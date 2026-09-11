@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>LUFFY • لوفي | مركز إدارة الكادر والبطاقات الذكية</title>
+  
+  <!-- خطوط النخبة العالمية -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Readex+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --font-ar: 'Readex Pro', system-ui, sans-serif;
+      --font-en: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+      --bg-cream: #fcfbfa;
+      --card-surface: #ffffff;
+      --text-espresso: #1a110d;
+      --text-muted: #71625b;
+      --text-light: #a89a92;
+
+      --brand-red: #ff2a5f;
+      --brand-gold: #f59e0b;
+      --emerald: #10b981;
+      --emerald-dark: #059669;
+      --blue-accent: #2563eb;
+      --purple-accent: #7c3aed;
+
+      --border-subtle: 1px solid #f1f0ee;
+      --border-soft: 1.5px solid rgba(254, 215, 170, 0.45);
+      --shadow-luxury: 0 12px 32px -6px rgba(180, 100, 120, 0.08), 0 2px 8px rgba(0, 0, 0, 0.02);
+      --shadow-card: 0 10px 25px -5px rgba(0,0,0,0.05), 0 2px 6px rgba(0,0,0,0.02);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      font-family: var(--font-ar);
+      background: radial-gradient(circle at 10% 10%, #fff0f5 0%, #fcf9f5 45%, #fef5eb 100%);
+      color: var(--text-espresso);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 8px 6px 90px;
+      overflow-x: hidden;
+    }
+
+    @media (min-width: 768px) { body { padding: 18px 14px 90px; } }
+
+    .team-master-wrapper {
+      width: 100%; max-width: 860px; background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1.5px solid #ffffff;
+      border-radius: 26px; padding: 14px 10px; box-shadow: 0 20px 50px -10px rgba(180, 100, 120, 0.1);
+      display: flex; flex-direction: column; position: relative;
+    }
+
+    @media (min-width: 768px) { .team-master-wrapper { padding: 22px 18px; border-radius: 32px; } }
+
+    .svg-pure-icon {
+      width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2;
+      stroke-linecap: round; stroke-linejoin: round; display: inline-block; vertical-align: middle; flex-shrink: 0;
+    }
+
+    /* Header */
+    .admin-top-bar {
+      display: flex; flex-direction: column; gap: 8px; padding-bottom: 10px;
+      border-bottom: 1.5px solid #f1f0ee; margin-bottom: 10px;
+    }
+
+    @media (min-width: 600px) {
+      .admin-top-bar { flex-direction: row; justify-content: space-between; align-items: center; }
+    }
+
+    .header-brand-row { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+    .brand-cluster { display: flex; align-items: center; gap: 8px; min-width: 0; }
+
+    .straw-hat-badge {
+      position: relative; width: 38px; height: 38px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    }
+    .hat-glow {
+      position: absolute; width: 140%; height: 140%; border-radius: 50%;
+      background: radial-gradient(circle, rgba(251, 191, 36, 0.6) 0%, transparent 70%); filter: blur(8px);
+    }
+    .straw-hat-svg {
+      width: 100%; height: 100%; position: relative; z-index: 2; filter: drop-shadow(0 4px 8px rgba(217, 119, 6, 0.35));
+    }
+
+    .brand-title-box { display: flex; flex-direction: column; min-width: 0; }
+    .brand-name {
+      display: flex; align-items: center; gap: 4px; font-size: 15.5px; font-weight: 900; line-height: 1.2; white-space: nowrap;
+    }
+    .name-en {
+      font-family: var(--font-en); letter-spacing: 1px;
+      background: linear-gradient(135deg, var(--brand-red) 0%, var(--brand-gold) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .name-ar { color: var(--text-espresso); }
+    .brand-subtitle { font-size: 10px; color: var(--text-muted); font-weight: 800; margin-top: 1px; white-space: nowrap; }
+
+    .header-actions-row { display: flex; align-items: center; gap: 6px; width: 100%; }
+    @media (min-width: 600px) { .header-actions-row { width: auto; } }
+
+    .live-pulse-badge {
+      display: flex; align-items: center; gap: 5px; background: #f0fdf4; border: 1px solid #bbf7d0;
+      padding: 5px 9px; border-radius: 9999px; font-size: 10.5px; font-weight: 800; color: var(--emerald-dark); flex-shrink: 0;
+    }
+    .live-dot-pulse {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 8px var(--emerald); animation: pulseSyncDot 2s infinite;
+    }
+    @keyframes pulseSyncDot { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.6; } }
+
+    .btn-tool-outline {
+      flex: 1; background: #f8fafc; border: 1.5px solid #e2e8f0; color: var(--text-muted); font-family: var(--font-ar);
+      font-size: 11px; font-weight: 800; padding: 6px 12px; border-radius: 12px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 5px; text-decoration: none; transition: all 0.2s ease; white-space: nowrap;
+    }
+    .btn-tool-outline:hover { background: #ffffff; border-color: #fed7aa; color: var(--brand-red); }
+    @media (min-width: 600px) { .btn-tool-outline { flex: initial; } }
+
+    /* KPIs Grid */
+    .kpi-command-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-bottom: 10px;
+    }
+    @media (min-width: 600px) { .kpi-command-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .kpi-stat-unit {
+      background: #ffffff; border: 1.5px solid #f1f0ee; border-radius: 14px; padding: 8px 10px;
+      display: flex; flex-direction: column; gap: 2px; box-shadow: var(--shadow-card);
+    }
+    .kpi-label { font-size: 9.5px; font-weight: 800; color: var(--text-muted); }
+    .kpi-val-row { display: flex; justify-content: space-between; align-items: baseline; }
+    .kpi-digits { font-family: var(--font-en); font-size: 18px; font-weight: 900; color: var(--text-espresso); }
+
+    /* Search Toolbar */
+    .search-staff-wrapper { position: relative; margin-bottom: 10px; display: flex; align-items: center; }
+    .search-staff-input {
+      width: 100%; background: #ffffff; border: 1.5px solid #fed7aa; border-radius: 14px;
+      padding: 8px 36px 8px 12px; font-family: var(--font-ar); font-size: 11.5px; outline: none; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    }
+    .search-svg-icon { position: absolute; right: 12px; width: 16px; height: 16px; stroke: #a89a92; pointer-events: none; }
+
+    /* Navigation Tabs */
+    .nav-track-bar {
+      display: flex; background: #f1f5f9; padding: 3px; border-radius: 9999px; gap: 3px;
+      margin-bottom: 12px; overflow-x: auto; scrollbar-width: none;
+    }
+    .nav-track-bar::-webkit-scrollbar { display: none; }
+
+    .tab-item-btn {
+      flex: 1; min-width: max-content; border: none; background: transparent; padding: 7px 10px;
+      border-radius: 9999px; font-family: var(--font-ar); font-size: 11px; font-weight: 800;
+      color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center;
+      gap: 4px; transition: all 0.2s ease; white-space: nowrap;
+    }
+    .tab-item-btn.active { background: #ffffff; color: var(--brand-red); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); }
+
+    .admin-panel { display: none; }
+    .admin-panel.active { display: block; animation: fadeIn 0.2s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+    .luxury-surface-card {
+      background: #ffffff; border: var(--border-soft); border-radius: 18px; padding: 14px 12px;
+      box-shadow: var(--shadow-luxury); margin-bottom: 12px;
+    }
+    @media (min-width: 768px) { .luxury-surface-card { padding: 18px 16px; border-radius: 24px; } }
+
+    .card-title-main { font-size: 14px; font-weight: 900; color: var(--text-espresso); margin-bottom: 3px; }
+    .card-desc-sub { font-size: 11px; color: var(--text-muted); line-height: 1.4; margin-bottom: 12px; }
+
+    /* Employee & Card Cards */
+    .staff-list-flow { display: flex; flex-direction: column; gap: 9px; max-height: 58vh; overflow-y: auto; padding-right: 1px; }
+
+    .employee-card-unit {
+      background: #ffffff; border: 1.5px solid #f1f0ee; border-radius: 16px;
+      padding: 11px 12px; display: flex; flex-direction: column; gap: 8px;
+      box-shadow: var(--shadow-card); transition: all 0.2s ease;
+    }
+    .employee-card-unit.is-manager-tier { border-color: #fde68a; background: #fffdf8; }
+    .employee-card-unit.is-supervisor-tier { border-color: #bfdbfe; background: #f8fbff; }
+
+    .emp-card-header-row { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+    
+    .emp-avatar-stage {
+      width: 38px; height: 38px; min-width: 38px; border-radius: 11px;
+      display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 900;
+    }
+    .avatar-manager { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+    .avatar-supervisor { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
+    .avatar-staff { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+
+    .emp-info-meta { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; }
+    .emp-name-title { font-size: 13.5px; font-weight: 900; color: var(--text-espresso); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    
+    .tier-badge { font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 5px; }
+    .tier-manager { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+    .tier-supervisor { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
+    .tier-staff { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+
+    /* Contact Strip per Employee */
+    .emp-contact-actions-strip {
+      display: flex; align-items: center; gap: 5px; background: #f8fafc; padding: 5px 8px;
+      border-radius: 10px; border: 1px solid #eef2f6; flex-wrap: wrap;
+    }
+    .btn-contact-action {
+      border: 1px solid #e2e8f0; background: #ffffff; padding: 4px 8px; border-radius: 8px;
+      font-size: 10px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center;
+      gap: 4px; color: var(--text-espresso); cursor: pointer; transition: all 0.2s ease;
+    }
+    .btn-contact-action:hover { border-color: var(--brand-red); color: var(--brand-red); }
+    .btn-contact-call { color: var(--blue-accent); border-color: #bfdbfe; background: #eff6ff; }
+    .btn-contact-wa { color: #047857; border-color: #a7f3d0; background: #ecfdf5; }
+
+    .smart-card-chip {
+      display: flex; justify-content: space-between; align-items: center; background: #ffffff;
+      border: 1px solid #e2e8f0; border-radius: 10px; padding: 6px 8px; margin-top: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+    .card-label-txt { font-size: 11px; font-weight: 800; color: var(--text-espresso); }
+    .card-token-sub { font-family: var(--font-en); font-size: 9px; color: var(--text-muted); direction: ltr; text-align: right; }
+    
+    .scan-counter-pill {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      color: #92400e; border: 1px solid #fde68a; font-family: var(--font-en);
+      font-size: 9.5px; font-weight: 900; padding: 2px 6px; border-radius: 9999px; display: flex; align-items: center; gap: 3px;
+    }
+
+    .card-actions-cluster { display: flex; align-items: center; gap: 3px; }
+    .btn-card-micro { border: none; padding: 3px 6px; border-radius: 5px; font-size: 9.5px; font-weight: 800; cursor: pointer; }
+    .btn-card-toggle-freeze { background: #f1f5f9; color: #475569; }
+    .btn-card-toggle-active { background: #ecfdf5; color: #065f46; }
+    .btn-card-delete { background: #fff1f2; color: #9f1239; }
+
+    /* Forms */
+    .form-responsive-grid { display: grid; grid-template-columns: 1fr; gap: 8px; width: 100%; }
+    @media (min-width: 600px) { .form-responsive-grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
+    .form-group-unit { display: flex; flex-direction: column; gap: 3px; margin-bottom: 6px; width: 100%; }
+    .form-group-unit.full-width { grid-column: 1 / -1; }
+    label { font-size: 10.5px; font-weight: 800; color: var(--text-espresso); }
+    input, select {
+      width: 100%; background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 11px;
+      padding: 8.5px 10px; font-family: var(--font-ar); font-size: 11.5px; outline: none;
+    }
+    input:focus, select:focus { border-color: var(--brand-red); background: #ffffff; }
+
+    .jordan-phone-wrap {
+      display: flex; align-items: center; direction: ltr; background: #f8fafc;
+      border: 1.5px solid #e2e8f0; border-radius: 11px; overflow: hidden;
+    }
+    .jordan-prefix-pill {
+      background: #f1f5f9; padding: 8.5px 10px; font-family: var(--font-en); font-weight: 900;
+      font-size: 11.5px; color: var(--text-espresso); border-right: 1px solid #e2e8f0;
+    }
+    .jordan-phone-input {
+      flex: 1; border: none; background: transparent; padding: 8.5px 10px; font-family: var(--font-en);
+      font-weight: 800; font-size: 12.5px; color: var(--text-espresso); outline: none;
+    }
+
+    .btn-primary-action {
+      background: linear-gradient(135deg, var(--brand-red) 0%, #ff5e7e 100%); color: #ffffff; border: none;
+      padding: 11px; border-radius: 12px; font-family: var(--font-ar); font-size: 12px; font-weight: 900;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 14px rgba(255, 42, 95, 0.3);
+    }
+
+    /* Modals & Dialogs */
+    .modal-backdrop-wrap {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100%; height: 100dvh;
+      background: rgba(10, 8, 9, 0.68); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 16px;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    .modal-backdrop-wrap.open { opacity: 1; pointer-events: auto; }
+    
+    .modal-dialog-panel {
+      background: #ffffff; border-radius: 22px; padding: 18px 16px; width: 100%; max-width: 440px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.3); border: 1.5px solid #fed7aa;
+      margin: auto; max-height: 90vh; overflow-y: auto; transform: scale(0.96); transition: transform 0.25s ease;
+    }
+    .modal-backdrop-wrap.open .modal-dialog-panel { transform: scale(1); }
+
+    .nfc-scan-touch-box {
+      background: #fdfaf7; border: 1.5px dashed var(--brand-gold); border-radius: 14px;
+      padding: 14px; text-align: center; margin: 10px 0; cursor: pointer;
+    }
+
+    /* Inspector Radar Screen */
+    .inspector-radar-stage {
+      background: #fdfaf7; border: 2px dashed var(--brand-gold); border-radius: 18px;
+      padding: 20px 12px; text-align: center; margin-bottom: 12px; cursor: pointer;
+    }
+    .inspector-result-card {
+      background: #ffffff; border: 1.5px solid #fed7aa; border-radius: 16px;
+      padding: 14px; display: flex; flex-direction: column; gap: 6px; text-align: right;
+      box-shadow: var(--shadow-luxury); animation: popIn 0.3s ease-out;
+    }
+    @keyframes popIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+    #toast-container { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 15000; pointer-events: none; }
+    .chakra-toast {
+      background: #1f1412; color: #ffffff; padding: 7px 15px; border-radius: 9999px; font-size: 11px; font-weight: 800;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25); border: 1.5px solid #fed7aa; display: flex; align-items: center; gap: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="team-master-wrapper">
+    <!-- Header -->
+    <div class="admin-top-bar">
+      <div class="header-brand-row">
+        <div class="brand-cluster">
+          <div class="straw-hat-badge">
+            <div class="hat-glow"></div>
+            <svg class="straw-hat-svg" viewBox="0 0 100 100" fill="none">
+              <ellipse cx="50" cy="70" rx="46" ry="13" fill="#EAB308"/>
+              <path d="M24 67C24 38 31 24 50 24C69 24 76 38 76 67Z" fill="#FACC15"/>
+              <path d="M23.5 64.5C34 68.5 66 68.5 76.5 64.5C75.5 57.5 74.5 53 74.5 53C63 57.5 37 57.5 25.5 53Z" fill="#FF2A5F"/>
+            </svg>
+          </div>
+          <div class="brand-title-box">
+            <div class="brand-name"><span class="name-en">LUFFY</span> • <span class="name-ar">إدارة الكادر والبطاقات</span></div>
+            <span class="brand-subtitle">الهوية الرقمية وبطاقات NFC والاتصال • العقبة 🇯🇴</span>
+          </div>
+        </div>
+
+        <div class="live-pulse-badge">
+          <div class="live-dot-pulse"></div>
+          <span>سجل الكادر متصل</span>
+        </div>
+      </div>
+
+      <div class="header-actions-row">
+        <button class="btn-tool-outline" onclick="fetchStaffDirectory()">
+          <svg class="svg-pure-icon" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+          <span>تحديث</span>
+        </button>
+
+        <a href="z_84mq_vault.html" class="btn-tool-outline" style="border-color:#fed7aa; color:var(--brand-red);">
+          <svg class="svg-pure-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+          <span>الإدارة</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 📊 KPIs Staff Dashboard -->
+    <div class="kpi-command-grid">
+      <div class="kpi-stat-unit">
+        <span class="kpi-label">إجمالي الكادر</span>
+        <div class="kpi-val-row">
+          <span class="kpi-digits" id="kpi-total-staff">0</span>
+          <span style="font-size:9px; color:var(--text-muted);">عضو فريق</span>
+        </div>
+      </div>
+
+      <div class="kpi-stat-unit">
+        <span class="kpi-label">البطاقات النشطة</span>
+        <div class="kpi-val-row">
+          <span class="kpi-digits" style="color:var(--emerald);" id="kpi-active-cards">0</span>
+          <span style="font-size:9px; color:var(--emerald);">بطاقة ذكية</span>
+        </div>
+      </div>
+
+      <div class="kpi-stat-unit">
+        <span class="kpi-label">المسحات التسويقية</span>
+        <div class="kpi-val-row">
+          <span class="kpi-digits" style="color:var(--brand-gold);" id="kpi-total-scans">0</span>
+          <span style="font-size:9px; color:var(--brand-gold);">مسحة تفاعل</span>
+        </div>
+      </div>
+
+      <div class="kpi-stat-unit">
+        <span class="kpi-label">المدراء والمشرفين</span>
+        <div class="kpi-val-row">
+          <span class="kpi-digits" style="color:var(--blue-accent);" id="kpi-managers-count">0</span>
+          <span style="font-size:9px; color:var(--blue-accent);">صلاحيات عليا</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-track-bar">
+      <button class="tab-item-btn active" onclick="switchStaffTab('directory', this)">
+        <svg class="svg-pure-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        <span>دليل الكادر وجهات الاتصال</span>
+      </button>
+
+      <button class="tab-item-btn" onclick="switchStaffTab('enroll', this)">
+        <svg class="svg-pure-icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+        <span>تسجيل عضو كادر جديد</span>
+      </button>
+
+      <button class="tab-item-btn" onclick="switchStaffTab('inspector', this)">
+        <svg class="svg-pure-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
+        <span>رادار فحص البطاقات</span>
+      </button>
+    </div>
+
+    <!-- TAB 1: STAFF DIRECTORY & CARDS -->
+    <div class="admin-panel active" id="pane-directory">
+      <div class="search-staff-wrapper">
+        <svg class="svg-pure-icon search-svg-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" class="search-staff-input" id="search-staff-input" placeholder="ابحث بالاسم، المسمى، الهاتف، أو رمز البطاقة..." oninput="handleStaffSearch(this.value)">
+      </div>
+
+      <div class="staff-list-flow" id="staff-directory-stream">جاري جلب بيانات الكادر والبطاقات...</div>
+    </div>
+
+    <!-- TAB 2: ENROLL NEW EMPLOYEE -->
+    <div class="admin-panel" id="pane-enroll">
+      <div class="luxury-surface-card">
+        <div class="card-title-main">تسجيل عضو كادر جديد في المنظومة</div>
+        <div class="card-desc-sub">أدخل بيانات الموظف وجهات الاتصال، وسيتم حفظه فوراً في شيت الأمان:</div>
+
+        <form id="enroll-staff-form" onsubmit="event.preventDefault(); triggerEnrollNewStaff();">
+          <div class="form-responsive-grid">
+            <div class="form-group-unit">
+              <label>اسم الموظف الكامل *</label>
+              <input type="text" id="new_staff_name" placeholder="مثال: أحمد الكردي" required>
+            </div>
+
+            <div class="form-group-unit">
+              <label>المسمى الوظيفي *</label>
+              <input type="text" id="new_staff_role" placeholder="مثال: مشرف الوردية" required>
+            </div>
+
+            <div class="form-group-unit full-width">
+              <label>رتبة الصلاحية الإدارية والأمنية *</label>
+              <select id="new_staff_tier" required>
+                <option value="STAFF">موظف تقديم (تسويق وخدمة زبائن)</option>
+                <option value="SUPERVISOR">مشرف وردية (تشغيل المطبخ واليومية)</option>
+                <option value="MANAGER">مدير عام (صلاحيات كاملة واعتماد أمني)</option>
+              </select>
+            </div>
+
+            <div class="form-group-unit">
+              <label>رقم الهاتف للاتصال المباشر 📞</label>
+              <div class="jordan-phone-wrap">
+                <div class="jordan-prefix-pill">🇯🇴 +962</div>
+                <input type="tel" class="jordan-phone-input" id="new_staff_phone_call" placeholder="7XXXXXXXX" maxlength="12" oninput="sanitizePhoneDigits(this)">
+              </div>
+            </div>
+
+            <div class="form-group-unit">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <label>رقم هاتف محادثات الواتساب 💬</label>
+                <button type="button" style="border:none; background:transparent; color:var(--emerald-dark); font-size:10px; font-weight:800; cursor:pointer;" onclick="syncWhatsAppPhoneWithCall()">= نفس الرقم</button>
+              </div>
+              <div class="jordan-phone-wrap">
+                <div class="jordan-prefix-pill">🇯🇴 +962</div>
+                <input type="tel" class="jordan-phone-input" id="new_staff_phone_wa" placeholder="7XXXXXXXX (أو اتركه فارغاً)" maxlength="12" oninput="sanitizePhoneDigits(this)">
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary-action" id="btn-submit-enroll" style="width:100%; margin-top:10px;">
+            <span>حفظ واعتماد الموظف في النظام السحابي ⚡</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- TAB 3: NFC SMART CARD INSPECTOR -->
+    <div class="admin-panel" id="pane-inspector">
+      <div class="luxury-surface-card">
+        <div class="card-title-main">رادار فحص وقراءة البطاقات الذكية المباشر</div>
+        <div class="card-desc-sub">لامس أي بطاقة بظهر هاتفك لكشف هويتها، صاحبها، رتبتها، وعدد مسحاتها التسويقية:</div>
+
+        <div class="inspector-radar-stage" onclick="triggerCardInspectorScan()">
+          <svg class="svg-pure-icon" style="width:36px; height:36px; stroke:var(--brand-gold);" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
+          <div style="font-size:12px; font-weight:900; color:var(--text-espresso); margin-top:5px;" id="inspector-status-hint">انقر هنا ثم قرّب أي بطاقة لفحصها فوراً</div>
+        </div>
+
+        <div id="inspector-result-box" style="display:none;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 💳 نافذة ربط وبرمجة بطاقة NFC لموظف محدد -->
+  <div class="modal-backdrop-wrap" id="bind-card-modal" onclick="closeBindCardModal()">
+    <div class="modal-dialog-panel" onclick="event.stopPropagation()">
+      <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px solid #f1f0ee; margin-bottom:12px;">
+        <div style="font-size:14px; font-weight:900;">💳 ربط وبرمجة بطاقة NFC للموظف</div>
+        <button style="border:none; background:#f1f5f9; width:26px; height:26px; border-radius:50%; font-weight:800; cursor:pointer;" onclick="closeBindCardModal()">✕</button>
+      </div>
+
+      <input type="hidden" id="bind_target_emp_id">
+      <div style="font-size:12.5px; font-weight:900; color:var(--brand-red); margin-bottom:8px;" id="bind-target-emp-name">الموظف: ...</div>
+      
+      <div class="form-group-unit">
+        <label>تسمية البطاقة (مثال: بطاقة الصالة الأساسية، ميدالية المفاتيح)</label>
+        <input type="text" id="bind_card_label_input" placeholder="بطاقة الصالة الأساسية">
+      </div>
+
+      <div class="form-group-unit">
+        <label>رمز البطاقة NFC</label>
+        <input type="text" id="bind_card_token_input" placeholder="اضغط على المربع أدناه للمسح..." readonly style="background:#fffdfa;" onclick="scanNfcForBinding()">
+      </div>
+
+      <div class="nfc-scan-touch-box" onclick="scanNfcForBinding()">
+        <svg class="svg-pure-icon" style="width:30px; height:30px; stroke:var(--brand-gold);" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
+        <div style="font-size:11px; font-weight:800; margin-top:4px;" id="bind-nfc-scan-hint">اضغط لملامسة البطاقة الجديدة بظهر الهاتف</div>
+      </div>
+
+      <button class="btn-primary-action" style="width:100%; margin-top:6px;" onclick="submitCardBindingForEmployee()">
+        <span>اعتماد وربط هذه البطاقة بالشيت ⚡</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script>
+    // ⚡ الرابط المركزي السحابي المعتمد وقاعدة بيانات الأمان والكادر
+    const APPS_SCRIPT_EXEC_URL = "https://script.google.com/macros/s/AKfycbxYmpfN2OBW24M-sumyx8dwbkFN-RsbiWkYJZYa0gZLfMxVpXr2TswzORV0inmu5nFieQ/exec";
+    const MASTER_SECRET = "LUFFY#2026$Aqaba_Master!Vault@99";
+
+    let staffDirectoryList = [];
+    let staffSearchFilter = "";
+    let currentEmployeeForCardBinding = null;
+
+    function showToast(msg) {
+      const c = document.getElementById('toast-container');
+      const t = document.createElement('div');
+      t.className = 'chakra-toast';
+      t.innerHTML = `<span>${msg}</span>`;
+      c.appendChild(t);
+      setTimeout(() => t.remove(), 3200);
+    }
+
+    function switchStaffTab(tabKey, btn) {
+      document.querySelectorAll('.tab-item-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(`pane-${tabKey}`).classList.add('active');
+
+      if (tabKey === 'directory') fetchStaffDirectory();
+    }
+
+    function handleStaffSearch(query) {
+      staffSearchFilter = query.trim().toLowerCase();
+      renderStaffDirectory();
+    }
+
+    function sanitizePhoneDigits(inputEl) {
+      let raw = inputEl.value.replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
+      let digits = raw.replace(/\D/g, '');
+      if (digits.startsWith('962')) digits = digits.slice(3);
+      if (digits.startsWith('00962')) digits = digits.slice(5);
+      while (digits.startsWith('0')) digits = digits.slice(1);
+      inputEl.value = digits;
+    }
+
+    function syncWhatsAppPhoneWithCall() {
+      const callVal = document.getElementById('new_staff_phone_call').value.trim();
+      document.getElementById('new_staff_phone_wa').value = callVal;
+      showToast("تم نسخ رقم الاتصال للواتساب ✓");
+    }
+
+    // =========================================================================
+    // 👥 سحب دليل الكادر والبطاقات من السيرفر المركزي
+    // =========================================================================
+    function fetchStaffDirectory() {
+      const cb = "onStaffLoaded_" + Date.now();
+      window[cb] = function(res) {
+        if (!res || !res.data) return;
+        staffDirectoryList = res.data;
+        calculateStaffKPIs();
+        renderStaffDirectory();
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=get_staff_list&callback=${cb}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+    }
+
+    function calculateStaffKPIs() {
+      const totalStaff = staffDirectoryList.length;
+      let activeCardsCount = 0;
+      let totalScansCount = 0;
+      let managersCount = 0;
+
+      staffDirectoryList.forEach(emp => {
+        if (emp.tier === 'MANAGER' || emp.tier === 'SUPERVISOR') managersCount++;
+        totalScansCount += (Number(emp.total_scans) || 0);
+        (emp.cards || []).forEach(c => {
+          if (c.status === 'ACTIVE') activeCardsCount++;
+        });
+      });
+
+      document.getElementById('kpi-total-staff').textContent = totalStaff;
+      document.getElementById('kpi-active-cards').textContent = activeCardsCount;
+      document.getElementById('kpi-total-scans').textContent = totalScansCount;
+      document.getElementById('kpi-managers-count').textContent = managersCount;
+    }
+
+    function renderStaffDirectory() {
+      const container = document.getElementById('staff-directory-stream');
+      if (!container) return;
+
+      if (!staffDirectoryList || staffDirectoryList.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:30px; background:#fffdfa; border:1.5px dashed #fed7aa; border-radius:18px;">
+            <div style="font-size:14px; font-weight:900; color:var(--brand-red);">لا يوجد كادر مسجل بعد</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">انتقل لتبويب (تسجيل عضو كادر جديد) لتسجيل الموظف الأول في ثوانٍ ✓</div>
+          </div>
+        `;
+        return;
+      }
+
+      const filtered = staffDirectoryList.filter(emp => {
+        if (!staffSearchFilter) return true;
+        const name = (emp.name || '').toLowerCase();
+        const role = (emp.role || '').toLowerCase();
+        const phone = String(emp.phone_call || '').toLowerCase();
+        const hasCardMatch = (emp.cards || []).some(c => (c.label || '').toLowerCase().includes(staffSearchFilter) || (c.token || '').toLowerCase().includes(staffSearchFilter));
+        return name.includes(staffSearchFilter) || role.includes(staffSearchFilter) || phone.includes(staffSearchFilter) || hasCardMatch;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div style="text-align:center; padding:30px; color:var(--text-muted); font-weight:800;">لا يوجد موظفون مطابقون للبحث.</div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(emp => {
+        const isMgr = (emp.tier === 'MANAGER');
+        const isSup = (emp.tier === 'SUPERVISOR');
+        
+        let avatarClass = "avatar-staff", tierClass = "tier-staff", tierLabel = "موظف تقديم";
+        if (isMgr) { avatarClass = "avatar-manager"; tierClass = "tier-manager"; tierLabel = "مدير عام"; }
+        else if (isSup) { avatarClass = "avatar-supervisor"; tierClass = "tier-supervisor"; tierLabel = "مشرف وردية"; }
+
+        const cleanCallPhone = String(emp.phone_call || '').replace(/[^\d+]/g, '');
+        const cleanWaPhone = String(emp.phone_whatsapp || emp.phone_call || '').replace(/[^\d+]/g, '').replace('+', '');
+
+        return `
+          <div class="employee-card-unit ${isMgr ? 'is-manager-tier' : (isSup ? 'is-supervisor-tier' : '')}">
+            <div class="emp-card-header-row">
+              <div class="emp-info-meta">
+                <div class="emp-avatar-stage ${avatarClass}">${emp.name.charAt(0)}</div>
+                <div style="min-width:0;">
+                  <div class="emp-name-title">${emp.name}</div>
+                  <div style="display:flex; align-items:center; gap:5px; margin-top:2px;">
+                    <span class="tier-badge ${tierClass}">${tierLabel}</span>
+                    <span style="font-size:10px; color:var(--text-muted);">${emp.role}</span>
+                  </div>
+                </div>
+              </div>
+
+              <button class="btn-tool-outline" style="padding:4px 8px; font-size:10px; color:var(--purple-accent); border-color:#d8b4fe;" onclick='openCardBindingModal(${JSON.stringify(emp)})'>+ ربط بطاقة NFC</button>
+            </div>
+
+            <!-- أزرار الاتصال والواتساب -->
+            <div class="emp-contact-actions-strip">
+              ${cleanCallPhone ? `
+                <a href="tel:${cleanCallPhone}" class="btn-contact-action btn-contact-call">
+                  <svg class="svg-pure-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                  <span>اتصال: ${emp.phone_call}</span>
+                </a>
+              ` : '<span style="font-size:10px; color:var(--text-muted);">لم يتم تحديد هاتف اتصال</span>'}
+
+              ${cleanWaPhone ? `
+                <a href="https://wa.me/${cleanWaPhone}?text=${encodeURIComponent('أهلاً بك يا ' + emp.name + ' في كادر لوفي - كابتن السعادة 🍨✨')}" target="_blank" class="btn-contact-action btn-contact-wa">
+                  <span>💬 واتساب: ${emp.phone_whatsapp || emp.phone_call}</span>
+                </a>
+              ` : ''}
+            </div>
+
+            <!-- البطاقات الذكية المربوطة -->
+            <div style="border-top:1px solid #f1f0ee; padding-top:6px; margin-top:2px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; font-size:10px; font-weight:800; color:var(--text-muted); margin-bottom:4px;">
+                <span>البطاقات الذكية المربوطة (${emp.cards ? emp.cards.length : 0}):</span>
+                <span>إجمالي المسحات: <strong style="color:var(--brand-red); font-family:var(--font-en);">${emp.total_scans || 0}</strong></span>
+              </div>
+
+              ${(emp.cards && emp.cards.length > 0) ? (emp.cards.map(card => `
+                <div class="smart-card-chip">
+                  <div>
+                    <div class="card-label-txt">
+                      💳 ${card.label}
+                      <span style="font-size:9px; font-weight:800; color:${card.status === 'ACTIVE' ? 'var(--emerald-dark)' : 'var(--brand-red)'}; margin-right:3px;">
+                        [${card.status === 'ACTIVE' ? 'نشطة' : 'معطلة'}]
+                      </span>
+                    </div>
+                    <div class="card-token-sub">${card.token}</div>
+                  </div>
+
+                  <div class="card-actions-cluster">
+                    <div class="scan-counter-pill" title="عدد مسحات البطاقة">
+                      👁️ ${card.scan_count || 0}
+                    </div>
+
+                    <button class="btn-card-micro ${card.status === 'ACTIVE' ? 'btn-card-toggle-freeze' : 'btn-card-toggle-active'}" onclick="toggleCardStatusDirect('${card.token}', '${card.status === 'ACTIVE' ? 'DISABLED' : 'ACTIVE'}')">
+                      ${card.status === 'ACTIVE' ? 'تجميد' : 'تفعيل'}
+                    </button>
+
+                    <button class="btn-card-micro btn-card-delete" onclick="deleteCardDirect('${card.token}')">حذف</button>
+                  </div>
+                </div>
+              `).join('')) : `
+                <div style="font-size:10.5px; color:var(--text-muted); background:#fdfaf7; border:1px dashed #fed7aa; padding:6px; border-radius:8px; text-align:center;">
+                  لا توجد بطاقة NFC مربوطة بعد • اضغط <strong>(+ ربط بطاقة NFC)</strong> بالأعلى
+                </div>
+              `}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // =========================================================================
+    // ✍️ تسجيل موظف جديد
+    // =========================================================================
+    function triggerEnrollNewStaff() {
+      const name = document.getElementById('new_staff_name').value.trim();
+      const role = document.getElementById('new_staff_role').value.trim();
+      const tier = document.getElementById('new_staff_tier').value;
+      const rawCall = document.getElementById('new_staff_phone_call').value.trim();
+      const rawWa = document.getElementById('new_staff_phone_wa').value.trim();
+
+      const phoneCall = rawCall ? `+962${rawCall}` : "";
+      const phoneWa = rawWa ? `+962${rawWa}` : phoneCall;
+
+      if (!name || !role) {
+        showToast("⚠️ يرجى إدخال اسم الموظف والمسمى الوظيفي");
+        return;
+      }
+
+      showToast(`جاري تسجيل [${name}] في قاعدة البيانات...`);
+      const payload = {
+        name, role, tier,
+        token: `LUFFY_KEY_${Date.now().toString().slice(-4)}`,
+        card_label: "البطاقة الأساسية",
+        phone_call: phoneCall,
+        phone_whatsapp: phoneWa
+      };
+
+      const cb = "onStaffRegDone_" + Date.now();
+      window[cb] = function(res) {
+        showToast(`🎉 تم تسجيل الموظف [${name}] بنجاح ✓`);
+        document.getElementById('enroll-staff-form').reset();
+        switchStaffTab('directory', document.querySelectorAll('.tab-item-btn')[0]);
+      };
+
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?auth_pass=${encodeURIComponent(MASTER_SECRET)}&action=register_new_employee&data=${encodeURIComponent(JSON.stringify(payload))}&callback=${cb}`;
+      document.body.appendChild(s);
+    }
+
+    // =========================================================================
+    // 💳 ربط وبرمجة بطاقة NFC لموظف
+    // =========================================================================
+    function openCardBindingModal(emp) {
+      currentEmployeeForCardBinding = emp;
+      document.getElementById('bind_target_emp_id').value = emp.emp_id;
+      document.getElementById('bind-target-emp-name').textContent = `الموظف: ${emp.name} (${emp.role})`;
+      document.getElementById('bind_card_label_input').value = "";
+      document.getElementById('bind_card_token_input').value = "";
+      document.getElementById('bind-nfc-scan-hint').textContent = "اضغط لملامسة البطاقة الجديدة بظهر الهاتف";
+      document.getElementById('bind-card-modal').classList.add('open');
+    }
+    function closeBindCardModal() { document.getElementById('bind-card-modal').classList.remove('open'); }
+
+    function scanNfcForBinding() {
+      if (!('NDEFReader' in window)) {
+        const mock = `LUFFY_CARD_${Date.now().toString().slice(-4)}`;
+        document.getElementById('bind_card_token_input').value = mock;
+        document.getElementById('bind-nfc-scan-hint').textContent = `تم التقاط الرمز: ${mock} ✓`;
+        return;
+      }
+      try {
+        document.getElementById('bind-nfc-scan-hint').textContent = "جاري قراءة البطاقة... قرّبها الآن";
+        const ndef = new NDEFReader();
+        ndef.scan().then(() => {
+          ndef.onreading = ev => {
+            const dec = new TextDecoder();
+            let p = "";
+            for (const r of ev.message.records) p += dec.decode(r.data);
+            const token = p.match(/[?&]t=([^&]+)/) ? decodeURIComponent(p.match(/[?&]t=([^&]+)/)[1]) : (p || ev.serialNumber);
+            document.getElementById('bind_card_token_input').value = token;
+            document.getElementById('bind-nfc-scan-hint').textContent = `تم مسح البطاقة: ${token} ✓`;
+            showToast("تم مسح بطاقة الموظف بنجاح ✓");
+          };
+        }).catch(() => {
+          document.getElementById('bind-nfc-scan-hint').textContent = "انقر للمسح مجدداً";
+        });
+      } catch(e){}
+    }
+
+    function submitCardBindingForEmployee() {
+      if (!currentEmployeeForCardBinding) return;
+      const label = document.getElementById('bind_card_label_input').value.trim() || "بطاقة ذكية";
+      const token = document.getElementById('bind_card_token_input').value.trim() || `LUFFY_CARD_${Date.now().toString().slice(-4)}`;
+
+      showToast(`جاري ربط البطاقة بـ [${currentEmployeeForCardBinding.name}]...`);
+      const payload = {
+        emp_id: currentEmployeeForCardBinding.emp_id,
+        emp_name: currentEmployeeForCardBinding.name,
+        role: currentEmployeeForCardBinding.role,
+        tier: currentEmployeeForCardBinding.tier,
+        label: label,
+        token: token
+      };
+
+      const cb = "onCardBoundDone_" + Date.now();
+      window[cb] = function() {
+        showToast("🎉 تم ربط البطاقة بنجاح ✓");
+        closeBindCardModal();
+        fetchStaffDirectory();
+      };
+
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?auth_pass=${encodeURIComponent(MASTER_SECRET)}&action=add_additional_card&data=${encodeURIComponent(JSON.stringify(payload))}&callback=${cb}`;
+      document.body.appendChild(s);
+    }
+
+    function toggleCardStatusDirect(token, newStatus) {
+      showToast("جاري تعديل حالة البطاقة...");
+      const cb = "onCardTgl_" + Date.now();
+      window[cb] = function() {
+        showToast("تم تحديث حالة البطاقة بنجاح ✓");
+        fetchStaffDirectory();
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?auth_pass=${encodeURIComponent(MASTER_SECRET)}&action=toggle_card_status&target_token=${encodeURIComponent(token)}&new_status=${newStatus}&callback=${cb}`;
+      document.body.appendChild(s);
+    }
+
+    function deleteCardDirect(token) {
+      if (!confirm("هل أنت متأكد من رغبتك في حذف هذه البطاقة نهائياً؟")) return;
+      showToast("جاري حذف البطاقة...");
+      const cb = "onCardDel_" + Date.now();
+      window[cb] = function() {
+        showToast("تم حذف البطاقة بنجاح ✓");
+        fetchStaffDirectory();
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?auth_pass=${encodeURIComponent(MASTER_SECRET)}&action=delete_card&target_token=${encodeURIComponent(token)}&callback=${cb}`;
+      document.body.appendChild(s);
+    }
+
+    // =========================================================================
+    // 🔍 رادار فحص البطاقات الذكية (NFC Inspector Radar)
+    // =========================================================================
+    function triggerCardInspectorScan() {
+      const hint = document.getElementById('inspector-status-hint');
+
+      if (!('NDEFReader' in window)) {
+        const testToken = prompt("أدخل كود البطاقة أو التوكن للفحص المباشر:");
+        if (testToken) inspectTokenData(testToken.trim());
+        return;
+      }
+
+      try {
+        hint.textContent = "جاري قراءة البطاقة... قرّبها من ظهر الهاتف الآن";
+        const ndef = new NDEFReader();
+        ndef.scan().then(() => {
+          ndef.onreading = ev => {
+            const dec = new TextDecoder();
+            let p = "";
+            for (const r of ev.message.records) p += dec.decode(r.data);
+            const token = p.match(/[?&]t=([^&]+)/) ? decodeURIComponent(p.match(/[?&]t=([^&]+)/)[1]) : (p || ev.serialNumber);
+            hint.textContent = "تمت القراءة بنجاح!";
+            inspectTokenData(token);
+          };
+        }).catch(() => {
+          hint.textContent = "اضغط لإعادة المحاولة";
+        });
+      } catch(e){}
+    }
+
+    function inspectTokenData(token) {
+      const resultBox = document.getElementById('inspector-result-box');
+      resultBox.style.display = "block";
+      resultBox.innerHTML = `<div style="text-align:center; padding:15px; color:var(--text-muted);">جاري مطابقة البطاقة مع قاعدة البيانات...</div>`;
+
+      let matchedEmp = null;
+      let matchedCard = null;
+
+      for (let emp of staffDirectoryList) {
+        for (let c of (emp.cards || [])) {
+          if (c.token === token || (token && token.includes(c.token))) {
+            matchedEmp = emp;
+            matchedCard = c;
+            break;
+          }
+        }
+        if (matchedEmp) break;
+      }
+
+      if (matchedEmp && matchedCard) {
+        resultBox.innerHTML = `
+          <div class="inspector-result-card">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:11.5px; font-weight:900; color:var(--emerald-dark);">✓ بطاقة معتمدة ومسجلة في النظام</span>
+              <span class="tier-badge ${matchedEmp.tier === 'MANAGER' ? 'tier-manager' : (matchedEmp.tier === 'SUPERVISOR' ? 'tier-supervisor' : 'tier-staff')}">
+                ${matchedEmp.tier}
+              </span>
+            </div>
+
+            <div style="font-size:14px; font-weight:900; color:var(--text-espresso); margin-top:2px;">
+              👤 الموظف: ${matchedEmp.name} (${matchedEmp.role})
+            </div>
+
+            <div style="font-size:11px; color:var(--text-muted); line-height:1.5;">
+              🏷️ تسمية البطاقة: <strong>${matchedCard.label}</strong><br>
+              📞 هاتف الاتصال: <strong>${matchedEmp.phone_call || 'غير محدد'}</strong> | 💬 واتساب: <strong>${matchedEmp.phone_whatsapp || 'غير محدد'}</strong><br>
+              🔑 التوكن المشفر: <code style="font-family:var(--font-en);">${matchedCard.token}</code><br>
+              📊 المسحات التسويقية: <strong style="color:var(--brand-red); font-family:var(--font-en);">${matchedCard.scan_count || 0} مسحة</strong><br>
+              ⚡ الحالة: <strong style="color:${matchedCard.status === 'ACTIVE' ? 'var(--emerald-dark)' : 'var(--brand-red)'};">${matchedCard.status === 'ACTIVE' ? 'نشطة ومفعلة' : 'مجمدة وموقوفة'}</strong>
+            </div>
+          </div>
+        `;
+      } else {
+        resultBox.innerHTML = `
+          <div class="inspector-result-card" style="border-color:#fecdd3; background:#fff5f8;">
+            <div style="font-size:12.5px; font-weight:900; color:var(--brand-red);">⚠️ بطاقة غير مسجلة أو مجهولة!</div>
+            <div style="font-size:10.5px; color:var(--text-muted); margin-top:3px;">
+              الرمز المقروء: <code style="font-family:var(--font-en);">${token}</code><br>
+              يمكنك ربط وبرمجة هذه الشريحة الآن بأي موظف مسجل من خلال زر (+ ربط بطاقة NFC).
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    fetchStaffDirectory();
+    setInterval(fetchStaffDirectory, 12000); // تحديث متزن كل 12 ثانية
+  </script>
+</body>
+</html>
