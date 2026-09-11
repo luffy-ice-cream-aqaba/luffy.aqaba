@@ -1,0 +1,2467 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>LUFFY • لوفي | كابتن السعادة</title>
+  
+  <!-- خطوط النخبة العالمية -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Readex+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- خريطة Leaflet التفاعلية -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <style>
+    :root {
+      --font-ar: 'Readex Pro', system-ui, sans-serif;
+      --font-en: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+      --bg-cream: #fffdfa;
+      --card-bg: #ffffff;
+      --text-espresso: #1a110d;
+      --text-muted: #71625b;
+      --text-sub-en: #9ca3af;
+
+      --brand-red: #ff2a5f;
+      --brand-gold: #f59e0b;
+      --emerald: #10b981;
+      --emerald-dark: #059669;
+      --amber: #d97706;
+      --blue-accent: #2563eb;
+      --whatsapp-green: #25d366;
+
+      --shadow-card: 0 12px 28px -6px rgba(180, 100, 120, 0.08), 0 2px 8px rgba(0,0,0,0.02);
+      --shadow-luxury-btn: 0 8px 22px -4px rgba(255, 42, 95, 0.38);
+      --shadow-whatsapp-btn: 0 8px 22px -4px rgba(16, 185, 129, 0.38);
+      --shadow-insta-btn: 0 8px 22px -4px rgba(225, 48, 108, 0.38);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: var(--font-ar);
+      background: radial-gradient(circle at 15% 10%, #fff0f5 0%, #fff9f2 40%, #fdf4f8 100%);
+      color: var(--text-espresso);
+      min-height: 100vh;
+      padding-bottom: calc(100px + env(safe-area-inset-bottom, 20px));
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .svg-icon {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    .en-sub {
+      display: block;
+      font-family: var(--font-en);
+      font-size: 0.82em;
+      color: var(--text-sub-en) !important;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      margin-top: 1px;
+    }
+
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum";
+      font-family: var(--font-en);
+      letter-spacing: 0.5px;
+      display: inline-block;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1.5px solid rgba(255, 255, 255, 0.95);
+      z-index: 100;
+      padding: 10px 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    .header-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 44px;
+      margin-bottom: 8px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .straw-hat-badge {
+      position: relative;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hat-glow {
+      position: absolute;
+      width: 140%;
+      height: 140%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(251, 191, 36, 0.5) 0%, transparent 70%);
+      filter: blur(8px);
+    }
+
+    .straw-hat-svg {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 2;
+      filter: drop-shadow(0 4px 8px rgba(217, 119, 6, 0.3));
+    }
+
+    .brand-name {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .name-en {
+      font-family: var(--font-en);
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, var(--brand-red) 0%, var(--brand-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .name-ar { color: var(--text-espresso); }
+
+    .store-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      padding: 6px 12px;
+      border-radius: 9999px;
+      font-size: 11.5px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      transition: all 0.25s ease;
+    }
+    .store-status-pill:active { transform: scale(0.95); }
+    .store-status-pill.open { border-color: #a7f3d0; background: #f0fdf4; color: #065f46; }
+    .store-status-pill.closing-soon, .store-status-pill.opening-soon {
+      border-color: #fde68a; background: #fffbeb; color: #92400e; animation: pulseAlert 2s infinite;
+    }
+    .store-status-pill.closed { border-color: #fecdd3; background: #fff1f2; color: #9f1239; }
+
+    @keyframes pulseAlert {
+      0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+      70% { box-shadow: 0 0 0 6px rgba(245, 158, 11, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+    }
+
+    .store-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .open .store-dot { background: var(--emerald); box-shadow: 0 0 6px var(--emerald); }
+    .closing-soon .store-dot, .opening-soon .store-dot { background: var(--amber); box-shadow: 0 0 6px var(--amber); }
+    .closed .store-dot { background: var(--brand-red); box-shadow: 0 0 6px var(--brand-red); }
+
+    /* Search Bar */
+    .search-input-wrapper {
+      position: relative;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-input {
+      width: 100%;
+      background: #ffffff;
+      border: 1.5px solid #fed7aa;
+      border-radius: 14px;
+      padding: 10px 42px 10px 42px;
+      font-family: var(--font-ar);
+      font-size: 12px;
+      color: var(--text-espresso);
+      outline: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    }
+
+    .search-icon-svg {
+      position: absolute;
+      right: 14px;
+      width: 18px;
+      height: 18px;
+      stroke: #a89a92;
+      fill: none !important;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      pointer-events: none;
+    }
+
+    .search-filter-icon-btn {
+      position: absolute;
+      left: 10px;
+      border: none;
+      background: transparent;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--brand-red);
+      transition: transform 0.2s ease;
+    }
+
+    .filter-count-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: var(--brand-red);
+      color: #ffffff;
+      font-family: var(--font-en);
+      font-size: 9px;
+      font-weight: 900;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid #ffffff;
+    }
+
+    .filter-scroll-container {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+    .filter-scroll-container::-webkit-scrollbar { display: none; }
+
+    .chip-filter-btn {
+      white-space: nowrap;
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-family: var(--font-ar);
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.25s ease;
+    }
+
+    .chip-filter-btn.active {
+      background: linear-gradient(135deg, var(--brand-red) 0%, #ff5e7e 100%);
+      color: #ffffff;
+      border-color: var(--brand-red);
+      box-shadow: 0 4px 12px rgba(255, 42, 95, 0.3);
+    }
+
+    .chip-heart-icon {
+      width: 14px;
+      height: 14px;
+      stroke: var(--brand-red);
+      fill: var(--brand-red);
+    }
+    .chip-filter-btn.active .chip-heart-icon { stroke: #ffffff; fill: #ffffff; }
+
+    /* Flavor Cards Feed */
+    .menu-feed-container {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mobile-flavor-card {
+      background: var(--card-bg);
+      border-radius: 22px;
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      padding: 13px 13px 15px 13px;
+      display: flex;
+      flex-direction: row;
+      gap: 13px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mobile-flavor-card:active { transform: scale(0.98); }
+    .mobile-flavor-card.card-sold-out { opacity: 0.65; background: #fafafa; }
+
+    .card-halo-bg {
+      position: absolute;
+      top: -30%; right: -30%; width: 150%; height: 150%;
+      border-radius: 50%; filter: blur(40px); opacity: 0.15; pointer-events: none;
+    }
+
+    .card-visual-box {
+      width: 100px;
+      min-width: 100px;
+      height: 100px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle, rgba(255, 240, 243, 0.7) 0%, rgba(255, 255, 255, 0.1) 70%);
+      border-radius: 18px;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    .card-ice-img { max-width: 85%; max-height: 85%; object-fit: contain; filter: drop-shadow(0 8px 12px rgba(45, 20, 25, 0.2)); z-index: 2; }
+    .card-fruit-badge {
+      position: absolute; bottom: 2px; left: 2px; width: 36px; height: 36px; object-fit: contain;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15)); transform: rotate(-10deg); z-index: 3;
+    }
+
+    .card-info-box {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-width: 0;
+      z-index: 2;
+    }
+    
+    .card-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .card-title-ar { font-size: 16px; font-weight: 900; color: var(--text-espresso); line-height: 1.2; }
+    .card-title-en { font-family: var(--font-en); font-size: 11px; font-weight: 800; text-transform: uppercase; margin-top: 1px; }
+
+    .fresh-chip-mini {
+      background: linear-gradient(135deg, #ff1e56, #ff5e7e); color: #ffffff;
+      font-size: 9.5px; font-weight: 800; padding: 3px 8px; border-radius: 9999px;
+      white-space: nowrap; display: flex; align-items: center; gap: 4px;
+    }
+    .restock-chip-mini { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; font-size: 9px; font-weight: 800; padding: 2px 7px; border-radius: 9999px; }
+    .soldout-chip-mini { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; font-size: 9px; font-weight: 800; padding: 2px 7px; border-radius: 9999px; }
+    .card-desc-snippet { font-size: 11px; font-weight: 500; color: var(--text-muted); line-height: 1.35; margin: 4px 0 6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+    .card-tags-cluster { display: flex; flex-wrap: wrap; gap: 4px; margin: 4px 0; }
+    .hashtag-pill {
+      background: #fdfaf7; border: 1px solid #f6ece5; color: var(--text-muted); font-size: 10px;
+      font-weight: 800; padding: 2px 8px; border-radius: 6px; cursor: pointer; transition: all 0.2s ease;
+    }
+    .hashtag-pill.active-hash { background: var(--brand-red); color: #fff; border-color: var(--brand-red); }
+
+    .card-tags-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4px;
+      margin-top: 8px;
+      padding-top: 4px;
+      border-top: 1px solid #fbf7f4;
+      min-height: 32px;
+    }
+
+    .pure-heart-btn {
+      border: none;
+      background: transparent;
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      min-height: 32px;
+      padding: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      z-index: 5;
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .pure-heart-btn:active { transform: scale(0.82); }
+    .pure-heart-btn .heart-svg-icon {
+      width: 20px;
+      height: 20px;
+      stroke: #a89a92;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      overflow: visible;
+      transition: all 0.25s ease;
+    }
+    .pure-heart-btn.favorited .heart-svg-icon {
+      stroke: var(--brand-red);
+      fill: var(--brand-red);
+      filter: drop-shadow(0 2px 5px rgba(255, 42, 95, 0.4));
+    }
+
+    /* Drawers */
+    .drawer-backdrop {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100%; height: 100dvh;
+      background: rgba(10, 8, 9, 0.48); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 1000;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end;
+    }
+    .drawer-backdrop.open { opacity: 1; pointer-events: auto; }
+
+    .drawer-surface {
+      background: #ffffff; width: 100%; border-radius: 26px 26px 0 0;
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.18); border-top: 2px solid #fed7aa;
+      transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 88dvh; max-height: 88vh; display: flex; flex-direction: column; overflow: hidden;
+    }
+    .drawer-backdrop.open .drawer-surface { transform: translateY(0); }
+
+    .drawer-top-action-bar {
+      flex-shrink: 0; position: sticky; top: 0; background: #ffffff; z-index: 20;
+      display: flex; justify-content: space-between; align-items: center; padding: 14px 18px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .drawer-close-circle-btn {
+      width: 32px; height: 32px; border-radius: 50%; background: #f1f5f9;
+      border: 1px solid #e2e8f0; color: var(--text-muted); font-size: 14px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+    }
+    .drawer-scroll-body {
+      flex: 1 1 auto; min-height: 0; overflow-y: auto;
+      padding: 14px 18px 20px; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
+    }
+
+    .drawer-visual-stage { width: 100%; height: 130px; display: flex; align-items: center; justify-content: center; position: relative; margin: 2px 0 6px; }
+    .drawer-pedestal { position: absolute; width: 125px; height: 125px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 240, 243, 0.9) 0%, rgba(255, 255, 255, 0.1) 70%); border: 1px solid rgba(255, 255, 255, 0.9); }
+    .drawer-main-img { max-height: 125px; max-width: 80%; object-fit: contain; z-index: 2; filter: drop-shadow(0 12px 18px rgba(45, 20, 25, 0.2)); }
+    .drawer-fruit-img { position: absolute; bottom: 0; left: 12%; width: 52px; height: 52px; object-fit: contain; z-index: 3; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15)); transform: rotate(-12deg); }
+
+    .drawer-title-ar { font-size: 19px; font-weight: 900; color: var(--text-espresso); line-height: 1.15; }
+    .drawer-title-en { font-family: var(--font-en); font-size: 12px; font-weight: 800; text-transform: uppercase; margin: 2px 0 6px; }
+    .drawer-full-story { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 8px; }
+
+    .quantity-control-wrapper {
+      display: flex; align-items: center; justify-content: space-between; background: #fdfaf7;
+      border: 1.5px solid #fed7aa; padding: 8px 14px; border-radius: 16px; margin: 8px 0;
+    }
+    .qty-control-cluster { display: inline-flex; align-items: center; gap: 12px; }
+    .qty-btn {
+      width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid #fed7aa; background: #ffffff;
+      color: var(--text-espresso); font-weight: 900; font-size: 16px; display: flex; align-items: center;
+      justify-content: center; cursor: pointer; transition: all 0.2s ease;
+    }
+    .qty-btn:active { transform: scale(0.92); background: #fed7aa; }
+    .qty-number { font-family: var(--font-en); font-size: 15px; font-weight: 900; min-width: 26px; text-align: center; color: var(--text-espresso); }
+
+    .drawer-sticky-bottom-actions {
+      flex-shrink: 0; position: sticky; bottom: 0; z-index: 20;
+      padding: 12px 18px calc(14px + env(safe-area-inset-bottom, 16px));
+      background: #ffffff; border-top: 1px solid #f1f5f9;
+    }
+    .drawer-actions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    .btn-luxury-cart {
+      background: #fdfaf7; border: 1.5px solid #fed7aa; color: var(--text-espresso);
+      padding: 11px; border-radius: 14px; font-family: var(--font-ar); font-size: 12px;
+      font-weight: 800; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+    }
+    .btn-luxury-order {
+      background: linear-gradient(135deg, var(--brand-red) 0%, #ff5e7e 100%);
+      border: none; color: #ffffff; padding: 11px; border-radius: 14px; font-family: var(--font-ar);
+      font-size: 12px; font-weight: 800; cursor: pointer; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; gap: 2px; box-shadow: var(--shadow-luxury-btn);
+    }
+
+    /* Store Hours Table */
+    .countdown-card-pill {
+      background: #fffdfa;
+      border: 1.5px solid #fed7aa;
+      border-radius: 16px;
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      text-align: center;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.06);
+    }
+    .countdown-card-pill.alert {
+      border-color: #fde68a;
+      background: #fffbeb;
+      color: #92400e;
+    }
+    
+    .hours-table-box {
+      background: #ffffff;
+      border: 1.5px solid #fed7aa;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
+    }
+    .hours-row {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      padding: 10px 12px;
+      font-size: 11.5px;
+      font-weight: 700;
+      border-bottom: 1px solid #f6ece5;
+      align-items: center;
+      text-align: center;
+    }
+    .hours-row > span:first-child { text-align: right; }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-row.is-today {
+      background: #fffbeb;
+      color: #92400e;
+      font-weight: 900;
+    }
+    .hours-header-row {
+      background: #fdfaf7;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text-muted);
+      border-bottom: 1.5px solid #fed7aa;
+    }
+
+    /* Fulfillment & Time Selector */
+    .fulfillment-choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0 18px; }
+    .choice-card-btn {
+      background: #ffffff; border: 2px solid #fed7aa; border-radius: 20px;
+      padding: 16px 10px; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; gap: 8px; cursor: pointer; transition: all 0.25s ease;
+      box-shadow: var(--shadow-card); text-align: center;
+    }
+    .choice-card-btn:active { transform: scale(0.95); }
+    .choice-icon-wrap { width: 46px; height: 46px; border-radius: 50%; background: #fff0f3; display: flex; align-items: center; justify-content: center; }
+    .choice-card-btn.pickup .choice-icon-wrap { background: #eff6ff; }
+    .choice-card-title { font-size: 13.5px; font-weight: 900; color: var(--text-espresso); }
+    .choice-card-sub { font-size: 11px; font-weight: 700; color: var(--text-muted); margin-top: 2px; }
+
+    .checkout-form-group { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
+    .checkout-label { font-size: 12px; font-weight: 800; color: var(--text-espresso); display: flex; align-items: center; gap: 5px; }
+    
+    .checkout-input {
+      width: 100%; background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 12px;
+      padding: 10px 12px; font-family: var(--font-ar); font-size: 12px; outline: none;
+    }
+    .checkout-input:focus { border-color: var(--brand-red); background: #fff; }
+
+    .jordan-phone-wrap {
+      display: flex; align-items: center; direction: ltr; background: #f8fafc;
+      border: 1.5px solid #e2e8f0; border-radius: 12px; overflow: hidden;
+    }
+    .jordan-prefix-pill {
+      background: #f1f5f9; padding: 10px 12px; font-family: var(--font-en); font-weight: 900;
+      font-size: 12px; color: var(--text-espresso); border-right: 1px solid #e2e8f0;
+    }
+    .jordan-phone-input {
+      flex: 1; border: none; background: transparent; padding: 10px 12px; font-family: var(--font-en);
+      font-weight: 800; font-size: 13.5px; color: var(--text-espresso); outline: none; letter-spacing: 0.5px;
+    }
+
+    .order-type-switch-bar { display: grid; grid-template-columns: 1fr 1fr; background: #f1f5f9; padding: 3px; border-radius: 12px; gap: 3px; margin-bottom: 10px; }
+    .order-type-btn {
+      border: none; background: transparent; padding: 8px 4px; border-radius: 9px; font-family: var(--font-ar);
+      font-size: 12px; font-weight: 800; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px;
+    }
+    .order-type-btn.active { background: #ffffff; color: var(--brand-red); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); }
+
+    .fast-slot-card {
+      background: #f0fdf4; border: 1.5px solid #a7f3d0; border-radius: 14px;
+      padding: 10px 12px; display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .fast-slot-card.active { border-color: var(--emerald-dark); background: #ecfdf5; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15); }
+
+    .btn-open-custom-time-picker {
+      background: #fffdfa; border: 1.5px dashed #fed7aa; color: #b45309;
+      padding: 10px 12px; border-radius: 14px; font-family: var(--font-ar); font-size: 12px;
+      font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      gap: 6px; margin-top: 6px; transition: all 0.2s ease;
+    }
+    .btn-open-custom-time-picker.has-value { border-style: solid; border-color: var(--brand-gold); background: #fffbeb; color: #92400e; }
+
+    /* Interactive Time Modal */
+    .time-selector-guide-pill {
+      background: #fdfaf7; border: 1px solid #fed7aa; border-radius: 12px;
+      padding: 8px 10px; font-size: 11px; font-weight: 700; color: #b45309; text-align: center;
+      line-height: 1.4; margin-bottom: 12px;
+    }
+    .interactive-hours-track { display: flex; gap: 8px; overflow-x: auto; padding: 8px 4px 14px; scrollbar-width: none; }
+    .interactive-hours-track::-webkit-scrollbar { display: none; }
+    .hour-pin-node {
+      flex: 0 0 76px; background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 14px;
+      padding: 10px 6px; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; gap: 4px; cursor: pointer; position: relative;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hour-pin-node.selected { border-color: var(--brand-red); background: #fff0f3; color: var(--brand-red); transform: translateY(-3px); }
+    .hour-pin-node.selected::after {
+      content: ""; position: absolute; bottom: -8px; width: 0; height: 0;
+      border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid var(--brand-red);
+    }
+    .minutes-cluster-box { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; }
+    .min-choice-pill {
+      background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 10px;
+      padding: 9px 4px; text-align: center; font-family: var(--font-en); font-size: 13px;
+      font-weight: 900; color: var(--text-espresso); cursor: pointer; transition: all 0.2s ease;
+    }
+    .min-choice-pill.active { border-color: var(--brand-gold); background: #fffbeb; color: #92400e; }
+    .min-choice-pill.disabled { opacity: 0.3; pointer-events: none; background: #f1f5f9; border-color: #e2e8f0; }
+
+    .time-confirmation-preview {
+      background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 14px;
+      padding: 12px; text-align: center; margin-top: 14px; display: flex; flex-direction: column; gap: 3px;
+    }
+
+    /* Location & Map */
+    .location-suite-box {
+      background: #ffffff; border: 1.5px solid #fed7aa; border-radius: 18px;
+      padding: 12px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px;
+      box-shadow: var(--shadow-card);
+    }
+    .btn-gps-interactive-pill {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      color: #ffffff; border: none; padding: 11px 14px; border-radius: 12px;
+      font-family: var(--font-ar); font-size: 12px; font-weight: 800; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+    .map-wrapper-box {
+      width: 100%; height: 185px; border-radius: 14px; border: 1.5px solid #bfdbfe;
+      overflow: hidden; position: relative; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08); margin-top: 4px;
+    }
+    #leaflet-map-element { width: 100%; height: 100%; z-index: 10; }
+
+    .location-validation-badge {
+      display: none; padding: 8px 12px; border-radius: 12px; font-size: 11.5px; font-weight: 800; line-height: 1.35;
+    }
+    .location-validation-badge.success { display: flex; align-items: center; gap: 6px; background: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46; }
+    .location-validation-badge.warning { display: flex; align-items: center; gap: 6px; background: #fffbeb; border: 1px solid #fde68a; color: #92400e; }
+    .location-validation-badge.error { display: flex; align-items: center; gap: 6px; background: #fff1f2; border: 1px solid #fecdd3; color: #9f1239; }
+    .location-validation-badge.prompt { display: flex; align-items: center; gap: 6px; background: #fff7ed; border: 1px solid #fed7aa; color: #c2410c; }
+
+    .btn-whatsapp-action {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff; border: none; padding: 12px; border-radius: 14px; font-family: var(--font-ar);
+      font-size: 13px; font-weight: 900; cursor: pointer; display: flex; align-items: center;
+      justify-content: center; gap: 6px; box-shadow: var(--shadow-whatsapp-btn);
+    }
+    .btn-insta-action {
+      background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+      color: #ffffff; border: none; padding: 12px; border-radius: 14px; font-family: var(--font-ar);
+      font-size: 12px; font-weight: 800; cursor: pointer; display: flex; align-items: center;
+      justify-content: center; gap: 6px; box-shadow: var(--shadow-insta-btn);
+    }
+
+    .floating-cart-bar {
+      position: fixed; bottom: calc(16px + env(safe-area-inset-bottom, 12px)); left: 50%;
+      transform: translateX(-50%) translateY(120px); width: calc(100% - 32px); max-width: 460px;
+      background: rgba(26, 17, 13, 0.96); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1.5px solid #fed7aa;
+      border-radius: 20px; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between;
+      color: #ffffff; z-index: 900; box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35); cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease; opacity: 0; pointer-events: none;
+    }
+    .floating-cart-bar.active { transform: translateX(-50%) translateY(0); opacity: 1; pointer-events: auto; }
+    .cart-count-badge { background: var(--brand-red); color: #fff; font-family: var(--font-en); font-size: 12px; font-weight: 900; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .btn-view-cart-pill { background: #ffffff; color: var(--text-espresso); border: none; padding: 6px 14px; border-radius: 9999px; font-family: var(--font-ar); font-size: 11.5px; font-weight: 800; }
+
+    .toast-stack-container {
+      position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 99999;
+      display: flex; flex-direction: column; gap: 8px; width: calc(100% - 28px); max-width: 420px; pointer-events: none;
+    }
+    .luxury-toast-pill {
+      pointer-events: auto; background: rgba(26, 17, 13, 0.96); color: #ffffff; backdrop-filter: blur(20px);
+      border: 1.5px solid #fed7aa; border-radius: 16px; padding: 11px 14px; font-size: 11.5px; font-weight: 800;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3); touch-action: pan-y; cursor: grab; user-select: none;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+      animation: toastSlideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes toastSlideDown {
+      from { opacity: 0; transform: translateY(-20px) scale(0.92); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toast-stack-container" id="toast-stack-box"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-top-row">
+      <div class="brand-group">
+        <div class="straw-hat-badge">
+          <div class="hat-glow"></div>
+          <svg class="straw-hat-svg" viewBox="0 0 100 100" fill="none">
+            <ellipse cx="50" cy="70" rx="46" ry="13" fill="#EAB308"/>
+            <path d="M24 67C24 38 31 24 50 24C69 24 76 38 76 67Z" fill="#FACC15"/>
+            <path d="M23.5 64.5C34 68.5 66 68.5 76.5 64.5C75.5 57.5 74.5 53 74.5 53C63 57.5 37 57.5 25.5 53Z" fill="#FF2A5F"/>
+            <path d="M35 32C42 27 58 27 65 32" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+        <div class="brand-name">
+          <span class="name-en">LUFFY</span>
+          <span style="color:var(--brand-red);">•</span>
+          <span class="name-ar">لوفي</span>
+        </div>
+      </div>
+
+      <div class="store-status-pill open" id="store-header-status-pill" onclick="openStoreHoursModal()">
+        <div class="store-dot"></div>
+        <span id="store-status-title">جاري الفحص...</span>
+      </div>
+    </div>
+
+    <!-- Search Input -->
+    <div class="search-input-wrapper">
+      <svg class="search-icon-svg" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" class="search-input" id="search-input" placeholder="ابحث عن نكهتك المفضلة أو استخدم الوسوم..." oninput="handleSearch(this.value)">
+      <button class="search-filter-icon-btn" onclick="openTagsModal()" title="تصفية حسب الوسوم">
+        <svg class="svg-icon" viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+        <span class="filter-count-badge" id="active-tags-count" style="display:none;">0</span>
+      </button>
+    </div>
+
+    <!-- Filter Chips -->
+    <div class="filter-scroll-container" id="filter-container">
+      <button class="chip-filter-btn active" onclick="applyCategoryFilter('ALL', this)">
+        <span>الكل</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Feed Container -->
+  <main class="menu-feed-container" id="menu-feed"></main>
+
+  <!-- Floating Cart -->
+  <div class="floating-cart-bar" id="floating-cart-bar" onclick="openCartDrawer()">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <div class="cart-count-badge" id="cart-total-badge">0</div>
+      <div>
+        <div style="font-size:13px; font-weight:800;" id="cart-bar-title">سلة طلبات كابتن السعادة</div>
+        <div style="font-size:10px; color:#fed7aa;">اضغط لمعاينة الطلب والإرسال</div>
+      </div>
+    </div>
+    <button class="btn-view-cart-pill">معاينة السلة</button>
+  </div>
+
+  <!-- Store Hours Modal -->
+  <div class="drawer-backdrop" id="store-hours-modal" onclick="closeStoreHoursModal()">
+    <div class="drawer-surface" onclick="event.stopPropagation()">
+      <div class="drawer-top-action-bar">
+        <div>
+          <div style="font-size:15px; font-weight:900;">ساعات الدوام المعتمدة</div>
+          <span class="en-sub">Store Operating Hours & Schedule</span>
+        </div>
+        <button class="drawer-close-circle-btn" onclick="closeStoreHoursModal()">✕</button>
+      </div>
+
+      <div class="drawer-scroll-body">
+        <div class="countdown-card-pill" id="modal-countdown-card">
+          <span style="font-size:13px; font-weight:900;" id="modal-next-event-title">جاري التحديث...</span>
+          <span class="tabular-nums" style="font-size:26px; font-weight:900; color:var(--brand-red); margin: 4px 0;" id="modal-countdown-digits">00:00:00</span>
+          <span style="font-size:11px; font-weight:700; color:var(--text-muted);" id="modal-event-detail-txt">...</span>
+        </div>
+
+        <div class="hours-table-box">
+          <div class="hours-row hours-header-row">
+            <span>اليوم</span>
+            <span>بداية العمل</span>
+            <span>نهاية العمل</span>
+          </div>
+          <div id="hours-table-body"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tags Filter Modal -->
+  <div class="drawer-backdrop" id="tags-filter-modal" onclick="closeTagsModal()">
+    <div class="drawer-surface" onclick="event.stopPropagation()">
+      <div class="drawer-top-action-bar">
+        <div>
+          <div style="font-size:15px; font-weight:900;">تصفية بالوسوم المتاحة</div>
+          <span class="en-sub">Filter by Multiple Tags</span>
+        </div>
+        <button class="drawer-close-circle-btn" onclick="closeTagsModal()">✕</button>
+      </div>
+
+      <div class="drawer-scroll-body">
+        <div style="font-size:11.5px; color:var(--text-muted); margin-bottom:8px;">
+          اضغط على الوسم لتحديده، واضغط عليه مجدداً لإلغائه:
+        </div>
+        <div class="card-tags-cluster" id="all-tags-selection-cluster" style="gap:6px;"></div>
+      </div>
+
+      <div class="drawer-sticky-bottom-actions">
+        <div style="display:grid; grid-template-columns: 1fr 1.5fr; gap:10px;">
+          <button class="btn-luxury-cart" style="background:#f8fafc; border-color:#e2e8f0;" onclick="clearAllTagFilters()">
+            <span>إلغاء وتفريغ الفلاتر</span>
+          </button>
+          <button class="btn-luxury-order" onclick="closeTagsModal()">
+            <span>اعتماد الفلاتر</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flavor Detail Drawer -->
+  <div class="drawer-backdrop" id="flavor-drawer" onclick="closeDrawer()">
+    <div class="drawer-surface" onclick="event.stopPropagation()">
+      <div class="drawer-top-action-bar">
+        <button class="pure-heart-btn" id="drawer-fav-pure-btn" onclick="toggleDrawerFavorite()">
+          <svg class="heart-svg-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <button class="drawer-close-circle-btn" onclick="closeDrawer()">✕</button>
+      </div>
+
+      <div class="drawer-scroll-body">
+        <div class="drawer-visual-stage">
+          <div class="drawer-pedestal"></div>
+          <img class="drawer-main-img" id="drawer-main-img" src="" alt="">
+          <img class="drawer-fruit-img" id="drawer-fruit-img" src="" alt="" style="display:none;">
+        </div>
+
+        <div id="drawer-status-badge-box" style="margin-bottom:4px;"></div>
+        <div class="drawer-title-ar" id="drawer-title-ar"></div>
+        <div class="drawer-title-en" id="drawer-title-en"></div>
+        <p class="drawer-full-story" id="drawer-story-ar"></p>
+
+        <div class="card-tags-cluster" style="margin-bottom:10px;" id="drawer-tags-box"></div>
+
+        <div class="quantity-control-wrapper">
+          <span style="font-size:12px; font-weight:800;">تحديد الكمية:</span>
+          <div class="qty-control-cluster">
+            <button class="qty-btn" onclick="changeQuantity(-1)">−</button>
+            <span class="qty-number" id="drawer-qty-val">1</span>
+            <button class="qty-btn" onclick="changeQuantity(1)">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="drawer-sticky-bottom-actions">
+        <div class="drawer-actions-grid">
+          <button class="btn-luxury-cart" onclick="addCurrentItemToCart()">
+            <span style="display:flex; align-items:center; gap:4px;">
+              <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+              <span>إضافة للسلة</span>
+            </span>
+            <span class="en-sub">Add to Basket</span>
+          </button>
+          <button class="btn-luxury-order" onclick="triggerCheckoutFlow('SINGLE')">
+            <span style="display:flex; align-items:center; gap:4px;">
+              <svg class="svg-icon" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
+              <span>تأكيد الطلب</span>
+            </span>
+            <span class="en-sub" style="color:#ffffff !important; opacity:0.85;">Direct Checkout</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Drawer -->
+  <div class="drawer-backdrop" id="cart-drawer" onclick="closeCartDrawer()">
+    <div class="drawer-surface" onclick="event.stopPropagation()">
+      <div class="drawer-top-action-bar">
+        <div>
+          <div style="font-size:15px; font-weight:900;">سلة طلبات كابتن السعادة</div>
+          <span class="en-sub">Your Prepared Order Basket</span>
+        </div>
+        <button class="drawer-close-circle-btn" onclick="closeCartDrawer()">✕</button>
+      </div>
+      <div class="drawer-scroll-body"><div id="cart-items-list" style="margin:8px 0;"></div></div>
+      <div class="drawer-sticky-bottom-actions">
+        <button class="btn-luxury-order" id="btn-cart-checkout-action" style="width:100%; padding:13px;" onclick="triggerCheckoutFlow('CART')">
+          <span style="font-size:13.5px; font-weight:900;">متابعة تأكيد الطلب وتحديد الموعد</span>
+          <span class="en-sub" style="color:#ffffff !important; opacity:0.85;">Proceed to Schedule & Delivery</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Drawer -->
+  <div class="drawer-backdrop" id="checkout-drawer" onclick="closeCheckoutDrawer()">
+    <div class="drawer-surface" onclick="event.stopPropagation()">
+      <div class="drawer-top-action-bar">
+        <div>
+          <div style="font-size:15px; font-weight:900;" id="checkout-drawer-title-ar">تأكيد الطلب والموعد</div>
+          <span class="en-sub" id="checkout-drawer-title-en">Confirm Order & Schedule</span>
+        </div>
+        <button class="drawer-close-circle-btn" onclick="closeCheckoutDrawer()">✕</button>
+      </div>
+
+      <div class="drawer-scroll-body" id="checkout-scroll-container">
+        
+        <!-- الخطوة 1: اختيار طريقة الاستلام -->
+        <div id="checkout-step-choice-view">
+          <div style="font-size:13px; font-weight:900; color:var(--text-espresso); margin-top:4px;">
+            كيف تود استلام طلبك اليوم؟
+            <span class="en-sub">How would you like to receive your order?</span>
+          </div>
+
+          <div class="fulfillment-choice-grid">
+            <div class="choice-card-btn" onclick="selectFulfillmentAndProceed('DELIVERY')">
+              <div class="choice-icon-wrap">
+                <svg class="svg-icon" style="width:24px; height:24px; stroke:var(--brand-red);" viewBox="0 0 24 24"><circle cx="18.5" cy="17.5" r="3.5"></circle><circle cx="5.5" cy="17.5" r="3.5"></circle><circle cx="15" cy="5" r="1"></circle><path d="M12 17.5V14l-3-3 4-3 2 3h2"></path></svg>
+              </div>
+              <div>
+                <div class="choice-card-title">توصيل إلى موقعي</div>
+                <div class="choice-card-sub">كابتن السعادة بيوصلك قبل ما تذوب البوظة</div>
+              </div>
+            </div>
+
+            <div class="choice-card-btn pickup" onclick="selectFulfillmentAndProceed('PICKUP')">
+              <div class="choice-icon-wrap">
+                <svg class="svg-icon" style="width:24px; height:24px; stroke:var(--blue-accent);" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+              </div>
+              <div>
+                <div class="choice-card-title">استلام من المحل</div>
+                <div class="choice-card-sub">جاهز للاستلام خلال 5 دقائق</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- الخطوة 2: تعبئة البيانات والموقع وموعد التسليم -->
+        <div id="checkout-step-form-view" style="display:none;">
+          <div class="checkout-form-group">
+            <label class="checkout-label">
+              <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>طريقة الاستلام المحددة</span>
+            </label>
+            <div class="order-type-switch-bar">
+              <button type="button" class="order-type-btn" id="btn-type-delivery" onclick="setOrderType('DELIVERY')">
+                <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="18.5" cy="17.5" r="3.5"></circle><circle cx="5.5" cy="17.5" r="3.5"></circle><circle cx="15" cy="5" r="1"></circle><path d="M12 17.5V14l-3-3 4-3 2 3h2"></path></svg>
+                <span>توصيل إلى موقعي</span>
+              </button>
+              <button type="button" class="order-type-btn" id="btn-type-pickup" onclick="setOrderType('PICKUP')">
+                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                <span>استلام من المحل</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="checkout-form-group">
+            <label class="checkout-label">
+              <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <span id="time-slot-form-label">موعد التسليم</span>
+            </label>
+            
+            <div class="fast-slot-card active" id="fast-slot-suggestion-card" onclick="chooseFastSuggestedSlot()">
+              <div>
+                <div style="font-size:12.5px; font-weight:900; color:var(--text-espresso);" id="fast-slot-main-title">أقرب موعد مقترح</div>
+                <div style="font-size:10.5px; color:var(--emerald-dark); font-weight:800;" id="fast-slot-sub-time">جاري الاحتساب...</div>
+              </div>
+              <span style="font-size:11px; background:#dcfce7; color:#166534; padding:3px 8px; border-radius:6px; font-weight:800;">خيار فوري ✓</span>
+            </div>
+
+            <button type="button" class="btn-open-custom-time-picker" id="btn-open-custom-time" onclick="openInteractiveTimeModal()">
+              <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 15 15"></polyline></svg>
+              <span id="custom-time-btn-label">تحديد موعد تسليم مخصص</span>
+            </button>
+          </div>
+
+          <!-- قسم تثبيت الموقع الجغرافي -->
+          <div id="delivery-location-section" style="display:none;">
+            <div class="location-suite-box" id="location-suite-box-container">
+              <div class="checkout-label">
+                <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="12 2 19 21 12 17 5 21 12 2"></polygon></svg>
+                <span>تحديد موقع التوصيل في العقبة (إلزامي) *</span>
+              </div>
+
+              <button type="button" class="btn-gps-interactive-pill" onclick="captureLiveGpsLocation()">
+                <svg class="svg-icon" style="stroke:#ffffff;" viewBox="0 0 24 24"><polygon points="12 2 19 21 12 17 5 21 12 2"></polygon></svg>
+                <span id="gps-btn-label">اضغط لتثبيت موقعك الحالي</span>
+              </button>
+
+              <div class="map-wrapper-box" id="map-interactive-container">
+                <div id="leaflet-map-element"></div>
+              </div>
+              <div style="font-size:10.5px; color:var(--text-muted); text-align:center;">
+                يمكنك تحريك الدبوس على الخريطة لتحديد عنوان بيتك بدقة
+              </div>
+
+              <div id="location-geofence-alert" class="location-validation-badge prompt">
+                📍 يرجى الضغط على زر تثبيت موقعك أعلاه أو النقر على الخريطة لتحديد موقعك
+              </div>
+            </div>
+
+            <div class="checkout-form-group">
+              <label class="checkout-label">
+                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                <span>تفاصيل العنوان أو أقرب معلم</span>
+              </label>
+              <input type="text" class="checkout-input" id="cust-address-input" placeholder="العقبة - بجانب ساحة الثورة / فندق...">
+            </div>
+          </div>
+
+          <div class="checkout-form-group">
+            <label class="checkout-label">
+              <svg class="svg-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <span>الاسم الكريم *</span>
+            </label>
+            <input type="text" class="checkout-input" id="cust-name-input" placeholder="مثال: أحمد">
+          </div>
+
+          <div class="checkout-form-group">
+            <label class="checkout-label">
+              <svg class="svg-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <span>رقم الهاتف الأردني (إلزامي) *</span>
+            </label>
+            <div class="jordan-phone-wrap" id="jordan-phone-box">
+              <div class="jordan-prefix-pill">🇯🇴 +962</div>
+              <input type="tel" class="jordan-phone-input" id="cust-phone-input" placeholder="7XXXXXXXX" maxlength="12" oninput="sanitizeJordanPhoneInput(this)">
+            </div>
+          </div>
+
+          <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:10px 12px; margin-top:6px;">
+            <div style="font-size:11px; font-weight:800; color:var(--text-muted);">ملخص الطلبية:</div>
+            <div id="order-text-summary-view" style="font-size:12px; font-weight:800; color:var(--text-espresso); margin-top:2px;">...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Action Buttons -->
+      <div class="drawer-sticky-bottom-actions" id="checkout-drawer-bottom-actions" style="display:none;">
+        <div style="display:flex; flex-direction:column; gap:9px;">
+          
+          <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1.5px solid #a7f3d0; border-radius: 12px; padding: 8px 12px; display: flex; align-items: center; gap: 8px;">
+            <svg class="svg-icon" style="stroke: #16a34a; width: 18px; height: 18px;" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <div style="font-size: 11px; font-weight: 800; color: #166534; line-height: 1.35;">
+              يتم اعتماد طلبك للتجهيز مباشرة مع كابتن السعادة فور إتمام إرسال الرسالة ✨
+            </div>
+          </div>
+
+          <button type="button" class="btn-whatsapp-action" onclick="dispatchDirectOrder('WHATSAPP')">
+            <svg style="width:17px; height:17px; fill:currentColor;" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.158.571 4.184 1.57 5.938l-1.666 6.088 6.257-1.642c1.701.928 3.655 1.45 5.72 1.45 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12z"/></svg>
+            <span>إرسال وتأكيد الطلب فوراً عبر واتساب</span>
+          </button>
+          <button type="button" class="btn-insta-action" onclick="dispatchDirectOrder('INSTAGRAM')">
+            <svg style="width:15px; height:15px; fill:currentColor;" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            <span>إرسال عبر إنستغرام لوفي</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Time Modal -->
+  <div class="drawer-backdrop" id="interactive-time-modal" onclick="closeInteractiveTimeModal()">
+    <div class="drawer-surface" onclick="event.stopPropagation()">
+      <div class="drawer-top-action-bar">
+        <div>
+          <div style="font-size:15px; font-weight:900;">تحديد موعد التسليم المخصص</div>
+          <span class="en-sub">Smart Interactive Time Selector</span>
+        </div>
+        <button class="drawer-close-circle-btn" onclick="closeInteractiveTimeModal()">✕</button>
+      </div>
+
+      <div class="drawer-scroll-body">
+        <div class="time-selector-guide-pill" id="time-selector-guide-text">
+          اختر الساعة المطلوبة أدناه، ثم حدد الدقائق لتثبيت الموعد المعتمد مع كابتن السعادة.
+        </div>
+
+        <div style="font-size:12px; font-weight:800; margin-bottom:4px;" id="hours-track-title">1. اختر الساعة المتاحة:</div>
+        <div class="interactive-hours-track" id="interactive-hours-track"></div>
+
+        <div style="font-size:12px; font-weight:800; margin-top:14px; margin-bottom:4px;">2. اختر الدقائق المعتمدة:</div>
+        <div class="minutes-cluster-box" id="minutes-selection-cluster"></div>
+
+        <div class="time-confirmation-preview">
+          <span style="font-size:11px; color:var(--text-muted); font-weight:800;">الموعد المختار للتسليم:</span>
+          <span style="font-size:15px; font-weight:900; color:var(--brand-red);" id="interactive-time-preview-text">...</span>
+          <span style="font-size:10.5px; font-weight:800; color:var(--emerald-dark);" id="interactive-time-status-pill">ضمن ساعات الدوام الرسمية ✓</span>
+        </div>
+      </div>
+
+      <div class="drawer-sticky-bottom-actions">
+        <button class="btn-luxury-order" style="width:100%; padding:13px;" onclick="confirmCustomInteractiveTime()">
+          <span>تثبيت واعتماد هذا الموعد</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ⚡ الرابط السحابي المعتمد وقواعد البيانات المنفصلة
+    const APPS_SCRIPT_EXEC_URL = "https://script.google.com/macros/s/AKfycbxYmpfN2OBW24M-sumyx8dwbkFN-RsbiWkYJZYa0gZLfMxVpXr2TswzORV0inmu5nFieQ/exec";
+    const DB_OPERATIONS_ID     = "1zpMXr5QvBnUSaeqegS-pFGHj1kVAHp21T4tHEy7fYt4"; // شيت النكهات والمخزون
+    const DB_VAULT_ID          = "1dkQ6oamvJ7Xi3MISTzQGESFKOuy2brvapFf6ugeMqAI"; // شيت ساعات الدوام والأمان
+    const INSTAGRAM_HANDLE     = "luffy.aqaba";
+    
+    let STORE_WHATSAPP_NUMBER  = "962779450205";
+
+    let rawFlavors = [];
+    let previousFlavorsMap = {};
+    let isFirstDataLoad = true;
+
+    let currentCategory = 'ALL';
+    let selectedTags = new Set();
+    let searchQuery = '';
+    
+    let favoriteIds = JSON.parse(localStorage.getItem('luffy_favorites') || "[]");
+    let cartItems = JSON.parse(localStorage.getItem('luffy_cart') || "[]");
+
+    let orderType = null;
+    let selectedTimeSlot = '';
+    let isCustomTimeSelected = false;
+
+    let tempChosenHourObj = null;
+    let tempChosenMin = 0;
+
+    let capturedGpsLocation = null;
+    let calculatedDistanceKm = null;
+    let isLocationValidated = false;
+
+    let leafletMapInstance = null;
+    let leafletMarkerInstance = null;
+    const AQABA_STORE_COORDS = [29.5265, 35.0020];
+
+    const OCCUPIED_POLYGON = [
+      [29.5445, 34.9805], [29.5600, 34.9760], [29.5800, 34.9780],
+      [29.6400, 34.9950], [29.8000, 35.0500], [33.3000, 35.8000],
+      [33.3000, 34.2000], [29.4500, 34.2000], [29.4500, 34.8800],
+      [29.5400, 34.9450], [29.5445, 34.9805]
+    ];
+
+    const SEA_POLYGON = [
+      [29.5445, 34.9810], [29.5410, 34.9920], [29.5310, 34.9975],
+      [29.5160, 34.9985], [29.4750, 34.9780], [29.4200, 34.9650],
+      [29.3550, 34.9540], [29.3550, 34.9000], [29.4800, 34.8800],
+      [29.5400, 34.9450], [29.5445, 34.9810]
+    ];
+
+    const DEFAULT_WEEKLY_HOURS = {
+      0: { name: "الأحد", open: "14:00", close: "02:00", active: true },
+      1: { name: "الاثنين", open: "14:00", close: "02:00", active: true },
+      2: { name: "الثلاثاء", open: "14:00", close: "02:00", active: true },
+      3: { name: "الأربعاء", open: "14:00", close: "02:00", active: true },
+      4: { name: "الخميس", open: "14:00", close: "03:30", active: true },
+      5: { name: "الجمعة", open: "14:00", close: "03:30", active: true },
+      6: { name: "السبت", open: "14:00", close: "02:00", active: true }
+    };
+    let weeklyHours = JSON.parse(localStorage.getItem('luffy_weekly_hours') || JSON.stringify(DEFAULT_WEEKLY_HOURS));
+    let activeDrawerItem = null;
+    let selectedQuantity = 1;
+
+    function isPointInPolygon(point, vs) {
+      const x = point[0], y = point[1];
+      let inside = false;
+      for (let i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+        const xi = vs[i][0], yi = vs[i][1];
+        const xj = vs[j][0], yj = vs[j][1];
+        const intersect = ((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+        if (intersect) inside = !inside;
+      }
+      return inside;
+    }
+
+    function showToast(message) {
+      const stack = document.getElementById('toast-stack-box');
+      if (!stack) return;
+
+      while (stack.children.length >= 2) {
+        stack.removeChild(stack.firstChild);
+      }
+
+      const pill = document.createElement('div');
+      pill.className = 'luxury-toast-pill';
+      pill.innerHTML = `<span>${message}</span>`;
+
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchDeltaX = 0;
+      let touchDeltaY = 0;
+
+      pill.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      pill.addEventListener('touchmove', (e) => {
+        touchDeltaX = e.touches[0].clientX - touchStartX;
+        touchDeltaY = e.touches[0].clientY - touchStartY;
+
+        if (Math.abs(touchDeltaX) > 10) {
+          pill.style.transform = `translateX(${touchDeltaX}px)`;
+          pill.style.opacity = Math.max(0.2, 1 - Math.abs(touchDeltaX) / 180);
+        }
+      }, { passive: true });
+
+      pill.addEventListener('touchend', () => {
+        if (Math.abs(touchDeltaX) > 60) {
+          pill.style.transform = `translateX(${touchDeltaX > 0 ? 300 : -300}px)`;
+          pill.style.opacity = '0';
+          setTimeout(() => pill.remove(), 250);
+        } else if (touchDeltaY < -40) {
+          stack.innerHTML = "";
+        } else {
+          pill.style.transform = 'translateX(0)';
+          pill.style.opacity = '1';
+        }
+      });
+
+      stack.appendChild(pill);
+      setTimeout(() => { if (pill.parentElement) pill.remove(); }, 4000);
+    }
+
+    function extractDriveId(url) {
+      if (!url) return '';
+      const m = String(url).split(',')[0].trim().match(/[-\w]{25,}/);
+      return m ? m[0] : '';
+    }
+    function getDriveImageUrl(url) {
+      const id = extractDriveId(url);
+      return id ? `https://drive.google.com/thumbnail?id=${id}&sz=w1000` : (url ? url.trim() : '');
+    }
+
+    function convertArabicToEnglishDigits(str) {
+      if (!str) return '';
+      return str.toString().replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[۰-۹]/g, d => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
+    }
+
+    function sanitizeJordanPhoneInput(inputEl) {
+      let raw = convertArabicToEnglishDigits(inputEl.value);
+      let digits = raw.replace(/\D/g, '');
+      if (digits.startsWith('962')) digits = digits.slice(3);
+      if (digits.startsWith('00962')) digits = digits.slice(5);
+      while (digits.startsWith('0')) digits = digits.slice(1);
+      inputEl.value = digits;
+      document.getElementById('jordan-phone-box').classList.remove('input-error');
+    }
+
+    function getFullJordanPhoneNumber() {
+      const el = document.getElementById('cust-phone-input');
+      const val = el.value.trim();
+      if (!val || val.length !== 9 || !val.startsWith('7')) return null;
+      return `+962${val}`;
+    }
+
+    function parseSafeTime(openStr, closeStr, isActive = true) {
+      const parse = (s, defH, defM) => {
+        if (!s) return { h: defH, m: defM, min: defH * 60 + defM };
+        const p = String(s).replace(/[^\d:]/g, '').split(':').map(Number);
+        if (p.length >= 2 && !isNaN(p[0]) && !isNaN(p[1])) {
+          return { h: p[0], m: p[1], min: p[0] * 60 + p[1] };
+        }
+        return { h: defH, m: defM, min: defH * 60 + defM };
+      };
+      const o = parse(openStr, 14, 0);
+      const c = parse(closeStr, 2, 0);
+      return {
+        active: Boolean(isActive),
+        openH: o.h, openM: o.m, openMin: o.min,
+        closeH: c.h, closeM: c.m, closeMin: c.min,
+        isOvernight: c.min <= o.min
+      };
+    }
+
+    function formatTimeFriendly(h, m, isOvernight = false) {
+      h = Number(h); m = Number(m);
+      const h24 = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+      let h12 = h % 12 || 12;
+      const ampm = h >= 12 ? 'مساءً' : 'صباحاً';
+      const overnightSuffix = isOvernight ? ' (اليوم التالي)' : '';
+      return `${h24} (${h12}:${String(m).padStart(2, '0')} ${ampm})${overnightSuffix}`;
+    }
+
+    function formatTimeDoubleLine(h, m, isOvernight = false) {
+      h = Number(h); m = Number(m);
+      const h24 = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+      let h12 = h % 12 || 12;
+      const ampm = h >= 12 ? 'مساءً' : 'صباحاً';
+      const overnightSuffix = isOvernight ? ' (اليوم التالي)' : '';
+      return `
+        <div style="font-family:var(--font-en); font-size:13px; font-weight:900; line-height:1.2;">${h24}</div>
+        <div style="font-size:10px; color:var(--text-muted); font-weight:700; line-height:1.2; margin-top:2px;">${h12}:${String(m).padStart(2, '0')} ${ampm}${overnightSuffix}</div>
+      `;
+    }
+
+    function getHaversineDistance(lat1, lon1, lat2, lon2) {
+      const R = 6371;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
+    }
+
+    function extractItemTags(item) {
+      const tags = [];
+      const cat = (item.Category || item['التصنيف'] || '').trim();
+      if (cat && cat !== 'الكل' && cat !== 'عام') tags.push(cat);
+      const rawTags = (item.Tags || item['الوسوم'] || item['وسوم'] || '').toString();
+      if (rawTags) {
+        rawTags.split(/[,،#]/).map(t => t.trim()).filter(Boolean).forEach(t => tags.push(t));
+      }
+      const desc = (item.Description_AR || item['وصف النكهة (عربي)'] || '').toString();
+      const hashMatches = desc.match(/#[\w\u0600-\u06FF]+/g);
+      if (hashMatches) {
+        hashMatches.forEach(h => tags.push(h.replace('#', '').trim()));
+      }
+      return Array.from(new Set(tags)).filter(Boolean);
+    }
+
+    /* Tag Filters */
+    function toggleTagFilter(tag, event) {
+      if (event) event.stopPropagation();
+      if (selectedTags.has(tag)) selectedTags.delete(tag);
+      else selectedTags.add(tag);
+      updateTagsBadge();
+      renderMenuFeed();
+      renderTagsModalClusters();
+    }
+
+    function clearAllTagFilters() {
+      selectedTags.clear();
+      updateTagsBadge();
+      renderMenuFeed();
+      closeTagsModal();
+      showToast("تم تفريغ كافة الفلاتر ✓");
+    }
+
+    function updateTagsBadge() {
+      const badge = document.getElementById('active-tags-count');
+      if (selectedTags.size > 0) {
+        badge.style.display = 'flex';
+        badge.textContent = selectedTags.size;
+      } else {
+        badge.style.display = 'none';
+      }
+    }
+
+    function openTagsModal() {
+      renderTagsModalClusters();
+      document.getElementById('tags-filter-modal').classList.add('open');
+    }
+    function closeTagsModal() {
+      document.getElementById('tags-filter-modal').classList.remove('open');
+    }
+
+    function renderTagsModalClusters() {
+      const container = document.getElementById('all-tags-selection-cluster');
+      if (!container) return;
+      const allTags = new Set();
+      rawFlavors.forEach(f => extractItemTags(f).forEach(t => allTags.add(t)));
+      container.innerHTML = Array.from(allTags).map(t => `
+        <span class="hashtag-pill ${selectedTags.has(t) ? 'active-hash' : ''}" onclick="toggleTagFilter('${t}', event)">#${t}</span>
+      `).join('');
+    }
+
+    /* Store Hours Badge */
+    function updateStoreLiveHoursBadge() {
+      const now = new Date();
+      const currentDay = now.getDay();
+      const prevDay = (currentDay + 6) % 7;
+      const nextDay = (currentDay + 1) % 7;
+      const nowSec = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+      const nowMin = Math.floor(nowSec / 60);
+
+      const pill = document.getElementById('store-header-status-pill');
+      const title = document.getElementById('store-status-title');
+      const countdownCard = document.getElementById('modal-countdown-card');
+      const nextTitle = document.getElementById('modal-next-event-title');
+      const countdownDigits = document.getElementById('modal-countdown-digits');
+      const eventDetail = document.getElementById('modal-event-detail-txt');
+
+      const prevS = parseSafeTime(weeklyHours[prevDay]?.open, weeklyHours[prevDay]?.close, weeklyHours[prevDay]?.active);
+      const todayS = parseSafeTime(weeklyHours[currentDay]?.open, weeklyHours[currentDay]?.close, weeklyHours[currentDay]?.active);
+      const nextS = parseSafeTime(weeklyHours[nextDay]?.open, weeklyHours[nextDay]?.close, weeklyHours[nextDay]?.active);
+
+      let isStoreOpen = false;
+      let targetSec = 0;
+
+      if (prevS.active && prevS.isOvernight && nowMin < prevS.closeMin) {
+        isStoreOpen = true;
+        targetSec = prevS.closeMin * 60;
+      } else if (todayS.active) {
+        const closeEffMin = todayS.isOvernight ? todayS.closeMin + 1440 : todayS.closeMin;
+        if (nowMin >= todayS.openMin && nowMin < closeEffMin) {
+          isStoreOpen = true;
+          targetSec = closeEffMin * 60;
+        } else if (nowMin < todayS.openMin) {
+          isStoreOpen = false;
+          targetSec = todayS.openMin * 60;
+        } else {
+          isStoreOpen = false;
+          targetSec = (nextS.openMin + 1440) * 60;
+        }
+      } else {
+        isStoreOpen = false;
+        targetSec = (nextS.openMin + 1440) * 60;
+      }
+
+      let diffSec = targetSec - nowSec;
+      if (diffSec < 0) diffSec += 86400;
+
+      const hrs = Math.floor(diffSec / 3600);
+      const mins = Math.floor((diffSec % 3600) / 60);
+      const secs = diffSec % 60;
+      const formattedCountdown = `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      if (countdownDigits) countdownDigits.textContent = formattedCountdown;
+
+      if (isStoreOpen) {
+        const remMin = Math.floor(diffSec / 60);
+        const closeFormatted = formatTimeFriendly(todayS.closeH, todayS.closeM, todayS.isOvernight);
+
+        if (remMin <= 60) {
+          pill.className = "store-status-pill closing-soon";
+          title.textContent = `يغلق خلال ${remMin} دقيقة`;
+          if (countdownCard) countdownCard.className = "countdown-card-pill alert";
+          if (nextTitle) nextTitle.textContent = "سنغلق أبوابنا بعد";
+          if (eventDetail) eventDetail.textContent = `عند الساعة ${closeFormatted}`;
+        } else {
+          pill.className = "store-status-pill open";
+          title.textContent = "مفتوح الآن";
+          if (countdownCard) countdownCard.className = "countdown-card-pill";
+          if (nextTitle) nextTitle.textContent = "نستقبلكم الآن";
+          if (eventDetail) eventDetail.textContent = `حتى الساعة ${closeFormatted}`;
+        }
+      } else {
+        const remMin = Math.floor(diffSec / 60);
+        const openFormatted = todayS.active && nowMin < todayS.openMin 
+          ? formatTimeFriendly(todayS.openH, todayS.openM)
+          : formatTimeFriendly(nextS.openH, nextS.openM);
+
+        if (remMin <= 60) {
+          pill.className = "store-status-pill opening-soon";
+          title.textContent = `يفتح خلال ${remMin} دقيقة`;
+          if (countdownCard) countdownCard.className = "countdown-card-pill alert";
+        } else {
+          pill.className = "store-status-pill closed";
+          title.textContent = "مغلق حالياً";
+          if (countdownCard) countdownCard.className = "countdown-card-pill";
+        }
+        if (nextTitle) nextTitle.textContent = "نفتح أبوابنا بعد";
+        if (eventDetail) eventDetail.textContent = `عند الساعة ${openFormatted}`;
+      }
+    }
+
+    function openStoreHoursModal() { renderStoreHoursTable(); document.getElementById('store-hours-modal').classList.add('open'); }
+    function closeStoreHoursModal() { document.getElementById('store-hours-modal').classList.remove('open'); }
+
+    function renderStoreHoursTable() {
+      const tbody = document.getElementById('hours-table-body');
+      if (!tbody) return;
+      const now = new Date();
+      const currentDay = now.getDay();
+      const nextDay = (currentDay + 1) % 7;
+
+      let html = "";
+      for (let i = 0; i < 7; i++) {
+        const sched = weeklyHours[i] || DEFAULT_WEEKLY_HOURS[i];
+        let dayLabel = sched.name;
+        if (i === currentDay) dayLabel = `اليوم (${sched.name})`;
+        else if (i === nextDay) dayLabel = `غداً (${sched.name})`;
+
+        const sOpen = sched.active ? formatTimeDoubleLine(sched.open.split(':')[0], sched.open.split(':')[1]) : '<div style="color:var(--text-muted);">عطلة</div>';
+        const sClose = sched.active ? formatTimeDoubleLine(sched.close.split(':')[0], sched.close.split(':')[1], sched.isOvernight) : '<div style="color:var(--text-muted);">عطلة</div>';
+
+        html += `
+          <div class="hours-row ${i === currentDay ? 'is-today' : ''}">
+            <span>${dayLabel}</span>
+            <span>${sOpen}</span>
+            <span>${sClose}</span>
+          </div>
+        `;
+      }
+      tbody.innerHTML = html;
+    }
+
+    /* Timing Calculation */
+    function calculateAccurateSchedule() {
+      const now = new Date();
+      const currentDay = now.getDay();
+      const prevDay = (currentDay + 6) % 7;
+      const nextDay = (currentDay + 1) % 7;
+      const nowMin = now.getHours() * 60 + now.getMinutes();
+
+      const prevS = parseSafeTime(weeklyHours[prevDay]?.open, weeklyHours[prevDay]?.close, weeklyHours[prevDay]?.active);
+      const todayS = parseSafeTime(weeklyHours[currentDay]?.open, weeklyHours[currentDay]?.close, weeklyHours[currentDay]?.active);
+      const nextS = parseSafeTime(weeklyHours[nextDay]?.open, weeklyHours[nextDay]?.close, weeklyHours[nextDay]?.active);
+
+      const isPickup = (orderType === 'PICKUP');
+      const minPrepBuffer = isPickup ? 5 : 20;
+      const slotStep = isPickup ? 5 : 15;
+
+      let isNowOpen = false;
+      let activeShiftCloseMin = 0;
+      let targetDayText = "اليوم";
+      let shiftIsOvernight = false;
+      let earliestDeliveryMin = 0;
+
+      // 1. وردية الأمس فجراً
+      if (prevS.active && prevS.isOvernight && nowMin < prevS.closeMin) {
+        isNowOpen = true;
+        activeShiftCloseMin = prevS.closeMin;
+        targetDayText = "اليوم فجراً";
+        shiftIsOvernight = true;
+
+        let rawTarget = nowMin + minPrepBuffer;
+        let roundedTarget = Math.ceil(rawTarget / slotStep) * slotStep;
+
+        if (roundedTarget <= activeShiftCloseMin) {
+          earliestDeliveryMin = roundedTarget;
+        } else {
+          isNowOpen = false;
+          targetDayText = "اليوم عند الافتتاح";
+          let openTarget = todayS.openMin + minPrepBuffer;
+          earliestDeliveryMin = Math.ceil(openTarget / slotStep) * slotStep;
+          activeShiftCloseMin = todayS.isOvernight ? todayS.closeMin + 1440 : todayS.closeMin;
+        }
+      } 
+      // 2. وردية اليوم
+      else if (todayS.active) {
+        const closeEff = todayS.isOvernight ? todayS.closeMin + 1440 : todayS.closeMin;
+        shiftIsOvernight = todayS.isOvernight;
+
+        if (nowMin >= todayS.openMin && nowMin < closeEff) {
+          isNowOpen = true;
+          activeShiftCloseMin = closeEff;
+          targetDayText = "اليوم";
+
+          let rawTarget = nowMin + minPrepBuffer;
+          let roundedTarget = Math.ceil(rawTarget / slotStep) * slotStep;
+
+          if (roundedTarget <= activeShiftCloseMin) {
+            earliestDeliveryMin = roundedTarget;
+          } else {
+            isNowOpen = false;
+            targetDayText = "غداً عند الافتتاح";
+            let nextOpenTarget = nextS.openMin + minPrepBuffer;
+            earliestDeliveryMin = Math.ceil(nextOpenTarget / slotStep) * slotStep;
+            activeShiftCloseMin = nextS.isOvernight ? nextS.closeMin + 1440 : nextS.closeMin;
+          }
+        } else if (nowMin < todayS.openMin) {
+          isNowOpen = false;
+          activeShiftCloseMin = closeEff;
+          targetDayText = "اليوم عند الافتتاح";
+          let openTarget = todayS.openMin + minPrepBuffer;
+          earliestDeliveryMin = Math.ceil(openTarget / slotStep) * slotStep;
+        } else {
+          isNowOpen = false;
+          activeShiftCloseMin = nextS.isOvernight ? nextS.closeMin + 1440 : nextS.closeMin;
+          targetDayText = "غداً عند الافتتاح";
+          let nextOpenTarget = nextS.openMin + minPrepBuffer;
+          earliestDeliveryMin = Math.ceil(nextOpenTarget / slotStep) * slotStep;
+          shiftIsOvernight = nextS.isOvernight;
+        }
+      } else {
+        isNowOpen = false;
+        activeShiftCloseMin = nextS.isOvernight ? nextS.closeMin + 1440 : nextS.closeMin;
+        targetDayText = "غداً عند الافتتاح";
+        let nextOpenTarget = nextS.openMin + minPrepBuffer;
+        earliestDeliveryMin = Math.ceil(nextOpenTarget / slotStep) * slotStep;
+        shiftIsOvernight = nextS.isOvernight;
+      }
+
+      let fastH = Math.floor(earliestDeliveryMin / 60) % 24;
+      let fastM = earliestDeliveryMin % 60;
+      const formattedFastSlot = `${targetDayText}: ${formatTimeFriendly(fastH, fastM, (earliestDeliveryMin >= 1440 && shiftIsOvernight))}`;
+
+      const titleEl = document.getElementById('fast-slot-main-title');
+      const subTimeEl = document.getElementById('fast-slot-sub-time');
+      const labelEl = document.getElementById('time-slot-form-label');
+
+      if (labelEl) {
+        labelEl.textContent = isPickup 
+          ? 'موعد الاستلام من المحل (أقرب موعد بعد 5 دقائق)' 
+          : 'موعد التسليم (أقرب موعد متاح بعد 20 دقيقة)';
+      }
+      
+      if (titleEl) {
+        titleEl.textContent = isPickup 
+          ? 'أقرب موعد استلام من المحل (خلال 5 دقائق)' 
+          : 'أسرع موعد توصيل متاح (خلال 20 دقيقة)';
+      }
+      if (subTimeEl) subTimeEl.textContent = formattedFastSlot;
+
+      if (!isCustomTimeSelected) {
+        selectedTimeSlot = formattedFastSlot;
+      }
+
+      return {
+        activeShiftOpenMin: todayS.openMin,
+        activeShiftCloseMin,
+        isNowOpen,
+        earliestDeliveryMin,
+        targetDayText,
+        minPrepBuffer,
+        slotStep,
+        shiftIsOvernight,
+        nowMin,
+        isPickup
+      };
+    }
+
+    function chooseFastSuggestedSlot() {
+      isCustomTimeSelected = false;
+      calculateAccurateSchedule();
+      document.getElementById('fast-slot-suggestion-card').classList.add('active');
+      document.getElementById('btn-open-custom-time').classList.remove('has-value');
+      document.getElementById('custom-time-btn-label').textContent = "تحديد موعد تسليم مخصص";
+      showToast("تم اعتماد أقرب موعد مقترح ✓");
+    }
+
+    function openInteractiveTimeModal() {
+      renderInteractiveHoursTrack();
+      renderInteractiveMinutesCluster();
+      document.getElementById('interactive-time-modal').classList.add('open');
+    }
+    function closeInteractiveTimeModal() {
+      document.getElementById('interactive-time-modal').classList.remove('open');
+    }
+
+    function renderInteractiveHoursTrack() {
+      const track = document.getElementById('interactive-hours-track');
+      if (!track) return;
+      track.innerHTML = "";
+
+      const sched = calculateAccurateSchedule();
+      const currentStartMin = sched.earliestDeliveryMin;
+      const minAllowedHour = Math.floor(currentStartMin / 60);
+      const maxAllowedHour = Math.floor((sched.activeShiftCloseMin - 5) / 60);
+
+      const availableHours = [];
+      for (let h = minAllowedHour; h <= maxAllowedHour; h++) {
+        if ((h * 60 + 55) >= currentStartMin) {
+          let realH = h % 24;
+          let isNextDay = (h >= 24);
+          let dayNote = isNextDay ? "اليوم التالي" : sched.targetDayText;
+          availableHours.push({ rawHour: h, realHour: realH, dayNote, isNextDay });
+        }
+      }
+
+      if (availableHours.length === 0) {
+        track.innerHTML = `<div style="font-size:12px; color:#991b1b; padding:10px;">انتهت مواعيد الاستقبال لهذا اليوم</div>`;
+        return;
+      }
+
+      tempChosenHourObj = availableHours[0];
+
+      availableHours.forEach((item, idx) => {
+        const node = document.createElement('div');
+        node.className = `hour-pin-node ${idx === 0 ? 'selected' : ''}`;
+        const h12 = item.realHour % 12 || 12;
+        const ampm = item.realHour >= 12 ? 'مساءً' : 'صباحاً';
+
+        node.innerHTML = `
+          <span style="font-family:var(--font-en); font-size:14px; font-weight:900;">${String(item.realHour).padStart(2,'0')}:00</span>
+          <span style="font-size:9.5px; font-weight:700;">${h12} ${ampm}</span>
+          <span style="font-size:8px; opacity:0.75;">${item.dayNote}</span>
+        `;
+
+        node.onclick = () => {
+          document.querySelectorAll('.hour-pin-node').forEach(n => n.classList.remove('selected'));
+          node.classList.add('selected');
+          tempChosenHourObj = item;
+          updateMinutesAvailability();
+          updateInteractiveTimePreview();
+        };
+
+        track.appendChild(node);
+      });
+
+      updateMinutesAvailability();
+      updateInteractiveTimePreview();
+    }
+
+    function renderInteractiveMinutesCluster() {
+      const container = document.getElementById('minutes-selection-cluster');
+      if (!container) return;
+      
+      const isPickup = (orderType === 'PICKUP');
+      const validMinutes = isPickup 
+        ? [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55] 
+        : [0, 15, 30, 45];
+
+      container.innerHTML = validMinutes.map(m => `
+        <div class="min-choice-pill ${m === tempChosenMin ? 'active' : ''}" id="min-btn-${m}" onclick="selectCustomMinute(${m}, this)">
+          :${String(m).padStart(2, '0')}
+        </div>
+      `).join('');
+    }
+
+    function updateMinutesAvailability() {
+      if (!tempChosenHourObj) return;
+      const sched = calculateAccurateSchedule();
+      const currentEarliestMin = sched.earliestDeliveryMin;
+      const maxAllowedTotalMin = sched.activeShiftCloseMin - 5;
+
+      const isPickup = (orderType === 'PICKUP');
+      const validMinutes = isPickup 
+        ? [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55] 
+        : [0, 15, 30, 45];
+
+      let firstValidMin = null;
+
+      validMinutes.forEach(m => {
+        const btn = document.getElementById(`min-btn-${m}`);
+        if (!btn) return;
+        const totalMin = tempChosenHourObj.rawHour * 60 + m;
+        
+        if (totalMin < currentEarliestMin || totalMin > maxAllowedTotalMin) {
+          btn.classList.add('disabled');
+        } else {
+          btn.classList.remove('disabled');
+          if (firstValidMin === null) firstValidMin = m;
+        }
+      });
+
+      const currentBtn = document.getElementById(`min-btn-${tempChosenMin}`);
+      if (!currentBtn || currentBtn.classList.contains('disabled')) {
+        tempChosenMin = firstValidMin !== null ? firstValidMin : validMinutes[0];
+        document.querySelectorAll('.min-choice-pill').forEach(b => b.classList.remove('active'));
+        const autoActiveBtn = document.getElementById(`min-btn-${tempChosenMin}`);
+        if (autoActiveBtn) autoActiveBtn.classList.add('active');
+      }
+    }
+
+    function selectCustomMinute(m, btnEl) {
+      if (btnEl.classList.contains('disabled')) return;
+      tempChosenMin = m;
+      document.querySelectorAll('.min-choice-pill').forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+      updateInteractiveTimePreview();
+    }
+
+    function updateInteractiveTimePreview() {
+      if (!tempChosenHourObj) return;
+      const formatted = `${tempChosenHourObj.dayNote}: ${formatTimeFriendly(tempChosenHourObj.realHour, tempChosenMin, tempChosenHourObj.isNextDay)}`;
+      document.getElementById('interactive-time-preview-text').textContent = formatted;
+    }
+
+    function confirmCustomInteractiveTime() {
+      if (!tempChosenHourObj) return;
+      isCustomTimeSelected = true;
+      selectedTimeSlot = `${tempChosenHourObj.dayNote}: ${formatTimeFriendly(tempChosenHourObj.realHour, tempChosenMin, tempChosenHourObj.isNextDay)}`;
+
+      document.getElementById('fast-slot-suggestion-card').classList.remove('active');
+      const btn = document.getElementById('btn-open-custom-time');
+      btn.classList.add('has-value');
+      document.getElementById('custom-time-btn-label').textContent = `موعد مخصص: ${selectedTimeSlot}`;
+
+      closeInteractiveTimeModal();
+      showToast("تم تثبيت موعد التسليم المخصص بنجاح ✓");
+    }
+
+    /* Checkout Flow */
+    function triggerCheckoutFlow(mode) {
+      if (mode === 'SINGLE' && activeDrawerItem) {
+        const id = activeDrawerItem.ID || activeDrawerItem.Flavor_Name_AR;
+        const nameAR = activeDrawerItem.Flavor_Name_AR || 'بوظة لوفي';
+        const nameEN = activeDrawerItem.Flavor_Name_EN || '';
+        const thumb = getDriveImageUrl(activeDrawerItem['Image_URL Show'] || '');
+        const exist = cartItems.find(c => c.id === id);
+        if (exist) exist.qty += selectedQuantity;
+        else cartItems.push({ id, nameAR, nameEN, thumb, qty: selectedQuantity });
+        localStorage.setItem('luffy_cart', JSON.stringify(cartItems));
+        updateCartFloatingBar();
+      }
+
+      closeDrawer();
+      closeCartDrawer();
+      
+      document.getElementById('checkout-step-choice-view').style.display = 'block';
+      document.getElementById('checkout-step-form-view').style.display = 'none';
+      document.getElementById('checkout-drawer-bottom-actions').style.display = 'none';
+      orderType = null;
+
+      openCheckoutDrawer();
+    }
+
+    function selectFulfillmentAndProceed(type) {
+      orderType = type;
+      document.getElementById('checkout-step-choice-view').style.display = 'none';
+      document.getElementById('checkout-step-form-view').style.display = 'block';
+      document.getElementById('checkout-drawer-bottom-actions').style.display = 'block';
+
+      setOrderType(type);
+      document.getElementById('order-text-summary-view').textContent = cartItems.map(c => `${c.nameAR} × ${c.qty} علبة`).join(' ، ');
+    }
+
+    function setOrderType(t) {
+      orderType = t;
+      document.getElementById('btn-type-delivery').classList.toggle('active', t === 'DELIVERY');
+      document.getElementById('btn-type-pickup').classList.toggle('active', t === 'PICKUP');
+      document.getElementById('delivery-location-section').style.display = (t === 'DELIVERY') ? 'block' : 'none';
+      
+      calculateAccurateSchedule();
+
+      if (t === 'DELIVERY') {
+        setTimeout(initLeafletMap, 200);
+      }
+    }
+
+    function evaluateAqabaGeofence(lat, lng) {
+      lat = parseFloat(lat); lng = parseFloat(lng);
+      if (isNaN(lat) || isNaN(lng)) return { valid: false, msg: "الموقع غير محدد بدقة" };
+
+      if (isPointInPolygon([lat, lng], OCCUPIED_POLYGON)) {
+        return { 
+          valid: false, 
+          msg: "عذراً، التوصيل غير متاح حالياً.. ولكننا قريباً سنكون عندكم بإذن الله سبحانه وتعالى 🇵🇸✌️🇯🇴" 
+        };
+      }
+
+      if (isPointInPolygon([lat, lng], SEA_POLYGON)) {
+        return { valid: false, msg: "الموقع المحدد يقع داخل مياه البحر! يرجى اختيار موقع بري على اليابسة." };
+      }
+
+      if (lat < 29.3550 || lat > 29.6500 || lng < 34.9600 || lng > 35.1200) {
+        return { valid: false, msg: "نعتذر منكم عن عدم توفر خدمة التوصيل في منطقتكم حالياً، نسأل الله أن نصلكم قريباً 🇯🇴" };
+      }
+
+      const dist = getHaversineDistance(AQABA_STORE_COORDS[0], AQABA_STORE_COORDS[1], lat, lng);
+      calculatedDistanceKm = parseFloat(dist.toFixed(2));
+
+      if (dist > 18) return { valid: false, msg: "نعتذر منكم عن عدم توفر خدمة التوصيل في منطقتكم حالياً، نسأل الله أن نصلكم قريباً 🇯🇴" };
+      if (dist > 8) return { valid: true, warning: true, msg: "📍 لبعد المسافة، يلزم تأكيد قبول الطلب هاتفياً من قبل إدارة المحل قبل الإرسال." };
+
+      return { valid: true, warning: false, msg: "الموقع معتمد ضمن النطاق المباشر للتوصيل السريع في العقبة ✓" };
+    }
+
+    function initLeafletMap() {
+      const mapEl = document.getElementById('leaflet-map-element');
+      if (!mapEl) return;
+
+      if (!leafletMapInstance) {
+        leafletMapInstance = L.map('leaflet-map-element', {
+          attributionControl: false, zoomControl: true
+        }).setView(AQABA_STORE_COORDS, 13);
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+          maxZoom: 19, subdomains: 'abcd'
+        }).addTo(leafletMapInstance);
+
+        const customPinIcon = L.divIcon({
+          className: 'custom-leaflet-pin',
+          html: `<div style="background:var(--brand-red); width:26px; height:26px; border-radius:50% 50% 50% 0; transform:rotate(-45deg); border:2.5px solid #ffffff; box-shadow:0 4px 10px rgba(0,0,0,0.3); display:flex; align-items:center; justify-content:center;"><div style="width:8px; height:8px; background:#ffffff; border-radius:50%;"></div></div>`,
+          iconSize: [26, 26], iconAnchor: [13, 26]
+        });
+
+        leafletMapInstance.on('click', (e) => {
+          if (!leafletMarkerInstance) {
+            leafletMarkerInstance = L.marker(e.latlng, { draggable: true, icon: customPinIcon }).addTo(leafletMapInstance);
+            leafletMarkerInstance.on('dragend', (ev) => {
+              const pos = ev.target.getLatLng();
+              setCapturedPin(pos.lat, pos.lng);
+            });
+          } else {
+            leafletMarkerInstance.setLatLng(e.latlng);
+          }
+          setCapturedPin(e.latlng.lat, e.latlng.lng);
+        });
+
+      } else {
+        leafletMapInstance.invalidateSize();
+      }
+    }
+
+    function setCapturedPin(lat, lng) {
+      lat = parseFloat(lat).toFixed(6);
+      lng = parseFloat(lng).toFixed(6);
+      
+      const mapUrl = `https://www.google.com/maps?q=${lat},${lng}`;
+      capturedGpsLocation = { lat: lat, lng: lng, mapUrl: mapUrl };
+
+      const badge = document.getElementById('location-geofence-alert');
+      const evalRes = evaluateAqabaGeofence(lat, lng);
+
+      if (!evalRes.valid) {
+        isLocationValidated = false;
+        badge.className = "location-validation-badge error";
+        badge.textContent = evalRes.msg;
+        showToast(evalRes.msg);
+      } else if (evalRes.warning) {
+        isLocationValidated = true;
+        badge.className = "location-validation-badge warning";
+        badge.textContent = evalRes.msg;
+      } else {
+        isLocationValidated = true;
+        badge.className = "location-validation-badge success";
+        badge.textContent = evalRes.msg;
+      }
+    }
+
+    function captureLiveGpsLocation() {
+      if (!navigator.geolocation) { showToast('تحديد الموقع غير مدعوم بالجهاز'); return; }
+      document.getElementById('gps-btn-label').textContent = "جاري الاتصال بالأقمار الصناعية...";
+
+      navigator.geolocation.getCurrentPosition(pos => {
+        const lat = pos.coords.latitude.toFixed(6);
+        const lng = pos.coords.longitude.toFixed(6);
+        
+        if (leafletMapInstance) {
+          const customPinIcon = L.divIcon({
+            className: 'custom-leaflet-pin',
+            html: `<div style="background:var(--brand-red); width:26px; height:26px; border-radius:50% 50% 50% 0; transform:rotate(-45deg); border:2.5px solid #ffffff; box-shadow:0 4px 10px rgba(0,0,0,0.3); display:flex; align-items:center; justify-content:center;"><div style="width:8px; height:8px; background:#ffffff; border-radius:50%;"></div></div>`,
+            iconSize: [26, 26], iconAnchor: [13, 26]
+          });
+
+          if (!leafletMarkerInstance) {
+            leafletMarkerInstance = L.marker([lat, lng], { draggable: true, icon: customPinIcon }).addTo(leafletMapInstance);
+            leafletMarkerInstance.on('dragend', (ev) => {
+              const p = ev.target.getLatLng();
+              setCapturedPin(p.lat, p.lng);
+            });
+          } else {
+            leafletMarkerInstance.setLatLng([lat, lng]);
+          }
+          leafletMapInstance.setView([lat, lng], 15);
+        }
+
+        setCapturedPin(lat, lng);
+        document.getElementById('gps-btn-label').textContent = "تم تثبيت موقعك الحالي بنجاح ✓";
+        showToast('تم تثبيت موقعك في العقبة بنجاح ✓');
+
+      }, () => {
+        showToast('يرجى تفعيل صلاحية الموقع في هاتفك');
+        document.getElementById('gps-btn-label').textContent = "اضغط لتثبيت موقعك الحالي";
+      }, { enableHighAccuracy: true });
+    }
+
+    function openCheckoutDrawer() { document.getElementById('checkout-drawer').classList.add('open'); }
+    function closeCheckoutDrawer() { document.getElementById('checkout-drawer').classList.remove('open'); }
+
+    /* Dispatch Direct Order */
+    function dispatchDirectOrder(channel) {
+      if (!orderType) { showToast('يرجى اختيار طريقة استلام الطلب'); return; }
+
+      const custNameInput = document.getElementById('cust-name-input');
+      const custName = custNameInput.value.trim();
+      if (!custName) {
+        custNameInput.focus();
+        showToast('يرجى إدخال اسمك الكريم');
+        return;
+      }
+
+      const fullPhone = getFullJordanPhoneNumber();
+      const phoneBox = document.getElementById('jordan-phone-box');
+      if (!fullPhone) {
+        phoneBox.classList.add('input-error');
+        document.getElementById('cust-phone-input').focus();
+        showToast('يرجى إدخال رقم هاتف أردني صحيح (9 أرقام يبدأ بـ 7)');
+        return;
+      }
+      phoneBox.classList.remove('input-error');
+
+      const custAddress = document.getElementById('cust-address-input').value.trim();
+
+      // 🔒 القفل الإلزامي: منع إتمام التوصيل دون تثبيت فعلي لموقع العميل
+      if (orderType === 'DELIVERY') {
+        if (!capturedGpsLocation || !capturedGpsLocation.mapUrl || !isLocationValidated) {
+          showToast('⚠️ إلزامي: يرجى تثبيت موقع التوصيل أو تحديد موقعك على الخريطة أولاً');
+          const locBox = document.getElementById('location-suite-box-container');
+          if (locBox) locBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+        const evalRes = evaluateAqabaGeofence(capturedGpsLocation.lat, capturedGpsLocation.lng);
+        if (!evalRes.valid) { showToast(evalRes.msg); return; }
+      }
+
+      const orderId = `LFY-${Date.now().toString().slice(-4)}`;
+      let itemsSummary = cartItems.map(c => `${c.nameAR} × ${c.qty}`).join(' ، ');
+      let totalQty = cartItems.reduce((s, i) => s + i.qty, 0);
+
+      const orderPayload = {
+        id: orderId,
+        customer_name: custName,
+        phone: fullPhone,
+        order_type: orderType,
+        time_slot: selectedTimeSlot,
+        items_summary: itemsSummary,
+        total_qty: totalQty,
+        gps_url: (capturedGpsLocation && capturedGpsLocation.mapUrl) ? capturedGpsLocation.mapUrl : '',
+        address: custAddress,
+        distance_km: (orderType === 'DELIVERY' && calculatedDistanceKm) ? calculatedDistanceKm : 0,
+        raw_cart: cartItems
+      };
+
+      // ⚡ إرسال الطلب للسيرفر السحابي لحفظه في Live_Orders مباشرة
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=create_order&data=${encodeURIComponent(JSON.stringify(orderPayload))}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+
+      let distanceNote = (orderType === 'DELIVERY' && calculatedDistanceKm && calculatedDistanceKm > 8) 
+        ? `\nملاحظة: لبعد المسافة، يلزم تأكيد قبول الطلب هاتفياً من الإدارة.` : "";
+
+      let message = `طلب جديد من القائمة الرقمية (LUFFY • لوفي) 🇯🇴
+كابتن السعادة • بوظة طبيعية 100%
+رقم الطلب: #${orderId}
+━━━━━━━━━━━━━━━━━━━━━━
+اسم العميل: ${custName}
+هاتف العميل: ${fullPhone}
+طريقة الاستلام: ${orderType === 'DELIVERY' ? 'توصيل إلى موقعي' : 'استلام مباشر من المحل'}
+موعد التسليم: ${selectedTimeSlot}
+
+تفاصيل الأصناف والكميات:
+${itemsSummary}
+
+إجمالي الكمية: ${totalQty} علبة
+${(capturedGpsLocation && capturedGpsLocation.mapUrl) ? `\nرابط موقع التوصيل (خرائط Google):\n${capturedGpsLocation.mapUrl}\n` : ''}${custAddress ? `العنوان: ${custAddress}\n` : ''}${distanceNote}━━━━━━━━━━━━━━━━━━━━━━
+بوظة لوفي الطبيعية 100% • كابتن السعادة • العقبة 🇯🇴
+(تم تأكيد الطلب واعتماده للتجهيز فوراً)`;
+
+      if (channel === 'WHATSAPP') {
+        const url = `https://api.whatsapp.com/send?phone=${STORE_WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`;
+        showToast('جاري فتح واتساب وتجهيز الطلب مع كابتن السعادة...');
+        closeCheckoutDrawer();
+        setTimeout(() => { window.open(url, '_blank'); }, 400);
+      } else {
+        copyTextSync(message);
+        showToast(`تم نسخ تفاصيل الطلب #${orderId}! جاري فتح إنستغرام لوفي...`);
+        closeCheckoutDrawer();
+        setTimeout(() => { window.open(`https://ig.me/m/${INSTAGRAM_HANDLE}`, '_blank'); }, 500);
+      }
+    }
+
+    /* Sync Google Sheets */
+    function syncMobileMenu() {
+      // 1. قراءة النكهات الحية من شيت العمليات اللحظية (LUFFY_DB_OPERATIONS)
+      const oldScript = document.getElementById("gviz-mobile-engine");
+      if (oldScript) oldScript.remove();
+      const script = document.createElement("script");
+      script.id = "gviz-mobile-engine";
+      script.src = `https://docs.google.com/spreadsheets/d/${DB_OPERATIONS_ID}/gviz/tq?tqx=responseHandler:luffyMobileCallback&sheet=Live_Flavors&_ts=${Date.now()}`;
+      document.body.appendChild(script);
+
+      // 2. سحب الروابط وساعات الدوام من شيت الأمان (LUFFY_DB_VAULT_HR)
+      fetchSystemRegistryFast();
+      fetchStoreHoursFromSheet();
+    }
+
+    function fetchSystemRegistryFast() {
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=get_system_registry&callback=onRegistryLoaded&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+    }
+    window.onRegistryLoaded = function(res) {
+      if (!res || !res.registry) return;
+      if (res.registry.config && res.registry.config.STORE_WHATSAPP_NUMBER) {
+        STORE_WHATSAPP_NUMBER = String(res.registry.config.STORE_WHATSAPP_NUMBER).replace(/\D/g, '');
+      }
+    };
+
+    function fetchStoreHoursFromSheet() {
+      const s = document.createElement("script");
+      s.src = `https://docs.google.com/spreadsheets/d/${DB_VAULT_ID}/gviz/tq?tqx=responseHandler:onStoreHoursLoaded&sheet=Store_Hours&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+    }
+    window.onStoreHoursLoaded = function(res) {
+      if (!res || !res.table) return;
+      res.table.rows.forEach((r, idx) => {
+        const dayIdx = Number(r.c[0]?.v !== undefined ? r.c[0]?.v : idx);
+        if (weeklyHours[dayIdx]) {
+          const openVal = r.c[2] ? (r.c[2].f || r.c[2].v) : weeklyHours[dayIdx].open;
+          const closeVal = r.c[3] ? (r.c[3].f || r.c[3].v) : weeklyHours[dayIdx].close;
+          const activeVal = r.c[4] ? (r.c[4].f || r.c[4].v) : "TRUE";
+
+          weeklyHours[dayIdx].open = String(openVal || "14:00");
+          weeklyHours[dayIdx].close = String(closeVal || "02:00");
+          weeklyHours[dayIdx].active = String(activeVal).toUpperCase() === "TRUE";
+        }
+      });
+      localStorage.setItem('luffy_weekly_hours', JSON.stringify(weeklyHours));
+      updateStoreLiveHoursBadge();
+    };
+
+    window.luffyMobileCallback = function(response) {
+      if (!response || !response.table) return;
+      const cols = response.table.cols.map(c => (c && c.label ? c.label.trim() : ''));
+      
+      const newFlavors = response.table.rows.map(r => {
+        const item = {};
+        r.c.forEach((cell, i) => { item[cols[i] || `col_${i}`] = cell ? (cell.f !== undefined ? cell.f : cell.v) : ''; });
+        return item;
+      });
+
+      const currentMap = {};
+      newFlavors.forEach(item => {
+        const id = item.Flavor_ID || item.ID || item.Flavor_Name_AR || item['اسم النكهة (عربي)'];
+        const { isFresh, stockState } = checkFreshAndStockStatus(item);
+        currentMap[id] = { id, nameAR: item.Flavor_Name_AR || item['اسم النكهة (عربي)'], stockState, isFresh };
+      });
+
+      if (!isFirstDataLoad && Object.keys(previousFlavorsMap).length > 0) {
+        cartItems.forEach(c => {
+          const prev = previousFlavorsMap[c.id];
+          const curr = currentMap[c.id];
+          if (prev && curr && prev.stockState !== 'soldout' && curr.stockState === 'soldout') {
+            if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+            showToast(`⚠️ تنبيه: نكهة [${curr.nameAR}] نفدت من المتجر، يرجى تعديل السلة`);
+          }
+        });
+      }
+
+      previousFlavorsMap = currentMap;
+      isFirstDataLoad = false;
+      rawFlavors = newFlavors;
+
+      buildCategoryChips();
+      renderMenuFeed();
+      updateCartFloatingBar();
+      renderCartItems();
+
+      if (activeDrawerItem) {
+        const freshItem = rawFlavors.find(f => (f.Flavor_ID || f.ID || f.Flavor_Name_AR) === (activeDrawerItem.Flavor_ID || activeDrawerItem.ID || activeDrawerItem.Flavor_Name_AR));
+        if (freshItem) updateDrawerContent(freshItem);
+      }
+    };
+
+    function buildCategoryChips() {
+      const cats = new Set();
+      rawFlavors.forEach(f => {
+        const cat = (f.Category || f['التصنيف'] || '').trim();
+        if (cat) cats.add(cat);
+      });
+
+      const container = document.getElementById("filter-container");
+      container.innerHTML = `<button class="chip-filter-btn ${currentCategory === 'ALL' ? 'active' : ''}" onclick="applyCategoryFilter('ALL', this)"><span>الكل</span></button>`;
+
+      if (favoriteIds && favoriteIds.length > 0) {
+        const favBtn = document.createElement("button");
+        favBtn.className = `chip-filter-btn ${currentCategory === 'FAVORITES' ? 'active' : ''}`;
+        favBtn.innerHTML = `
+          <svg class="chip-heart-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span>المفضلة</span>
+        `;
+        favBtn.onclick = () => applyCategoryFilter('FAVORITES', favBtn);
+        container.appendChild(favBtn);
+      }
+
+      cats.forEach(rawCat => {
+        const btn = document.createElement("button");
+        btn.className = `chip-filter-btn ${currentCategory === rawCat ? 'active' : ''}`;
+        btn.textContent = rawCat;
+        btn.onclick = () => applyCategoryFilter(rawCat, btn);
+        container.appendChild(btn);
+      });
+    }
+
+    function applyCategoryFilter(cat, btnEl) {
+      currentCategory = cat;
+      document.querySelectorAll(".chip-filter-btn").forEach(b => b.classList.remove("active"));
+      if (btnEl) btnEl.classList.add("active");
+      renderMenuFeed();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val.trim().toLowerCase();
+      renderMenuFeed();
+    }
+
+    function checkFreshAndStockStatus(item) {
+      let isActive = String(item.Is_Active || item['متوفر اليوم؟ (Active)'] || '').trim().toUpperCase() === "TRUE";
+      let isFresh = String(item.Is_Fresh_Batch || item['طازج الآن؟ (Batch)'] || '').trim().toUpperCase() === "TRUE";
+      let stockState = item.Stock_State || (isActive ? 'available' : 'soldout');
+      return { isFresh, stockState };
+    }
+
+    function renderMenuFeed() {
+      const feed = document.getElementById("menu-feed");
+      feed.innerHTML = "";
+
+      const filtered = rawFlavors.filter(item => {
+        const id = item.Flavor_ID || item.ID || item.Flavor_Name_AR || item['اسم النكهة (عربي)'];
+        const nameAR = (item.Flavor_Name_AR || item['اسم النكهة (عربي)'] || '').toLowerCase();
+        const cat = item.Category || item['التصنيف'] || '';
+        const tags = extractItemTags(item);
+
+        const matchSearch = !searchQuery || nameAR.includes(searchQuery);
+        let matchCat = (currentCategory === 'ALL') ? true : (currentCategory === 'FAVORITES' ? favoriteIds.includes(id) : cat === currentCategory);
+        let matchTags = (selectedTags.size === 0) || Array.from(selectedTags).every(st => tags.includes(st));
+
+        return matchSearch && matchCat && matchTags;
+      });
+
+      if (filtered.length === 0) {
+        feed.innerHTML = `<div style="text-align:center; padding:40px 10px; color:var(--text-muted); font-weight:800;">لا توجد نكهات مطابقة للبحث أو الفلاتر حالياً</div>`;
+        return;
+      }
+
+      filtered.forEach((item, index) => {
+        const id = item.Flavor_ID || item.ID || item.Flavor_Name_AR || `f_${index}`;
+        const titleAR = item.Flavor_Name_AR || item['اسم النكهة (عربي)'] || 'نكهة لوفي';
+        const titleEN = item.Flavor_Name_EN || item['اسم النكهة (ENGLISH)'] || '';
+        const descAR = item.Description_AR || item['وصف النكهة (عربي)'] || '';
+        const showUrl = getDriveImageUrl(item.Image_URL_Show || item['Image_URL Show'] || item['صورة العرض'] || '');
+        const fruitUrl = getDriveImageUrl(item.Image_URL_Fruit || item['Image_URL fruit'] || item['صورة الفاكهة'] || '');
+        const { isFresh, stockState } = checkFreshAndStockStatus(item);
+        const isFav = favoriteIds.includes(id);
+        const tagsList = extractItemTags(item);
+        const accentColor = item.Primary_Color || 'var(--brand-gold)';
+
+        const card = document.createElement("div");
+        card.className = `mobile-flavor-card ${stockState === 'soldout' ? 'card-sold-out' : ''}`;
+        card.onclick = () => openDrawer(item);
+
+        card.innerHTML = `
+          <div class="card-halo-bg" style="background:${item.Primary_Color || '#ff6b8b'};"></div>
+          <div class="card-visual-box">
+            <img class="card-ice-img" src="${showUrl || 'https://images.unsplash.com/photo-1560008511-11c63416e52d?w=200'}" alt="">
+            ${fruitUrl ? `<img class="card-fruit-badge" src="${fruitUrl}">` : ''}
+          </div>
+          <div class="card-info-box">
+            <div>
+              <div class="card-top-row">
+                <div>
+                  <div class="card-title-ar">${titleAR}</div>
+                  <div class="card-title-en" style="color:${accentColor};">${titleEN}</div>
+                </div>
+                <div class="badge-status-cluster">
+                  ${isFresh ? `<span class="fresh-chip-mini"><span>طازج ✨️ Fresh</span></span>` : ''}
+                  ${stockState === 'restocking' ? `<span class="restock-chip-mini">قيد التجهيز</span>` : ''}
+                  ${stockState === 'soldout' ? `<span class="soldout-chip-mini">انتهت الكمية</span>` : ''}
+                </div>
+              </div>
+              <div class="card-desc-snippet">${descAR}</div>
+
+              <div class="card-tags-cluster">
+                ${tagsList.slice(0, 3).map(t => `<span class="hashtag-pill ${selectedTags.has(t) ? 'active-hash' : ''}" onclick="toggleTagFilter('${t}', event)">#${t}</span>`).join('')}
+              </div>
+            </div>
+
+            <div class="card-tags-row">
+              <span style="font-size:10.5px; color:var(--text-muted); font-weight:700;">${item.Category || item['التصنيف'] || 'عام'}</span>
+              <button class="pure-heart-btn ${isFav ? 'favorited' : ''}" onclick="toggleFeedCardFavorite('${id}', event)" title="المفضلة">
+                <svg class="heart-svg-icon" viewBox="0 0 24 24">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        `;
+        feed.appendChild(card);
+      });
+    }
+
+    function toggleFeedCardFavorite(id, event) {
+      event.stopPropagation();
+      const index = favoriteIds.indexOf(id);
+      if (index > -1) {
+        favoriteIds.splice(index, 1);
+        showToast('تمت الإزالة من المفضلة');
+      } else {
+        favoriteIds.push(id);
+        showToast('تمت الإضافة إلى مفضلتك ✓');
+      }
+      localStorage.setItem('luffy_favorites', JSON.stringify(favoriteIds));
+      if (favoriteIds.length === 0 && currentCategory === 'FAVORITES') currentCategory = 'ALL';
+      buildCategoryChips();
+      renderMenuFeed();
+    }
+
+    function openDrawer(item) {
+      activeDrawerItem = item;
+      selectedQuantity = 1;
+      document.getElementById('drawer-qty-val').textContent = selectedQuantity;
+      updateDrawerContent(item);
+      document.getElementById("flavor-drawer").classList.add("open");
+    }
+
+    function updateDrawerContent(item) {
+      const id = item.Flavor_ID || item.ID || item.Flavor_Name_AR || item['اسم النكهة (عربي)'];
+      const showUrl = getDriveImageUrl(item.Image_URL_Show || item['Image_URL Show'] || item['صورة العرض'] || '');
+      const fruitUrl = getDriveImageUrl(item.Image_URL_Fruit || item['Image_URL fruit'] || item['صورة الفاكهة'] || '');
+      const { isFresh, stockState } = checkFreshAndStockStatus(item);
+
+      document.getElementById("drawer-main-img").src = showUrl || 'https://images.unsplash.com/photo-1560008511-11c63416e52d?w=400';
+      const fruitEl = document.getElementById("drawer-fruit-img");
+      if (fruitUrl) { fruitEl.src = fruitUrl; fruitEl.style.display = 'block'; }
+      else { fruitEl.style.display = 'none'; }
+
+      document.getElementById("drawer-title-ar").textContent = item.Flavor_Name_AR || item['اسم النكهة (عربي)'] || 'نكهة لوفي';
+      const titleEnEl = document.getElementById("drawer-title-en");
+      titleEnEl.textContent = item.Flavor_Name_EN || item['اسم النكهة (ENGLISH)'] || '';
+      titleEnEl.style.color = item.Primary_Color || 'var(--brand-gold)';
+      
+      document.getElementById("drawer-story-ar").textContent = item.Description_AR || item['وصف النكهة (عربي)'] || '';
+
+      const statusBox = document.getElementById("drawer-status-badge-box");
+      statusBox.innerHTML = "";
+      if (isFresh) statusBox.innerHTML += `<span class="fresh-chip-mini" style="font-size:10.5px; padding:4px 10px;">طازج ✨️ Fresh</span>`;
+      if (stockState === 'restocking') statusBox.innerHTML += `<span class="restock-chip-mini" style="font-size:10.5px; padding:4px 10px;">قيد التجهيز</span>`;
+      if (stockState === 'soldout') statusBox.innerHTML += `<span class="soldout-chip-mini" style="font-size:10.5px; padding:4px 10px;">انتهت الكمية</span>`;
+
+      const tagsBox = document.getElementById("drawer-tags-box");
+      const tagsList = extractItemTags(item);
+      tagsBox.innerHTML = tagsList.map(t => `<span class="hashtag-pill ${selectedTags.has(t) ? 'active-hash' : ''}" onclick="toggleTagFilter('${t}', event)">#${t}</span>`).join('');
+
+      const isFav = favoriteIds.includes(id);
+      document.getElementById("drawer-fav-pure-btn").classList.toggle("favorited", isFav);
+    }
+
+    function toggleDrawerFavorite() {
+      if (!activeDrawerItem) return;
+      const id = activeDrawerItem.Flavor_ID || activeDrawerItem.ID || activeDrawerItem.Flavor_Name_AR || activeDrawerItem['اسم النكهة (عربي)'];
+      const index = favoriteIds.indexOf(id);
+      let isFav = false;
+      if (index > -1) {
+        favoriteIds.splice(index, 1);
+        showToast('تمت الإزالة من المفضلة');
+      } else {
+        favoriteIds.push(id);
+        isFav = true;
+        showToast('تمت الإضافة إلى مفضلتك ✓');
+      }
+      localStorage.setItem('luffy_favorites', JSON.stringify(favoriteIds));
+      if (favoriteIds.length === 0 && currentCategory === 'FAVORITES') currentCategory = 'ALL';
+      document.getElementById("drawer-fav-pure-btn").classList.toggle("favorited", isFav);
+      buildCategoryChips();
+      renderMenuFeed();
+    }
+
+    function closeDrawer() { document.getElementById("flavor-drawer").classList.remove("open"); }
+    function changeQuantity(d) {
+      selectedQuantity = Math.max(1, Math.min(50, selectedQuantity + d));
+      document.getElementById('drawer-qty-val').textContent = selectedQuantity;
+    }
+
+    function addCurrentItemToCart() {
+      if (!activeDrawerItem) return;
+      const { stockState } = checkFreshAndStockStatus(activeDrawerItem);
+      if (stockState === 'soldout') { showToast('عذراً، هذه النكهة نفدت من المحل'); return; }
+
+      const id = activeDrawerItem.Flavor_ID || activeDrawerItem.ID || activeDrawerItem.Flavor_Name_AR;
+      const nameAR = activeDrawerItem.Flavor_Name_AR || 'بوظة لوفي';
+      const nameEN = activeDrawerItem.Flavor_Name_EN || '';
+      const thumb = getDriveImageUrl(activeDrawerItem.Image_URL_Show || activeDrawerItem['Image_URL Show'] || '');
+      const exist = cartItems.find(c => c.id === id);
+      if (exist) exist.qty += selectedQuantity;
+      else cartItems.push({ id, nameAR, nameEN, thumb, qty: selectedQuantity });
+      localStorage.setItem('luffy_cart', JSON.stringify(cartItems));
+      updateCartFloatingBar();
+      closeDrawer();
+      showToast(`تمت إضافة ${nameAR} للسلة ✓`);
+    }
+
+    function updateCartFloatingBar() {
+      const bar = document.getElementById('floating-cart-bar');
+      const badge = document.getElementById('cart-total-badge');
+      const count = cartItems.reduce((s, i) => s + i.qty, 0);
+      if (count > 0) { badge.textContent = count; bar.classList.add('active'); }
+      else { bar.classList.remove('active'); closeCartDrawer(); }
+    }
+
+    function openCartDrawer() { renderCartItems(); document.getElementById('cart-drawer').classList.add('open'); }
+    function closeCartDrawer() { document.getElementById('cart-drawer').classList.remove('open'); }
+
+    function renderCartItems() {
+      const container = document.getElementById('cart-items-list');
+      if (cartItems.length === 0) {
+        container.innerHTML = `<div style="text-align:center; padding:30px; color:var(--text-muted); font-weight:700;">السلة فارغة حالياً</div>`;
+        return;
+      }
+
+      let hasSoldOutInCart = false;
+
+      container.innerHTML = cartItems.map((c, i) => {
+        const liveItem = rawFlavors.find(f => (f.Flavor_ID || f.ID || f.Flavor_Name_AR) === c.id);
+        let isSoldOut = false;
+        if (liveItem) {
+          const { stockState } = checkFreshAndStockStatus(liveItem);
+          if (stockState === 'soldout') {
+            isSoldOut = true;
+            hasSoldOutInCart = true;
+          }
+        }
+
+        return `
+          <div style="display:flex; align-items:center; justify-content:space-between; background:#f8fafc; border:1px solid ${isSoldOut ? '#fecaca' : '#e2e8f0'}; padding:10px 12px; border-radius:14px; margin-bottom:8px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <img src="${c.thumb}" style="width:34px; height:34px; object-fit:contain;">
+              <div>
+                <strong style="font-size:12.5px; color:var(--text-espresso);">${c.nameAR}</strong>
+                ${isSoldOut ? `<span style="font-size:9.5px; color:#991b1b; background:#fee2e2; padding:1px 5px; border-radius:4px; font-weight:800; display:inline-block; margin-right:4px;">نفدت ⚠️</span>` : ''}
+                <div style="font-size:11px; color:var(--text-muted);">${c.qty} علبة</div>
+              </div>
+            </div>
+            <div class="qty-control-cluster" style="background:#ffffff; border:1px solid #fed7aa; padding:3px 8px; border-radius:12px;">
+              <button class="qty-btn" onclick="modifyCartQty(${i}, -1)">−</button>
+              <span class="qty-number">${c.qty}</span>
+              <button class="qty-btn" onclick="modifyCartQty(${i}, 1)">+</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const checkoutBtn = document.getElementById('btn-cart-checkout-action');
+      if (checkoutBtn) {
+        if (hasSoldOutInCart) {
+          checkoutBtn.style.opacity = '0.5';
+          checkoutBtn.innerHTML = `<span>⚠️ يرجى إزالة النكهات المنتهية للمتابعة</span>`;
+        } else {
+          checkoutBtn.style.opacity = '1';
+          checkoutBtn.innerHTML = `<span style="font-size:13.5px; font-weight:900;">متابعة تأكيد الطلب وتحديد الموعد</span><span class="en-sub" style="color:#ffffff !important; opacity:0.85;">Proceed to Schedule & Delivery</span>`;
+        }
+      }
+    }
+
+    function modifyCartQty(idx, d) {
+      cartItems[idx].qty += d;
+      if (cartItems[idx].qty <= 0) cartItems.splice(idx, 1);
+      localStorage.setItem('luffy_cart', JSON.stringify(cartItems));
+      updateCartFloatingBar();
+      renderCartItems();
+    }
+
+    function copyTextSync(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).catch(() => fallbackCopyText(text));
+      } else { fallbackCopyText(text); }
+    }
+    function fallbackCopyText(text) {
+      const ta = document.createElement("textarea");
+      ta.value = text; ta.style.position = "fixed"; ta.style.left = "-999999px";
+      document.body.appendChild(ta); ta.focus(); ta.select();
+      try { document.execCommand('copy'); } catch(e){}
+      ta.remove();
+    }
+
+    syncMobileMenu();
+    setInterval(syncMobileMenu, 12000); // تحديث متزن كل 12 ثانية
+    setInterval(updateStoreLiveHoursBadge, 1000);
+  </script>
+</body>
+</html>
+
+خطوتك المباش
