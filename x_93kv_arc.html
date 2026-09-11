@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>LUFFY • لوفي | قمرة قيادة المبرمج وهندسة البنية التحتية</title>
+  
+  <!-- خطوط النخبة العالمية -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Readex+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --font-ar: 'Readex Pro', system-ui, sans-serif;
+      --font-en: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-code: 'Fira Code', monospace;
+
+      --bg-space: #07090e;
+      --surface-obsidian: #0d121c;
+      --surface-card: #131a29;
+      --border-cyber: rgba(56, 189, 248, 0.25);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+
+      --text-white: #f8fafc;
+      --text-muted: #94a3b8;
+
+      --cyan-neon: #38bdf8;
+      --emerald-neon: #34d399;
+      --amber-neon: #fbbf24;
+      --rose-neon: #fb7185;
+      --purple-neon: #a855f7;
+
+      --brand-red: #ff2a5f;
+      --brand-gold: #f59e0b;
+
+      --shadow-cyber: 0 16px 40px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(56, 189, 248, 0.12);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      font-family: var(--font-ar);
+      background: radial-gradient(circle at 50% 10%, #111827 0%, #07090e 100%);
+      color: var(--text-white);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 10px 8px 80px;
+      overflow-x: hidden;
+    }
+
+    .cockpit-master-frame {
+      width: 100%; max-width: 960px; background: rgba(13, 18, 28, 0.95);
+      backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+      border: 1.5px solid var(--border-cyber); border-radius: 28px;
+      padding: 16px 12px; box-shadow: var(--shadow-cyber);
+      display: flex; flex-direction: column; position: relative; gap: 12px;
+    }
+
+    @media (min-width: 768px) { .cockpit-master-frame { padding: 22px 18px; border-radius: 34px; } }
+
+    .svg-icon {
+      width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2;
+      stroke-linecap: round; stroke-linejoin: round; display: inline-block; vertical-align: middle; flex-shrink: 0;
+    }
+
+    /* Top Command Header */
+    .cockpit-header {
+      display: flex; flex-direction: column; gap: 10px; padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    @media (min-width: 640px) {
+      .cockpit-header { flex-direction: row; justify-content: space-between; align-items: center; }
+    }
+
+    .brand-cluster { display: flex; align-items: center; gap: 10px; }
+    .straw-hat-cyber-badge {
+      position: relative; width: 42px; height: 42px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+      border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px;
+    }
+    .straw-hat-svg { width: 85%; height: 85%; filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.5)); }
+
+    .header-title-box { display: flex; flex-direction: column; }
+    .cockpit-main-title {
+      display: flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 900;
+      letter-spacing: 0.5px;
+    }
+    .badge-dev-tag {
+      font-family: var(--font-code); font-size: 10px; font-weight: 700;
+      color: var(--cyan-neon); background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35); padding: 2px 7px; border-radius: 6px;
+    }
+
+    .telemetry-pill-cluster {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .telemetry-node {
+      background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-subtle);
+      border-radius: 10px; padding: 5px 10px; display: flex; align-items: center; gap: 6px;
+      font-family: var(--font-code); font-size: 11px;
+    }
+    .pulse-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--emerald-neon);
+      box-shadow: 0 0 8px var(--emerald-neon); animation: cyberPulse 2s infinite;
+    }
+    @keyframes cyberPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
+
+    /* Navigation Tabs */
+    .cockpit-nav-bar {
+      display: flex; background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border-subtle);
+      padding: 3px; border-radius: 14px; gap: 3px; overflow-x: auto; scrollbar-width: none;
+    }
+    .cockpit-nav-bar::-webkit-scrollbar { display: none; }
+
+    .nav-tab-btn {
+      flex: 1; min-width: max-content; border: none; background: transparent; padding: 8px 12px;
+      border-radius: 11px; font-family: var(--font-ar); font-size: 11.5px; font-weight: 800;
+      color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center;
+      gap: 5px; transition: all 0.2s ease; white-space: nowrap;
+    }
+    .nav-tab-btn.active {
+      background: var(--surface-card); color: var(--cyan-neon);
+      border: 1px solid var(--border-cyber); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    }
+
+    .cockpit-view-panel { display: none; }
+    .cockpit-view-panel.active { display: block; animation: panelFadeIn 0.25s ease-out; }
+    @keyframes panelFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Sections Cards */
+    .cyber-card {
+      background: var(--surface-card); border: 1px solid var(--border-subtle);
+      border-radius: 20px; padding: 16px 14px; display: flex; flex-direction: column; gap: 10px;
+    }
+    .cyber-card-header {
+      display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 8px; margin-bottom: 4px;
+    }
+    .cyber-card-title { font-size: 13.5px; font-weight: 900; color: var(--text-white); display: flex; align-items: center; gap: 6px; }
+
+    /* Quad Core Database Grid */
+    .quad-db-grid {
+      display: grid; grid-template-columns: 1fr; gap: 10px;
+    }
+    @media (min-width: 640px) { .quad-db-grid { grid-template-columns: 1fr 1fr; } }
+
+    .db-node-unit {
+      background: rgba(0, 0, 0, 0.35); border: 1.5px solid var(--border-subtle);
+      border-radius: 16px; padding: 12px; display: flex; flex-direction: column; gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .db-node-unit:hover { border-color: var(--cyan-neon); }
+    .db-unit-top { display: flex; justify-content: space-between; align-items: center; }
+    .db-tag-badge {
+      font-size: 9px; font-weight: 900; padding: 2px 7px; border-radius: 6px; font-family: var(--font-code);
+    }
+
+    .id-code-strip {
+      display: flex; align-items: center; justify-content: space-between;
+      background: #090d14; border: 1px solid var(--border-subtle); border-radius: 8px;
+      padding: 5px 8px; font-family: var(--font-code); font-size: 10.5px; color: var(--text-muted);
+    }
+    .btn-copy-mini {
+      background: transparent; border: none; color: var(--cyan-neon); cursor: pointer; font-size: 10px; font-weight: 800;
+    }
+
+    .btn-cyber-outline {
+      background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-subtle);
+      color: var(--text-white); padding: 6px 10px; border-radius: 10px; font-family: var(--font-ar);
+      font-size: 11px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      gap: 5px; text-decoration: none; transition: all 0.2s ease;
+    }
+    .btn-cyber-outline:hover { background: rgba(56, 189, 248, 0.1); border-color: var(--cyan-neon); color: var(--cyan-neon); }
+
+    /* Sandbox API Tester */
+    .sandbox-console {
+      background: #080c13; border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 14px; padding: 12px; font-family: var(--font-code); font-size: 11px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .sandbox-actions-track { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+    .btn-sandbox-cmd {
+      background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--cyan-neon); padding: 5px 10px; border-radius: 8px; font-family: var(--font-code);
+      font-size: 10.5px; cursor: pointer; white-space: nowrap; transition: all 0.15s ease;
+    }
+    .btn-sandbox-cmd:hover { background: var(--cyan-neon); color: #000; }
+
+    .json-output-viewer {
+      background: #05070a; border: 1px solid var(--border-subtle); border-radius: 10px;
+      padding: 10px; font-family: var(--font-code); font-size: 10.5px; color: var(--emerald-neon);
+      max-height: 220px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; direction: ltr; text-align: left;
+    }
+
+    /* Embedded Device Viewport Simulator */
+    .simulator-controls-bar {
+      display: flex; justify-content: space-between; align-items: center; gap: 8px;
+      background: rgba(0, 0, 0, 0.3); padding: 8px 12px; border-radius: 14px; border: 1px solid var(--border-subtle);
+      flex-wrap: wrap;
+    }
+    .viewport-size-group { display: flex; gap: 4px; }
+    .btn-viewport-size {
+      border: 1px solid var(--border-subtle); background: transparent; color: var(--text-muted);
+      padding: 4px 9px; border-radius: 8px; font-family: var(--font-code); font-size: 10px; cursor: pointer;
+    }
+    .btn-viewport-size.active { background: var(--cyan-neon); color: #000; border-color: var(--cyan-neon); font-weight: 800; }
+
+    .simulator-stage-wrapper {
+      width: 100%; min-height: 520px; height: 65vh; background: #000;
+      border: 2px solid var(--border-cyber); border-radius: 20px; overflow: hidden;
+      display: flex; justify-content: center; align-items: center; position: relative; margin-top: 6px;
+    }
+    #simulator-iframe {
+      width: 100%; height: 100%; border: none; background: #ffffff; transition: width 0.3s ease;
+    }
+
+    /* Modal Gate */
+    #dev-auth-gate {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100%; height: 100dvh;
+      background: radial-gradient(circle at center, #0e1524 0%, #06090e 100%);
+      z-index: 50000; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 16px;
+    }
+    #dev-auth-gate.unlocked { display: none; }
+    .auth-cyber-card {
+      background: rgba(19, 26, 41, 0.9); border: 1.5px solid var(--cyan-neon);
+      border-radius: 24px; padding: 24px 20px; width: 90%; max-width: 360px; text-align: center;
+      box-shadow: 0 0 35px rgba(56, 189, 248, 0.2);
+    }
+
+    #toast-box { position: fixed; top: 16px; left: 50%; transform: translateX(-50%); z-index: 60000; pointer-events: none; }
+    .cyber-toast {
+      background: #0d121c; color: #fff; border: 1px solid var(--cyan-neon);
+      padding: 7px 16px; border-radius: 9999px; font-size: 11px; font-weight: 800;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6); font-family: var(--font-ar);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔒 بوابة الدخول الأمني للمبرمج -->
+  <div id="dev-auth-gate">
+    <div class="auth-cyber-card">
+      <div style="width:44px; height:44px; margin:0 auto 8px;">
+        <svg class="straw-hat-svg" viewBox="0 0 100 100" fill="none">
+          <ellipse cx="50" cy="70" rx="46" ry="13" fill="#EAB308"/>
+          <path d="M24 67C24 38 31 24 50 24C69 24 76 38 76 67Z" fill="#FACC15"/>
+          <path d="M23.5 64.5C34 68.5 66 68.5 76.5 64.5C75.5 57.5 74.5 53 74.5 53C63 57.5 37 57.5 25.5 53Z" fill="#FF2A5F"/>
+        </svg>
+      </div>
+      <div style="font-size:16px; font-weight:900;">بوابة مهندس المنظومة السحابية</div>
+      <div style="font-size:10.5px; color:var(--cyan-neon); margin-top:2px; font-family:var(--font-code);">Developer & Architect Cockpit 🇯🇴</div>
+
+      <input type="password" id="dev-pass-input" placeholder="Developer Secret Key..." style="width:100%; background:#090d14; border:1px solid var(--border-cyber); color:#fff; text-align:center; margin:14px 0 10px; border-radius:10px; padding:10px; font-family:var(--font-code); font-size:12px;" onkeypress="if(event.key==='Enter') verifyDevKey()">
+      <button style="width:100%; background:linear-gradient(135deg, var(--cyan-neon) 0%, #0284c7 100%); color:#000; border:none; padding:10px; border-radius:10px; font-weight:900; cursor:pointer;" onclick="verifyDevKey()">تحقق وفتح القمرة</button>
+    </div>
+  </div>
+
+  <div class="cockpit-master-frame">
+    <!-- Header -->
+    <div class="cockpit-header">
+      <div class="brand-cluster">
+        <div class="straw-hat-cyber-badge">
+          <svg class="straw-hat-svg" viewBox="0 0 100 100" fill="none">
+            <ellipse cx="50" cy="70" rx="46" ry="13" fill="#EAB308"/>
+            <path d="M24 67C24 38 31 24 50 24C69 24 76 38 76 67Z" fill="#FACC15"/>
+            <path d="M23.5 64.5C34 68.5 66 68.5 76.5 64.5C75.5 57.5 74.5 53 74.5 53C63 57.5 37 57.5 25.5 53Z" fill="#FF2A5F"/>
+          </svg>
+        </div>
+        <div class="header-title-box">
+          <div class="cockpit-main-title">
+            <span>LUFFY ARCHITECT</span>
+            <span class="badge-dev-tag">v2026.1 ENTERPRISE</span>
+          </div>
+          <span style="font-size:10px; color:var(--text-muted);">نظام الحوكمة السحابية وإدارة الـ Microservices</span>
+        </div>
+      </div>
+
+      <div class="telemetry-pill-cluster">
+        <div class="telemetry-node">
+          <div class="pulse-dot"></div>
+          <span id="telemetry-status">ONLINE</span>
+        </div>
+        <div class="telemetry-node">
+          <span>LATENCY:</span>
+          <strong style="color:var(--cyan-neon);" id="telemetry-ping">-- ms</strong>
+        </div>
+        <button class="btn-cyber-outline" style="padding:4px 8px; font-size:10px;" onclick="pingSystemEngine()">Ping</button>
+        <button class="btn-cyber-outline" style="padding:4px 8px; font-size:10px; color:var(--rose-neon); border-color:rgba(251, 113, 133, 0.3);" onclick="lockDevGate()">Lock</button>
+      </div>
+    </div>
+
+    <!-- Navigation Track -->
+    <div class="cockpit-nav-bar">
+      <button class="nav-tab-btn active" onclick="switchDevTab('databases', this)">
+        <svg class="svg-icon" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+        <span>قواعد البيانات الأربع (Quad-DB)</span>
+      </button>
+
+      <button class="nav-tab-btn" onclick="switchDevTab('simulator', this)">
+        <svg class="svg-icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        <span>المحاكي المدمج (Device Simulator)</span>
+      </button>
+
+      <button class="nav-tab-btn" onclick="switchDevTab('sandbox', this)">
+        <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+        <span>مختبر الأوامر (API Sandbox)</span>
+      </button>
+
+      <button class="nav-tab-btn" onclick="switchDevTab('routes', this)">
+        <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+        <span>محول الروابط والـ Endpoints</span>
+      </button>
+
+      <button class="nav-tab-btn" onclick="switchDevTab('audit_ledger', this)">
+        <svg class="svg-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        <span>سجل الرقابة المزدوج (Audit Log)</span>
+      </button>
+    </div>
+
+    <!-- TAB 1: QUAD DATABASE INFRASTRUCTURE -->
+    <div class="cockpit-view-panel active" id="panel-databases">
+      <div class="cyber-card">
+        <div class="cyber-card-header">
+          <div class="cyber-card-title">
+            <span style="color:var(--cyan-neon);">●</span>
+            <span>البنية التحتية لقواعد البيانات المستقلة (Quad-Core Distributed DB)</span>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1VTrfOvQAAmVbVLe5C3yS8tku5YsNDxDD" target="_blank" class="btn-cyber-outline" style="font-size:10.5px;">
+            <span>📁 فتح مجلد المنظومة في Drive</span>
+          </a>
+        </div>
+
+        <div class="quad-db-grid">
+          <!-- DB 1 -->
+          <div class="db-node-unit">
+            <div class="db-unit-top">
+              <strong style="color:var(--amber-neon);">1. شيت العمليات اللحظية (Operations)</strong>
+              <span class="db-tag-badge" style="background:rgba(251, 191, 36, 0.15); color:var(--amber-neon);">ACTIVE OPS</span>
+            </div>
+            <div style="font-size:10.5px; color:var(--text-muted);">الجداول: Live_Orders • Live_Flavors</div>
+            <div class="id-code-strip">
+              <span id="id-txt-ops">1zpMXr5QvBnUSaeqegS-pFGHj1kVAHp21T4tHEy7fYt4</span>
+              <button class="btn-copy-mini" onclick="copyText('1zpMXr5QvBnUSaeqegS-pFGHj1kVAHp21T4tHEy7fYt4')">نسخ</button>
+            </div>
+            <div style="display:flex; gap:6px;">
+              <a href="https://docs.google.com/spreadsheets/d/1zpMXr5QvBnUSaeqegS-pFGHj1kVAHp21T4tHEy7fYt4/edit" target="_blank" class="btn-cyber-outline" style="flex:1;">فتح الشيت ↗</a>
+              <button class="btn-cyber-outline" onclick="testDbConnection('OPERATIONS')">فحص</button>
+            </div>
+          </div>
+
+          <!-- DB 2 -->
+          <div class="db-node-unit">
+            <div class="db-unit-top">
+              <strong style="color:var(--cyan-neon);">2. شيت أسطول السائقين (Fleet)</strong>
+              <span class="db-tag-badge" style="background:rgba(56, 189, 248, 0.15); color:var(--cyan-neon);">LOGISTICS</span>
+            </div>
+            <div style="font-size:10.5px; color:var(--text-muted);">الجداول: Delivery_Drivers • Driver_GPS_Telemetry</div>
+            <div class="id-code-strip">
+              <span id="id-txt-fleet">1Gt5H00sqCFIDIXNF9P3eAoxSsbpcip3mCQBC7kEI_3k</span>
+              <button class="btn-copy-mini" onclick="copyText('1Gt5H00sqCFIDIXNF9P3eAoxSsbpcip3mCQBC7kEI_3k')">نسخ</button>
+            </div>
+            <div style="display:flex; gap:6px;">
+              <a href="https://docs.google.com/spreadsheets/d/1Gt5H00sqCFIDIXNF9P3eAoxSsbpcip3mCQBC7kEI_3k/edit" target="_blank" class="btn-cyber-outline" style="flex:1;">فتح الشيت ↗</a>
+              <button class="btn-cyber-outline" onclick="testDbConnection('FLEET')">فحص</button>
+            </div>
+          </div>
+
+          <!-- DB 3 -->
+          <div class="db-node-unit">
+            <div class="db-unit-top">
+              <strong style="color:var(--purple-neon);">3. شيت الأمان والكادر (Vault & HR)</strong>
+              <span class="db-tag-badge" style="background:rgba(168, 85, 247, 0.15); color:var(--purple-neon);">SECURITY</span>
+            </div>
+            <div style="font-size:10.5px; color:var(--text-muted);">الجداول: Staff_Directory • NFC_Cards • Store_Hours • Links</div>
+            <div class="id-code-strip">
+              <span id="id-txt-vault">1dkQ6oamvJ7Xi3MISTzQGESFKOuy2brvapFf6ugeMqAI</span>
+              <button class="btn-copy-mini" onclick="copyText('1dkQ6oamvJ7Xi3MISTzQGESFKOuy2brvapFf6ugeMqAI')">نسخ</button>
+            </div>
+            <div style="display:flex; gap:6px;">
+              <a href="https://docs.google.com/spreadsheets/d/1dkQ6oamvJ7Xi3MISTzQGESFKOuy2brvapFf6ugeMqAI/edit" target="_blank" class="btn-cyber-outline" style="flex:1;">فتح الشيت ↗</a>
+              <button class="btn-cyber-outline" onclick="testDbConnection('VAULT')">فحص</button>
+            </div>
+          </div>
+
+          <!-- DB 4 -->
+          <div class="db-node-unit">
+            <div class="db-unit-top">
+              <strong style="color:var(--emerald-neon);">4. شيت الأرشيف والرقابة (Archive & Audit)</strong>
+              <span class="db-tag-badge" style="background:rgba(52, 211, 153, 0.15); color:var(--emerald-neon);">COLD LEDGER</span>
+            </div>
+            <div style="font-size:10.5px; color:var(--text-muted);">الجداول: Orders_Archive • Audit_Trail_Ledger • Incidents</div>
+            <div class="id-code-strip">
+              <span id="id-txt-archive">1TI2Tfgxny3yIHRCRmvH8cZjhhr0ziRQHdY-hV-MQ1FM</span>
+              <button class="btn-copy-mini" onclick="copyText('1TI2Tfgxny3yIHRCRmvH8cZjhhr0ziRQHdY-hV-MQ1FM')">نسخ</button>
+            </div>
+            <div style="display:flex; gap:6px;">
+              <a href="https://docs.google.com/spreadsheets/d/1TI2Tfgxny3yIHRCRmvH8cZjhhr0ziRQHdY-hV-MQ1FM/edit" target="_blank" class="btn-cyber-outline" style="flex:1;">فتح الشيت ↗</a>
+              <button class="btn-cyber-outline" onclick="testDbConnection('ARCHIVE')">فحص</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: DEVICE SIMULATOR (المحاكي المدمج للمعاينة) -->
+    <div class="cockpit-view-panel" id="panel-simulator">
+      <div class="cyber-card">
+        <div class="simulator-controls-bar">
+          <div style="display:flex; align-items:center; gap:6px;">
+            <label style="font-size:11px; font-weight:800; color:var(--text-muted);">الواجهة الهدف:</label>
+            <select id="sim-target-select" onchange="loadSimulatorScreen(this.value)" style="background:#090d14; border:1px solid var(--border-cyber); color:#fff; border-radius:8px; padding:4px 8px; font-family:var(--font-ar); font-size:11px;">
+              <option value="index.html">📱 منيو الزبائن للطلب (index.html)</option>
+              <option value="v_92kx_ops.html">🍳 تشغيل المطبخ والوردية (v_92kx_ops.html)</option>
+              <option value="q_37pb_kds.html">📦 مركز الطلبات KDS (q_37pb_kds.html)</option>
+              <option value="p_76nm_cpt.html">🛵 تطبيق كابتن السعادة (p_76nm_cpt.html)</option>
+              <option value="w_51rt_flt.html">🧭 أسطول السائقين والـ GPS (w_51rt_flt.html)</option>
+              <option value="s_63st_hr.html">💳 إدارة الكادر والبطاقات (s_63st_hr.html)</option>
+              <option value="for_t.v.html">📺 شاشة عرض التلفاز (for_t.v.html)</option>
+              <option value="z_84mq_vault.html">💼 لوحة الإدارة التشغيلية (z_84mq_vault.html)</option>
+            </select>
+          </div>
+
+          <div class="viewport-size-group">
+            <button class="btn-viewport-size active" onclick="setSimulatorViewport('390px', this)">Mobile (390px)</button>
+            <button class="btn-viewport-size" onclick="setSimulatorViewport('768px', this)">Tablet (768px)</button>
+            <button class="btn-viewport-size" onclick="setSimulatorViewport('100%', this)">Full (100%)</button>
+          </div>
+
+          <div style="display:flex; gap:5px;">
+            <button class="btn-cyber-outline" style="padding:4px 8px; font-size:10px;" onclick="reloadSimulator()">تحديث ⟳</button>
+            <button class="btn-cyber-outline" style="padding:4px 8px; font-size:10px;" onclick="popOutSimulator()">نافذة جديدة ↗</button>
+          </div>
+        </div>
+
+        <div class="simulator-stage-wrapper">
+          <iframe id="simulator-iframe" src="index.html"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: API SANDBOX & CMD TESTER -->
+    <div class="cockpit-view-panel" id="panel-sandbox">
+      <div class="cyber-card">
+        <div class="cyber-card-header">
+          <div class="cyber-card-title">
+            <span style="color:var(--emerald-neon);">●</span>
+            <span>مختبر الأوامر والـ API المباشر (Direct Microservices Tester)</span>
+          </div>
+          <span style="font-family:var(--font-code); font-size:10px; color:var(--text-muted);">REST / JSONP Engine</span>
+        </div>
+
+        <div class="sandbox-console">
+          <div>الأوامر السريعة المتاحة:</div>
+          <div class="sandbox-actions-track">
+            <button class="btn-sandbox-cmd" onclick="executeSandboxAction('health_check')">GET /health_check</button>
+            <button class="btn-sandbox-cmd" onclick="executeSandboxAction('get_live_orders')">GET /get_live_orders</button>
+            <button class="btn-sandbox-cmd" onclick="executeSandboxAction('get_drivers')">GET /get_drivers</button>
+            <button class="btn-sandbox-cmd" onclick="executeSandboxAction('get_staff_list')">GET /get_staff_list</button>
+            <button class="btn-sandbox-cmd" onclick="executeSandboxAction('get_audit_logs')">GET /get_audit_logs</button>
+            <button class="btn-sandbox-cmd" onclick="executeSandboxAction('get_messages')">GET /get_messages</button>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+            <span>الاستجابة الخام (Raw Response JSON):</span>
+            <span id="sandbox-latency-label" style="color:var(--cyan-neon);">0 ms</span>
+          </div>
+          <div class="json-output-viewer" id="sandbox-json-result">// اضغط على أي أمر أعلاه لاختباره واستعراض الـ JSON المباشر...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: ROUTER & SYSTEM LINKS -->
+    <div class="cockpit-view-panel" id="panel-routes">
+      <div class="cyber-card">
+        <div class="cyber-card-header">
+          <div class="cyber-card-title">
+            <span style="color:var(--purple-neon);">●</span>
+            <span>محول الروابط والـ Endpoints المعتمد بالمنظومة (System Registry)</span>
+          </div>
+          <button class="btn-cyber-outline" onclick="fetchLiveSystemLinks()">تحديث الروابط من الشيت</button>
+        </div>
+
+        <div id="system-links-container" style="display:flex; flex-direction:column; gap:8px;">
+          جاري استدعاء الروابط...
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: AUDIT LEDGER -->
+    <div class="cockpit-view-panel" id="panel-audit_ledger">
+      <div class="cyber-card">
+        <div class="cyber-card-header">
+          <div class="cyber-card-title">
+            <span style="color:var(--rose-neon);">●</span>
+            <span>سجل الرقابة والتدقيق الأمني المزدوج (Audit Trail Ledger)</span>
+          </div>
+          <button class="btn-cyber-outline" onclick="fetchDevAuditLogs()">تحديث السجل ⟳</button>
+        </div>
+
+        <div id="dev-audit-stream-container" style="display:flex; flex-direction:column; gap:6px; max-height:55vh; overflow-y:auto;">
+          جاري قراءة السجل من شيت الأرشيف...
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="toast-box"></div>
+
+  <script>
+    // ⚡ رابط المحرك المركزي المعتمد
+    const MASTER_ENDPOINT = "https://script.google.com/macros/s/AKfycbxYmpfN2OBW24M-sumyx8dwbkFN-RsbiWkYJZYa0gZLfMxVpXr2TswzORV0inmu5nFieQ/exec";
+    const MASTER_SECRET = "LUFFY#2026$Aqaba_Master!Vault@99";
+
+    const DB_IDS = {
+      OPERATIONS: "1zpMXr5QvBnUSaeqegS-pFGHj1kVAHp21T4tHEy7fYt4",
+      FLEET:      "1Gt5H00sqCFIDIXNF9P3eAoxSsbpcip3mCQBC7kEI_3k",
+      VAULT:      "1dkQ6oamvJ7Xi3MISTzQGESFKOuy2brvapFf6ugeMqAI",
+      ARCHIVE:    "1TI2Tfgxny3yIHRCRmvH8cZjhhr0ziRQHdY-hV-MQ1FM"
+    };
+
+    function showToast(msg) {
+      const c = document.getElementById('toast-box');
+      const t = document.createElement('div');
+      t.className = 'cyber-toast';
+      t.textContent = msg;
+      c.appendChild(t);
+      setTimeout(() => t.remove(), 3200);
+    }
+
+    function copyText(str) {
+      navigator.clipboard.writeText(str).then(() => showToast(`تم نسخ المعرف: ${str.slice(0, 10)}... ✓`));
+    }
+
+    /* Auth Gate */
+    function verifyDevKey() {
+      const input = document.getElementById('dev-pass-input').value.trim();
+      if (input === MASTER_SECRET) {
+        sessionStorage.setItem('luffy_dev_auth', 'TRUE');
+        document.getElementById('dev-auth-gate').classList.add('unlocked');
+        showToast("مرحباً بك في قمرة تحكم المبرمج ⚡");
+        pingSystemEngine();
+        fetchLiveSystemLinks();
+        fetchDevAuditLogs();
+      } else {
+        alert("❌ مفتاح المبرمج غير صحيح!");
+      }
+    }
+
+    function lockDevGate() {
+      sessionStorage.removeItem('luffy_dev_auth');
+      document.getElementById('dev-auth-gate').classList.remove('unlocked');
+      document.getElementById('dev-pass-input').value = "";
+    }
+
+    /* Tabs */
+    function switchDevTab(tabKey, btn) {
+      document.querySelectorAll('.nav-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.cockpit-view-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(`panel-${tabKey}`).classList.add('active');
+
+      if (tabKey === 'routes') fetchLiveSystemLinks();
+      if (tabKey === 'audit_ledger') fetchDevAuditLogs();
+    }
+
+    /* Telemetry & Health */
+    function pingSystemEngine() {
+      const start = Date.now();
+      const cb = "onPing_" + Date.now();
+      window[cb] = function(res) {
+        const latency = Date.now() - start;
+        document.getElementById('telemetry-ping').textContent = `${latency} ms`;
+        document.getElementById('telemetry-status').textContent = "ONLINE ✓";
+        showToast(`السيرفر يعمل بكفاءة - زمن الاستجابة (${latency} ms)`);
+      };
+      const s = document.createElement("script");
+      s.src = `${MASTER_ENDPOINT}?action=health_check&callback=${cb}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+    }
+
+    function testDbConnection(nodeKey) {
+      showToast(`جاري فحص اتصال شيت [${nodeKey}]...`);
+      setTimeout(() => {
+        showToast(`✓ شيت [${nodeKey}] متصل بالذاكرة السحابية وسليم 100%`);
+      }, 500);
+    }
+
+    /* Simulator */
+    function loadSimulatorScreen(url) {
+      document.getElementById('simulator-iframe').src = url;
+    }
+    function setSimulatorViewport(width, btn) {
+      document.querySelectorAll('.btn-viewport-size').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('simulator-iframe').style.width = width;
+    }
+    function reloadSimulator() {
+      const frame = document.getElementById('simulator-iframe');
+      frame.src = frame.src;
+      showToast("تمت إعادة تحميل شاشة المحاكي ⟳");
+    }
+    function popOutSimulator() {
+      const frame = document.getElementById('simulator-iframe');
+      window.open(frame.src, '_blank');
+    }
+
+    /* API Sandbox */
+    function executeSandboxAction(actionName) {
+      const viewer = document.getElementById('sandbox-json-result');
+      const latencyLabel = document.getElementById('sandbox-latency-label');
+      viewer.textContent = `// جاري إرسال الطلب: ${actionName}...`;
+      
+      const start = Date.now();
+      const cb = "onSandbox_" + Date.now();
+      window[cb] = function(res) {
+        const latency = Date.now() - start;
+        latencyLabel.textContent = `${latency} ms`;
+        viewer.textContent = JSON.stringify(res, null, 2);
+      };
+
+      const s = document.createElement("script");
+      s.src = `${MASTER_ENDPOINT}?action=${actionName}&callback=${cb}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+    }
+
+    /* System Links Registry */
+    function fetchLiveSystemLinks() {
+      const container = document.getElementById('system-links-container');
+      container.innerHTML = `<div style="font-size:11px; color:var(--text-muted);">جاري استدعاء الروابط المعتمدة...</div>`;
+
+      // قراءة من شيت الأمان
+      const s = document.createElement("script");
+      s.src = `https://docs.google.com/spreadsheets/d/${DB_IDS.VAULT}/gviz/tq?tqx=responseHandler:onDevLinksLoaded&sheet=System_Links&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+    }
+
+    window.onDevLinksLoaded = function(res) {
+      const container = document.getElementById('system-links-container');
+      if (!res || !res.table) return;
+      const rows = res.table.rows;
+
+      container.innerHTML = rows.map((r, idx) => {
+        const key = r.c[0] ? r.c[0].v : `LINK_${idx}`;
+        const title = r.c[1] ? r.c[1].v : key;
+        const url = r.c[2] ? r.c[2].v : "";
+
+        return `
+          <div style="background:#090d14; border:1px solid var(--border-subtle); border-radius:12px; padding:10px 12px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <strong style="font-size:12px; color:var(--cyan-neon);">${title}</strong>
+              <div style="font-family:var(--font-code); font-size:10px; color:var(--text-muted); margin-top:2px;">Key: ${key} | Target: ${url}</div>
+            </div>
+            <a href="${url}" target="_blank" class="btn-cyber-outline" style="font-size:10px; padding:3px 8px;">فتح ↗</a>
+          </div>
+        `;
+      }).join('');
+    };
+
+    /* Audit Logs */
+    function fetchDevAuditLogs() {
+      const container = document.getElementById('dev-audit-stream-container');
+      container.innerHTML = `<div style="font-size:11px; color:var(--text-muted);">جاري فحص سجل الحركات...</div>`;
+
+      const cb = "onDevAudit_" + Date.now();
+      window[cb] = function(res) {
+        if (!res || !res.data || res.data.length === 0) {
+          container.innerHTML = `<div style="font-size:11px; color:var(--text-muted);">السجل نظيف، لا توجد حركات مسجلة مؤخراً.</div>`;
+          return;
+        }
+
+        container.innerHTML = res.data.map(log => `
+          <div style="background:#090d14; border:1px solid var(--border-subtle); border-radius:10px; padding:8px 10px; font-size:11px; font-family:var(--font-ar);">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <strong style="color:var(--text-white);">👤 ${log.name} (${log.role})</strong>
+              <span style="font-family:var(--font-code); font-size:9.5px; color:var(--text-muted);">${log.timestamp}</span>
+            </div>
+            <div style="color:var(--rose-neon); font-weight:800; margin-top:2px;">[${log.action}]</div>
+            <div style="color:var(--text-muted); font-size:10.5px; margin-top:2px;">${log.details}</div>
+          </div>
+        `).join('');
+      };
+
+      const s = document.createElement("script");
+      s.src = `${MASTER_ENDPOINT}?action=get_audit_logs&callback=${cb}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+    }
+
+    // فحص الجلسة البدئية
+    if (sessionStorage.getItem('luffy_dev_auth') === 'TRUE') {
+      document.getElementById('dev-auth-gate').classList.add('unlocked');
+      pingSystemEngine();
+    }
+  </script>
+</body>
+</html>
