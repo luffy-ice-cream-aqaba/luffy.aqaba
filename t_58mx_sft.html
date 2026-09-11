@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>LUFFY • لوفي | محطة تشغيل الوردية والمطبخ الميدانية</title>
+  
+  <!-- مكتبة توليد QR Code الفورية للطباعة -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <!-- خطوط النخبة العالمية -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Readex+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --font-ar: 'Readex Pro', system-ui, sans-serif;
+      --font-en: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+      --bg-cream: #fdfbf9;
+      --card-surface: #ffffff;
+      --text-espresso: #1a110d;
+      --text-muted: #786a63;
+      --text-light: #a3958e;
+
+      --brand-red: #ff2a5f;
+      --brand-gold: #f59e0b;
+      --emerald: #10b981;
+      --emerald-dark: #059669;
+      --amber: #d97706;
+      --blue-accent: #2563eb;
+      --purple-accent: #7c3aed;
+
+      --border-soft: 1.5px solid rgba(254, 215, 170, 0.45);
+      --shadow-luxury: 0 12px 32px -6px rgba(180, 100, 120, 0.08), 0 2px 8px rgba(0,0,0,0.02);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      font-family: var(--font-ar);
+      background: radial-gradient(circle at 12% 10%, #fff1f5 0%, #fdf9f4 45%, #fef6ed 100%);
+      color: var(--text-espresso);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 10px 8px 100px;
+      overflow-x: hidden;
+    }
+
+    @media (min-width: 600px) { body { padding: 16px 12px 100px; } }
+
+    .svg-pure-icon {
+      width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2;
+      stroke-linecap: round; stroke-linejoin: round; display: inline-block; vertical-align: middle; flex-shrink: 0;
+    }
+
+    .tabular-digits {
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum";
+      font-family: var(--font-en);
+    }
+
+    .shift-master-wrapper {
+      width: 100%; max-width: 740px; background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1.5px solid #ffffff;
+      border-radius: 28px; padding: 16px 14px; box-shadow: 0 20px 50px -10px rgba(180, 100, 120, 0.1);
+      display: flex; flex-direction: column; position: relative;
+    }
+
+    @media (min-width: 600px) { .shift-master-wrapper { padding: 20px 18px; border-radius: 32px; } }
+
+    /* Header */
+    .shift-header-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-bottom: 10px; border-bottom: 1.5px solid #f1f0ee; margin-bottom: 10px; gap: 8px;
+    }
+
+    .brand-cluster { display: flex; align-items: center; gap: 8px; }
+    .straw-hat-badge { position: relative; width: 40px; height: 40px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .hat-glow {
+      position: absolute; width: 140%; height: 140%; border-radius: 50%;
+      background: radial-gradient(circle, rgba(251, 191, 36, 0.55) 0%, transparent 70%); filter: blur(8px);
+    }
+    .straw-hat-svg { width: 100%; height: 100%; position: relative; z-index: 2; filter: drop-shadow(0 4px 8px rgba(217, 119, 6, 0.35)); }
+
+    .brand-title-box { display: flex; flex-direction: column; }
+    .brand-title-main { display: flex; align-items: center; gap: 5px; font-size: 17px; font-weight: 900; line-height: 1.2; }
+    .name-en {
+      font-family: var(--font-en); letter-spacing: 1px;
+      background: linear-gradient(135deg, var(--brand-red) 0%, var(--brand-gold) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .name-ar { color: var(--text-espresso); }
+    .brand-subtitle-sub { font-size: 10.5px; color: var(--text-muted); font-weight: 800; margin-top: 1px; }
+
+    .header-actions-group { display: flex; align-items: center; gap: 5px; }
+    .btn-header-action {
+      background: #f8fafc; border: 1.5px solid #e2e8f0; color: var(--text-espresso); font-family: var(--font-ar);
+      font-size: 11px; font-weight: 800; padding: 6px 11px; border-radius: 11px; cursor: pointer;
+      display: flex; align-items: center; gap: 4px; transition: all 0.2s ease; white-space: nowrap;
+    }
+    .btn-header-action:hover { background: #ffffff; border-color: #fed7aa; color: var(--brand-red); }
+
+    /* Operator Identity Strip */
+    .operator-identity-strip {
+      background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fd 100%);
+      border: 1.5px solid #bfdbfe; border-radius: 14px; padding: 7px 11px;
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 6px;
+    }
+
+    .operator-user-meta {
+      display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 900;
+      color: #1e40af; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+
+    .fleet-status-pill {
+      display: flex; align-items: center; gap: 4px; background: #ffffff;
+      border: 1px solid #bfdbfe; padding: 3px 8px; border-radius: 9999px; font-size: 10px;
+      font-weight: 800; color: #1e40af; white-space: nowrap; flex-shrink: 0;
+    }
+    .fleet-dot-active {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--emerald);
+      box-shadow: 0 0 6px var(--emerald); animation: pulseDot 2s infinite;
+    }
+    @keyframes pulseDot { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
+
+    /* Hadith Banner */
+    .management-broadcast-banner {
+      background: linear-gradient(135deg, #fffdfa 0%, #fff7ed 50%, #fff0f3 100%);
+      border: 1.5px solid #fed7aa; border-radius: 16px; padding: 10px 12px;
+      margin-bottom: 10px; box-shadow: 0 4px 16px rgba(245, 158, 11, 0.08); display: flex; flex-direction: column; gap: 5px;
+    }
+
+    .broadcast-banner-header { display: flex; justify-content: space-between; align-items: center; }
+    .broadcast-title-cluster { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 900; color: var(--brand-red); }
+    .broadcast-time-tag { font-size: 9.5px; color: var(--text-muted); font-family: var(--font-ar); font-weight: 700; }
+    .broadcast-body-text { font-size: 11.5px; font-weight: 700; color: var(--text-espresso); line-height: 1.5; }
+
+    /* Master Shift Tabs */
+    .master-shift-tabs-bar {
+      display: grid; grid-template-columns: 1fr 1fr; background: #f1f5f9;
+      padding: 3px; border-radius: 14px; gap: 4px; margin-bottom: 10px; width: 100%;
+    }
+
+    .shift-main-tab-btn {
+      border: none; background: transparent; padding: 8px 4px; border-radius: 11px;
+      font-family: var(--font-ar); font-size: clamp(10.5px, 2.8vw, 12px); font-weight: 800;
+      color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center;
+      gap: 5px; transition: all 0.2s ease; white-space: nowrap;
+    }
+
+    .shift-main-tab-btn.active { background: #ffffff; color: var(--brand-red); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); }
+    .badge-orders-live-count { background: var(--brand-red); color: #ffffff; font-family: var(--font-en); font-size: 9.5px; font-weight: 900; padding: 1px 6px; border-radius: 9999px; }
+
+    .panel-section-view { display: none; }
+    .panel-section-view.active { display: block; animation: fadeIn 0.2s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* KDS Stages */
+    .kds-stages-strip-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); background: #ffffff;
+      border: 1.5px solid #fed7aa; padding: 2.5px; border-radius: 12px; gap: 2.5px; margin-bottom: 10px;
+    }
+
+    .kds-stage-pill {
+      border: none; background: transparent; padding: 7px 2px; border-radius: 9px;
+      font-family: var(--font-ar); font-size: clamp(9px, 2.6vw, 11px); font-weight: 800;
+      color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center;
+      gap: 3px; transition: all 0.2s ease; white-space: nowrap;
+    }
+    .kds-stage-pill.active { background: #fff0f3; color: var(--brand-red); border: 1px solid #fecdd3; }
+    .kds-stage-pill b { font-family: var(--font-en); font-size: 10.5px; }
+
+    /* KDS Cards */
+    .orders-cards-stream {
+      display: flex; flex-direction: column; gap: 9px; min-height: 40vh; max-height: 58vh;
+      overflow-y: auto; padding-right: 1px;
+    }
+
+    .kds-order-card {
+      background: #ffffff; border: 1.5px solid #f1f0ee; border-radius: 18px;
+      padding: 12px 14px; display: flex; flex-direction: column; gap: 8px;
+      box-shadow: var(--shadow-luxury); position: relative;
+    }
+    .kds-order-card.status-problem { border-color: var(--brand-red); background: #fff5f5; }
+    .kds-order-card.is-pickup-ready { border-color: #a7f3d0; background: #f0fdf4; }
+
+    .order-card-header-row { display: flex; justify-content: space-between; align-items: center; }
+    .order-id-badge { font-family: var(--font-en); font-size: 12.5px; font-weight: 900; color: var(--brand-red); background: #fff0f3; padding: 2px 8px; border-radius: 7px; }
+    
+    .order-type-chip { font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 9999px; display: flex; align-items: center; gap: 3px; }
+    .type-delivery { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
+    .type-pickup { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+
+    .time-slot-pill-kds {
+      background: #fdfaf7; border: 1px solid #fed7aa; border-radius: 10px;
+      padding: 6px 9px; font-size: 11px; font-weight: 800; color: #92400e;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    .live-countdown-badge {
+      display: inline-flex; align-items: center; gap: 5px; padding: 3px 8px;
+      border-radius: 6px; font-size: 10.5px; font-weight: 900;
+    }
+    .countdown-calm { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+    .countdown-urgent { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
+    .countdown-critical { background: #fff1f2; color: #9f1239; border: 1px solid #fecdd3; animation: pulseAlert 1.5s infinite; }
+
+    @keyframes pulseAlert { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+
+    .qty-priority-badge {
+      background: linear-gradient(135deg, #ff1e56 0%, #be123c 100%);
+      color: #ffffff; border: 1px solid #fda4af; border-radius: 8px;
+      padding: 4px 8px; font-size: 10.5px; font-weight: 900; display: flex; align-items: center; gap: 4px;
+    }
+
+    .order-items-textbox {
+      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 11px;
+      padding: 8px 10px; font-size: 11.5px; font-weight: 700; color: var(--text-espresso); line-height: 1.35;
+    }
+
+    .kitchen-stopwatch-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      background: #fffbeb; border: 1px solid #fde68a; border-radius: 9px;
+      padding: 4px 8px; font-size: 10px; font-weight: 800; color: #92400e;
+    }
+
+    .btn-kds-step {
+      border: none; padding: 10px 6px; border-radius: 11px; font-family: var(--font-ar);
+      font-size: 11.5px; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;
+      transition: all 0.2s ease;
+    }
+    .btn-kds-primary { background: linear-gradient(135deg, var(--emerald) 0%, #059669 100%); color: #fff; }
+    .btn-kds-purple { background: linear-gradient(135deg, var(--purple-accent) 0%, #6d28d9 100%); color: #fff; }
+    .btn-kds-tool { background: #f8fafc; border: 1px solid #e2e8f0; color: var(--text-espresso); text-decoration: none; font-size: 10.5px; }
+
+    /* Flavors Stock Control */
+    .flavor-control-card {
+      background: #ffffff; border: 1.5px solid #f1f0ee; border-radius: 16px;
+      padding: 10px 12px; display: flex; flex-direction: column; gap: 7px;
+      box-shadow: var(--shadow-luxury); margin-bottom: 8px;
+    }
+    .flavor-card-top-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .flavor-meta-box { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; }
+    .flavor-thumb-stage {
+      width: 38px; height: 38px; min-width: 38px; border-radius: 10px;
+      background: #fdfaf7; border: 1px solid #f6ece5; display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .flavor-thumb-img { max-width: 88%; max-height: 88%; object-fit: contain; }
+
+    .btn-fresh-toggle {
+      border: 1px solid #e2e8f0; background: #f8fafc; padding: 4px 9px; border-radius: 9999px;
+      font-size: 10px; font-weight: 800; color: var(--text-muted); cursor: pointer;
+    }
+    .btn-fresh-toggle.is-fresh-active { background: #fff0f3; border-color: #fecdd3; color: var(--brand-red); }
+
+    .stock-segments-track {
+      display: grid; grid-template-columns: repeat(4, 1fr); background: #f8fafc;
+      padding: 2.5px; border-radius: 10px; border: 1px solid #eef2f6; gap: 2.5px;
+    }
+    .stock-pill-btn {
+      border: none; background: transparent; padding: 5px 1px; border-radius: 7px;
+      font-family: var(--font-ar); font-size: clamp(8.5px, 2.4vw, 10px); font-weight: 800;
+      color: var(--text-muted); cursor: pointer; text-align: center;
+    }
+    .stock-pill-btn.is-available { background: #ffffff; color: #065f46; border: 1px solid #bbf7d0; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    .stock-pill-btn.is-low { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
+    .stock-pill-btn.is-restocking { background: #fefce8; color: #854d0e; border: 1px solid #fef08a; }
+    .stock-pill-btn.is-soldout { background: #fff1f2; color: #9f1239; border: 1px solid #fecdd3; }
+
+    /* Modals & Gates */
+    #shift-nfc-auth-gate, .custom-modal-backdrop {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100%; height: 100dvh;
+      background: radial-gradient(circle at center, #1f1412 0%, #0d0807 100%);
+      backdrop-filter: blur(20px); z-index: 20000; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 20px; color: #ffffff;
+    }
+    #shift-nfc-auth-gate.unlocked { display: none; }
+    .custom-modal-backdrop { background: rgba(10, 8, 9, 0.68); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+    .custom-modal-backdrop.open { opacity: 1; pointer-events: auto; }
+
+    .gate-card-box, .custom-modal-card {
+      background: rgba(255, 255, 255, 0.08); border: 1.5px solid rgba(254, 215, 170, 0.3);
+      border-radius: 26px; padding: 24px 18px; width: 100%; max-width: 360px; text-align: center;
+    }
+    .custom-modal-card { background: #ffffff; color: var(--text-espresso); border-color: #fed7aa; max-height: 90vh; overflow-y: auto; text-align: right; }
+
+    .nfc-scanning-ring {
+      position: relative; width: 66px; height: 66px; border-radius: 50%;
+      background: rgba(245, 158, 11, 0.12); border: 1.5px dashed var(--brand-gold);
+      display: flex; align-items: center; justify-content: center; margin: 12px auto; cursor: pointer;
+    }
+
+    /* تذكرة الطباعة الحرارية */
+    .printable-thermal-wrapper {
+      background: #ffffff; border: 1.5px dashed #000000; border-radius: 12px;
+      padding: 14px 10px; margin: 10px auto; width: 100%; max-width: 290px;
+      font-family: 'Readex Pro', monospace, sans-serif; font-size: 11px;
+      line-height: 1.45; color: #000000; text-align: center;
+    }
+    .qr-thermal-box { display: flex; justify-content: center; margin: 6px auto; width: 100px; height: 100px; }
+
+    #thermal-print-hidden-frame { display: none; }
+    #toast-container { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 30000; pointer-events: none; }
+    .chakra-toast {
+      background: #1f1412; color: #ffffff; padding: 7px 15px; border-radius: 9999px; font-size: 11px; font-weight: 800;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25); border: 1.5px solid #fed7aa;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔒 شاشة تسجيل الدخول بـ NFC أو الرمز السريع لكادر الوردية -->
+  <div id="shift-nfc-auth-gate">
+    <div class="gate-card-box">
+      <div style="width:42px; height:42px; margin:0 auto 6px;">
+        <svg viewBox="0 0 100 100" fill="none" style="width:100%; height:100%;">
+          <ellipse cx="50" cy="70" rx="46" ry="13" fill="#EAB308"/>
+          <path d="M24 67C24 38 31 24 50 24C69 24 76 38 76 67Z" fill="#FACC15"/>
+          <path d="M23.5 64.5C34 68.5 66 68.5 76.5 64.5C75.5 57.5 74.5 53 74.5 53C63 57.5 37 57.5 25.5 53Z" fill="#FF2A5F"/>
+        </svg>
+      </div>
+      <div style="font-size:16px; font-weight:900;">محطة تشغيل الوردية والمطبخ</div>
+      <div style="font-size:11px; color:#fed7aa; margin-top:2px;">كابتن السعادة • العقبة 🇯🇴</div>
+
+      <div class="nfc-scanning-ring" onclick="initNfcGateScanner()">
+        <svg class="svg-pure-icon" style="width:30px; height:30px; stroke:var(--brand-gold);" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
+      </div>
+      <div style="font-size:11.5px; font-weight:800;" id="nfc-gate-status-txt">لامس بطاقتك الذكية NFC لفتح الوردية</div>
+
+      <div style="margin-top:12px;">
+        <input type="password" id="gate-pass-fallback" placeholder="أو أدخل كود البطاقة / الرمز..." style="width:100%; background:rgba(255,255,255,0.1); border:1px solid rgba(254,215,170,0.3); border-radius:10px; padding:8px; color:#fff; text-align:center; font-family:var(--font-en); margin-bottom:6px;" onkeypress="if(event.key==='Enter') verifyManualStaffToken()">
+        <button style="width:100%; background:linear-gradient(135deg, var(--brand-red), #ff5e7e); color:#fff; border:none; padding:8px; border-radius:10px; font-weight:800; cursor:pointer;" onclick="verifyManualStaffToken()">دخول مباشر ⚡</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="shift-master-wrapper">
+    <!-- Header -->
+    <div class="shift-header-nav">
+      <div class="brand-cluster">
+        <div class="straw-hat-badge">
+          <div class="hat-glow"></div>
+          <svg class="straw-hat-svg" viewBox="0 0 100 100" fill="none">
+            <ellipse cx="50" cy="70" rx="46" ry="13" fill="#EAB308"/>
+            <path d="M24 67C24 38 31 24 50 24C69 24 76 38 76 67Z" fill="#FACC15"/>
+            <path d="M23.5 64.5C34 68.5 66 68.5 76.5 64.5C75.5 57.5 74.5 53 74.5 53C63 57.5 37 57.5 25.5 53Z" fill="#FF2A5F"/>
+          </svg>
+        </div>
+        <div class="brand-title-box">
+          <div class="brand-title-main"><span class="name-en">LUFFY</span> • <span class="name-ar">محطة الوردية</span></div>
+          <div class="brand-subtitle-sub">تشغيل المطبخ والمخزون الميداني • العقبة 🇯🇴</div>
+        </div>
+      </div>
+
+      <div class="header-actions-group">
+        <button class="btn-header-action" onclick="refreshAllShiftData()">
+          <svg class="svg-pure-icon" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+          <span>تحديث</span>
+        </button>
+        <button class="btn-header-action" onclick="lockShiftGate()">
+          <svg class="svg-pure-icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <span>قفل</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Operator & Fleet Strip -->
+    <div class="operator-identity-strip">
+      <div class="operator-user-meta">
+        <svg class="svg-pure-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>المشغل: <strong id="logged-staff-name">كادر لوفي</strong> (<span id="logged-staff-role">مشرف الوردية</span>)</span>
+      </div>
+      <div class="fleet-status-pill">
+        <div class="fleet-dot-active"></div>
+        <span id="active-drivers-badge">السائقين: 0</span>
+      </div>
+    </div>
+
+    <!-- Hadith / Shift Directive Banner -->
+    <div class="management-broadcast-banner">
+      <div class="broadcast-banner-header">
+        <div class="broadcast-title-cluster">
+          <svg class="svg-pure-icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <strong id="mgmt-sender-label">توجيه الوردية النبوي</strong>
+        </div>
+        <span class="broadcast-time-tag" id="mgmt-time-label">حديث شريف</span>
+      </div>
+      <div class="broadcast-body-text" id="mgmt-directive-text">
+        عن أَبي ذرٍّ رضي الله عنه قَالَ: قَالَ لي رسولُ الله ﷺ: «لا تَحقِرَنَّ مِنَ المَعْرُوف شَيْئًا، وَلَو أنْ تَلقَى أخَاكَ بوجهٍ طليقٍ» [رواه مسلم]
+      </div>
+    </div>
+
+    <!-- Master Shift Tabs -->
+    <div class="master-shift-tabs-bar">
+      <button class="shift-main-tab-btn active" onclick="switchShiftTab('kds_orders', this)">
+        <svg class="svg-pure-icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        <span>المطبخ والتسليم</span>
+        <span class="badge-orders-live-count" id="live-orders-total-badge">0</span>
+      </button>
+
+      <button class="shift-main-tab-btn" onclick="switchShiftTab('flavors_stock', this)">
+        <svg class="svg-pure-icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        <span>تشغيل النكهات والمخزون</span>
+      </button>
+    </div>
+
+    <!-- PANEL 1: KITCHEN & DISPATCH -->
+    <div class="panel-section-view active" id="pane-kds_orders">
+      <div class="kds-stages-strip-grid">
+        <button class="kds-stage-pill active" onclick="switchKdsStage('PENDING', this)">
+          <span>غرفة الانتظار</span> <b id="kds-count-pending">(0)</b>
+        </button>
+        <button class="kds-stage-pill" onclick="switchKdsStage('PREPARING', this)">
+          <span>تحت التحضير</span> <b id="kds-count-prep">(0)</b>
+        </button>
+        <button class="kds-stage-pill" onclick="switchKdsStage('DISPATCHED', this)">
+          <span>جاهز للتسليم</span> <b id="kds-count-dispatched">(0)</b>
+        </button>
+      </div>
+
+      <div class="orders-cards-stream" id="orders-stream-container">جاري جلب الطلبات...</div>
+    </div>
+
+    <!-- PANEL 2: LIVE FLAVORS STOCK -->
+    <div class="panel-section-view" id="pane-flavors_stock">
+      <div id="flavors-feed-container">جاري جلب النكهات الحية...</div>
+    </div>
+  </div>
+
+  <!-- 🛵 نافذة تعيين كابتن التوصيل -->
+  <div class="custom-modal-backdrop" id="driver-dispatch-modal">
+    <div class="custom-modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px solid #f1f0ee; margin-bottom:10px;">
+        <div style="font-size:14px; font-weight:900;">🛵 تعيين كابتن التوصيل وتسليم الطلب</div>
+        <button style="border:none; background:#f1f5f9; width:26px; height:26px; border-radius:50%; font-weight:800; cursor:pointer;" onclick="closeDriverDispatchModal()">✕</button>
+      </div>
+
+      <input type="hidden" id="dispatch_order_id">
+      <div style="font-size:11.5px; font-weight:800; margin-bottom:6px;" id="dispatch-order-meta-title">...</div>
+
+      <label style="font-size:11px; font-weight:800; color:var(--text-muted);">اختر الكابتن المتاح بالوردية:</label>
+      <div id="drivers-picker-container" style="display:flex; flex-direction:column; gap:6px; margin:8px 0; max-height:28vh; overflow-y:auto;">
+        جاري جلب السائقين...
+      </div>
+
+      <button class="btn-kds-step btn-kds-purple" style="width:100%; justify-content:center; padding:11px;" onclick="confirmDriverHandoff()">
+        <span>تأكيد التسليم للكابتن فوراً ⚡</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 🖨️ تذكرة الطباعة الحرارية المدمجة المعظمة -->
+  <div class="custom-modal-backdrop" id="slip-print-modal">
+    <div class="custom-modal-card" style="max-width:380px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px solid #f1f0ee;">
+        <div style="font-size:13.5px; font-weight:900;">تذكرة التحضير والطباعة الحرارية</div>
+        <button style="border:none; background:#f1f5f9; width:26px; height:26px; border-radius:50%; font-weight:800; cursor:pointer;" onclick="closeSlipPrintModal()">✕</button>
+      </div>
+
+      <div id="printable-thermal-slip-content" class="printable-thermal-wrapper">
+        <div style="font-size:16px; font-weight:900;">LUFFY • لوفي</div>
+        <div style="font-size:11px; font-weight:800;">كابتن السعادة • بوظة طبيعية 100%</div>
+        <div style="border-top:1px dashed #000; margin:6px 0;"></div>
+        
+        <div style="font-size:17px; font-weight:900;" id="slip-order-id">#LFY-0000</div>
+        <div style="font-size:11px; font-weight:800;" id="slip-time-slot">موعد التسليم: فوري</div>
+        
+        <div class="qr-thermal-box" id="slip-qr-container"></div>
+
+        <div style="border-top:1px dashed #000; margin:6px 0;"></div>
+        <div style="text-align:right; font-size:11px; font-weight:800;" id="slip-customer-info">العميل: ...</div>
+        <div style="text-align:right; font-size:10.5px;" id="slip-address-info">العنوان: ...</div>
+        <div style="border-top:1px dashed #000; margin:6px 0;"></div>
+        
+        <div style="text-align:right; font-weight:900; font-size:11.5px;">الأصناف المطلوبة:</div>
+        <div style="text-align:right; font-size:11px; line-height:1.4;" id="slip-items-summary">...</div>
+        <div style="border-top:1px dashed #000; margin:6px 0;"></div>
+        <div style="font-size:9.5px; font-weight:700;">صُنعت لكم بكل حب وإتقان في العقبة 🇯🇴</div>
+      </div>
+
+      <div style="display:flex; gap:6px; margin-top:8px;">
+        <button class="btn-kds-step btn-kds-tool" style="flex:1;" onclick="closeSlipPrintModal()">إغلاق</button>
+        <button class="btn-kds-step btn-kds-primary" style="flex:2;" onclick="triggerDirectThermalPrint()">طباعة التذكرة</button>
+      </div>
+    </div>
+  </div>
+
+  <iframe id="thermal-print-hidden-frame"></iframe>
+  <div id="toast-container"></div>
+
+  <script>
+    // ⚡ الرابط المركزي السحابي المعتمد وقاعدة العمليات
+    const APPS_SCRIPT_EXEC_URL = "https://script.google.com/macros/s/AKfycbxYmpfN2OBW24M-sumyx8dwbkFN-RsbiWkYJZYa0gZLfMxVpXr2TswzORV0inmu5nFieQ/exec";
+    const MASTER_SECRET = "LUFFY#2026$Aqaba_Master!Vault@99";
+
+    let liveOrdersList = [];
+    let driversList = [];
+    let liveFlavorsList = [];
+    let currentKdsStage = 'PENDING';
+    let selectedOrderForDispatch = null;
+    let selectedDriver = null;
+    let activeStaff = JSON.parse(sessionStorage.getItem('luffy_active_staff') || "null");
+
+    let inactivityTimer = null;
+    const INACTIVITY_LIMIT_MS = 5 * 60 * 1000;
+
+    function resetInactivityTimer() {
+      clearTimeout(inactivityTimer);
+      inactivityTimer = setTimeout(() => {
+        if (activeStaff) {
+          lockShiftGate();
+          showToast("🔒 تم قفل شاشة المحطة تلقائياً لعدم النشاط لحماية الحساب");
+        }
+      }, INACTIVITY_LIMIT_MS);
+    }
+    ['click', 'touchstart', 'mousemove', 'keydown'].forEach(evt => window.addEventListener(evt, resetInactivityTimer, { passive: true }));
+
+    function showToast(msg) {
+      const c = document.getElementById('toast-container');
+      const t = document.createElement('div');
+      t.className = 'chakra-toast';
+      t.innerHTML = `<span>${msg}</span>`;
+      c.appendChild(t);
+      setTimeout(() => t.remove(), 3000);
+    }
+
+    // =========================================================================
+    // 🔒 تسجيل دخول المشغل بالـ NFC أو الرمز السريع
+    // =========================================================================
+    function lockShiftGate() {
+      activeStaff = null;
+      sessionStorage.removeItem('luffy_active_staff');
+      document.getElementById('shift-nfc-auth-gate').classList.remove('unlocked');
+      initNfcGateScanner();
+    }
+
+    async function initNfcGateScanner() {
+      if (activeStaff) { unlockShiftStation(activeStaff); return; }
+      const statusTxt = document.getElementById('nfc-gate-status-txt');
+      if (!('NDEFReader' in window)) { statusTxt.textContent = "الـ NFC متاح عبر متصفح داعم"; return; }
+      try {
+        statusTxt.textContent = "جاري الاستماع للبطاقة... قرّب بطاقتك الآن";
+        const ndef = new NDEFReader();
+        await ndef.scan();
+        ndef.onreading = event => {
+          const decoder = new TextDecoder();
+          let p = "";
+          for (const r of event.message.records) p += decoder.decode(r.data);
+          let token = p.match(/[?&]t=([^&]+)/) ? decodeURIComponent(p.match(/[?&]t=([^&]+)/)[1]) : (p || event.serialNumber);
+          verifyStaffNfcToken(token);
+        };
+      } catch (err) { statusTxt.textContent = "اضغط للمتابعة أو مرر البطاقة"; }
+    }
+
+    function verifyStaffNfcToken(token) {
+      const cb = "onStaffAuth_" + Date.now();
+      window[cb] = function(res) {
+        if (!res || !res.data) return;
+        let found = null;
+        res.data.forEach(emp => {
+          (emp.cards || []).forEach(c => {
+            if (String(c.token).trim() === String(token).trim() && c.status === "ACTIVE") {
+              found = { name: emp.name, role: emp.role, tier: emp.tier, token: c.token };
+            }
+          });
+        });
+        if (found) {
+          activeStaff = found;
+          sessionStorage.setItem('luffy_active_staff', JSON.stringify(activeStaff));
+          unlockShiftStation(activeStaff);
+        } else {
+          showToast("❌ البطاقة غير مسجلة أو مجمدة!");
+        }
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=get_staff_list&callback=${cb}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+    }
+
+    function verifyManualStaffToken() {
+      const val = document.getElementById('gate-pass-fallback').value.trim();
+      if (!val) return;
+      if (val === MASTER_SECRET) {
+        unlockShiftStation({ name: "المدير العام", role: "إدارة العمليات", tier: "MANAGER", token: "MASTER_KEY" });
+      } else {
+        verifyStaffNfcToken(val);
+      }
+    }
+
+    function unlockShiftStation(staff) {
+      document.getElementById('shift-nfc-auth-gate').classList.add('unlocked');
+      document.getElementById('logged-staff-name').textContent = staff.name;
+      document.getElementById('logged-staff-role').textContent = staff.role;
+      showToast(`أهلاً بك يا ${staff.name} في الوردية ✨`);
+      resetInactivityTimer();
+      refreshAllShiftData();
+    }
+
+    function switchShiftTab(tabKey, btn) {
+      document.querySelectorAll('.shift-main-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.panel-section-view').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(`pane-${tabKey}`).classList.add('active');
+
+      if (tabKey === 'kds_orders') fetchLiveOrdersDirectly();
+      if (tabKey === 'flavors_stock') fetchLiveFlavorsFeed();
+    }
+
+    function switchKdsStage(stageKey, btn) {
+      document.querySelectorAll('.kds-stage-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentKdsStage = stageKey;
+      renderKdsOrdersStream();
+    }
+
+    // =========================================================================
+    // 🛍️ مسرح المطبخ والطلبات الحية (Kitchen KDS)
+    // =========================================================================
+    function fetchLiveOrdersDirectly() {
+      const cb = "onKdsOrdersLoaded_" + Date.now();
+      window[cb] = function(res) {
+        if (!res || !res.data) return;
+        liveOrdersList = res.data;
+        updateKdsCounts();
+        renderKdsOrdersStream();
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=get_live_orders&callback=${cb}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+
+      fetchDriversList();
+    }
+
+    function fetchDriversList() {
+      const cb = "onDriversLoaded_" + Date.now();
+      window[cb] = function(res) {
+        if (res && res.data) {
+          driversList = res.data;
+          const activeCount = driversList.filter(d => d.Shift_Status === 'ACTIVE').length;
+          document.getElementById('active-drivers-badge').textContent = `السائقين: ${activeCount}`;
+        }
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=get_drivers&callback=${cb}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+    }
+
+    function updateKdsCounts() {
+      const pending = liveOrdersList.filter(o => o.Status === 'PENDING').length;
+      const prep = liveOrdersList.filter(o => o.Status === 'PREPARING' || o.Status === 'PROBLEM').length;
+      const dispatched = liveOrdersList.filter(o => o.Status === 'DISPATCHED' || o.Status === 'IN_TRANSIT').length;
+
+      document.getElementById('kds-count-pending').textContent = `(${pending})`;
+      document.getElementById('kds-count-prep').textContent = `(${prep})`;
+      document.getElementById('kds-count-dispatched').textContent = `(${dispatched})`;
+      document.getElementById('live-orders-total-badge').textContent = pending + prep;
+    }
+
+    function renderKdsOrdersStream() {
+      const container = document.getElementById('orders-stream-container');
+      container.innerHTML = "";
+
+      const filtered = liveOrdersList.filter(o => {
+        if (currentKdsStage === 'PENDING') return o.Status === 'PENDING';
+        if (currentKdsStage === 'PREPARING') return o.Status === 'PREPARING' || o.Status === 'PROBLEM';
+        if (currentKdsStage === 'DISPATCHED') return o.Status === 'DISPATCHED' || o.Status === 'IN_TRANSIT';
+        return false;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div style="text-align:center; padding:35px; color:var(--text-muted); font-weight:800;">لا توجد طلبات في هذا القسم حالياً ✓</div>`;
+        return;
+      }
+
+      filtered.forEach(order => {
+        const id = order.Order_ID;
+        const isDelivery = order.Order_Type === 'DELIVERY';
+        const totalQty = Number(order.Total_Qty) || 1;
+        const cleanPhone = String(order.Customer_Phone || order.Phone_Number || '').replace(/[^\d+]/g, '');
+
+        const card = document.createElement('div');
+        card.className = `kds-order-card ${order.Status === 'PROBLEM' ? 'status-problem' : ''} ${(!isDelivery && order.Status === 'DISPATCHED') ? 'is-pickup-ready' : ''}`;
+
+        let actionBtnHtml = '';
+        if (order.Status === 'PENDING') {
+          actionBtnHtml = `
+            <button class="btn-kds-step btn-kds-primary" onclick="setOrderStatusDirect('${id}', 'PREPARING')">
+              <span>بدء التحضير بالمطبخ ⚡</span>
+            </button>
+          `;
+        } else if (order.Status === 'PREPARING') {
+          if (isDelivery) {
+            actionBtnHtml = `
+              <button class="btn-kds-step btn-kds-purple" onclick="openDriverDispatchModal('${id}')">
+                <span>جاهز للتوصيل ⬅ تعيين كابتن</span>
+              </button>
+            `;
+          } else {
+            actionBtnHtml = `
+              <button class="btn-kds-step btn-kds-primary" onclick="setOrderStatusDirect('${id}', 'DISPATCHED')">
+                <span>جاهز للاستلام 🛍️ (نداء بالتلفاز + تذكرة)</span>
+              </button>
+            `;
+          }
+        } else {
+          if (!isDelivery) {
+            actionBtnHtml = `
+              <button class="btn-kds-step btn-kds-primary" onclick="setOrderStatusDirect('${id}', 'DELIVERED')">
+                <span>تم تسليم الزبون في المحل بنجاح ✓</span>
+              </button>
+            `;
+          } else {
+            actionBtnHtml = `
+              <div style="font-size:11px; font-weight:800; color:#1e40af; text-align:center; padding:6px; background:#eff6ff; border-radius:8px;">
+                في عهدة الكابتن للتوصيل 🛵
+              </div>
+            `;
+          }
+        }
+
+        card.innerHTML = `
+          <div class="order-card-header-row">
+            <span class="order-id-badge">#${id}</span>
+            <span class="order-type-chip ${isDelivery ? 'type-delivery' : 'type-pickup'}">
+              ${isDelivery ? 'توصيل 🛵' : 'استلام من المحل 🛍️'}
+            </span>
+          </div>
+
+          <div class="time-slot-pill-kds">
+            <span>موعد التسليم:</span>
+            <strong>${order.Time_Slot || 'فوري'}</strong>
+          </div>
+
+          ${totalQty >= 30 ? `<div class="qty-priority-badge">🚨 أولوية قصوى: كمية ضخمة (${totalQty} علبة)</div>` : ''}
+
+          <div style="font-size:12px; font-weight:800;">العميل: ${order.Customer_Name} (${cleanPhone})</div>
+
+          <div class="order-items-textbox">
+            <strong>الأصناف (${totalQty} علبة):</strong><br>
+            ${order.Items_Summary}
+          </div>
+
+          ${order.Address_Details ? `<div style="font-size:10.5px; color:var(--text-muted);">العنوان: ${order.Address_Details}</div>` : ''}
+          ${order.Assigned_Driver_Name ? `<div style="font-size:11px; font-weight:800; color:#166534;">🛵 الكابتن: ${order.Assigned_Driver_Name}</div>` : ''}
+
+          <div style="display:flex; gap:6px; margin-top:4px;">
+            <button class="btn-kds-step btn-kds-tool" style="flex:1;" onclick='openSlipPreview(${JSON.stringify(order)})'>تذكرة حرارية 🖨️</button>
+            ${order.GPS_Map_URL ? `<a href="${order.GPS_Map_URL}" target="_blank" class="btn-kds-step btn-kds-tool" style="flex:1; color:var(--blue-accent);">خرائط GPS ↗</a>` : ''}
+          </div>
+
+          ${actionBtnHtml}
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function setOrderStatusDirect(orderId, newStatus) {
+      showToast(`جاري تحديث الطلب #${orderId} إلى ${newStatus}...`);
+      const payload = { 
+        order_id: orderId, 
+        new_status: newStatus, 
+        staff_name: activeStaff ? activeStaff.name : "كادر الوردية" 
+      };
+
+      const cb = "onKdsStatus_" + Date.now();
+      window[cb] = function() {
+        showToast("تم تحديث حالة الطلب بنجاح ✓");
+        fetchLiveOrdersDirectly();
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?auth_pass=${encodeURIComponent(MASTER_SECRET)}&action=update_order_status&data=${encodeURIComponent(JSON.stringify(payload))}&callback=${cb}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+    }
+
+    function openDriverDispatchModal(orderId) {
+      selectedOrderForDispatch = liveOrdersList.find(o => o.Order_ID === orderId);
+      if (!selectedOrderForDispatch) return;
+
+      document.getElementById('dispatch_order_id').value = orderId;
+      document.getElementById('dispatch-order-meta-title').textContent = `الطلب #${orderId} للعميل: ${selectedOrderForDispatch.Customer_Name}`;
+
+      const container = document.getElementById('drivers-picker-container');
+      const availableDrivers = driversList.filter(d => d.Shift_Status === 'ACTIVE');
+
+      if (availableDrivers.length === 0) {
+        container.innerHTML = `<div style="text-align:center; padding:10px; color:var(--text-muted);">لا يوجد كباتن متاحين بالوردية الآن.</div>`;
+      } else {
+        container.innerHTML = availableDrivers.map(d => `
+          <div style="display:flex; justify-content:space-between; align-items:center; background:#f8fafc; border:1.5px solid #e2e8f0; padding:8px 12px; border-radius:12px; cursor:pointer;" onclick="selectDriverForOrder('${d.Driver_ID}', '${d.Driver_Name}', '${d.Phone_Number}')">
+            <strong>🛵 ${d.Driver_Name}</strong>
+            <span style="font-size:10px; color:var(--emerald-dark);">جاهز (${d.Vehicle_Type})</span>
+          </div>
+        `).join('');
+      }
+      document.getElementById('driver-dispatch-modal').classList.add('open');
+    }
+    function closeDriverDispatchModal() { document.getElementById('driver-dispatch-modal').classList.remove('open'); }
+
+    function selectDriverForOrder(id, name, phone) {
+      selectedDriver = { id, name, phone };
+      showToast(`تم اختيار الكابتن: ${name}`);
+    }
+
+    function confirmDriverHandoff() {
+      if (!selectedDriver) { showToast("يرجى اختيار كابتن أولاً"); return; }
+      const orderId = document.getElementById('dispatch_order_id').value;
+
+      const payload = {
+        order_id: orderId,
+        new_status: 'DISPATCHED',
+        assigned_driver_id: selectedDriver.id,
+        assigned_driver_name: selectedDriver.name,
+        assigned_driver_phone: selectedDriver.phone,
+        staff_name: activeStaff ? activeStaff.name : "كادر الوردية"
+      };
+
+      const cb = "onHandoffDone_" + Date.now();
+      window[cb] = function() {
+        showToast("تم تسليم الطلب للكابتن بنجاح ✓");
+        closeDriverDispatchModal();
+        fetchLiveOrdersDirectly();
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?auth_pass=${encodeURIComponent(MASTER_SECRET)}&action=update_order_status&data=${encodeURIComponent(JSON.stringify(payload))}&callback=${cb}`;
+      document.body.appendChild(s);
+    }
+
+    // =========================================================================
+    // 🍨 تشغيل النكهات والمخزون الحي بالمعمل
+    // =========================================================================
+    function fetchLiveFlavorsFeed() {
+      const cb = "onLiveFlv_" + Date.now();
+      window[cb] = function(res) {
+        if (!res || !res.data) return;
+        liveFlavorsList = res.data;
+        renderFlavorsStockList();
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=get_flavors&callback=${cb}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+    }
+
+    function renderFlavorsStockList() {
+      const container = document.getElementById('flavors-feed-container');
+      container.innerHTML = "";
+
+      liveFlavorsList.forEach(item => {
+        const id = item.Flavor_ID || item.Flavor_Name_AR;
+        const card = document.createElement('div');
+        card.className = 'flavor-control-card';
+
+        card.innerHTML = `
+          <div class="flavor-card-top-row">
+            <div class="flavor-meta-box">
+              <div class="flavor-thumb-stage">
+                <img class="flavor-thumb-img" src="${item.Image_URL_Show || 'https://images.unsplash.com/photo-1560008511-11c63416e52d?w=100'}">
+              </div>
+              <div style="min-width:0;">
+                <strong style="font-size:13px;">${item.Flavor_Name_AR}</strong>
+                <div style="font-size:10px; color:var(--text-muted);">${item.Category || 'عام'}</div>
+              </div>
+            </div>
+
+            <button class="btn-fresh-toggle ${item.Is_Fresh_Batch ? 'is-fresh-active' : ''}" onclick="toggleFlavorFreshDirect('${id}')">
+              <span>${item.Is_Fresh_Batch ? 'طازج الآن ✨' : 'عادي'}</span>
+            </button>
+          </div>
+
+          <div class="stock-segments-track">
+            <button class="stock-pill-btn ${item.Stock_State === 'available' ? 'is-available' : ''}" onclick="setStockStateDirect('${id}', 'available')">متوفر</button>
+            <button class="stock-pill-btn ${item.Stock_State === 'low' ? 'is-low' : ''}" onclick="setStockStateDirect('${id}', 'low')">شارفت</button>
+            <button class="stock-pill-btn ${item.Stock_State === 'restocking' ? 'is-restocking' : ''}" onclick="setStockStateDirect('${id}', 'restocking')">بالمطبخ</button>
+            <button class="stock-pill-btn ${item.Stock_State === 'soldout' ? 'is-soldout' : ''}" onclick="setStockStateDirect('${id}', 'soldout')">انتهت</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function toggleFlavorFreshDirect(id) {
+      const flv = liveFlavorsList.find(f => (f.Flavor_ID || f.Flavor_Name_AR) === id);
+      if (!flv) return;
+      flv.Is_Fresh_Batch = !flv.Is_Fresh_Batch;
+      syncSingleFlavorStock(flv);
+      renderFlavorsStockList();
+    }
+
+    function setStockStateDirect(id, state) {
+      const flv = liveFlavorsList.find(f => (f.Flavor_ID || f.Flavor_Name_AR) === id);
+      if (!flv) return;
+      flv.Stock_State = state;
+      flv.Is_Active = (state !== 'soldout');
+      syncSingleFlavorStock(flv);
+      renderFlavorsStockList();
+    }
+
+    function syncSingleFlavorStock(flv) {
+      showToast(`جاري التحديث باسم [${activeStaff ? activeStaff.name : 'كادر الوردية'}]...`);
+      const payload = [{ name: flv.Flavor_Name_AR, active: flv.Is_Active, fresh: flv.Is_Fresh_Batch, stock_state: flv.Stock_State }];
+
+      const cb = "onFlvStock_" + Date.now();
+      window[cb] = function() {
+        showToast("تم تحديث المخزون وتوثيق العملية بسجل الرقابة ✓");
+      };
+
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?auth_pass=${encodeURIComponent(MASTER_SECRET)}&action=update_daily&staff_name=${encodeURIComponent(activeStaff ? activeStaff.name : 'كادر الوردية')}&data=${encodeURIComponent(JSON.stringify(payload))}&callback=${cb}`;
+      document.body.appendChild(s);
+    }
+
+    // =========================================================================
+    // 🖨️ تذكرة الطباعة الحرارية
+    // =========================================================================
+    function openSlipPreview(order) {
+      document.getElementById('slip-order-id').textContent = `#${order.Order_ID}`;
+      document.getElementById('slip-time-slot').textContent = `موعد التسليم: ${order.Time_Slot || 'فوري'}`;
+      document.getElementById('slip-customer-info').textContent = `العميل: ${order.Customer_Name} (${order.Customer_Phone || order.Phone_Number || ''})`;
+      document.getElementById('slip-address-info').textContent = `العنوان: ${order.Address_Details || 'العقبة'}`;
+      document.getElementById('slip-items-summary').textContent = order.Items_Summary;
+
+      const qrBox = document.getElementById('slip-qr-container');
+      qrBox.innerHTML = "";
+      new QRCode(qrBox, { text: order.Order_ID, width: 95, height: 95 });
+
+      document.getElementById('slip-print-modal').classList.add('open');
+    }
+    function closeSlipPrintModal() { document.getElementById('slip-print-modal').classList.remove('open'); }
+
+    function triggerDirectThermalPrint() {
+      const content = document.getElementById('printable-thermal-slip-content').innerHTML;
+      const iframe = document.getElementById('thermal-print-hidden-frame');
+      const doc = iframe.contentWindow || iframe.contentDocument.document || iframe.contentDocument;
+      doc.document.open();
+      doc.document.write(`<!DOCTYPE html><html lang="ar" dir="rtl"><head><title>Print</title><style>@page{margin:0;size:80mm auto;}body{font-family:'Readex Pro',monospace;width:72mm;margin:0 auto;text-align:center;font-size:11px;line-height:1.4;}</style></head><body>${content}</body></html>`);
+      doc.document.close();
+      setTimeout(() => { iframe.contentWindow.focus(); iframe.contentWindow.print(); }, 300);
+    }
+
+    function refreshAllShiftData() {
+      fetchLiveOrdersDirectly();
+      fetchLiveFlavorsFeed();
+      fetchShiftDirectiveMessage();
+      showToast("تم تحديث البيانات لحظياً ✓");
+    }
+
+    function fetchShiftDirectiveMessage() {
+      const cb = "onShiftMsg_" + Date.now();
+      window[cb] = function(res) {
+        if (!res || !res.data || res.data.length === 0) return;
+        const latest = res.data[0];
+        document.getElementById('mgmt-sender-label').textContent = latest.sender || "الإدارة العامة";
+        document.getElementById('mgmt-time-label').textContent = latest.timestamp || "الآن";
+        document.getElementById('mgmt-directive-text').textContent = latest.text || "عن أَبي ذرٍّ رضي الله عنه قَالَ: قَالَ لي رسولُ الله ﷺ: «لا تَحقِرَنَّ مِنَ المَعْرُوف شَيْئًا، وَلَو أنْ تَلقَى أخَاكَ بوجهٍ طليقٍ»";
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=get_messages&callback=${cb}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+    }
+
+    if (activeStaff) unlockShiftStation(activeStaff); else lockShiftGate();
+    setInterval(fetchLiveOrdersDirectly, 12000); // تحديث متزن كل 12 ثانية
+  </script>
+</body>
+</html>
