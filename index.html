@@ -2055,20 +2055,32 @@ ${(capturedGpsLocation && capturedGpsLocation.mapUrl) ? `\nرابط موقع ا�
     }
 
     /* Sync Google Sheets */
-    function syncMobileMenu() {
-      // 1. قراءة النكهات الحية من شيت العمليات اللحظية (LUFFY_DB_OPERATIONS)
-      const oldScript = document.getElementById("gviz-mobile-engine");
-      if (oldScript) oldScript.remove();
-      const script = document.createElement("script");
-      script.id = "gviz-mobile-engine";
-      script.src = `https://docs.google.com/spreadsheets/d/${DB_OPERATIONS_ID}/gviz/tq?tqx=responseHandler:luffyMobileCallback&sheet=Live_Flavors&_ts=${Date.now()}`;
-      document.body.appendChild(script);
+  function syncMobileMenu() {
+      // ⚡ قراءة مباشرة وفورية من السيرفر السحابي المركزي بدون كاش أو تعقيدات أذونات
+      const cb = "onFlavorsApiLoaded_" + Date.now();
+      window[cb] = function(res) {
+        if (!res || !res.data) return;
+        
+        rawFlavors = res.data;
+        buildCategoryChips();
+        renderMenuFeed();
+        updateCartFloatingBar();
+        renderCartItems();
 
-      // 2. سحب الروابط وساعات الدوام من شيت الأمان (LUFFY_DB_VAULT_HR)
+        if (activeDrawerItem) {
+          const freshItem = rawFlavors.find(f => (f.Flavor_ID || f.Flavor_Name_AR) === (activeDrawerItem.Flavor_ID || activeDrawerItem.Flavor_Name_AR));
+          if (freshItem) updateDrawerContent(freshItem);
+        }
+      };
+
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=get_flavors&callback=${cb}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+
+      // استدعاء الروابط وساعات الدوام
       fetchSystemRegistryFast();
       fetchStoreHoursFromSheet();
     }
-
     function fetchSystemRegistryFast() {
       const s = document.createElement("script");
       s.src = `${APPS_SCRIPT_EXEC_URL}?action=get_system_registry&callback=onRegistryLoaded&_ts=${Date.now()}`;
