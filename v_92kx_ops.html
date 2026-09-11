@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>LUFFY • لوفي | كابتن السعادة - تشغيل المطبخ والوردية</title>
+  
+  <!-- مكتبة توليد QR Code الفورية للطباعة -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <!-- خطوط النخبة العالمية -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Readex+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --font-ar: 'Readex Pro', system-ui, sans-serif;
+      --font-en: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+      --bg-cream: #fdfbf9;
+      --card-surface: #ffffff;
+      --text-espresso: #1a110d;
+      --text-muted: #786a63;
+
+      --brand-red: #ff2a5f;
+      --brand-gold: #f59e0b;
+      --emerald: #10b981;
+      --emerald-dark: #059669;
+      --amber: #d97706;
+      --blue-accent: #2563eb;
+      --purple-accent: #7c3aed;
+
+      --border-soft: 1.5px solid rgba(254, 215, 170, 0.45);
+      --shadow-luxury: 0 12px 32px -6px rgba(180, 100, 120, 0.08), 0 2px 8px rgba(0,0,0,0.02);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      font-family: var(--font-ar);
+      background: radial-gradient(circle at 12% 10%, #fff1f5 0%, #fdf9f4 45%, #fef6ed 100%);
+      color: var(--text-espresso);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 10px 8px 100px;
+      overflow-x: hidden;
+    }
+
+    @media (min-width: 600px) { body { padding: 16px 12px 100px; } }
+
+    .svg-pure-icon {
+      width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2;
+      stroke-linecap: round; stroke-linejoin: round; display: inline-block; vertical-align: middle; flex-shrink: 0;
+    }
+
+    .tabular-digits {
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum";
+      font-family: var(--font-en);
+    }
+
+    .shift-master-wrapper {
+      width: 100%; max-width: 680px; background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1.5px solid #ffffff;
+      border-radius: 26px; padding: 14px 12px; box-shadow: 0 20px 50px -10px rgba(180, 100, 120, 0.1);
+      display: flex; flex-direction: column; position: relative;
+    }
+
+    @media (min-width: 600px) { .shift-master-wrapper { padding: 18px 16px; border-radius: 32px; } }
+
+    .shift-header-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-bottom: 10px; border-bottom: 1px solid #f1f0ee; margin-bottom: 10px; gap: 8px;
+    }
+
+    .brand-cluster { display: flex; align-items: center; gap: 8px; }
+    .straw-hat-svg { width: 36px; height: 36px; filter: drop-shadow(0 4px 8px rgba(217, 119, 6, 0.35)); }
+
+    .brand-title-main { font-size: 17px; font-weight: 900; }
+    .name-en {
+      font-family: var(--font-en); letter-spacing: 1px;
+      background: linear-gradient(135deg, var(--brand-red) 0%, var(--brand-gold) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .btn-header-action {
+      background: #f8fafc; border: 1.5px solid #e2e8f0; color: var(--text-espresso); font-family: var(--font-ar);
+      font-size: 11px; font-weight: 800; padding: 5px 10px; border-radius: 10px; cursor: pointer;
+      display: flex; align-items: center; gap: 4px; transition: all 0.2s ease;
+    }
+
+    /* KDS Stages Grid */
+    .kds-stages-strip-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); background: #ffffff;
+      border: 1.5px solid #fed7aa; padding: 2.5px; border-radius: 12px; gap: 2.5px; margin-bottom: 10px;
+    }
+
+    .kds-stage-pill {
+      border: none; background: transparent; padding: 7px 2px; border-radius: 9px;
+      font-family: var(--font-ar); font-size: clamp(9.5px, 2.7vw, 11px); font-weight: 800;
+      color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center;
+      gap: 3px; transition: all 0.2s ease; white-space: nowrap;
+    }
+    .kds-stage-pill.active { background: #fff0f3; color: var(--brand-red); border: 1px solid #fecdd3; }
+    .kds-stage-pill b { font-family: var(--font-en); font-size: 10.5px; }
+
+    /* Orders Cards */
+    .orders-cards-stream {
+      display: flex; flex-direction: column; gap: 9px; min-height: 40vh; max-height: 60vh;
+      overflow-y: auto; padding-right: 1px;
+    }
+
+    .kds-order-card {
+      background: #ffffff; border: 1.5px solid #f1f0ee; border-radius: 18px;
+      padding: 12px 14px; display: flex; flex-direction: column; gap: 8px;
+      box-shadow: var(--shadow-luxury); position: relative;
+    }
+    .kds-order-card.status-problem { border-color: var(--brand-red); background: #fff5f5; }
+    .kds-order-card.is-pickup-ready { border-color: #a7f3d0; background: #f0fdf4; }
+
+    .order-card-header-row { display: flex; justify-content: space-between; align-items: center; }
+    .order-id-badge { font-family: var(--font-en); font-size: 12.5px; font-weight: 900; color: var(--brand-red); background: #fff0f3; padding: 2px 8px; border-radius: 7px; }
+    
+    .time-slot-pill-kds {
+      background: #fdfaf7; border: 1px solid #fed7aa; border-radius: 10px;
+      padding: 6px 10px; font-size: 11px; font-weight: 800; color: #92400e;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    .live-countdown-badge {
+      display: inline-flex; align-items: center; gap: 5px; padding: 3px 8px;
+      border-radius: 6px; font-size: 10.5px; font-weight: 900;
+    }
+    .countdown-calm { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+    .countdown-urgent { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
+    .countdown-critical { background: #fff1f2; color: #9f1239; border: 1px solid #fecdd3; animation: pulseAlert 1.5s infinite; }
+
+    @keyframes pulseAlert { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+
+    .order-items-textbox {
+      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 11px;
+      padding: 8px 10px; font-size: 11.5px; font-weight: 700; color: var(--text-espresso); line-height: 1.4;
+    }
+
+    .btn-kds-step {
+      border: none; padding: 10px; border-radius: 11px; font-family: var(--font-ar);
+      font-size: 11.5px; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;
+      transition: all 0.2s ease;
+    }
+    .btn-kds-primary { background: linear-gradient(135deg, var(--emerald) 0%, #059669 100%); color: #fff; }
+    .btn-kds-purple { background: linear-gradient(135deg, var(--purple-accent) 0%, #6d28d9 100%); color: #fff; }
+    .btn-kds-tool { background: #f8fafc; border: 1px solid #e2e8f0; color: var(--text-espresso); font-size: 10.5px; text-decoration: none; }
+
+    /* Modals */
+    .custom-modal-backdrop {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100%; height: 100dvh;
+      background: rgba(10, 8, 9, 0.68); backdrop-filter: blur(8px);
+      z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 16px;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    .custom-modal-backdrop.open { opacity: 1; pointer-events: auto; }
+
+    .custom-modal-card {
+      background: #ffffff; border-radius: 22px; padding: 18px 16px; width: 100%; max-width: 440px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.3); border: 1.5px solid #fed7aa; max-height: 90vh; overflow-y: auto;
+    }
+
+    /* تذكرة الطباعة الحرارية */
+    .printable-thermal-wrapper {
+      background: #ffffff; border: 1.5px dashed #000000; border-radius: 12px;
+      padding: 14px 10px; margin: 10px auto; width: 100%; max-width: 290px;
+      font-family: 'Readex Pro', monospace, sans-serif; font-size: 11px;
+      line-height: 1.45; color: #000000; text-align: center;
+    }
+    .qr-thermal-box { display: flex; justify-content: center; margin: 6px auto; width: 100px; height: 100px; }
+
+    #thermal-print-hidden-frame { display: none; }
+    #toast-container { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 15000; pointer-events: none; }
+    .chakra-toast {
+      background: #1f1412; color: #ffffff; padding: 7px 15px; border-radius: 9999px; font-size: 11px; font-weight: 800;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25); border: 1.5px solid #fed7aa;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="shift-master-wrapper">
+    <!-- Header -->
+    <div class="shift-header-nav">
+      <div class="brand-cluster">
+        <svg class="straw-hat-svg" viewBox="0 0 100 100" fill="none">
+          <ellipse cx="50" cy="70" rx="46" ry="13" fill="#EAB308"/>
+          <path d="M24 67C24 38 31 24 50 24C69 24 76 38 76 67Z" fill="#FACC15"/>
+          <path d="M23.5 64.5C34 68.5 66 68.5 76.5 64.5C75.5 57.5 74.5 53 74.5 53C63 57.5 37 57.5 25.5 53Z" fill="#FF2A5F"/>
+        </svg>
+        <div>
+          <div class="brand-title-main"><span class="name-en">LUFFY</span> • <span>المطبخ والوردية</span></div>
+          <div style="font-size:10px; color:var(--text-muted);">كابتن السعادة • العقبة 🇯🇴</div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:6px;">
+        <button class="btn-header-action" onclick="fetchLiveOrdersDirectly()">
+          <svg class="svg-pure-icon" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+          <span>تحديث</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- KDS Stages -->
+    <div class="kds-stages-strip-grid">
+      <button class="kds-stage-pill active" onclick="switchKdsStage('PENDING', this)">
+        <span>غرفة الانتظار</span> <b id="kds-count-pending">(0)</b>
+      </button>
+      <button class="kds-stage-pill" onclick="switchKdsStage('PREPARING', this)">
+        <span>تحت التحضير</span> <b id="kds-count-prep">(0)</b>
+      </button>
+      <button class="kds-stage-pill" onclick="switchKdsStage('DISPATCHED', this)">
+        <span>جاهز للتسليم</span> <b id="kds-count-dispatched">(0)</b>
+      </button>
+    </div>
+
+    <!-- Orders Stream -->
+    <div class="orders-cards-stream" id="orders-stream-container">جاري جلب الطلبات...</div>
+  </div>
+
+  <!-- 🛵 نافذة تعيين الكابتن للتوصيل -->
+  <div class="custom-modal-backdrop" id="driver-dispatch-modal">
+    <div class="custom-modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px solid #f1f0ee; margin-bottom:10px;">
+        <div style="font-size:14px; font-weight:900;">🛵 تعيين كابتن التوصيل وتسليم الطلب</div>
+        <button style="border:none; background:#f1f5f9; width:26px; height:26px; border-radius:50%; font-weight:800; cursor:pointer;" onclick="closeDriverDispatchModal()">✕</button>
+      </div>
+
+      <input type="hidden" id="dispatch_order_id">
+      <div style="font-size:11.5px; font-weight:800; margin-bottom:8px;" id="dispatch-order-meta-title">...</div>
+
+      <label style="font-size:11px; font-weight:800; color:var(--text-muted);">اختر الكابتن المتاح:</label>
+      <div id="drivers-picker-container" style="display:flex; flex-direction:column; gap:6px; margin:8px 0; max-height:30vh; overflow-y:auto;">
+        جاري جلب السائقين...
+      </div>
+
+      <button class="btn-kds-step btn-kds-purple" style="width:100%; justify-content:center; padding:11px;" onclick="confirmDriverHandoff()">
+        <span>تأكيد التسليم للكابتن فوراً ⚡</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 🖨️ تذكرة الطباعة الحرارية المدمجة -->
+  <div class="custom-modal-backdrop" id="slip-print-modal">
+    <div class="custom-modal-card" style="max-width:380px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px solid #f1f0ee;">
+        <div style="font-size:13.5px; font-weight:900;">تذكرة التحضير والطباعة الحرارية</div>
+        <button style="border:none; background:#f1f5f9; width:26px; height:26px; border-radius:50%; font-weight:800; cursor:pointer;" onclick="closeSlipPrintModal()">✕</button>
+      </div>
+
+      <div id="printable-thermal-slip-content" class="printable-thermal-wrapper">
+        <div style="font-size:16px; font-weight:900;">LUFFY • لوفي</div>
+        <div style="font-size:11px; font-weight:800;">كابتن السعادة • بوظة طبيعية 100%</div>
+        <div style="border-top:1px dashed #000; margin:6px 0;"></div>
+        
+        <div style="font-size:16px; font-weight:900;" id="slip-order-id">#LFY-0000</div>
+        <div style="font-size:11px; font-weight:800;" id="slip-time-slot">موعد التسليم: فوري</div>
+        
+        <div class="qr-thermal-box" id="slip-qr-container"></div>
+
+        <div style="border-top:1px dashed #000; margin:6px 0;"></div>
+        <div style="text-align:right; font-size:11px; font-weight:800;" id="slip-customer-info">العميل: ...</div>
+        <div style="text-align:right; font-size:10.5px;" id="slip-address-info">العنوان: ...</div>
+        <div style="border-top:1px dashed #000; margin:6px 0;"></div>
+        
+        <div style="text-align:right; font-weight:900; font-size:11.5px;">الأصناف المطلوبة:</div>
+        <div style="text-align:right; font-size:11px; line-height:1.4;" id="slip-items-summary">...</div>
+        <div style="border-top:1px dashed #000; margin:6px 0;"></div>
+        <div style="font-size:9.5px; font-weight:700;">صُنعت لكم بكل حب وإتقان في العقبة 🇯🇴</div>
+      </div>
+
+      <div style="display:flex; gap:6px; margin-top:8px;">
+        <button class="btn-kds-step btn-kds-tool" style="flex:1;" onclick="closeSlipPrintModal()">إغلاق</button>
+        <button class="btn-kds-step btn-kds-primary" style="flex:2;" onclick="triggerDirectThermalPrint()">طباعة التذكرة</button>
+      </div>
+    </div>
+  </div>
+
+  <iframe id="thermal-print-hidden-frame"></iframe>
+  <div id="toast-container"></div>
+
+  <script>
+    const APPS_SCRIPT_EXEC_URL = "https://script.google.com/macros/s/AKfycbxYmpfN2OBW24M-sumyx8dwbkFN-RsbiWkYJZYa0gZLfMxVpXr2TswzORV0inmu5nFieQ/exec";
+    const MASTER_SECRET = "LUFFY#2026$Aqaba_Master!Vault@99";
+
+    let liveOrdersList = [];
+    let driversList = [];
+    let currentKdsStage = 'PENDING';
+    let selectedOrderForDispatch = null;
+    let selectedDriver = null;
+
+    function showToast(msg) {
+      const c = document.getElementById('toast-container');
+      const t = document.createElement('div');
+      t.className = 'chakra-toast';
+      t.textContent = msg;
+      c.appendChild(t);
+      setTimeout(() => t.remove(), 3000);
+    }
+
+    function switchKdsStage(stageKey, btn) {
+      document.querySelectorAll('.kds-stage-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentKdsStage = stageKey;
+      renderKdsOrdersStream();
+    }
+
+    // ⚡ جلب الطلبات الحية من السيرفر السحابي
+    function fetchLiveOrdersDirectly() {
+      const cb = "onKdsOrdersLoaded_" + Date.now();
+      window[cb] = function(res) {
+        if (!res || !res.data) return;
+        liveOrdersList = res.data;
+        updateKdsCounts();
+        renderKdsOrdersStream();
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=get_live_orders&callback=${cb}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+
+      fetchDriversList();
+    }
+
+    function fetchDriversList() {
+      const cb = "onDriversLoaded_" + Date.now();
+      window[cb] = function(res) {
+        if (res && res.data) driversList = res.data;
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=get_drivers&callback=${cb}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+    }
+
+    function updateKdsCounts() {
+      const pending = liveOrdersList.filter(o => o.Status === 'PENDING').length;
+      const prep = liveOrdersList.filter(o => o.Status === 'PREPARING' || o.Status === 'PROBLEM').length;
+      const dispatched = liveOrdersList.filter(o => o.Status === 'DISPATCHED' || o.Status === 'IN_TRANSIT').length;
+
+      document.getElementById('kds-count-pending').textContent = `(${pending})`;
+      document.getElementById('kds-count-prep').textContent = `(${prep})`;
+      document.getElementById('kds-count-dispatched').textContent = `(${dispatched})`;
+    }
+
+    function renderKdsOrdersStream() {
+      const container = document.getElementById('orders-stream-container');
+      container.innerHTML = "";
+
+      const filtered = liveOrdersList.filter(o => {
+        if (currentKdsStage === 'PENDING') return o.Status === 'PENDING';
+        if (currentKdsStage === 'PREPARING') return o.Status === 'PREPARING' || o.Status === 'PROBLEM';
+        if (currentKdsStage === 'DISPATCHED') return o.Status === 'DISPATCHED' || o.Status === 'IN_TRANSIT';
+        return false;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div style="text-align:center; padding:30px; color:var(--text-muted); font-weight:800;">لا توجد طلبات في هذا القسم حالياً ✓</div>`;
+        return;
+      }
+
+      filtered.forEach(order => {
+        const id = order.Order_ID;
+        const isDelivery = order.Order_Type === 'DELIVERY';
+        const card = document.createElement('div');
+        card.className = `kds-order-card ${order.Status === 'PROBLEM' ? 'status-problem' : ''}`;
+
+        let actionBtnHtml = '';
+        if (order.Status === 'PENDING') {
+          actionBtnHtml = `
+            <button class="btn-kds-step btn-kds-primary" onclick="setOrderStatusDirect('${id}', 'PREPARING')">
+              <span>بدء التحضير بالمطبخ ⚡</span>
+            </button>
+          `;
+        } else if (order.Status === 'PREPARING') {
+          if (isDelivery) {
+            actionBtnHtml = `
+              <button class="btn-kds-step btn-kds-purple" onclick="openDriverDispatchModal('${id}')">
+                <span>جاهز للتوصيل ⬅ تعيين كابتن</span>
+              </button>
+            `;
+          } else {
+            actionBtnHtml = `
+              <button class="btn-kds-step btn-kds-primary" onclick="setOrderStatusDirect('${id}', 'DISPATCHED')">
+                <span>جاهز للاستلام 🛍️ (نداء بالتلفاز)</span>
+              </button>
+            `;
+          }
+        } else {
+          actionBtnHtml = `
+            <button class="btn-kds-step btn-kds-primary" onclick="setOrderStatusDirect('${id}', 'DELIVERED')">
+              <span>تم تسليم الطلب بنجاح ✓</span>
+            </button>
+          `;
+        }
+
+        card.innerHTML = `
+          <div class="order-card-header-row">
+            <span class="order-id-badge">#${id}</span>
+            <span style="font-size:10.5px; font-weight:900; color:${isDelivery ? '#1e40af' : '#92400e'}; background:${isDelivery ? '#eff6ff' : '#fef3c7'}; padding:2px 8px; border-radius:6px;">
+              ${isDelivery ? 'توصيل 🛵' : 'استلام من المحل 🛍️'}
+            </span>
+          </div>
+
+          <div class="time-slot-pill-kds">
+            <span>موعد التسليم:</span>
+            <strong>${order.Time_Slot || 'فوري'}</strong>
+          </div>
+
+          <div style="font-size:12px; font-weight:800;">العميل: ${order.Customer_Name} (${order.Customer_Phone || order.Phone_Number || ''})</div>
+
+          <div class="order-items-textbox">
+            <strong>الأصناف:</strong> ${order.Items_Summary}
+            ${order.Address_Details ? `<div style="font-size:10.5px; color:var(--text-muted); margin-top:2px;">العنوان: ${order.Address_Details}</div>` : ''}
+          </div>
+
+          <div style="display:flex; gap:6px; margin-top:4px;">
+            <button class="btn-kds-step btn-kds-tool" style="flex:1;" onclick='openSlipPreview(${JSON.stringify(order)})'>تذكرة حرارية 🖨️</button>
+            ${order.GPS_Map_URL ? `<a href="${order.GPS_Map_URL}" target="_blank" class="btn-kds-step btn-kds-tool" style="flex:1; color:var(--blue-accent);">خرائط GPS ↗</a>` : ''}
+          </div>
+
+          ${actionBtnHtml}
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function setOrderStatusDirect(orderId, newStatus) {
+      showToast(`جاري تحويل الطلب #${orderId} إلى ${newStatus}...`);
+      const payload = { order_id: orderId, new_status: newStatus, staff_name: "مشرف المطبخ" };
+
+      const cb = "onStatusUpd_" + Date.now();
+      window[cb] = function() {
+        showToast("تم تحديث حالة الطلب بنجاح ✓");
+        fetchLiveOrdersDirectly();
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=update_order_status&data=${encodeURIComponent(JSON.stringify(payload))}&callback=${cb}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+    }
+
+    function openDriverDispatchModal(orderId) {
+      selectedOrderForDispatch = liveOrdersList.find(o => o.Order_ID === orderId);
+      if (!selectedOrderForDispatch) return;
+
+      document.getElementById('dispatch_order_id').value = orderId;
+      document.getElementById('dispatch-order-meta-title').textContent = `الطلب #${orderId} للعميل: ${selectedOrderForDispatch.Customer_Name}`;
+
+      const container = document.getElementById('drivers-picker-container');
+      if (driversList.length === 0) {
+        container.innerHTML = `<div style="text-align:center; padding:10px; color:var(--text-muted);">لا يوجد كباتن مسجلين.</div>`;
+      } else {
+        container.innerHTML = driversList.map(d => `
+          <div style="display:flex; justify-content:space-between; align-items:center; background:#f8fafc; border:1.5px solid #e2e8f0; padding:8px 12px; border-radius:12px; cursor:pointer;" onclick="selectDriverForOrder('${d.Driver_ID}', '${d.Driver_Name}', '${d.Phone_Number}')">
+            <strong>🛵 ${d.Driver_Name}</strong>
+            <span style="font-size:10px; color:var(--emerald-dark);">${d.Shift_Status === 'ACTIVE' ? 'جاهز' : 'استراحة'}</span>
+          </div>
+        `).join('');
+      }
+      document.getElementById('driver-dispatch-modal').classList.add('open');
+    }
+    function closeDriverDispatchModal() { document.getElementById('driver-dispatch-modal').classList.remove('open'); }
+
+    function selectDriverForOrder(id, name, phone) {
+      selectedDriver = { id, name, phone };
+      showToast(`تم اختيار الكابتن: ${name}`);
+    }
+
+    function confirmDriverHandoff() {
+      if (!selectedDriver) { showToast("يرجى اختيار كابتن أولاً"); return; }
+      const orderId = document.getElementById('dispatch_order_id').value;
+
+      const payload = {
+        order_id: orderId,
+        new_status: 'DISPATCHED',
+        assigned_driver_id: selectedDriver.id,
+        assigned_driver_name: selectedDriver.name,
+        assigned_driver_phone: selectedDriver.phone,
+        staff_name: "مشرف المطبخ"
+      };
+
+      const cb = "onHandoff_" + Date.now();
+      window[cb] = function() {
+        showToast("تم تسليم الطلب للكابتن بنجاح ✓");
+        closeDriverDispatchModal();
+        fetchLiveOrdersDirectly();
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=update_order_status&data=${encodeURIComponent(JSON.stringify(payload))}&callback=${cb}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+    }
+
+    // 🖨️ تذكرة الطباعة الحرارية
+    function openSlipPreview(order) {
+      document.getElementById('slip-order-id').textContent = `#${order.Order_ID}`;
+      document.getElementById('slip-time-slot').textContent = `موعد التسليم: ${order.Time_Slot || 'فوري'}`;
+      document.getElementById('slip-customer-info').textContent = `العميل: ${order.Customer_Name} (${order.Customer_Phone || order.Phone_Number || ''})`;
+      document.getElementById('slip-address-info').textContent = `العنوان: ${order.Address_Details || 'العقبة'}`;
+      document.getElementById('slip-items-summary').textContent = order.Items_Summary;
+
+      const qrBox = document.getElementById('slip-qr-container');
+      qrBox.innerHTML = "";
+      new QRCode(qrBox, { text: order.Order_ID, width: 95, height: 95 });
+
+      document.getElementById('slip-print-modal').classList.add('open');
+    }
+    function closeSlipPrintModal() { document.getElementById('slip-print-modal').classList.remove('open'); }
+
+    function triggerDirectThermalPrint() {
+      const content = document.getElementById('printable-thermal-slip-content').innerHTML;
+      const iframe = document.getElementById('thermal-print-hidden-frame');
+      const doc = iframe.contentWindow || iframe.contentDocument.document || iframe.contentDocument;
+      doc.document.open();
+      doc.document.write(`<!DOCTYPE html><html lang="ar" dir="rtl"><head><title>Print</title><style>@page{margin:0;size:80mm auto;}body{font-family:'Readex Pro',monospace;width:72mm;margin:0 auto;text-align:center;font-size:11px;line-height:1.4;}</style></head><body>${content}</body></html>`);
+      doc.document.close();
+      setTimeout(() => { iframe.contentWindow.focus(); iframe.contentWindow.print(); }, 300);
+    }
+
+    fetchLiveOrdersDirectly();
+    setInterval(fetchLiveOrdersDirectly, 12000);
+  </script>
+</body>
+</html>

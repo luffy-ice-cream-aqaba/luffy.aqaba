@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>LUFFY • لوفي | كابتن السعادة - تطبيق الأسطول الذكي</title>
+  
+  <!-- مكتبة مسح QR Code عبر الكاميرا -->
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
+  <!-- خطوط النخبة العالمية -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Readex+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --font-ar: 'Readex Pro', system-ui, sans-serif;
+      --font-en: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+      --bg-dark: #0f0a08;
+      --card-dark: #1a120e;
+      --surface-glass: rgba(255, 255, 255, 0.06);
+      --border-glass: rgba(254, 215, 170, 0.25);
+
+      --brand-red: #ff2a5f;
+      --brand-gold: #f59e0b;
+      --emerald: #10b981;
+      --emerald-dark: #059669;
+      --blue-accent: #3b82f6;
+      --purple-accent: #8b5cf6;
+
+      --shadow-luxury: 0 20px 40px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(245, 158, 11, 0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; -webkit-font-smoothing: antialiased; }
+
+    body {
+      font-family: var(--font-ar);
+      background: radial-gradient(circle at 50% 10%, #2a1612 0%, #0f0a08 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 10px 8px 90px;
+      overflow-x: hidden;
+    }
+
+    .svg-icon {
+      width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2;
+      stroke-linecap: round; stroke-linejoin: round; display: inline-block; vertical-align: middle; flex-shrink: 0;
+    }
+
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum";
+      font-family: var(--font-en);
+      letter-spacing: 0.5px;
+      display: inline-block;
+    }
+
+    .app-shell-wrapper {
+      width: 100%;
+      max-width: 480px;
+      background: rgba(26, 18, 14, 0.95);
+      backdrop-filter: blur(25px);
+      border: 1.5px solid var(--border-glass);
+      border-radius: 28px;
+      padding: 16px 14px;
+      box-shadow: var(--shadow-luxury);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Top Bar */
+    .driver-top-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 12px;
+    }
+    .brand-cluster { display: flex; align-items: center; gap: 8px; }
+    .straw-hat-badge { position: relative; width: 38px; height: 38px; }
+    .hat-glow {
+      position: absolute; width: 140%; height: 140%; border-radius: 50%;
+      background: radial-gradient(circle, rgba(251, 191, 36, 0.6) 0%, transparent 70%); filter: blur(8px);
+    }
+    .straw-hat-svg { width: 100%; height: 100%; position: relative; z-index: 2; filter: drop-shadow(0 4px 8px rgba(217, 119, 6, 0.4)); }
+
+    .brand-title { display: flex; align-items: center; gap: 4px; font-size: 16px; font-weight: 900; }
+    .name-en {
+      font-family: var(--font-en); letter-spacing: 1px;
+      background: linear-gradient(135deg, var(--brand-red) 0%, var(--brand-gold) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .gps-pulse-badge {
+      display: flex; align-items: center; gap: 5px; background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35); padding: 5px 10px; border-radius: 9999px; font-size: 10px; font-weight: 800; color: var(--emerald);
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .gps-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 8px var(--emerald); animation: pulseDot 1.8s infinite; }
+    @keyframes pulseDot { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.6; } }
+
+    /* بطاقة هوية وجاهزية كابتن السعادة */
+    .driver-badge-card {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(255, 42, 95, 0.08) 100%);
+      border: 1.5px solid var(--border-glass); border-radius: 20px; padding: 12px 14px;
+      display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px;
+    }
+    .driver-name { font-size: 15px; font-weight: 900; color: #fff; }
+    .driver-sub { font-size: 11px; color: #fed7aa; }
+
+    /* زر التحكم بالجاهزية الذاتية */
+    .btn-captain-readiness-toggle {
+      width: 100%; border: none; padding: 11px 14px; border-radius: 14px;
+      font-family: var(--font-ar); font-size: 12px; font-weight: 900; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-captain-readiness-toggle.is-ready {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+    }
+    .btn-captain-readiness-toggle.is-break {
+      background: rgba(255, 255, 255, 0.1); color: #cbd5e1;
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* KPI Stats Bar */
+    .kpi-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+    .kpi-box {
+      background: var(--surface-glass); border: 1px solid var(--border-glass);
+      border-radius: 16px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px;
+    }
+    .kpi-title { font-size: 10px; font-weight: 800; color: #94a3b8; }
+    .kpi-digits { font-family: var(--font-en); font-size: 20px; font-weight: 900; color: #fff; }
+
+    /* Action Dock */
+    .action-dock-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    .btn-dock-action {
+      border: none; padding: 12px 10px; border-radius: 16px; font-family: var(--font-ar);
+      font-size: 12px; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .btn-dock-action:active { transform: scale(0.97); }
+    .btn-dock-scan { background: linear-gradient(135deg, var(--brand-red) 0%, #ff5e7e 100%); color: #fff; box-shadow: 0 4px 18px rgba(255, 42, 95, 0.4); }
+    .btn-dock-refresh { background: linear-gradient(135deg, var(--brand-gold) 0%, #d97706 100%); color: #fff; box-shadow: 0 4px 18px rgba(245, 158, 11, 0.35); }
+
+    /* Orders Stream */
+    .orders-stream-box { display: flex; flex-direction: column; gap: 10px; max-height: 54vh; overflow-y: auto; padding-right: 1px; }
+    .order-captain-card {
+      background: var(--card-dark); border: 1.5px solid var(--border-glass); border-radius: 20px;
+      padding: 14px; display: flex; flex-direction: column; gap: 9px; box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    .order-captain-card.is-in-transit { border-color: var(--blue-accent); background: rgba(59, 130, 246, 0.08); }
+
+    .order-header-row { display: flex; justify-content: space-between; align-items: center; }
+    .order-tag { font-family: var(--font-en); font-size: 13px; font-weight: 900; color: var(--brand-red); background: rgba(255, 42, 95, 0.15); padding: 2px 8px; border-radius: 6px; }
+    .status-badge { font-size: 10.5px; font-weight: 800; padding: 3px 9px; border-radius: 9999px; }
+    .status-assigned { background: rgba(245, 158, 11, 0.15); color: var(--brand-gold); }
+    .status-transit { background: rgba(59, 130, 246, 0.2); color: #93c5fd; }
+
+    .time-slot-target-strip {
+      background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px;
+      padding: 6px 10px; display: flex; justify-content: space-between; align-items: center;
+      font-size: 11px; font-weight: 800; color: #fed7aa;
+    }
+
+    .order-details-box { background: rgba(255, 255, 255, 0.04); border-radius: 12px; padding: 8px 10px; font-size: 11.5px; line-height: 1.4; }
+
+    .order-card-tools { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 2px; }
+    .btn-card-tool {
+      background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.12); color: #fff;
+      padding: 8px 6px; border-radius: 10px; font-family: var(--font-ar); font-size: 11px; font-weight: 800;
+      cursor: pointer; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 5px;
+    }
+
+    /* Modals & Screens */
+    .app-modal-backdrop {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100%; height: 100dvh;
+      background: radial-gradient(circle at center, #261410 0%, #0d0806 100%);
+      backdrop-filter: blur(16px); z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 16px;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    .app-modal-backdrop.open { opacity: 1; pointer-events: auto; }
+
+    .modal-card-surface {
+      background: #1a120e; border: 1.5px solid var(--border-glass); border-radius: 26px;
+      padding: 24px 18px; width: 100%; max-width: 380px; text-align: center; color: #fff;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+    }
+
+    .nfc-standby-radar {
+      width: 80px; height: 80px; border-radius: 50%; background: rgba(245, 158, 11, 0.15);
+      border: 2px dashed var(--brand-gold); display: flex; align-items: center; justify-content: center;
+      margin: 16px auto; cursor: pointer; animation: pulseRadar 2.2s infinite;
+    }
+    @keyframes pulseRadar { 0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); } 70% { box-shadow: 0 0 0 16px rgba(245, 158, 11, 0); } 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); } }
+
+    .qr-reader-container { width: 100%; border-radius: 16px; overflow: hidden; margin: 12px 0; border: 1.5px dashed var(--brand-red); }
+
+    /* Toast Stack */
+    .toast-stack-container {
+      position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 15000;
+      display: flex; flex-direction: column; gap: 8px; width: calc(100% - 28px); max-width: 420px; pointer-events: none;
+    }
+    .luxury-toast-pill {
+      pointer-events: auto; background: rgba(26, 17, 13, 0.96); color: #ffffff; backdrop-filter: blur(20px);
+      border: 1.5px solid var(--brand-gold); border-radius: 16px; padding: 11px 14px; font-size: 11.5px; font-weight: 800;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toast-stack-container" id="toast-stack-box"></div>
+
+  <!-- 🔒 1. بوابة تسجيل الدخول بميدالية NFC لكابتن السعادة -->
+  <div class="app-modal-backdrop open" id="driver-nfc-standby-gate">
+    <div class="modal-card-surface">
+      <div style="width:44px; height:44px; margin:0 auto 6px;">
+        <svg viewBox="0 0 100 100" fill="none" style="width:100%; height:100%;">
+          <ellipse cx="50" cy="70" rx="46" ry="13" fill="#EAB308"/>
+          <path d="M24 67C24 38 31 24 50 24C69 24 76 38 76 67Z" fill="#FACC15"/>
+          <path d="M23.5 64.5C34 68.5 66 68.5 76.5 64.5C75.5 57.5 74.5 53 74.5 53C63 57.5 37 57.5 25.5 53Z" fill="#FF2A5F"/>
+        </svg>
+      </div>
+
+      <div style="font-size:16px; font-weight:900;">بوابة كابتن السعادة الذكية</div>
+      <div style="font-size:11px; color:#fed7aa; margin-top:2px;">ابدأ بملامسة ميداليتك الذكية بظهر الهاتف 🇯🇴</div>
+
+      <div class="nfc-standby-radar" onclick="triggerNfcAutoScan()">
+        <svg class="svg-icon" style="width:36px; height:36px; stroke:var(--brand-gold);" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
+      </div>
+      <div style="font-size:11.5px; font-weight:800; color:#fff;" id="nfc-standby-hint">جاري الاستماع لميدالية الكابتن NFC...</div>
+
+      <div>
+        <button style="background:transparent; border:1px solid rgba(254, 215, 170, 0.3); color:#fed7aa; padding:8px 14px; border-radius:12px; font-family:var(--font-ar); font-size:11px; font-weight:800; cursor:pointer; margin-top:14px;" onclick="openEmergencyPasswordModal()">
+          <span>تعذر الـ NFC؟ الدخول برمز الطوارئ</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⚠️ 2. الدخول الاحتياطي برمز الطوارئ -->
+  <div class="app-modal-backdrop" id="emergency-pass-modal">
+    <div class="modal-card-surface">
+      <div style="font-size:14.5px; font-weight:900; color:var(--brand-red);">الدخول برمز الطوارئ المشفر</div>
+      <p style="font-size:11px; color:#cbd5e1; margin:6px 0 12px; line-height:1.4;">
+        يُسمح بالدخول برمز الطوارئ لـ <strong>(مرتين فقط)</strong> عند عدم توفر الميدالية.
+      </p>
+
+      <div style="text-align:right; margin-bottom:8px;">
+        <label style="font-size:10.5px; font-weight:800; color:#fed7aa;">رقم الهاتف أو المعرّف (DRV-ID):</label>
+        <input type="text" id="emergency_driver_ident" placeholder="07XXXXXXXX أو DRV-01" dir="ltr" style="width:100%; background:rgba(255,255,255,0.08); border:1.5px solid var(--border-glass); color:#fff; padding:9px; border-radius:12px; font-family:var(--font-en); font-size:12px; text-align:center; margin-top:3px;">
+      </div>
+
+      <div style="text-align:right; margin-bottom:12px;">
+        <label style="font-size:10.5px; font-weight:800; color:#fed7aa;">رمز الطوارئ:</label>
+        <input type="password" id="emergency_passcode_input" placeholder="••••••••" style="width:100%; background:rgba(255,255,255,0.08); border:1.5px solid var(--border-glass); color:#fff; padding:9px; border-radius:12px; font-family:var(--font-en); font-size:12px; text-align:center; margin-top:3px;">
+      </div>
+
+      <div style="display:flex; gap:6px;">
+        <button style="flex:1; border:none; background:rgba(255,255,255,0.1); color:#fff; padding:10px; border-radius:12px; font-size:11px; font-weight:800; cursor:pointer;" onclick="closeEmergencyModal()">إلغاء</button>
+        <button style="flex:2; border:none; background:linear-gradient(135deg, var(--brand-red) 0%, #ff5e7e 100%); color:#fff; padding:10px; border-radius:12px; font-size:11.5px; font-weight:900; cursor:pointer;" onclick="submitEmergencyPasscodeAuth()">تحقق ودخول طارئ ⚡</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 📱 شاشة التطبيق الرئيسية لكابتن السعادة -->
+  <div class="app-shell-wrapper">
+    <div class="driver-top-bar">
+      <div class="brand-cluster">
+        <div class="straw-hat-badge">
+          <div class="hat-glow"></div>
+          <svg class="straw-hat-svg" viewBox="0 0 100 100" fill="none">
+            <ellipse cx="50" cy="70" rx="46" ry="13" fill="#EAB308"/>
+            <path d="M24 67C24 38 31 24 50 24C69 24 76 38 76 67Z" fill="#FACC15"/>
+            <path d="M23.5 64.5C34 68.5 66 68.5 76.5 64.5C75.5 57.5 74.5 53 74.5 53C63 57.5 37 57.5 25.5 53Z" fill="#FF2A5F"/>
+          </svg>
+        </div>
+        <div class="brand-title"><span class="name-en">LUFFY</span> • <span>كابتن السعادة</span></div>
+      </div>
+
+      <div class="gps-pulse-badge" id="gps-indicator" onclick="verifyMandatoryLiveGps()">
+        <div class="gps-dot"></div>
+        <span id="gps-status-txt">GPS نشط ✓</span>
+      </div>
+    </div>
+
+    <!-- بطاقة الكابتن والجاهزية -->
+    <div class="driver-badge-card">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div class="driver-name" id="app-driver-name">كابتن السعادة: ...</div>
+          <div class="driver-sub" id="app-driver-vehicle">🛵 دراجة نارية</div>
+        </div>
+        <button style="border:none; background:rgba(255,255,255,0.1); color:#fff; padding:5px 9px; border-radius:8px; font-size:10px; cursor:pointer;" onclick="logoutDriverSession()">خروج</button>
+      </div>
+
+      <button class="btn-captain-readiness-toggle is-ready" id="btn-captain-readiness" onclick="toggleCaptainSelfReadiness()">
+        <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 10"></polyline></svg>
+        <span id="captain-readiness-text">أنا جاهز لاستقبال الطلبات الآن ✓</span>
+      </button>
+    </div>
+
+    <!-- إحصائيات سريعة -->
+    <div class="kpi-stats-grid">
+      <div class="kpi-box">
+        <span class="kpi-title">الطلبات الجارية بعهدتي</span>
+        <span class="kpi-digits" style="color:var(--brand-gold);" id="kpi-assigned-count">0</span>
+      </div>
+      <div class="kpi-box">
+        <span class="kpi-title">إجمالي الرحلات المنجزة</span>
+        <span class="kpi-digits" style="color:var(--emerald);" id="kpi-completed-trips">0</span>
+      </div>
+    </div>
+
+    <!-- أزرار الإجراء السريع -->
+    <div class="action-dock-bar">
+      <button class="btn-dock-action btn-dock-scan" onclick="openQrScannerForPickup()">
+        <svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"></path><path d="M17 3h2a2 2 0 0 1 2 2v2"></path><path d="M21 17v2a2 2 0 0 1-2 2h-2"></path><path d="M7 21H5a2 2 0 0 1-2-2v-2"></path><rect x="7" y="7" width="10" height="10" rx="1"></rect></svg>
+        <span>مسح QR الاستلام</span>
+      </button>
+
+      <button class="btn-dock-action btn-dock-refresh" onclick="fetchCaptainOrdersDirectly()">
+        <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+        <span>تحديث المهام</span>
+      </button>
+    </div>
+
+    <!-- تدفق الطلبات المسندة للكابتن -->
+    <div style="font-size:12px; font-weight:900; color:#fed7aa; margin-bottom:6px;">المهام قيد التنفيذ الآن:</div>
+    <div class="orders-stream-box" id="driver-orders-stream">
+      <div style="text-align:center; padding:30px 10px; color:#94a3b8; font-size:11.5px;">جاري جلب المهام المسندة إليك...</div>
+    </div>
+  </div>
+
+  <!-- 📷 مسح QR Code عبر الكاميرا عند الاستلام من المطبخ -->
+  <div class="app-modal-backdrop" id="qr-modal">
+    <div class="modal-card-surface">
+      <div style="font-size:14px; font-weight:900;" id="qr-modal-title">مسح QR كود الطلب للاستلام</div>
+      <div style="font-size:11px; color:#fed7aa; margin-top:2px;">وجّه الكاميرا نحو الكود المطبوع على التذكرة</div>
+
+      <div class="qr-reader-container">
+        <div id="qr-video-reader" style="width:100%; height:240px;"></div>
+      </div>
+
+      <div style="display:flex; gap:6px; margin-bottom:10px;">
+        <input type="text" id="manual_order_code" placeholder="LFY-0000 أو 0000" style="flex:1; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#fff; padding:8px; border-radius:10px; font-family:var(--font-en); text-align:center;">
+        <button style="border:none; background:var(--brand-gold); color:#000; padding:8px 14px; border-radius:10px; font-weight:900; cursor:pointer;" onclick="processManualQrCode()">تأكيد</button>
+      </div>
+
+      <button style="border:none; background:rgba(255,255,255,0.12); color:#fff; padding:8px 20px; border-radius:10px; font-size:11px; font-weight:800; cursor:pointer;" onclick="closeQrScanner()">إغلاق الكاميرا</button>
+    </div>
+  </div>
+
+  <!-- 📡 إثبات التسليم النهائي لباب الزبون بـ GPS و NFC -->
+  <div class="app-modal-backdrop" id="nfc-proof-modal">
+    <div class="modal-card-surface">
+      <div class="nfc-standby-radar" onclick="triggerNfcDeliveryProof()">
+        <svg class="svg-icon" style="width:34px; height:34px; stroke:var(--brand-gold);" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
+      </div>
+      <div style="font-size:15px; font-weight:900;" id="nfc-proof-title">إثبات تسليم الطلب لباب الزبون</div>
+      <p style="font-size:11.5px; color:#fed7aa; margin:6px 0 12px; line-height:1.4;">
+        تم قفل موقع الزبون بالـ <strong>GPS</strong> بدقة، يرجى <strong>ملامسة ميداليتك الذكية</strong> أو النقر للتأكيد وإنهاء الرحلة.
+      </p>
+      <button style="border:none; background:rgba(255,255,255,0.12); color:#fff; padding:8px 18px; border-radius:10px; font-size:11px; font-weight:800; cursor:pointer;" onclick="closeNfcProofModal()">إلغاء</button>
+    </div>
+  </div>
+
+  <script>
+    // ⚡ الرابط المركزي السحابي المعتمد
+    const APPS_SCRIPT_EXEC_URL = "https://script.google.com/macros/s/AKfycbxYmpfN2OBW24M-sumyx8dwbkFN-RsbiWkYJZYa0gZLfMxVpXr2TswzORV0inmu5nFieQ/exec";
+
+    let currentDriver = JSON.parse(localStorage.getItem('luffy_driver_session') || "null");
+    let driverOrdersList = [];
+    let qrHtml5Scanner = null;
+    let targetOrderForProof = null;
+    let liveGpsPosition = null;
+
+    function showToast(message) {
+      const stack = document.getElementById('toast-stack-box');
+      if (!stack) return;
+      while (stack.children.length >= 2) stack.removeChild(stack.firstChild);
+
+      const pill = document.createElement('div');
+      pill.className = 'luxury-toast-pill';
+      pill.innerHTML = `
+        <svg class="svg-icon" style="stroke:#10b981;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <span>${message}</span>
+      `;
+      stack.appendChild(pill);
+      setTimeout(() => { if (pill.parentElement) pill.remove(); }, 3500);
+    }
+
+    // =========================================================================
+    // 🛰️ رادار الـ GPS والنبض التلقائي للسائق
+    // =========================================================================
+    function verifyMandatoryLiveGps() {
+      return new Promise((resolve, reject) => {
+        if (!navigator.geolocation) {
+          showToast("❌ الـ GPS غير مدعوم بهاتفك");
+          reject("No GPS");
+          return;
+        }
+
+        document.getElementById('gps-status-txt').textContent = "قفل الأقمار الصناعية...";
+
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            const lat = pos.coords.latitude.toFixed(6);
+            const lng = pos.coords.longitude.toFixed(6);
+            liveGpsPosition = { lat, lng, mapUrl: `https://www.google.com/maps?q=${lat},${lng}` };
+            document.getElementById('gps-status-txt').textContent = "GPS نشط ومقفل ✓";
+            
+            if (currentDriver) {
+              pingDriverGpsLocation(liveGpsPosition.mapUrl);
+            }
+            resolve(liveGpsPosition);
+          },
+          (err) => {
+            document.getElementById('gps-status-txt').textContent = "⚠️ الـ GPS معطل";
+            showToast("⚠️ يلزم تفعيل الـ GPS لتسجيل مسارات التوصيل!");
+            reject(err);
+          },
+          { enableHighAccuracy: true, timeout: 8000 }
+        );
+      });
+    }
+
+    function pingDriverGpsLocation(gpsUrl) {
+      if (!currentDriver || !gpsUrl) return;
+      const payload = { driver_id: currentDriver.id, driver_name: currentDriver.name, gps_url: gpsUrl };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=driver_update_gps&data=${encodeURIComponent(JSON.stringify(payload))}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+    }
+
+    // =========================================================================
+    // 🟢 التحكم الذاتي بجاهزية الكابتن (جاهز / استراحة)
+    // =========================================================================
+    function toggleCaptainSelfReadiness() {
+      if (!currentDriver) return;
+      const isCurrentlyActive = (currentDriver.status === "ACTIVE");
+      const nextStatus = isCurrentlyActive ? "INACTIVE" : "ACTIVE";
+
+      showToast("جاري تعديل حالتك بالوردية...");
+      const cb = "onSelfTgl_" + Date.now();
+      window[cb] = function(res) {
+        if (res && res.status === "banned") {
+          alert("⚠️ تم حظر الحساب من قبل الإدارة.");
+          logoutDriverSession();
+          return;
+        }
+        currentDriver.status = nextStatus;
+        localStorage.setItem('luffy_driver_session', JSON.stringify(currentDriver));
+        updateCaptainReadinessUI();
+        showToast(nextStatus === "ACTIVE" ? "أنت جاهز لاستقبال الطلبات الآن ✓" : "أنت في استراحة مؤقتة");
+      };
+
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=driver_toggle_self_status&driver_id=${encodeURIComponent(currentDriver.id)}&new_status=${nextStatus}&callback=${cb}`;
+      document.body.appendChild(s);
+    }
+
+    function updateCaptainReadinessUI() {
+      const btn = document.getElementById('btn-captain-readiness');
+      const txt = document.getElementById('captain-readiness-text');
+      const isReady = (currentDriver && currentDriver.status === "ACTIVE");
+
+      if (isReady) {
+        btn.className = "btn-captain-readiness-toggle is-ready";
+        txt.textContent = "أنا جاهز لاستقبال الطلبات الآن ✓";
+      } else {
+        btn.className = "btn-captain-readiness-toggle is-break";
+        txt.textContent = "في استراحة مؤقتة (اضغط لتصبح جاهزاً)";
+      }
+    }
+
+    // =========================================================================
+    // 🔒 تسجيل الدخول بميدالية NFC أو برمز الطوارئ
+    // =========================================================================
+    async function triggerNfcAutoScan() {
+      if (!('NDEFReader' in window)) return;
+      try {
+        const ndef = new NDEFReader();
+        await ndef.scan();
+        ndef.onreading = ev => {
+          const dec = new TextDecoder();
+          let p = "";
+          for (const r of ev.message.records) p += dec.decode(r.data);
+          const token = p.match(/[?&]t=([^&]+)/) ? decodeURIComponent(p.match(/[?&]t=([^&]+)/)[1]) : (p || ev.serialNumber);
+          verifyDriverNfcToken(token);
+        };
+      } catch (err) {}
+    }
+
+    function verifyDriverNfcToken(token) {
+      showToast("جاري مطابقة الميدالية الذكية...");
+      const cb = "onDrvNfcAuth_" + Date.now();
+      window[cb] = function(res) {
+        if (res && res.status === "success" && res.driver) {
+          if (res.driver.status === "BANNED") {
+            alert("❌ هذا الحساب محظور من قبل الإدارة!");
+            return;
+          }
+          currentDriver = res.driver;
+          localStorage.setItem('luffy_driver_session', JSON.stringify(currentDriver));
+          showToast(`أهلاً بك يا كابتن ${currentDriver.name} ✓`);
+          checkDriverSession();
+        } else {
+          showToast("❌ ميدالية غير مسجلة لكابتن في النظام!");
+        }
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=driver_nfc_auth&token=${encodeURIComponent(token)}&callback=${cb}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+    }
+
+    function openEmergencyPasswordModal() { document.getElementById('emergency-pass-modal').classList.add('open'); }
+    function closeEmergencyModal() { document.getElementById('emergency-pass-modal').classList.remove('open'); }
+
+    function submitEmergencyPasscodeAuth() {
+      const ident = document.getElementById('emergency_driver_ident').value.trim();
+      const pass = document.getElementById('emergency_passcode_input').value.trim();
+      if (!ident || !pass) { showToast("يرجى إدخال المعرف ورمز الطوارئ"); return; }
+
+      showToast("جاري التحقق من رمز الطوارئ...");
+      const cb = "onEmergAuth_" + Date.now();
+      window[cb] = function(res) {
+        if (res && res.status === "success" && res.driver) {
+          currentDriver = res.driver;
+          localStorage.setItem('luffy_driver_session', JSON.stringify(currentDriver));
+          closeEmergencyModal();
+          showToast(`تم الدخول بنجاح (متبقي: ${res.remaining_uses} استخدام)`);
+          checkDriverSession();
+        } else if (res && res.status === "locked_out") {
+          alert("⚠️ تم استنفاد محاولات رمز الطوارئ (مرتان).\nتم قفل الرمز لأسباب أمنية. يرجى مراجعة الإدارة.");
+        } else {
+          showToast("رمز الطوارئ أو المعرف غير صحيح!");
+        }
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=driver_emergency_pass_auth&ident=${encodeURIComponent(ident)}&passcode=${encodeURIComponent(pass)}&callback=${cb}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+    }
+
+    function checkDriverSession() {
+      if (currentDriver) {
+        document.getElementById('driver-nfc-standby-gate').classList.remove('open');
+        document.getElementById('app-driver-name').textContent = `كابتن السعادة: ${currentDriver.name}`;
+        document.getElementById('app-driver-vehicle').textContent = `🛵 ${currentDriver.vehicle || 'دراجة نارية'}`;
+        updateCaptainReadinessUI();
+        verifyMandatoryLiveGps();
+        fetchCaptainOrdersDirectly();
+      } else {
+        document.getElementById('driver-nfc-standby-gate').classList.add('open');
+        triggerNfcAutoScan();
+      }
+    }
+
+    function logoutDriverSession() {
+      currentDriver = null;
+      localStorage.removeItem('luffy_driver_session');
+      checkDriverSession();
+    }
+
+    // =========================================================================
+    // 📦 جلب وتحديث الطلبات المسندة للكابتن عبر السيرفر
+    // =========================================================================
+    function fetchCaptainOrdersDirectly() {
+      if (!currentDriver) return;
+      showToast("جاري تحديث المهام...");
+      const cb = "onCaptainOrdersLoaded_" + Date.now();
+      window[cb] = function(res) {
+        if (!res || !res.data) return;
+        const allOrders = res.data;
+        const driverName = currentDriver.name.trim();
+        const driverId = currentDriver.id;
+
+        // تصفية الطلبات المسندة لهذا الكابتن
+        driverOrdersList = allOrders.filter(o => {
+          const assignedId = String(o.Assigned_Driver_ID || '');
+          const assignedName = String(o.Assigned_Driver_Name || '');
+          const isMyOrder = (assignedId === driverId || assignedName.includes(driverName));
+          const isOngoing = (o.Status === 'DISPATCHED' || o.Status === 'IN_TRANSIT');
+          return isMyOrder && isOngoing;
+        });
+
+        const completedCount = allOrders.filter(o => {
+          const assignedName = String(o.Assigned_Driver_Name || '');
+          return assignedName.includes(driverName) && o.Status === 'DELIVERED';
+        }).length;
+
+        document.getElementById('kpi-assigned-count').textContent = driverOrdersList.length;
+        document.getElementById('kpi-completed-trips').textContent = completedCount;
+
+        renderDriverOrdersCards();
+      };
+
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=get_live_orders&callback=${cb}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+    }
+
+    function renderDriverOrdersCards() {
+      const container = document.getElementById('driver-orders-stream');
+      container.innerHTML = "";
+
+      if (driverOrdersList.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:35px 15px; color:#94a3b8; border:1px dashed var(--border-glass); border-radius:18px;">
+            <svg class="svg-icon" style="width:34px; height:34px; stroke:#94a3b8; margin-bottom:4px;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 10"></polyline></svg>
+            <div style="font-size:13px; font-weight:800; color:#fff;">لا توجد مهام توصيل مسندة إليك حالياً</div>
+            <div style="font-size:10.5px; margin-top:2px;">سيظهر الطلب هنا فور تعيينك من المطبخ! ✨</div>
+          </div>
+        `;
+        return;
+      }
+
+      driverOrdersList.forEach(order => {
+        const id = order.Order_ID;
+        const isInTransit = order.Status === 'IN_TRANSIT';
+        const cleanCustPhone = String(order.Customer_Phone || order.Phone_Number || '').replace(/[^\d+]/g, '');
+
+        // 📍 زر الملاحة الذكي: فتح مسار الملاحة المباشر عبر Google Maps
+        let navLinkHtml = '';
+        if (order.GPS_Map_URL && order.GPS_Map_URL.startsWith('http')) {
+          navLinkHtml = `
+            <a href="${order.GPS_Map_URL}" target="_blank" rel="noopener noreferrer" class="btn-card-tool" style="color:var(--blue-accent); grid-column: span 2;" onclick="event.stopPropagation()">
+              <svg class="svg-icon" viewBox="0 0 24 24"><polygon points="12 2 19 21 12 17 5 21 12 2"></polygon></svg>
+              <span>فتح الملاحة المباشرة (Google Maps) ↗</span>
+            </a>
+          `;
+        }
+
+        const card = document.createElement('div');
+        card.className = `order-captain-card ${isInTransit ? 'is-in-transit' : ''}`;
+
+        card.innerHTML = `
+          <div class="order-header-row">
+            <span class="order-tag">#${id}</span>
+            <span class="status-badge ${isInTransit ? 'status-transit' : 'status-assigned'}">
+              ${isInTransit ? 'في عهدتك بالطريق 🛵' : 'جاهز للاستلام من المطبخ 📦'}
+            </span>
+          </div>
+
+          <div class="time-slot-target-strip">
+            <span>⏰ موعد التسليم المطلوب:</span>
+            <strong>${order.Time_Slot || 'أسرع وقت (فوري)'}</strong>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; font-weight:800;">
+            <span>👤 ${order.Customer_Name}</span>
+            <span style="font-family:var(--font-en); direction:ltr; font-weight:900; color:#fed7aa;">${cleanCustPhone}</span>
+          </div>
+
+          <div class="order-details-box">
+            <strong>الأصناف (${order.Total_Qty || 1} علبة):</strong> ${order.Items_Summary}
+            ${order.Address_Details ? `<div style="margin-top:3px; color:#fed7aa;">🏢 العنوان: ${order.Address_Details}</div>` : ''}
+          </div>
+
+          <div class="order-card-tools">
+            ${cleanCustPhone ? `
+              <a href="tel:${cleanCustPhone}" class="btn-card-tool" style="color:var(--emerald);">
+                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                <span>اتصال</span>
+              </a>
+              <a href="https://wa.me/${cleanCustPhone.replace('+', '')}" target="_blank" class="btn-card-tool" style="color:var(--emerald);">
+                <span>واتساب</span>
+              </a>
+            ` : ''}
+            ${navLinkHtml}
+          </div>
+
+          <div style="margin-top:4px;">
+            ${!isInTransit ? `
+              <button style="width:100%; background:linear-gradient(135deg, var(--blue-accent) 0%, #1d4ed8 100%); color:#fff; border:none; padding:11px; border-radius:12px; font-weight:900; font-size:12px; cursor:pointer;" onclick="openQrScannerForPickup('${id}')">
+                📷 مسح QR الاستلام من المطبخ والانطلاق
+              </button>
+            ` : `
+              <button style="width:100%; background:linear-gradient(135deg, var(--emerald) 0%, #059669 100%); color:#fff; border:none; padding:11px; border-radius:12px; font-weight:900; font-size:12px; cursor:pointer;" onclick="startDeliveryCompletionProof('${id}')">
+                🏁 تأكيد التسليم لباب الزبون بـ NFC والـ GPS ✓
+              </button>
+            `}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // =========================================================================
+    // 📷 مسح QR الاستلام من المطبخ
+    // =========================================================================
+    async function openQrScannerForPickup(specificOrderId = "") {
+      try { await verifyMandatoryLiveGps(); } catch(e) { return; }
+      document.getElementById('qr-modal-title').textContent = "مسح QR كود الطلب للاستلام";
+      document.getElementById('qr-modal').classList.add('open');
+
+      if (typeof Html5Qrcode !== "undefined") {
+        qrHtml5Scanner = new Html5Qrcode("qr-video-reader");
+        qrHtml5Scanner.start(
+          { facingMode: "environment" }, { fps: 10, qrbox: { width: 220, height: 220 } },
+          (decodedText) => { onQrCodeSuccessfullyScanned(decodedText); }, () => {}
+        ).catch(() => {});
+      }
+    }
+
+    function closeQrScanner() {
+      if (qrHtml5Scanner) {
+        qrHtml5Scanner.stop().then(() => qrHtml5Scanner.clear()).catch(()=>{});
+        qrHtml5Scanner = null;
+      }
+      document.getElementById('qr-modal').classList.remove('open');
+    }
+
+    function processManualQrCode() {
+      const code = document.getElementById('manual_order_code').value.trim();
+      if (!code) return;
+      onQrCodeSuccessfullyScanned(code);
+    }
+
+    function onQrCodeSuccessfullyScanned(scannedCode) {
+      closeQrScanner();
+      let orderId = scannedCode.replace('#', '').trim().toUpperCase();
+      const match = scannedCode.match(/LFY-\d+/i);
+      if (match) orderId = match[0].toUpperCase();
+      showToast(`تم مسح كود الطلب #${orderId}`);
+      executePickupHandshake(orderId);
+    }
+
+    function executePickupHandshake(orderId) {
+      showToast(`جاري توثيق الاستلام لكابتن السعادة ${currentDriver.name}...`);
+      const gpsLink = liveGpsPosition ? liveGpsPosition.mapUrl : '';
+      const payload = { order_id: orderId, driver_id: currentDriver.id, driver_name: currentDriver.name, driver_phone: currentDriver.phone, gps_pickup_url: gpsLink };
+      const cb = "onPickupHandoff_" + Date.now();
+      window[cb] = function() {
+        showToast(`تم استلام الطلب #${orderId} والانطلاق بنجاح ✓`);
+        fetchCaptainOrdersDirectly();
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=driver_confirm_pickup&data=${encodeURIComponent(JSON.stringify(payload))}&callback=${cb}`;
+      document.body.appendChild(s);
+    }
+
+    // =========================================================================
+    // 🏁 إثبات التسليم النهائي لباب الزبون بـ GPS و NFC
+    // =========================================================================
+    async function startDeliveryCompletionProof(orderId) {
+      try { await verifyMandatoryLiveGps(); } catch(e) { return; }
+      targetOrderForProof = orderId;
+      document.getElementById('nfc-proof-modal').classList.add('open');
+
+      if ('NDEFReader' in window) {
+        try {
+          const ndef = new NDEFReader();
+          await ndef.scan();
+          ndef.onreading = () => {
+            closeNfcProofModal();
+            commitFinalDoorstepDelivery(targetOrderForProof, "NFC_MEDALLION_PROOF");
+          };
+        } catch(e){}
+      }
+    }
+    function closeNfcProofModal() { document.getElementById('nfc-proof-modal').classList.remove('open'); }
+
+    function triggerNfcDeliveryProof() {
+      closeNfcProofModal();
+      commitFinalDoorstepDelivery(targetOrderForProof, "GPS_MANDATORY_PROOF");
+    }
+
+    function commitFinalDoorstepDelivery(orderId, proofToken) {
+      showToast(`جاري تسجيل إثبات التسليم للطلب #${orderId}...`);
+      const gpsLink = liveGpsPosition ? liveGpsPosition.mapUrl : '';
+      const payload = { order_id: orderId, driver_id: currentDriver.id, driver_name: currentDriver.name, doorstep_gps_url: gpsLink, nfc_proof: proofToken };
+      const cb = "onDelivDone_" + Date.now();
+      window[cb] = function() {
+        showToast(`🎉 تم تسليم الطلب #${orderId} للزبون بنجاح ✓`);
+        fetchCaptainOrdersDirectly();
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=driver_complete_delivery&data=${encodeURIComponent(JSON.stringify(payload))}&callback=${cb}`;
+      document.body.appendChild(s);
+    }
+
+    // فحص الجلسة وبدء الاستماع
+    checkDriverSession();
+    setInterval(fetchCaptainOrdersDirectly, 12000); // تحديث متزن كل 12 ثانية
+    setInterval(() => { if (currentDriver) verifyMandatoryLiveGps(); }, 60000); // إرسال نبض الـ GPS كل دقيقة
+  </script>
+</body>
+</html>
