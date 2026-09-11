@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>LUFFY • لوفي | مركز تتبع وإدارة الطلبات - كابتن السعادة</title>
+  
+  <!-- خطوط النخبة العالمية -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Readex+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --font-ar: 'Readex Pro', system-ui, sans-serif;
+      --font-en: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+      --bg-cream: #fcfbfa;
+      --card-surface: #ffffff;
+      --text-espresso: #1a110d;
+      --text-muted: #71625b;
+      --text-light: #a89a92;
+
+      --brand-red: #ff2a5f;
+      --brand-gold: #f59e0b;
+      --emerald: #10b981;
+      --emerald-dark: #059669;
+      --blue-accent: #2563eb;
+      --purple-accent: #7c3aed;
+      --amber-accent: #d97706;
+
+      --border-subtle: 1px solid #f1f0ee;
+      --border-soft: 1.5px solid rgba(254, 215, 170, 0.45);
+      --shadow-luxury: 0 12px 32px -6px rgba(180, 100, 120, 0.08), 0 2px 8px rgba(0, 0, 0, 0.02);
+      --shadow-card: 0 10px 25px -5px rgba(0,0,0,0.05), 0 2px 6px rgba(0,0,0,0.02);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      font-family: var(--font-ar);
+      background: radial-gradient(circle at 10% 10%, #fff0f5 0%, #fcf9f5 45%, #fef5eb 100%);
+      color: var(--text-espresso);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 10px 8px 90px;
+      overflow-x: hidden;
+    }
+
+    @media (min-width: 768px) { body { padding: 18px 14px 90px; } }
+
+    .orders-master-wrapper {
+      width: 100%; max-width: 860px; background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1.5px solid #ffffff;
+      border-radius: 28px; padding: 16px 12px; box-shadow: 0 20px 50px -10px rgba(180, 100, 120, 0.1);
+      display: flex; flex-direction: column; position: relative;
+    }
+
+    @media (min-width: 768px) { .orders-master-wrapper { padding: 22px 18px; border-radius: 32px; } }
+
+    .svg-pure-icon {
+      width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2;
+      stroke-linecap: round; stroke-linejoin: round; display: inline-block; vertical-align: middle; flex-shrink: 0;
+    }
+
+    /* Header */
+    .admin-top-bar {
+      display: flex; flex-direction: column; gap: 10px; padding-bottom: 12px;
+      border-bottom: 1.5px solid #f1f0ee; margin-bottom: 12px;
+    }
+    @media (min-width: 600px) {
+      .admin-top-bar { flex-direction: row; justify-content: space-between; align-items: center; }
+    }
+
+    .header-brand-row { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+    .brand-cluster { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .straw-hat-badge { position: relative; width: 40px; height: 40px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .hat-glow {
+      position: absolute; width: 140%; height: 140%; border-radius: 50%;
+      background: radial-gradient(circle, rgba(251, 191, 36, 0.6) 0%, transparent 70%); filter: blur(8px);
+    }
+    .straw-hat-svg { width: 100%; height: 100%; position: relative; z-index: 2; filter: drop-shadow(0 4px 8px rgba(217, 119, 6, 0.35)); }
+
+    .brand-title-box { display: flex; flex-direction: column; min-width: 0; }
+    .brand-name { display: flex; align-items: center; gap: 5px; font-size: 17px; font-weight: 900; line-height: 1.2; white-space: nowrap; }
+    .name-en {
+      font-family: var(--font-en); letter-spacing: 1px;
+      background: linear-gradient(135deg, var(--brand-red) 0%, var(--brand-gold) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .name-ar { color: var(--text-espresso); }
+    .brand-subtitle { font-size: 10.5px; color: var(--text-muted); font-weight: 800; margin-top: 1px; white-space: nowrap; }
+
+    .header-actions-row { display: flex; align-items: center; gap: 6px; width: 100%; }
+    @media (min-width: 600px) { .header-actions-row { width: auto; } }
+
+    .live-pulse-badge {
+      display: flex; align-items: center; gap: 5px; background: #f0fdf4; border: 1px solid #bbf7d0;
+      padding: 6px 10px; border-radius: 9999px; font-size: 10.5px; font-weight: 800; color: var(--emerald-dark); flex-shrink: 0;
+    }
+    .live-dot-pulse {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 8px var(--emerald); animation: pulseSyncDot 2s infinite;
+    }
+    @keyframes pulseSyncDot { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.6; } }
+
+    .btn-end-shift-action {
+      flex: 1; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+      color: #fed7aa; border: 1.5px solid #6366f1; padding: 7px 14px; border-radius: 12px;
+      font-family: var(--font-ar); font-size: 11.5px; font-weight: 900; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      box-shadow: 0 4px 12px rgba(49, 46, 129, 0.25); transition: all 0.2s ease; white-space: nowrap;
+    }
+    .btn-end-shift-action:active { transform: scale(0.97); }
+
+    .btn-tool-outline {
+      background: #f8fafc; border: 1.5px solid #e2e8f0; color: var(--text-muted); font-family: var(--font-ar);
+      font-size: 11px; font-weight: 800; padding: 7px 12px; border-radius: 12px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 4px; text-decoration: none; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0;
+    }
+    .btn-tool-outline:hover { background: #ffffff; border-color: #fed7aa; color: var(--brand-red); }
+
+    /* KPIs Analytics */
+    .kpi-command-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px; margin-bottom: 12px;
+    }
+    @media (min-width: 600px) { .kpi-command-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .kpi-stat-unit {
+      background: #ffffff; border: 1.5px solid #f1f0ee; border-radius: 16px;
+      padding: 9px 11px; display: flex; flex-direction: column; gap: 2px; box-shadow: var(--shadow-card);
+    }
+    .kpi-label { font-size: 10px; font-weight: 800; color: var(--text-muted); }
+    .kpi-val-row { display: flex; justify-content: space-between; align-items: baseline; }
+    .kpi-digits { font-family: var(--font-en); font-size: 19px; font-weight: 900; color: var(--text-espresso); }
+
+    .kpi-alert-card { border-color: #fecdd3; background: #fff5f8; }
+    .kpi-alert-card .kpi-digits { color: var(--brand-red); }
+
+    /* Search & Sorting Toolbar */
+    .search-sort-bar-grid {
+      display: grid; grid-template-columns: 1fr; gap: 6px; margin-bottom: 10px;
+    }
+    @media (min-width: 520px) { .search-sort-bar-grid { grid-template-columns: 1.25fr 1fr; } }
+
+    .search-filter-wrapper { position: relative; width: 100%; }
+    .search-orders-input {
+      width: 100%; background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 13px;
+      padding: 9px 14px 9px 36px; font-family: var(--font-ar); font-size: 11.5px; color: var(--text-espresso); outline: none;
+    }
+    .search-orders-input:focus { border-color: var(--brand-gold); background: #ffffff; }
+    .search-svg-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; stroke: var(--text-muted); pointer-events: none; }
+
+    .sort-orders-select {
+      width: 100%; background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 13px;
+      padding: 9px 12px; font-family: var(--font-ar); font-size: 11.5px; font-weight: 800;
+      color: var(--text-espresso); outline: none; cursor: pointer;
+    }
+
+    /* Stage Filter Chips */
+    .stages-scroll-track {
+      display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; width: 100%;
+      margin-bottom: 12px; padding-bottom: 2px;
+    }
+    .stages-scroll-track::-webkit-scrollbar { display: none; }
+
+    .stage-filter-chip {
+      white-space: nowrap; background: #ffffff; border: 1.5px solid #e2e8f0; color: var(--text-muted);
+      padding: 6px 11px; border-radius: 9999px; font-family: var(--font-ar); font-size: 10.5px; font-weight: 800;
+      cursor: pointer; display: flex; align-items: center; gap: 3px; transition: all 0.2s ease;
+    }
+    .stage-filter-chip.active {
+      background: var(--brand-red); color: #ffffff; border-color: var(--brand-red);
+      box-shadow: 0 4px 12px rgba(255, 42, 95, 0.3);
+    }
+    .stage-filter-chip b { font-family: var(--font-en); font-size: 10px; }
+
+    /* Orders Cards */
+    .orders-cards-stream {
+      display: flex; flex-direction: column; gap: 10px; min-height: 45vh; max-height: 62vh;
+      overflow-y: auto; padding-right: 1px;
+    }
+
+    .exec-order-card {
+      background: #ffffff; border: 1.5px solid #f1f0ee; border-radius: 18px;
+      padding: 12px 14px; display: flex; flex-direction: column; gap: 8px;
+      box-shadow: var(--shadow-card); transition: all 0.2s ease; position: relative;
+    }
+    .exec-order-card.is-unattended-urgent {
+      border-color: #ff2a5f !important; background: #fff5f7 !important;
+      box-shadow: 0 0 14px rgba(255, 42, 95, 0.2);
+    }
+    .exec-order-card.is-problem-state {
+      border-color: var(--brand-red); background: #fff5f8; animation: alertGlow 1.8s infinite alternate;
+    }
+    @keyframes alertGlow { 0% { box-shadow: 0 0 0 rgba(255, 42, 95, 0); } 100% { box-shadow: 0 0 14px rgba(255, 42, 95, 0.35); } }
+    .exec-order-card.is-cancelled-state { opacity: 0.72; border-color: #cbd5e1; background: #f8fafc; }
+
+    .card-top-row { display: flex; justify-content: space-between; align-items: center; }
+    .order-id-badge { font-family: var(--font-en); font-size: 12.5px; font-weight: 900; color: var(--brand-red); background: #fff0f3; padding: 2px 7px; border-radius: 7px; }
+    
+    .status-stage-pill { font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 9999px; display: flex; align-items: center; gap: 3px; }
+    .status-pill-pending { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+    .status-pill-prep { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
+    .status-pill-transit { background: #f3e8ff; color: #6b21a8; border: 1px solid #e9d5ff; }
+    .status-pill-delivered { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+    .status-pill-problem { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+    .status-pill-cancelled { background: #f1f5f9; color: #64748b; border: 1px solid #cbd5e1; text-decoration: line-through; }
+
+    .time-slot-target-strip {
+      background: #fdfaf7; border: 1px solid #fed7aa; border-radius: 10px;
+      padding: 6px 9px; display: flex; justify-content: space-between; align-items: center;
+      font-size: 11px; font-weight: 800; color: #92400e;
+    }
+
+    .qty-alert-badge {
+      display: flex; align-items: center; gap: 6px; padding: 6px 10px;
+      border-radius: 10px; font-size: 11px; font-weight: 900; line-height: 1.35;
+    }
+    .qty-alert-huge {
+      background: linear-gradient(135deg, #ff1e56 0%, #be123c 100%);
+      color: #ffffff; border: 1.5px solid #fda4af; box-shadow: 0 4px 14px rgba(225, 29, 72, 0.35);
+    }
+    .qty-alert-medium { background: #fffbeb; color: #92400e; border: 1.5px solid #fde68a; }
+
+    .order-items-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 11px; padding: 7px 9px; font-size: 11.5px; font-weight: 700; color: var(--text-espresso); line-height: 1.35; }
+
+    .timeline-seconds-strip {
+      display: grid; grid-template-columns: repeat(3, 1fr); background: #fdfaf7;
+      border: 1px solid #f5ebe3; border-radius: 10px; padding: 5px 8px; font-size: 9.5px; color: var(--text-muted); text-align: center; gap: 2px;
+    }
+    .timeline-seconds-strip b { font-family: var(--font-en); font-weight: 800; color: var(--text-espresso); display: block; font-size: 10.5px; }
+
+    .driver-assigned-strip {
+      background: #f0fdf4; border: 1.5px solid #bbf7d0; border-radius: 11px;
+      padding: 6px 9px; display: flex; justify-content: space-between; align-items: center; font-size: 10.5px;
+    }
+
+    .actions-arsenal-grid { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 3px; }
+    .btn-action-unit {
+      border: 1px solid #e2e8f0; background: #f8fafc; padding: 5px 8px; border-radius: 8px;
+      font-size: 10px; font-weight: 800; color: var(--text-espresso); cursor: pointer; text-decoration: none;
+      display: flex; align-items: center; gap: 3px; transition: all 0.2s ease;
+    }
+    .btn-action-unit:hover { background: #ffffff; border-color: #cbd5e1; }
+    .btn-step-start { background: linear-gradient(135deg, var(--emerald) 0%, #059669 100%); color: #fff; border: none; }
+    .btn-cancel-action { background: #fff1f2; color: #9f1239; border-color: #fecdd3; }
+    .btn-override-action {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); color: #fed7aa;
+      border: 1.5px solid #6366f1; margin-right: auto; box-shadow: 0 2px 8px rgba(49, 46, 129, 0.25);
+    }
+
+    /* Modals */
+    .modal-backdrop-wrap {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100%; height: 100dvh;
+      background: rgba(10, 8, 9, 0.68); backdrop-filter: blur(8px); z-index: 10000;
+      display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    .modal-backdrop-wrap.open { opacity: 1; pointer-events: auto; }
+
+    .override-modal-card {
+      background: #ffffff; border-radius: 24px; padding: 20px 18px; width: 92%; max-width: 440px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.3); border: 1.5px solid #fed7aa; max-height: 90vh; overflow-y: auto;
+    }
+
+    .shift-summary-stat-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin: 10px 0;
+    }
+    .summary-stat-pill {
+      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;
+      padding: 8px 10px; display: flex; flex-direction: column; gap: 2px;
+    }
+
+    .form-unit-block { display: flex; flex-direction: column; gap: 3px; margin-bottom: 9px; text-align: right; }
+    .form-unit-block label { font-size: 11px; font-weight: 800; color: var(--text-espresso); }
+    .form-unit-block select, .form-unit-block input {
+      width: 100%; background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 11px;
+      padding: 8px 10px; font-family: var(--font-ar); font-size: 11.5px; outline: none;
+    }
+
+    .slip-paper-view {
+      background: #ffffff; border: 1px dashed #cbd5e1; border-radius: 12px;
+      padding: 14px; font-family: monospace; font-size: 11px; line-height: 1.45;
+      color: #000000; margin: 10px 0; max-height: 45vh; overflow-y: auto; text-align: center;
+    }
+
+    #toast-container { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 15000; pointer-events: none; }
+    .chakra-toast {
+      background: #1f1412; color: #ffffff; padding: 8px 16px; border-radius: 9999px; font-size: 11px; font-weight: 800;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25); border: 1.5px solid #fed7aa; display: flex; align-items: center; gap: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="orders-master-wrapper">
+    <!-- Top Header -->
+    <div class="admin-top-bar">
+      <div class="header-brand-row">
+        <div class="brand-cluster">
+          <div class="straw-hat-badge">
+            <div class="hat-glow"></div>
+            <svg class="straw-hat-svg" viewBox="0 0 100 100" fill="none">
+              <ellipse cx="50" cy="70" rx="46" ry="13" fill="#EAB308"/>
+              <path d="M24 67C24 38 31 24 50 24C69 24 76 38 76 67Z" fill="#FACC15"/>
+              <path d="M23.5 64.5C34 68.5 66 68.5 76.5 64.5C75.5 57.5 74.5 53 74.5 53C63 57.5 37 57.5 25.5 53Z" fill="#FF2A5F"/>
+            </svg>
+          </div>
+          <div class="brand-title-box">
+            <div class="brand-name"><span class="name-en">LUFFY</span> • <span class="name-ar">مركز تتبع الطلبات</span></div>
+            <span class="brand-subtitle">غرفة العمليات والأرشفة المعتمدة • العقبة 🇯🇴</span>
+          </div>
+        </div>
+
+        <div class="live-pulse-badge">
+          <div class="live-dot-pulse"></div>
+          <span>مباشر</span>
+        </div>
+      </div>
+
+      <div class="header-actions-row">
+        <button class="btn-end-shift-action" onclick="openEndShiftModal()">
+          <svg class="svg-pure-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          <span>إنهاء اليوم والأرشفة</span>
+        </button>
+
+        <a href="z_84mq_vault.html" class="btn-tool-outline">
+          <svg class="svg-pure-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+          <span>الإدارة</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 📊 KPIs Analytics Command Bar -->
+    <div class="kpi-command-grid">
+      <div class="kpi-stat-unit">
+        <span class="kpi-label">إجمالي الطلبات</span>
+        <div class="kpi-val-row">
+          <span class="kpi-digits" id="kpi-total-count">0</span>
+          <span style="font-size:9.5px; color:var(--text-muted);">طلب اليوم</span>
+        </div>
+      </div>
+
+      <div class="kpi-stat-unit">
+        <span class="kpi-label">نشطة (مطبخ / طريق)</span>
+        <div class="kpi-val-row">
+          <span class="kpi-digits" style="color:var(--blue-accent);" id="kpi-active-count">0</span>
+          <span style="font-size:9.5px; color:var(--blue-accent);">قيد الإنجاز</span>
+        </div>
+      </div>
+
+      <div class="kpi-stat-unit kpi-alert-card">
+        <span class="kpi-label">🚨 كميات كبيرة / تنبيهات</span>
+        <div class="kpi-val-row">
+          <span class="kpi-digits" id="kpi-problem-count">0</span>
+          <span style="font-size:9.5px; color:var(--brand-red);">أولوية قصوى</span>
+        </div>
+      </div>
+
+      <div class="kpi-stat-unit">
+        <span class="kpi-label">متوسط سرعة الإنجاز</span>
+        <div class="kpi-val-row">
+          <span class="kpi-digits" style="color:var(--emerald);" id="kpi-avg-time">--</span>
+          <span style="font-size:9.5px; color:var(--emerald);">دقيقة/طلب</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🔍 Search & Sorting Toolbar -->
+    <div class="search-sort-bar-grid">
+      <div class="search-filter-wrapper">
+        <input type="text" class="search-orders-input" id="search-query-input" placeholder="ابحث برقم الطلب #LFY...، اسم الزبون، الهاتف، الموعد، أو العنوان..." oninput="handleSearchQuery(this.value)">
+        <svg class="search-svg-icon" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </div>
+
+      <div>
+        <select class="sort-orders-select" id="sort-orders-select" onchange="handleSortChange(this.value)">
+          <option value="TIME_SLOT_URGENCY" selected>⏰ حسب أسبقية موعد التسليم (Time Slot)</option>
+          <option value="NEWEST">⚡ الأحدث وروداً (Newest)</option>
+          <option value="QTY_HIGH">📦 الكميات الأكبر أولاً (Highest Quantity)</option>
+          <option value="LONGEST_ELAPSED">⏳ الأطول وقتاً مستغرقاً (Elapsed)</option>
+          <option value="OLDEST">🕰️ الأقدم وروداً (Oldest)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Stage Filter Chips -->
+    <div class="stages-scroll-track">
+      <button class="stage-filter-chip active" onclick="applyStageFilter('ALL', this)">الكل (<b id="cnt-chip-all">0</b>)</button>
+      <button class="stage-filter-chip" onclick="applyStageFilter('PENDING', this)">غرفة الانتظار (<b id="cnt-chip-pending">0</b>)</button>
+      <button class="stage-filter-chip" onclick="applyStageFilter('PREPARING', this)">تحت التحضير (<b id="cnt-chip-prep">0</b>)</button>
+      <button class="stage-filter-chip" onclick="applyStageFilter('DISPATCHED', this)">في الطريق / مع الكابتن (<b id="cnt-chip-transit">0</b>)</button>
+      <button class="stage-filter-chip" onclick="applyStageFilter('DELIVERED', this)">تم التسليم بنجاح (<b id="cnt-chip-delivered">0</b>)</button>
+      <button class="stage-filter-chip" onclick="applyStageFilter('PROBLEM', this)">⚠️ المشاكل (<b id="cnt-chip-problem">0</b>)</button>
+      <button class="stage-filter-chip" onclick="applyStageFilter('CANCELLED', this)">🚫 ملغي (<b id="cnt-chip-cancelled">0</b>)</button>
+    </div>
+
+    <!-- Orders Stream Flow -->
+    <div class="orders-cards-stream" id="orders-stream-container">جاري جلب سجل الطلبات من قاعدة العمليات...</div>
+  </div>
+
+  <!-- 🏁 نافذة إنهاء اليوم والأرشفة الشاملة -->
+  <div class="modal-backdrop-wrap" id="end-shift-modal" onclick="closeEndShiftModal()">
+    <div class="override-modal-card" onclick="event.stopPropagation()">
+      <div style="font-size:15px; font-weight:900; color:var(--brand-gold); margin-bottom:2px;">🏁 إنهاء اليوم والمراجعة والأرشفة الشاملة</div>
+      <div style="font-size:11px; color:var(--text-muted); margin-bottom:8px;">ترحيل طلبات الوردية المنتهية وتصفير الشاشة لبدء يوم جديد:</div>
+
+      <div class="shift-summary-stat-grid">
+        <div class="summary-stat-pill">
+          <span style="font-size:10px; color:var(--text-muted); font-weight:800;">الطلبات المكتملة للتسليم</span>
+          <span style="font-size:16px; font-weight:900; color:var(--emerald-dark);" id="arch-stat-delivered-count">0</span>
+        </div>
+        <div class="summary-stat-pill">
+          <span style="font-size:10px; color:var(--text-muted); font-weight:800;">إجمالي العلب المبيعة</span>
+          <span style="font-size:16px; font-weight:900; color:var(--text-espresso);" id="arch-stat-total-cups">0</span>
+        </div>
+        <div class="summary-stat-pill">
+          <span style="font-size:10px; color:var(--text-muted); font-weight:800;">طلبات التوصيل / الاستلام</span>
+          <span style="font-size:13px; font-weight:900; color:#1e40af;" id="arch-stat-types-breakdown">0 / 0</span>
+        </div>
+        <div class="summary-stat-pill">
+          <span style="font-size:10px; color:var(--text-muted); font-weight:800;">محفوظ لليوم التالي</span>
+          <span style="font-size:14px; font-weight:900; color:var(--brand-red);" id="arch-stat-preserved-nextday">0 طلب</span>
+        </div>
+      </div>
+
+      <div style="background:#eff6ff; border:1.5px solid #bfdbfe; border-radius:12px; padding:10px 12px; font-size:11px; color:#1e40af; line-height:1.45; margin-bottom:12px;">
+        🛡️ <strong>حماية طلبات الغد:</strong> سيتم ترحيل كافة طلبات وردية اليوم المنتهية إلى شيت <code>Orders_Archive</code> وتصفير الشاشة، وستبقى كافة طلبات الحجز المسبق المجدولة ليوم غد ظاهرة دون مساس.
+      </div>
+
+      <div style="display:flex; gap:6px;">
+        <button style="flex:1; border:none; background:#f1f5f9; padding:10px; border-radius:10px; font-size:11px; font-weight:800; cursor:pointer;" onclick="closeEndShiftModal()">إلغاء</button>
+        <button style="flex:2; border:none; background:linear-gradient(135deg, var(--emerald) 0%, #059669 100%); color:#fff; padding:10px; border-radius:10px; font-size:11.5px; font-weight:900; cursor:pointer;" onclick="submitShiftArchiveDirect()">أرشفة وإقفال الوردية بالكامل ⚡</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🚫 نافذة إلغاء الطلب -->
+  <div class="modal-backdrop-wrap" id="cancel-order-modal" onclick="closeCancelModal()">
+    <div class="override-modal-card" onclick="event.stopPropagation()">
+      <div style="font-size:14.5px; font-weight:900; color:var(--brand-red); margin-bottom:4px;">🚫 إلغاء الطلب واعتماد الاسترجاع</div>
+      <div style="font-size:11.5px; font-weight:800; color:var(--text-muted); margin-bottom:10px;" id="cancel-target-order-label">الطلب: #LFY-0000</div>
+
+      <div class="form-unit-block">
+        <label>سبب إلغاء الطلب بالتفصيل *</label>
+        <input type="text" id="cancel_reason_input" placeholder="مثال: اعتذار الزبون / طلب مكرر / تعذر التواصل..." required>
+      </div>
+
+      <div style="display:flex; gap:6px;">
+        <button style="flex:1; border:none; background:#f1f5f9; padding:9px; border-radius:10px; font-size:11px; font-weight:800; cursor:pointer;" onclick="closeCancelModal()">تراجع</button>
+        <button style="flex:2; border:none; background:linear-gradient(135deg, var(--brand-red) 0%, #be123c 100%); color:#fff; padding:9px; border-radius:10px; font-size:11.5px; font-weight:900; cursor:pointer;" onclick="submitCancellationDirect()">تأكيد الإلغاء ⚡</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 👑 نافذة تدخل وتجاوز الإدارة العامة (Executive Override) -->
+  <div class="modal-backdrop-wrap" id="override-modal" onclick="closeOverrideModal()">
+    <div class="override-modal-card" onclick="event.stopPropagation()">
+      <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px solid #f1f0ee; margin-bottom:10px;">
+        <div style="font-size:14px; font-weight:900;">👑 تدخل وتجاوز الإدارة العامة (Override)</div>
+        <button style="border:none; background:#f1f5f9; width:26px; height:26px; border-radius:50%; font-weight:800; cursor:pointer;" onclick="closeOverrideModal()">✕</button>
+      </div>
+
+      <div style="font-size:11.5px; font-weight:800; color:var(--brand-red); margin-bottom:8px;" id="override-target-id">الطلب: #LFY-0000</div>
+
+      <div class="form-unit-block">
+        <label>تعديل مرحلة الطلب قسرياً:</label>
+        <select id="override-status-select">
+          <option value="PENDING">غرفة الانتظار (PENDING)</option>
+          <option value="PREPARING">تحت التحضير بالمطبخ (PREPARING)</option>
+          <option value="DISPATCHED">جاهز للتسليم / في الطريق (DISPATCHED)</option>
+          <option value="DELIVERED">تم تسليم الزبون بنجاح (DELIVERED)</option>
+          <option value="PROBLEM">⚠️ تثبيت بلاغ مشكلة طارئة (PROBLEM)</option>
+          <option value="CANCELLED">🚫 إلغاء وتجميد الطلب (CANCELLED)</option>
+        </select>
+      </div>
+
+      <div class="form-unit-block">
+        <label>إسناد / تغيير السائق المعين:</label>
+        <select id="override-driver-select">
+          <option value="">-- بدون سائق معين --</option>
+        </select>
+      </div>
+
+      <div class="form-unit-block">
+        <label>ملاحظة التوجيه الإداري:</label>
+        <input type="text" id="override-note-input" placeholder="مثال: تم التوجيه لحل الإشكال مباشرة...">
+      </div>
+
+      <div style="display:flex; gap:6px; margin-top:6px;">
+        <button style="flex:1; border:none; background:#f1f5f9; padding:9px; border-radius:10px; font-size:11px; font-weight:800; cursor:pointer;" onclick="closeOverrideModal()">إلغاء</button>
+        <button style="flex:2; border:none; background:linear-gradient(135deg, var(--brand-red) 0%, #ff5e7e 100%); color:#fff; padding:9px; border-radius:10px; font-size:11.5px; font-weight:900; cursor:pointer;" onclick="submitOverrideDirect()">اعتماد التجاوز الإداري ⚡</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🖨️ تذكرة التحضير والإيصال الحراري -->
+  <div class="modal-backdrop-wrap" id="slip-modal" onclick="closeSlipModal()">
+    <div class="override-modal-card" onclick="event.stopPropagation()">
+      <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px solid #f1f0ee;">
+        <div style="font-size:13.5px; font-weight:900;">🖨️ تذكرة التحضير والإيصال الحراري</div>
+        <button style="border:none; background:#f1f5f9; width:26px; height:26px; border-radius:50%; font-weight:800; cursor:pointer;" onclick="closeSlipModal()">✕</button>
+      </div>
+
+      <div class="slip-paper-view" id="slip-paper-content"></div>
+
+      <div style="display:flex; gap:6px; margin-top:8px;">
+        <button style="flex:1; border:none; background:#f1f5f9; padding:9px; border-radius:10px; font-size:11px; font-weight:800; cursor:pointer;" onclick="closeSlipModal()">إغلاق</button>
+        <button style="flex:2; border:none; background:linear-gradient(135deg, var(--blue-accent) 0%, #1d4ed8 100%); color:#fff; padding:9px; border-radius:10px; font-size:11.5px; font-weight:800; cursor:pointer;" onclick="window.print()">طباعة الإيصال</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script>
+    // ⚡ الرابط السحابي المركزي المعتمد
+    const APPS_SCRIPT_EXEC_URL = "https://script.google.com/macros/s/AKfycbxYmpfN2OBW24M-sumyx8dwbkFN-RsbiWkYJZYa0gZLfMxVpXr2TswzORV0inmu5nFieQ/exec";
+    const MASTER_SECRET = "LUFFY#2026$Aqaba_Master!Vault@99";
+
+    let rawOrdersList = [];
+    let driversList = [];
+    let currentFilterStage = 'ALL';
+    let currentSortMode = 'TIME_SLOT_URGENCY';
+    let searchQuery = '';
+    let selectedOrderForOverride = null;
+    let targetOrderForCancellation = null;
+
+    function showToast(msg) {
+      const c = document.getElementById('toast-container');
+      const t = document.createElement('div');
+      t.className = 'chakra-toast';
+      t.innerHTML = `<span>${msg}</span>`;
+      c.appendChild(t);
+      setTimeout(() => t.remove(), 3200);
+    }
+
+    function calculateOrderElapsedSeconds(order) {
+      if (!order.Created_At) return 0;
+      const startMs = new Date(order.Created_At).getTime();
+      if (isNaN(startMs)) return 0;
+
+      let endMs = Date.now();
+      if (order.Status === 'DELIVERED' && order.Delivered_At) {
+        const delMs = new Date(order.Delivered_At).getTime();
+        if (!isNaN(delMs)) endMs = delMs;
+      }
+      return Math.max(0, Math.floor((endMs - startMs) / 1000));
+    }
+
+    function formatHumanDuration(seconds) {
+      const mins = Math.floor(seconds / 60);
+      const secs = seconds % 60;
+      if (mins >= 60) {
+        const hrs = Math.floor(mins / 60);
+        return `${hrs} س و ${mins % 60} د`;
+      }
+      return `${mins} د و ${secs} ث`;
+    }
+
+    // =========================================================================
+    // 📡 سحب الطلبات والسائقين عبر السيرفر المركزي
+    // =========================================================================
+    function fetchLiveOrdersDirectly() {
+      const cb1 = "onKdsOrders_" + Date.now();
+      window[cb1] = function(res) {
+        if (!res || !res.data) return;
+        rawOrdersList = res.data;
+        calculateKPIsDashboard();
+        renderOrdersCardsStream();
+      };
+      const s1 = document.createElement("script");
+      s1.src = `${APPS_SCRIPT_EXEC_URL}?action=get_live_orders&callback=${cb1}&_ts=${Date.now()}`;
+      document.body.appendChild(s1);
+
+      // جلب السائقين لقائمة التعيين
+      const cb2 = "onKdsDrivers_" + Date.now();
+      window[cb2] = function(res) {
+        if (res && res.data) {
+          driversList = res.data;
+          populateDriversSelect();
+        }
+      };
+      const s2 = document.createElement("script");
+      s2.src = `${APPS_SCRIPT_EXEC_URL}?action=get_drivers&callback=${cb2}&_ts=${Date.now()}`;
+      document.body.appendChild(s2);
+    }
+
+    function populateDriversSelect() {
+      const select = document.getElementById('override-driver-select');
+      if (!select) return;
+      select.innerHTML = `<option value="">-- بدون سائق معين --</option>`;
+      driversList.forEach(d => {
+        select.innerHTML += `<option value="${d.Driver_ID}|${d.Driver_Name}|${d.Phone_Number}">🛵 ${d.Driver_Name} (${d.Phone_Number || ''})</option>`;
+      });
+    }
+
+    function calculateKPIsDashboard() {
+      const total = rawOrdersList.length;
+      const pending = rawOrdersList.filter(o => o.Status === 'PENDING').length;
+      const prep = rawOrdersList.filter(o => o.Status === 'PREPARING').length;
+      const transit = rawOrdersList.filter(o => o.Status === 'DISPATCHED' || o.Status === 'IN_TRANSIT').length;
+      const delivered = rawOrdersList.filter(o => o.Status === 'DELIVERED').length;
+      const problem = rawOrdersList.filter(o => o.Status === 'PROBLEM').length;
+      const cancelled = rawOrdersList.filter(o => o.Status === 'CANCELLED').length;
+      const hugeQtyCount = rawOrdersList.filter(o => Number(o.Total_Qty) >= 30 && o.Status !== 'DELIVERED' && o.Status !== 'CANCELLED').length;
+
+      document.getElementById('kpi-total-count').textContent = total;
+      document.getElementById('kpi-active-count').textContent = pending + prep + transit;
+      document.getElementById('kpi-problem-count').textContent = problem + hugeQtyCount;
+
+      document.getElementById('cnt-chip-all').textContent = total;
+      document.getElementById('cnt-chip-pending').textContent = pending;
+      document.getElementById('cnt-chip-prep').textContent = prep;
+      document.getElementById('cnt-chip-transit').textContent = transit;
+      document.getElementById('cnt-chip-delivered').textContent = delivered;
+      document.getElementById('cnt-chip-problem').textContent = problem;
+      document.getElementById('cnt-chip-cancelled').textContent = cancelled;
+
+      let totalMinutes = 0;
+      let countTimed = 0;
+      rawOrdersList.forEach(o => {
+        if (o.Status === 'DELIVERED' && o.Created_At && o.Delivered_At) {
+          const t1 = new Date(o.Created_At).getTime();
+          const t2 = new Date(o.Delivered_At).getTime();
+          if (!isNaN(t1) && !isNaN(t2) && t2 > t1) {
+            totalMinutes += (t2 - t1) / (1000 * 60);
+            countTimed++;
+          }
+        }
+      });
+      document.getElementById('kpi-avg-time').textContent = countTimed > 0 ? (totalMinutes / countTimed).toFixed(1) : '--';
+    }
+
+    function applyStageFilter(stage, btn) {
+      currentFilterStage = stage;
+      document.querySelectorAll('.stage-filter-chip').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderOrdersCardsStream();
+    }
+
+    function handleSearchQuery(val) {
+      searchQuery = val.trim().toLowerCase();
+      renderOrdersCardsStream();
+    }
+
+    function handleSortChange(sortMode) {
+      currentSortMode = sortMode;
+      renderOrdersCardsStream();
+    }
+
+    function renderOrdersCardsStream() {
+      const container = document.getElementById('orders-stream-container');
+      container.innerHTML = "";
+
+      let filtered = rawOrdersList.filter(order => {
+        const id = String(order.Order_ID || '').toLowerCase();
+        const name = String(order.Customer_Name || '').toLowerCase();
+        const phone = String(order.Customer_Phone || order.Phone_Number || '').toLowerCase();
+        const driver = String(order.Assigned_Driver_Name || '').toLowerCase();
+        const items = String(order.Items_Summary || '').toLowerCase();
+
+        const matchSearch = !searchQuery || id.includes(searchQuery) || name.includes(searchQuery) || phone.includes(searchQuery) || driver.includes(searchQuery) || items.includes(searchQuery);
+
+        let matchStage = true;
+        if (currentFilterStage === 'DISPATCHED') matchStage = (order.Status === 'DISPATCHED' || order.Status === 'IN_TRANSIT');
+        else if (currentFilterStage !== 'ALL') matchStage = (order.Status === currentFilterStage);
+
+        return matchSearch && matchStage;
+      });
+
+      // فرز الطلبات
+      filtered.sort((a, b) => {
+        if (currentSortMode === 'QTY_HIGH') return (Number(b.Total_Qty) || 0) - (Number(a.Total_Qty) || 0);
+        if (currentSortMode === 'LONGEST_ELAPSED') return calculateOrderElapsedSeconds(b) - calculateOrderElapsedSeconds(a);
+        if (currentSortMode === 'OLDEST') return (new Date(a.Created_At).getTime() || 0) - (new Date(b.Created_At).getTime() || 0);
+        return (new Date(b.Created_At).getTime() || 0) - (new Date(a.Created_At).getTime() || 0);
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:35px; color:var(--text-muted); font-weight:800; background:#fff; border-radius:18px; border:1px dashed #fed7aa;">
+            لا توجد طلبات مطابقة في هذا القسم حالياً ✓
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(order => {
+        const id = order.Order_ID;
+        const isDelivery = order.Order_Type === 'DELIVERY';
+        const isPending = order.Status === 'PENDING';
+        const isProblem = order.Status === 'PROBLEM';
+        const isCancelled = order.Status === 'CANCELLED';
+        const elapsedSecs = calculateOrderElapsedSeconds(order);
+        const totalQty = Number(order.Total_Qty) || 1;
+        const cleanCustPhone = String(order.Customer_Phone || order.Phone_Number || '').replace(/[^\d+]/g, '');
+
+        let statusText = "غرفة الانتظار";
+        let statusClass = "status-pill-pending";
+        if (order.Status === 'PREPARING') { statusText = "تحت التحضير بالمطبخ"; statusClass = "status-pill-prep"; }
+        else if (order.Status === 'DISPATCHED' || order.Status === 'IN_TRANSIT') { statusText = isDelivery ? "في الطريق مع الكابتن" : "جاهز للاستلام بالمحل"; statusClass = "status-pill-transit"; }
+        else if (order.Status === 'DELIVERED') { statusText = "تم التسليم بنجاح ✓"; statusClass = "status-pill-delivered"; }
+        else if (order.Status === 'PROBLEM') { statusText = "⚠️ بلاغ مشكلة طارئة"; statusClass = "status-pill-problem"; }
+        else if (order.Status === 'CANCELLED') { statusText = "🚫 ملغي ومسترجع"; statusClass = "status-pill-cancelled"; }
+
+        let qtyAlertHtml = "";
+        if (totalQty >= 30) {
+          qtyAlertHtml = `<div class="qty-alert-badge qty-alert-huge">🚨 أولوية قصوى: كمية ضخمة (${totalQty} علبة)</div>`;
+        }
+
+        const card = document.createElement('div');
+        card.className = `exec-order-card ${isProblem ? 'is-problem-state' : ''} ${isCancelled ? 'is-cancelled-state' : ''} ${isPending ? 'is-unattended-urgent' : ''}`;
+
+        card.innerHTML = `
+          <div class="card-top-row">
+            <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+              <span class="order-id-badge">#${id}</span>
+              <span style="font-size:10.5px; font-weight:900; color:${isDelivery ? '#1e40af' : '#92400e'}; background:${isDelivery ? '#eff6ff' : '#fef3c7'}; padding:2px 8px; border-radius:6px;">
+                ${isDelivery ? 'توصيل 🛵' : 'استلام 🛍️'}
+              </span>
+              <span style="font-size:10px; font-weight:800; background:#f1f5f9; padding:2px 6px; border-radius:5px; color:#475569; font-family:var(--font-en);">
+                ⏳ ${formatHumanDuration(elapsedSecs)}
+              </span>
+            </div>
+            <span class="status-stage-pill ${statusClass}">${statusText}</span>
+          </div>
+
+          <div class="time-slot-target-strip">
+            <span>⏰ موعد التسليم المطلوب:</span>
+            <strong>${order.Time_Slot || 'أسرع وقت متاح'}</strong>
+          </div>
+
+          ${qtyAlertHtml}
+
+          <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; font-weight:800;">
+            <span>👤 ${order.Customer_Name || 'زبون كابتن السعادة'}</span>
+            <span style="font-family:var(--font-en); direction:ltr; font-weight:900;">${cleanCustPhone}</span>
+          </div>
+
+          <div class="order-items-box">
+            <strong>الأصناف (${totalQty} علبة):</strong><br>
+            ${order.Items_Summary}
+          </div>
+
+          ${order.Address_Details ? `<div style="font-size:10.5px; color:var(--text-muted);">🏢 العنوان والمعلم: ${order.Address_Details}</div>` : ''}
+          ${isProblem ? `<div style="font-size:11px; font-weight:800; color:#be123c;">⚠️ تفاصيل المشكلة: ${order.Problem_Note}</div>` : ''}
+
+          <div class="timeline-seconds-strip">
+            <div>الوارد: <b>${order.Created_At ? String(order.Created_At).slice(-8) : '--'}</b></div>
+            <div>بدء التحضير: <b>${order.Prep_Started_At ? String(order.Prep_Started_At).slice(-8) : '--'}</b></div>
+            <div>التسليم: <b>${order.Delivered_At ? String(order.Delivered_At).slice(-8) : (order.Dispatched_At ? String(order.Dispatched_At).slice(-8) : '--')}</b></div>
+          </div>
+
+          ${order.Assigned_Driver_Name ? `
+            <div class="driver-assigned-strip">
+              <div>🛵 الكابتن المستلم: <strong>${order.Assigned_Driver_Name}</strong></div>
+            </div>
+          ` : ''}
+
+          <div class="actions-arsenal-grid">
+            ${isPending ? `
+              <button class="btn-action-unit btn-step-start" onclick="setOrderStatusDirect('${id}', 'PREPARING')">
+                <span>بدء التحضير ⚡</span>
+              </button>
+            ` : ''}
+
+            ${cleanCustPhone ? `
+              <a href="tel:${cleanCustPhone}" class="btn-action-unit">اتصال</a>
+              <a href="https://wa.me/${cleanCustPhone.replace('+', '')}" target="_blank" class="btn-action-unit">واتساب</a>
+            ` : ''}
+
+            ${order.GPS_Map_URL ? `
+              <a href="${order.GPS_Map_URL}" target="_blank" class="btn-action-unit" style="color:var(--blue-accent);">خرائط GPS ↗</a>
+            ` : ''}
+
+            <button class="btn-action-unit" onclick='openSlipPreview(${JSON.stringify(order)})'>🖨️ تذكرة</button>
+
+            ${!isCancelled ? `
+              <button class="btn-action-unit btn-cancel-action" onclick='openCancelOrderModal(${JSON.stringify(order)})'>🚫 إلغاء</button>
+            ` : ''}
+
+            <button class="btn-action-unit btn-override-action" onclick='openOverrideModal(${JSON.stringify(order)})'>
+              <span>تجاوز إداري 👑</span>
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function setOrderStatusDirect(orderId, newStatus) {
+      showToast(`جاري تحويل الطلب #${orderId} إلى ${newStatus}...`);
+      const payload = { order_id: orderId, new_status: newStatus, staff_name: "مركز العمليات KDS" };
+
+      const cb = "onStatusDirect_" + Date.now();
+      window[cb] = function() {
+        showToast("تم تحديث حالة الطلب بنجاح ✓");
+        fetchLiveOrdersDirectly();
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=update_order_status&data=${encodeURIComponent(JSON.stringify(payload))}&callback=${cb}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+    }
+
+    // =========================================================================
+    // 🏁 إنهاء اليوم والأرشفة السحابية
+    // =========================================================================
+    function openEndShiftModal() {
+      const completedOrders = rawOrdersList.filter(o => o.Status === 'DELIVERED');
+      const preservedOrders = rawOrdersList.filter(o => o.Status !== 'DELIVERED' && o.Status !== 'CANCELLED');
+
+      let totalCups = 0, delCount = 0, pickCount = 0;
+      completedOrders.forEach(o => {
+        totalCups += Number(o.Total_Qty) || 1;
+        if (o.Order_Type === 'DELIVERY') delCount++; else pickCount++;
+      });
+
+      document.getElementById('arch-stat-delivered-count').textContent = completedOrders.length;
+      document.getElementById('arch-stat-total-cups').textContent = `${totalCups} علبة`;
+      document.getElementById('arch-stat-types-breakdown').textContent = `${delCount} توصيل / ${pickCount} استلام`;
+      document.getElementById('arch-stat-preserved-nextday').textContent = `${preservedOrders.length} طلب محفوظ`;
+
+      document.getElementById('end-shift-modal').classList.add('open');
+    }
+    function closeEndShiftModal() { document.getElementById('end-shift-modal').classList.remove('open'); }
+
+    function submitShiftArchiveDirect() {
+      showToast("جاري ترحيل طلبات اليوم للأرشيف وتصفير الشاشة...");
+      const cb = "onArchived_" + Date.now();
+      window[cb] = function(res) {
+        showToast(`🎉 تم أرشفة (${res.archived_count || 0}) طلب بنجاح وبدء وردية جديدة!`);
+        closeEndShiftModal();
+        fetchLiveOrdersDirectly();
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?auth_pass=${encodeURIComponent(MASTER_SECRET)}&action=archive_daily_shift&mode=ALL_TODAY&callback=${cb}&_ts=${Date.now()}`;
+      document.body.appendChild(s);
+    }
+
+    // =========================================================================
+    // 🚫 إلغاء الطلب
+    // =========================================================================
+    function openCancelOrderModal(order) {
+      targetOrderForCancellation = order;
+      document.getElementById('cancel-target-order-label').textContent = `الطلب المستهدف: #${order.Order_ID} للزبون: ${order.Customer_Name}`;
+      document.getElementById('cancel_reason_input').value = "";
+      document.getElementById('cancel-order-modal').classList.add('open');
+    }
+    function closeCancelModal() { document.getElementById('cancel-order-modal').classList.remove('open'); }
+
+    function submitCancellationDirect() {
+      const reason = document.getElementById('cancel_reason_input').value.trim();
+      if (!reason) { showToast("يرجى كتابة سبب الإلغاء للمتابعة"); return; }
+
+      showToast(`جاري إلغاء الطلب #${targetOrderForCancellation.Order_ID}...`);
+      const payload = {
+        order_id: targetOrderForCancellation.Order_ID,
+        new_status: "CANCELLED",
+        problem_note: `تم الإلغاء: ${reason}`,
+        staff_name: "الإدارة العامة"
+      };
+
+      const cb = "onCancelDone_" + Date.now();
+      window[cb] = function() {
+        showToast(`تم إلغاء الطلب #${targetOrderForCancellation.Order_ID} بنجاح ✓`);
+        closeCancelModal();
+        fetchLiveOrdersDirectly();
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?action=update_order_status&data=${encodeURIComponent(JSON.stringify(payload))}&callback=${cb}`;
+      document.body.appendChild(s);
+    }
+
+    // =========================================================================
+    // 👑 التجاوز الإداري المباشر
+    // =========================================================================
+    function openOverrideModal(order) {
+      selectedOrderForOverride = order;
+      document.getElementById('override-target-id').textContent = `الطلب المستهدف: #${order.Order_ID} للزبون: ${order.Customer_Name}`;
+      document.getElementById('override-status-select').value = order.Status === 'PROBLEM' ? 'PREPARING' : order.Status;
+      document.getElementById('override-note-input').value = order.Problem_Note || "";
+      populateDriversSelect();
+      document.getElementById('override-modal').classList.add('open');
+    }
+    function closeOverrideModal() { document.getElementById('override-modal').classList.remove('open'); }
+
+    function submitOverrideDirect() {
+      const newStatus = document.getElementById('override-status-select').value;
+      const driverVal = document.getElementById('override-driver-select').value;
+      const note = document.getElementById('override-note-input').value.trim();
+
+      let driverId = "", driverName = "", driverPhone = "";
+      if (driverVal) {
+        const parts = driverVal.split('|');
+        driverId = parts[0]; driverName = parts[1]; driverPhone = parts[2] || "";
+      }
+
+      showToast(`جاري اعتماد التجاوز الإداري للطلب #${selectedOrderForOverride.Order_ID}...`);
+      const payload = {
+        order_id: selectedOrderForOverride.Order_ID,
+        new_status: newStatus,
+        assigned_driver_id: driverId,
+        assigned_driver_name: driverName,
+        assigned_driver_phone: driverPhone,
+        problem_note: note || "تعديل إداري معتمد",
+        staff_name: "الإدارة العليا"
+      };
+
+      const cb = "onOverrideDone_" + Date.now();
+      window[cb] = function() {
+        showToast("تم اعتماد وتوثيق التجاوز الإداري بنجاح ✓");
+        closeOverrideModal();
+        fetchLiveOrdersDirectly();
+      };
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?auth_pass=${encodeURIComponent(MASTER_SECRET)}&action=update_order_status&data=${encodeURIComponent(JSON.stringify(payload))}&callback=${cb}`;
+      document.body.appendChild(s);
+    }
+
+    // 🖨️ معاينة التذكرة الحرارية
+    function openSlipPreview(order) {
+      document.getElementById('slip-paper-content').innerHTML = `
+========================================
+       LUFFY • لوفي | كابتن السعادة
+       العقبة - المملكة الأردنية الهاشمية 🇯🇴
+========================================
+رقم الطلب المرجعي: #${order.Order_ID}
+تاريخ الورود: ${order.Created_At || '--'}
+نوع الطلب: ${order.Order_Type === 'DELIVERY' ? 'توصيل خارجي 🛵' : 'استلام مباشر 🛍️'}
+موعد التسليم: ${order.Time_Slot || 'فوري'}
+----------------------------------------
+العميل: ${order.Customer_Name}
+الهاتف: ${order.Customer_Phone || order.Phone_Number || ''}
+العنوان: ${order.Address_Details || 'العقبة'}
+----------------------------------------
+الأصناف والكميات:
+${order.Items_Summary}
+----------------------------------------
+إجمالي الكمية: ${order.Total_Qty || 1} علبة
+الحالة: ${order.Status}
+========================================
+   شكراً لاختياركم لوفي • بوظة طبيعية 100%
+========================================
+      `;
+      document.getElementById('slip-modal').classList.add('open');
+    }
+    function closeSlipModal() { document.getElementById('slip-modal').classList.remove('open'); }
+
+    fetchLiveOrdersDirectly();
+    setInterval(fetchLiveOrdersDirectly, 12000); // تحديث متزن كل 12 ثانية
+  </script>
+</body>
+</html>
