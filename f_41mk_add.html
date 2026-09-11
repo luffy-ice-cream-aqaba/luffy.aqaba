@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>LUFFY • لوفي | استوديو إضافة النكهات السحابي</title>
+  
+  <!-- خطوط النخبة العالمية -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Readex+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --font-ar: 'Readex Pro', system-ui, sans-serif;
+      --font-en: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+      --bg-cream: #fcfbfa;
+      --card-surface: #ffffff;
+      --text-espresso: #1a110d;
+      --text-muted: #71625b;
+
+      --brand-red: #ff2a5f;
+      --brand-gold: #f59e0b;
+      --emerald: #10b981;
+      --blue-accent: #2563eb;
+
+      --border-subtle: 1.5px solid #f1f0ee;
+      --border-soft: 1.5px solid rgba(254, 215, 170, 0.45);
+      --shadow-luxury: 0 16px 36px -8px rgba(180, 100, 120, 0.1), 0 2px 8px rgba(0, 0, 0, 0.02);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      font-family: var(--font-ar);
+      background: radial-gradient(circle at 10% 10%, #fff0f5 0%, #fcf9f5 45%, #fef5eb 100%);
+      color: var(--text-espresso);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 12px 10px 80px;
+    }
+
+    .studio-wrapper {
+      width: 100%; max-width: 680px; background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(25px); border: 1.5px solid #ffffff;
+      border-radius: 28px; padding: 18px 14px; box-shadow: var(--shadow-luxury);
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    @media (min-width: 600px) { .studio-wrapper { padding: 24px 20px; } }
+
+    /* Header */
+    .studio-header {
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1.5px solid #f1f0ee; padding-bottom: 12px;
+    }
+    .brand-cluster { display: flex; align-items: center; gap: 8px; }
+    .straw-hat-svg { width: 34px; height: 34px; filter: drop-shadow(0 3px 6px rgba(217, 119, 6, 0.35)); }
+
+    /* Live Preview Card */
+    .preview-stage-container {
+      background: linear-gradient(135deg, #fffdfa 0%, #fdf6f0 100%);
+      border: 1.5px dashed var(--brand-gold); border-radius: 20px; padding: 14px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .preview-label { font-size: 11px; font-weight: 800; color: var(--brand-gold); display: flex; align-items: center; gap: 4px; }
+
+    .flavor-card-sample {
+      background: #ffffff; border-radius: 18px; border: 1.5px solid #ffffff;
+      padding: 12px; display: flex; gap: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+      position: relative; overflow: hidden;
+    }
+    .sample-halo {
+      position: absolute; top: -30%; right: -30%; width: 140%; height: 140%;
+      border-radius: 50%; filter: blur(35px); opacity: 0.18; pointer-events: none;
+    }
+    .sample-img-box {
+      width: 80px; height: 80px; border-radius: 14px; background: #fdfaf7;
+      display: flex; align-items: center; justify-content: center; position: relative; flex-shrink: 0;
+    }
+    .sample-main-img { max-width: 85%; max-height: 85%; object-fit: contain; }
+    .sample-fruit-img { position: absolute; bottom: 0; left: 0; width: 30px; height: 30px; object-fit: contain; transform: rotate(-10deg); }
+
+    /* Form Inputs */
+    .form-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    @media (min-width: 540px) { .form-grid { grid-template-columns: 1fr 1fr; } }
+
+    .form-group { display: flex; flex-direction: column; gap: 4px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 11.5px; font-weight: 800; color: var(--text-espresso); }
+    
+    input[type="text"], select, textarea {
+      width: 100%; background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 12px;
+      padding: 9px 12px; font-family: var(--font-ar); font-size: 12px; outline: none; transition: all 0.2s ease;
+    }
+    input[type="text"]:focus, select:focus, textarea:focus { border-color: var(--brand-red); background: #ffffff; }
+
+    /* File Dropzones */
+    .dropzone-box {
+      border: 1.5px dashed #cbd5e1; border-radius: 14px; padding: 12px;
+      text-align: center; cursor: pointer; background: #f8fafc; transition: all 0.2s ease;
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+    }
+    .dropzone-box:hover { border-color: var(--brand-red); background: #fff0f3; }
+    .dropzone-thumb-preview { width: 44px; height: 44px; object-fit: contain; border-radius: 8px; margin-top: 4px; display: none; }
+
+    .btn-submit-master {
+      background: linear-gradient(135deg, var(--brand-red) 0%, #ff5e7e 100%);
+      color: #ffffff; border: none; padding: 13px; border-radius: 14px;
+      font-family: var(--font-ar); font-size: 13px; font-weight: 900; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      box-shadow: 0 4px 16px rgba(255, 42, 95, 0.35); transition: transform 0.15s ease;
+    }
+    .btn-submit-master:active { transform: scale(0.98); }
+
+    /* Toast */
+    #toast-box { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 10000; pointer-events: none; }
+    .toast-pill {
+      background: #1a110d; color: #fff; border: 1.5px solid #fed7aa; padding: 8px 18px;
+      border-radius: 9999px; font-size: 11.5px; font-weight: 800; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div id="toast-box"></div>
+
+  <div class="studio-wrapper">
+    <!-- Header -->
+    <div class="studio-header">
+      <div class="brand-cluster">
+        <svg class="straw-hat-svg" viewBox="0 0 100 100" fill="none">
+          <ellipse cx="50" cy="70" rx="46" ry="13" fill="#EAB308"/>
+          <path d="M24 67C24 38 31 24 50 24C69 24 76 38 76 67Z" fill="#FACC15"/>
+          <path d="M23.5 64.5C34 68.5 66 68.5 76.5 64.5C75.5 57.5 74.5 53 74.5 53C63 57.5 37 57.5 25.5 53Z" fill="#FF2A5F"/>
+        </svg>
+        <div>
+          <div style="font-size:15px; font-weight:900;">استوديو إضافة النكهات السحابي</div>
+          <div style="font-size:10px; color:var(--text-muted);">رفع الصور تلقائياً لـ Google Drive وإدراجها بالشيت 🇯🇴</div>
+        </div>
+      </div>
+      <a href="z_84mq_vault.html" style="font-size:11px; font-weight:800; color:var(--text-muted); text-decoration:none; background:#f1f5f9; padding:6px 12px; border-radius:10px;">لوحة الإدارة ↗</a>
+    </div>
+
+    <!-- Live Card Preview -->
+    <div class="preview-stage-container">
+      <span class="preview-label">👁️ معاينة حية لشكل الكرت في منيو الزبائن:</span>
+      <div class="flavor-card-sample" id="preview-card-box">
+        <div class="sample-halo" id="preview-halo" style="background:#10b981;"></div>
+        <div class="sample-img-box">
+          <img class="sample-main-img" id="preview-main-img" src="https://images.unsplash.com/photo-1560008511-11c63416e52d?w=150" alt="">
+          <img class="sample-fruit-img" id="preview-fruit-img" src="" style="display:none;" alt="">
+        </div>
+        <div style="display:flex; flex-direction:column; justify-content:center; gap:2px; flex:1; min-width:0;">
+          <div style="font-size:14px; font-weight:900; color:var(--text-espresso);" id="preview-name-ar">اسم النكهة بالعربي</div>
+          <div style="font-size:10.5px; font-weight:800; font-family:var(--font-en); color:#10b981;" id="preview-name-en">FLAVOR ENGLISH NAME</div>
+          <div style="font-size:10px; color:var(--text-muted);" id="preview-desc-ar">وصف النكهة الطبيعية والمكونات الطازجة...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Studio Form -->
+    <form id="flavor-form" onsubmit="event.preventDefault(); submitFlavorToCloud();">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>اسم النكهة (عربي) *</label>
+          <input type="text" id="flv_name_ar" placeholder="مثال: رمان يافاوي طبيعي" required oninput="updateLivePreview()">
+        </div>
+
+        <div class="form-group">
+          <label>اسم النكهة (English) *</label>
+          <input type="text" id="flv_name_en" dir="ltr" placeholder="Fresh Natural Pomegranate" required oninput="updateLivePreview()">
+        </div>
+
+        <div class="form-group">
+          <label>التصنيف *</label>
+          <select id="flv_category" required onchange="updateLivePreview()">
+            <option value="فواكه طبيعية">فواكه طبيعية (Fresh Fruits)</option>
+            <option value="كريمي وسبيشال">كريمي وسبيشال (Creamy Special)</option>
+            <option value="بدون سكر مضاف">صحي / بدون سكر (No Added Sugar)</option>
+            <option value="شوكولاتة ومكسرات">شوكولاتة ومكسرات (Choco & Nuts)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>لون الهالة المحيطية والتمييز</label>
+          <input type="color" id="flv_color" value="#10b981" style="height:38px; padding:0; cursor:pointer;" onchange="updateLivePreview()">
+        </div>
+
+        <!-- 📸 رفع صورة العرض مع الضغط التلقائي -->
+        <div class="form-group">
+          <label>صورة العرض الرئيسية (العلبة/البوظة) *</label>
+          <div class="dropzone-box" onclick="document.getElementById('input_file_show').click()">
+            <span style="font-size:11px; font-weight:800; color:var(--text-muted);" id="label-file-show">اضغط لاختيار الصورة (تُضغط آلياً لـ < 1MB)</span>
+            <img id="thumb-show" class="dropzone-thumb-preview" alt="">
+          </div>
+          <input type="file" id="input_file_show" accept="image/*" style="display:none;" onchange="handleImageSelection(this, 'SHOW')">
+        </div>
+
+        <!-- 🍓 رفع صورة الفاكهة/المكون -->
+        <div class="form-group">
+          <label>صورة الفاكهة/المكون الطبيعي (اختياري)</label>
+          <div class="dropzone-box" onclick="document.getElementById('input_file_fruit').click()">
+            <span style="font-size:11px; font-weight:800; color:var(--text-muted);" id="label-file-fruit">اضغط لاختيار صورة الفاكهة (PNG/JPG)</span>
+            <img id="thumb-fruit" class="dropzone-thumb-preview" alt="">
+          </div>
+          <input type="file" id="input_file_fruit" accept="image/*" style="display:none;" onchange="handleImageSelection(this, 'FRUIT')">
+        </div>
+
+        <div class="form-group full">
+          <label>وصف النكهة للزبائن (مكوناتها وسر تميزها) *</label>
+          <textarea id="flv_desc_ar" rows="2" placeholder="اكتب وصفاً جذاباً يشرح مكونات النكهة وطزاجتها..." required oninput="updateLivePreview()"></textarea>
+        </div>
+
+        <div class="form-group full">
+          <label>الوسوم المفتاحية (Tags - مفصولة بفواصل)</label>
+          <input type="text" id="flv_tags" placeholder="#طبيعي,#بدون_سكر,#صيفي" value="#طبيعي,#طازج">
+        </div>
+      </div>
+
+      <button type="submit" id="btn-submit" class="btn-submit-master" style="width:100%; margin-top:14px;">
+        <span>رفع الصور وحفظ النكهة في قاعدة البيانات فوراً ⚡</span>
+      </button>
+    </form>
+  </div>
+
+  <script>
+    const APPS_SCRIPT_EXEC_URL = "https://script.google.com/macros/s/AKfycbxYmpfN2OBW24M-sumyx8dwbkFN-RsbiWkYJZYa0gZLfMxVpXr2TswzORV0inmu5nFieQ/exec";
+    const MASTER_SECRET = "LUFFY#2026$Aqaba_Master!Vault@99";
+
+    let base64Show = "";
+    let base64Fruit = "";
+
+    function showToast(msg) {
+      const box = document.getElementById('toast-box');
+      const pill = document.createElement('div');
+      pill.className = 'toast-pill';
+      pill.textContent = msg;
+      box.appendChild(pill);
+      setTimeout(() => pill.remove(), 3200);
+    }
+
+    function updateLivePreview() {
+      const ar = document.getElementById('flv_name_ar').value.trim() || "اسم النكهة بالعربي";
+      const en = document.getElementById('flv_name_en').value.trim() || "FLAVOR ENGLISH NAME";
+      const desc = document.getElementById('flv_desc_ar').value.trim() || "وصف النكهة الطبيعية والمكونات الطازجة...";
+      const color = document.getElementById('flv_color').value;
+
+      document.getElementById('preview-name-ar').textContent = ar;
+      const enEl = document.getElementById('preview-name-en');
+      enEl.textContent = en;
+      enEl.style.color = color;
+      document.getElementById('preview-desc-ar').textContent = desc;
+      document.getElementById('preview-halo').style.background = color;
+    }
+
+    // ⚡ محرك ضغط الصور التلقائي المتطور في المتصفح لضمان أن تكون < 1MB
+    function handleImageSelection(input, target) {
+      const file = input.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+          const maxDim = 1200; // الحد الأقصى للأبعاد لضمان نقاء العرض دون ثقل
+
+          if (width > maxDim || height > maxDim) {
+            if (width > height) { height = Math.round((height * maxDim) / width); width = maxDim; }
+            else { width = Math.round((width * maxDim) / height); height = maxDim; }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          // ضغط الصورة إلى JPEG بجودة 0.85 (حجم لا يتجاوز 400 إلى 700 كيلوبايت)
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.85);
+
+          if (target === 'SHOW') {
+            base64Show = compressedDataUrl;
+            document.getElementById('thumb-show').src = compressedDataUrl;
+            document.getElementById('thumb-show').style.display = 'block';
+            document.getElementById('label-file-show').textContent = `✓ تم تجهيز الصورة بنجاح (${file.name})`;
+            document.getElementById('preview-main-img').src = compressedDataUrl;
+          } else {
+            base64Fruit = compressedDataUrl;
+            document.getElementById('thumb-fruit').src = compressedDataUrl;
+            document.getElementById('thumb-fruit').style.display = 'block';
+            document.getElementById('label-file-fruit').textContent = `✓ تم تجهيز الفاكهة بنجاح (${file.name})`;
+            const pFruit = document.getElementById('preview-fruit-img');
+            pFruit.src = compressedDataUrl;
+            pFruit.style.display = 'block';
+          }
+          showToast("تم تحسين وضغط الصورة بنجاح ✓");
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function submitFlavorToCloud() {
+      if (!base64Show) {
+        showToast("⚠️ يرجى اختيار صورة العرض الرئيسية للنكهة");
+        return;
+      }
+
+      const btn = document.getElementById('btn-submit');
+      btn.disabled = true;
+      btn.innerHTML = `<span>جاري رفع الصور واعتماد النكهة بالدرايف... ⏳</span>`;
+
+      const payload = {
+        name_ar: document.getElementById('flv_name_ar').value.trim(),
+        name_en: document.getElementById('flv_name_en').value.trim(),
+        category: document.getElementById('flv_category').value,
+        color: document.getElementById('flv_color').value,
+        desc_ar: document.getElementById('flv_desc_ar').value.trim(),
+        tags: document.getElementById('flv_tags').value.trim(),
+        img_show_base64: base64Show,
+        img_show_type: "image/jpeg",
+        img_fruit_base64: base64Fruit,
+        img_fruit_type: "image/png",
+        created_by: "استوديو النكهات المعتمد"
+      };
+
+      const cb = "onFlvCreated_" + Date.now();
+      window[cb] = function(res) {
+        btn.disabled = false;
+        btn.innerHTML = `<span>رفع الصور وحفظ النكهة في قاعدة البيانات فوراً ⚡</span>`;
+
+        if (res && res.status === "success") {
+          alert(`🎉 تم إضافة نكهة [${payload.name_ar}] ورفع صورها إلى مجلد الدرايف بنجاح تام!`);
+          document.getElementById('flavor-form').reset();
+          base64Show = ""; base64Fruit = "";
+          document.getElementById('thumb-show').style.display = 'none';
+          document.getElementById('thumb-fruit').style.display = 'none';
+          document.getElementById('preview-fruit-img').style.display = 'none';
+          document.getElementById('label-file-show').textContent = "اضغط لاختيار الصورة (تُضغط آلياً لـ < 1MB)";
+          document.getElementById('label-file-fruit').textContent = "اضغط لاختيار صورة الفاكهة (PNG/JPG)";
+          updateLivePreview();
+        } else {
+          alert("تعذر الحفظ: " + (res ? res.message : "خطأ غير معروف"));
+        }
+      };
+
+      const s = document.createElement("script");
+      s.src = `${APPS_SCRIPT_EXEC_URL}?auth_pass=${encodeURIComponent(MASTER_SECRET)}&action=upload_and_add_flavor&data=${encodeURIComponent(JSON.stringify(payload))}&callback=${cb}&_ts=${Date.now()}`;
+      s.onerror = function() {
+        btn.disabled = false;
+        btn.innerHTML = `<span>رفع الصور وحفظ النكهة في قاعدة البيانات فوراً ⚡</span>`;
+        alert("حدث خطأ في الاتصال بالخادم، يرجى إعادة المحاولة.");
+      };
+      document.body.appendChild(s);
+    }
+  </script>
+</body>
+</html>
