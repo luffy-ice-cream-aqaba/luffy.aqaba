@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="referrer" content="no-referrer">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>LUFFY • لوفي | مركز إدارة الكادر والبطاقات الذكية</title>
+  <title>LUFFY • لوفي | مركز إدارة الكادر وإنهاء الخدمات</title>
   
   <!-- خطوط النخبة العالمية -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -232,17 +232,23 @@
     .btn-card-toggle-active { background: #ecfdf5; color: #065f46; }
     .btn-card-delete { background: #fff1f2; color: #9f1239; }
 
+    .btn-danger-offboard {
+      border: 1px solid #fecdd3; background: #fff1f2; color: #be123c;
+      padding: 4px 8px; border-radius: 8px; font-size: 10px; font-weight: 800; cursor: pointer;
+    }
+    .btn-danger-offboard:hover { background: #fee2e2; }
+
     /* Forms */
     .form-responsive-grid { display: grid; grid-template-columns: 1fr; gap: 8px; width: 100%; }
     @media (min-width: 600px) { .form-responsive-grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
     .form-group-unit { display: flex; flex-direction: column; gap: 3px; margin-bottom: 6px; width: 100%; }
     .form-group-unit.full-width { grid-column: 1 / -1; }
     label { font-size: 10.5px; font-weight: 800; color: var(--text-espresso); }
-    input, select {
+    input, select, textarea {
       width: 100%; background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 11px;
       padding: 8.5px 10px; font-family: var(--font-ar); font-size: 11.5px; outline: none;
     }
-    input:focus, select:focus { border-color: var(--brand-red); background: #ffffff; }
+    input:focus, select:focus, textarea:focus { border-color: var(--brand-red); background: #ffffff; }
 
     .jordan-phone-wrap {
       display: flex; align-items: center; direction: ltr; background: #f8fafc;
@@ -263,7 +269,7 @@
       cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 14px rgba(255, 42, 95, 0.3);
     }
 
-    /* Modals & Dialogs */
+    /* Modals */
     .modal-backdrop-wrap {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100%; height: 100dvh;
       background: rgba(10, 8, 9, 0.68); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
@@ -275,14 +281,9 @@
     .modal-dialog-panel {
       background: #ffffff; border-radius: 22px; padding: 18px 16px; width: 100%; max-width: 440px;
       box-shadow: 0 25px 60px rgba(0,0,0,0.3); border: 1.5px solid #fed7aa;
-      margin: auto; max-height: 90vh; overflow-y: auto; transform: scale(0.96); transition: transform 0.25s ease;
+      margin: auto; max-height: 90vh; overflow-y: auto; transform: scale(0.96); transition: transform 0.25s ease; text-align: right;
     }
     .modal-backdrop-wrap.open .modal-dialog-panel { transform: scale(1); }
-
-    .nfc-scan-touch-box {
-      background: #fdfaf7; border: 1.5px dashed var(--brand-gold); border-radius: 14px;
-      padding: 14px; text-align: center; margin: 10px 0; cursor: pointer;
-    }
 
     /* Inspector Radar Screen */
     .inspector-radar-stage {
@@ -319,8 +320,8 @@
             </svg>
           </div>
           <div class="brand-title-box">
-            <div class="brand-name"><span class="name-en">LUFFY</span> • <span class="name-ar">إدارة الكادر والبطاقات</span></div>
-            <span class="brand-subtitle">الهوية الرقمية وبطاقات NFC والاتصال • العقبة 🇯🇴</span>
+            <div class="brand-name"><span class="name-en">LUFFY</span> • <span class="name-ar">إدارة الكادر والخدمات</span></div>
+            <span class="brand-subtitle">سجل الموظفين النشطين وإنهاء الخدمات • العقبة 🇯🇴</span>
           </div>
         </div>
 
@@ -336,6 +337,10 @@
           <span>تحديث</span>
         </button>
 
+        <a href="n_62wr_nfc.html" target="_blank" class="btn-tool-outline" style="border-color:#38bdf8; color:#0284c7;">
+          <span>استوديو كتابة الـ NFC ↗</span>
+        </a>
+
         <a href="z_84mq_vault.html" class="btn-tool-outline" style="border-color:#fed7aa; color:var(--brand-red);">
           <svg class="svg-pure-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
           <span>الإدارة</span>
@@ -346,10 +351,10 @@
     <!-- 📊 KPIs Staff Dashboard -->
     <div class="kpi-command-grid">
       <div class="kpi-stat-unit">
-        <span class="kpi-label">إجمالي الكادر</span>
+        <span class="kpi-label">إجمالي الكادر النشط</span>
         <div class="kpi-val-row">
           <span class="kpi-digits" id="kpi-total-staff">0</span>
-          <span style="font-size:9px; color:var(--text-muted);">عضو فريق</span>
+          <span style="font-size:9px; color:var(--text-muted);">عضو على رأس عمله</span>
         </div>
       </div>
 
@@ -382,12 +387,12 @@
     <div class="nav-track-bar">
       <button class="tab-item-btn active" onclick="switchStaffTab('directory', this)">
         <svg class="svg-pure-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-        <span>دليل الكادر وجهات الاتصال</span>
+        <span>دليل الكادر على رأس عملهم</span>
       </button>
 
       <button class="tab-item-btn" onclick="switchStaffTab('enroll', this)">
         <svg class="svg-pure-icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
-        <span>تسجيل عضو كادر جديد</span>
+        <span>تسجيل موظف جديد (نقي)</span>
       </button>
 
       <button class="tab-item-btn" onclick="switchStaffTab('inspector', this)">
@@ -406,11 +411,11 @@
       <div class="staff-list-flow" id="staff-directory-stream">جاري جلب بيانات الكادر والبطاقات...</div>
     </div>
 
-    <!-- TAB 2: ENROLL NEW EMPLOYEE -->
+    <!-- TAB 2: ENROLL NEW EMPLOYEE (تسجيل نقي وفوري) -->
     <div class="admin-panel" id="pane-enroll">
       <div class="luxury-surface-card">
-        <div class="card-title-main">تسجيل عضو كادر جديد في المنظومة</div>
-        <div class="card-desc-sub">أدخل بيانات الموظف وجهات الاتصال، وسيتم حفظه فوراً في شيت الأمان:</div>
+        <div class="card-title-main">تسجيل موظف جديد في الكادر</div>
+        <div class="card-desc-sub">تسجيل إداري نقي وفوري بدون الحاجة لمسح الـ NFC الآن (يمكنك برمجة بطاقته لاحقاً عبر الاستوديو):</div>
 
         <form id="enroll-staff-form" onsubmit="event.preventDefault(); triggerEnrollNewStaff();">
           <div class="form-responsive-grid">
@@ -454,7 +459,7 @@
           </div>
 
           <button type="submit" class="btn-primary-action" id="btn-submit-enroll" style="width:100%; margin-top:10px;">
-            <span>حفظ واعتماد الموظف في النظام السحابي ⚡</span>
+            <span>حفظ واعتماد الموظف في النظام السحابي فوراً ⚡</span>
           </button>
         </form>
       </div>
@@ -467,8 +472,8 @@
         <div class="card-desc-sub">لامس أي بطاقة بظهر هاتفك لكشف هويتها، صاحبها، رتبتها، وعدد مسحاتها التسويقية:</div>
 
         <div class="inspector-radar-stage" onclick="triggerCardInspectorScan()">
-          <svg class="svg-pure-icon" style="width:36px; height:36px; stroke:var(--brand-gold);" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
-          <div style="font-size:12px; font-weight:900; color:var(--text-espresso); margin-top:5px;" id="inspector-status-hint">انقر هنا ثم قرّب أي بطاقة لفحصها فوراً</div>
+          <svg class="svg-pure-icon" style="width:36px; height:36px; stroke:var(--brand-gold); margin:0 auto;" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
+          <div style="font-size:12px; font-weight:900; color:var(--text-espresso); margin-top:5px;" id="inspector-status-hint">انقر هنا ثم قرّب أي بطاقة لفحصها فوراً دون فتح المتصفح</div>
         </div>
 
         <div id="inspector-result-box" style="display:none;"></div>
@@ -476,35 +481,36 @@
     </div>
   </div>
 
-  <!-- 💳 نافذة ربط وبرمجة بطاقة NFC لموظف -->
-  <div class="modal-backdrop-wrap" id="bind-card-modal" onclick="closeBindCardModal()">
+  <!-- ⚠️ نافذة إنهاء الخدمات والأرشفة السحابية (استقالة / فصل) -->
+  <div class="modal-backdrop-wrap" id="offboard-modal" onclick="closeOffboardModal()">
     <div class="modal-dialog-panel" onclick="event.stopPropagation()">
-      <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px solid #f1f0ee; margin-bottom:12px;">
-        <div style="font-size:14px; font-weight:900;">💳 ربط وبرمجة بطاقة NFC للموظف</div>
-        <button style="border:none; background:#f1f5f9; width:26px; height:26px; border-radius:50%; font-weight:800; cursor:pointer;" onclick="closeBindCardModal()">✕</button>
-      </div>
+      <div style="font-size:14.5px; font-weight:900; color:var(--brand-red); margin-bottom:2px;">⚠️ إنهاء خدمات موظف وأرشفة بياناته</div>
+      <p style="font-size:11px; color:var(--text-muted); margin-bottom:10px;" id="offboard-target-emp-name">الموظف: ...</p>
 
-      <input type="hidden" id="bind_target_emp_id">
-      <div style="font-size:12.5px; font-weight:900; color:var(--brand-red); margin-bottom:8px;" id="bind-target-emp-name">الموظف: ...</div>
-      
-      <div class="form-group-unit">
-        <label>تسمية البطاقة (مثال: بطاقة الصالة الأساسية، ميدالية المفاتيح)</label>
-        <input type="text" id="bind_card_label_input" placeholder="بطاقة الصالة الأساسية">
-      </div>
+      <input type="hidden" id="offboard_emp_id">
 
       <div class="form-group-unit">
-        <label>رمز البطاقة NFC</label>
-        <input type="text" id="bind_card_token_input" placeholder="اضغط على المربع أدناه للمسح..." readonly style="background:#fffdfa;" onclick="scanNfcForBinding()">
+        <label>سبب إنهاء الخدمات / الخروج *</label>
+        <select id="offboard_reason_select">
+          <option value="استقالة">استقالة برغبة الموظف (Resignation)</option>
+          <option value="فصل">فصل / إنهاء خدمات إداري (Termination)</option>
+          <option value="انتهاء عقد">انتهاء العقد الرسمي / تقاعد (Contract Expiry)</option>
+        </select>
       </div>
 
-      <div class="nfc-scan-touch-box" onclick="scanNfcForBinding()">
-        <svg class="svg-pure-icon" style="width:30px; height:30px; stroke:var(--brand-gold);" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
-        <div style="font-size:11px; font-weight:800; margin-top:4px;" id="bind-nfc-scan-hint">اضغط لملامسة البطاقة الجديدة بظهر الهاتف</div>
+      <div class="form-group-unit">
+        <label>ملاحظات إدارية وتفاصيل تسليم العهد والمفاتيح *</label>
+        <textarea id="offboard_notes_input" rows="3" placeholder="اكتب أسباب الخروج وتفاصيل براءة الذمة..." required></textarea>
       </div>
 
-      <button class="btn-primary-action" style="width:100%; margin-top:6px;" onclick="submitCardBindingForEmployee()">
-        <span>اعتماد وربط هذه البطاقة بالشيت ⚡</span>
-      </button>
+      <div style="background:#fff1f2; border:1px solid #fecdd3; padding:8px 10px; border-radius:10px; font-size:10.5px; color:#9f1239; margin-bottom:10px; line-height:1.4;">
+        🛡️ <strong>الأمان السحابي:</strong> سيتم ترحيل سجل الموظف كاملاً إلى شيت <code>Staff_Archive</code>، وتعطيل وسحب جميع بطاقات الـ NFC التابعة له فوراً، وإزالته من شاشات الوردية النشطة.
+      </div>
+
+      <div style="display:flex; gap:6px;">
+        <button style="flex:1; border:none; background:#f1f5f9; padding:9px; border-radius:10px; font-weight:800; cursor:pointer;" onclick="closeOffboardModal()">تراجع</button>
+        <button style="flex:1.5; border:none; background:linear-gradient(135deg, var(--brand-red), #be123c); color:#fff; padding:9px; border-radius:10px; font-weight:900; cursor:pointer;" onclick="confirmExecuteOffboardStaff()">تأكيد الإنهاء والأرشفة ⚡</button>
+      </div>
     </div>
   </div>
 
@@ -516,7 +522,6 @@
 
     let staffDirectoryList = [];
     let staffSearchFilter = "";
-    let currentEmployeeForCardBinding = null;
 
     // 🌟 دالة الاستخلاص الذكي للتوكن ومنع التداخل نهائياً
     function extractCleanNfcToken(rawPayload) {
@@ -573,7 +578,7 @@
     }
 
     // =========================================================================
-    // 👥 سحب دليل الكادر والبطاقات من السيرفر المركزي
+    // 👥 سحب دليل الكادر النشطين
     // =========================================================================
     function fetchStaffDirectory() {
       const cb = "onStaffLoaded_" + Date.now();
@@ -615,8 +620,8 @@
       if (!staffDirectoryList || staffDirectoryList.length === 0) {
         container.innerHTML = `
           <div style="text-align:center; padding:30px; background:#fffdfa; border:1.5px dashed #fed7aa; border-radius:18px;">
-            <div style="font-size:14px; font-weight:900; color:var(--brand-red);">لا يوجد كادر مسجل بعد</div>
-            <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">انتقل لتبويب (تسجيل عضو كادر جديد) لتسجيل الموظف الأول في ثوانٍ ✓</div>
+            <div style="font-size:14px; font-weight:900; color:var(--brand-red);">لا يوجد موظفون على رأس عملهم حالياً</div>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">سجل موظفاً جديداً بنقرة زر واحدة من تبويب (تسجيل موظف جديد) ✓</div>
           </div>
         `;
         return;
@@ -661,7 +666,14 @@
                 </div>
               </div>
 
-              <button class="btn-tool-outline" style="padding:4px 8px; font-size:10px; color:var(--purple-accent); border-color:#d8b4fe;" onclick='openCardBindingModal(${JSON.stringify(emp)})'>+ ربط بطاقة NFC</button>
+              <div style="display:flex; gap:4px; align-items:center;">
+                <a href="n_62wr_nfc.html" target="_blank" class="btn-tool-outline" style="padding:4px 8px; font-size:10px; color:#0284c7; border-color:#38bdf8;">
+                  برمجة بطاقة في الاستوديو ↗
+                </a>
+                <button class="btn-danger-offboard" onclick="openOffboardModal('${emp.emp_id}', '${emp.name}')">
+                  إنهاء خدمات ⚠️
+                </button>
+              </div>
             </div>
 
             <!-- أزرار الاتصال والواتساب -->
@@ -671,7 +683,7 @@
                   <svg class="svg-pure-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                   <span>اتصال: ${emp.phone_call}</span>
                 </a>
-              ` : '<span style="font-size:10px; color:var(--text-muted);">لم يتم تحديد هاتف اتصال</span>'}
+              ` : '<span style="font-size:10px; color:var(--text-muted);">لم يتم تحديد هاتف</span>'}
 
               ${cleanWaPhone ? `
                 <a href="https://wa.me/${cleanWaPhone}?text=${encodeURIComponent('أهلاً بك يا ' + emp.name + ' في كادر لوفي - كابتن السعادة 🍨✨')}" target="_blank" class="btn-contact-action btn-contact-wa">
@@ -700,20 +712,16 @@
                   </div>
 
                   <div class="card-actions-cluster">
-                    <div class="scan-counter-pill" title="عدد مسحات البطاقة">
-                      👁️ ${card.scan_count || 0}
-                    </div>
-
+                    <div class="scan-counter-pill">👁️ ${card.scan_count || 0}</div>
                     <button class="btn-card-micro ${card.status === 'ACTIVE' ? 'btn-card-toggle-freeze' : 'btn-card-toggle-active'}" onclick="toggleCardStatusDirect('${card.token}', '${card.status === 'ACTIVE' ? 'DISABLED' : 'ACTIVE'}')">
                       ${card.status === 'ACTIVE' ? 'تجميد' : 'تفعيل'}
                     </button>
-
                     <button class="btn-card-micro btn-card-delete" onclick="deleteCardDirect('${card.token}')">حذف</button>
                   </div>
                 </div>
               `).join('')) : `
                 <div style="font-size:10.5px; color:var(--text-muted); background:#fdfaf7; border:1px dashed #fed7aa; padding:6px; border-radius:8px; text-align:center;">
-                  لا توجد بطاقة NFC مربوطة بعد • اضغط <strong>(+ ربط بطاقة NFC)</strong> بالأعلى
+                  لا توجد بطاقة مربوطة • افتح <strong>(استوديو الـ NFC)</strong> لبرمجة بطاقة له فوراً
                 </div>
               `}
             </div>
@@ -723,7 +731,7 @@
     }
 
     // =========================================================================
-    // ✍️ تسجيل موظف جديد
+    // ✍️ تسجيل موظف جديد (نقي وفوري بدون بطاقة)
     // =========================================================================
     function triggerEnrollNewStaff() {
       const name = document.getElementById('new_staff_name').value.trim();
@@ -740,11 +748,9 @@
         return;
       }
 
-      showToast(`جاري تسجيل [${name}] في قاعدة البيانات...`);
+      showToast(`جاري تسجيل [${name}] في شيت الأمان...`);
       const payload = {
         name, role, tier,
-        token: `LUFFY_KEY_${Date.now().toString().slice(-4)}`,
-        card_label: "البطاقة الأساسية",
         phone_call: phoneCall,
         phone_whatsapp: phoneWa
       };
@@ -762,72 +768,38 @@
     }
 
     // =========================================================================
-    // 💳 ربط وبرمجة بطاقة NFC مع اعتراض الروابط
+    // ⚠️ إنهاء خدمات الموظف وأرشفته بالكامل (استقالة / فصل)
     // =========================================================================
-    function openCardBindingModal(emp) {
-      currentEmployeeForCardBinding = emp;
-      document.getElementById('bind_target_emp_id').value = emp.emp_id;
-      document.getElementById('bind-target-emp-name').textContent = `الموظف: ${emp.name} (${emp.role})`;
-      document.getElementById('bind_card_label_input').value = "";
-      document.getElementById('bind_card_token_input').value = "";
-      document.getElementById('bind-nfc-scan-hint').textContent = "اضغط لملامسة البطاقة الجديدة بظهر الهاتف";
-      document.getElementById('bind-card-modal').classList.add('open');
+    function openOffboardModal(empId, empName) {
+      document.getElementById('offboard_emp_id').value = empId;
+      document.getElementById('offboard-target-emp-name').textContent = `الموظف المستهدف: ${empName} (${empId})`;
+      document.getElementById('offboard_notes_input').value = "";
+      document.getElementById('offboard-modal').classList.add('open');
     }
-    function closeBindCardModal() { document.getElementById('bind-card-modal').classList.remove('open'); }
+    function closeOffboardModal() { document.getElementById('offboard-modal').classList.remove('open'); }
 
-    function scanNfcForBinding() {
-      if (!('NDEFReader' in window)) {
-        const mock = `LUFFY_CARD_${Date.now().toString().slice(-4)}`;
-        document.getElementById('bind_card_token_input').value = mock;
-        document.getElementById('bind-nfc-scan-hint').textContent = `تم التقاط الرمز: ${mock} ✓`;
+    function confirmExecuteOffboardStaff() {
+      const empId = document.getElementById('offboard_emp_id').value;
+      const reason = document.getElementById('offboard_reason_select').value;
+      const notes = document.getElementById('offboard_notes_input').value.trim();
+
+      if (!notes) {
+        showToast("⚠️ يرجى كتابة ملاحظات وتفاصيل إنهاء الخدمات لتسجيلها بالأرشيف");
         return;
       }
-      try {
-        document.getElementById('bind-nfc-scan-hint').textContent = "جاري قراءة البطاقة... قرّبها الآن";
-        const ndef = new NDEFReader();
-        ndef.scan().then(() => {
-          ndef.onreading = ev => {
-            const dec = new TextDecoder();
-            let fullData = "";
-            for (const r of ev.message.records) fullData += dec.decode(r.data);
-            
-            // ✨ استخلاص التوكن النظيف
-            const cleanToken = extractCleanNfcToken(fullData || ev.serialNumber);
-            
-            document.getElementById('bind_card_token_input').value = cleanToken;
-            document.getElementById('bind-nfc-scan-hint').textContent = `تم التقاط التوكن: ${cleanToken} ✓`;
-            showToast("تم مسح بطاقة الموظف بنجاح ✓");
-          };
-        }).catch(() => {
-          document.getElementById('bind-nfc-scan-hint').textContent = "انقر للمسح مجدداً";
-        });
-      } catch(e){}
-    }
 
-    function submitCardBindingForEmployee() {
-      if (!currentEmployeeForCardBinding) return;
-      const label = document.getElementById('bind_card_label_input').value.trim() || "بطاقة ذكية";
-      const token = document.getElementById('bind_card_token_input').value.trim() || `LUFFY_CARD_${Date.now().toString().slice(-4)}`;
+      showToast("جاري أرشفة الموظف وتعطيل بطاقاته وإنهاء خدماته...");
+      const payload = { emp_id: empId, reason: reason, notes: notes };
 
-      showToast(`جاري ربط البطاقة بـ [${currentEmployeeForCardBinding.name}]...`);
-      const payload = {
-        emp_id: currentEmployeeForCardBinding.emp_id,
-        emp_name: currentEmployeeForCardBinding.name,
-        role: currentEmployeeForCardBinding.role,
-        tier: currentEmployeeForCardBinding.tier,
-        label: label,
-        token: token
-      };
-
-      const cb = "onCardBoundDone_" + Date.now();
-      window[cb] = function() {
-        showToast("🎉 تم ربط البطاقة بنجاح ✓");
-        closeBindCardModal();
+      const cb = "onOffboardStaffDone_" + Date.now();
+      window[cb] = function(res) {
+        showToast("✓ تم إنهاء الخدمات وترحيل البيانات للأرشيف بنجاح");
+        closeOffboardModal();
         fetchStaffDirectory();
       };
 
       const s = document.createElement("script");
-      s.src = `${APPS_SCRIPT_EXEC_URL}?auth_pass=${encodeURIComponent(MASTER_SECRET)}&action=add_additional_card&data=${encodeURIComponent(JSON.stringify(payload))}&callback=${cb}`;
+      s.src = `${APPS_SCRIPT_EXEC_URL}?auth_pass=${encodeURIComponent(MASTER_SECRET)}&action=offboard_staff&data=${encodeURIComponent(JSON.stringify(payload))}&callback=${cb}`;
       document.body.appendChild(s);
     }
 
@@ -876,8 +848,6 @@
             const dec = new TextDecoder();
             let fullData = "";
             for (const r of ev.message.records) fullData += dec.decode(r.data);
-            
-            // ✨ استخلاص التوكن النظيف وعرض الملف فوراً دون فتح المتصفح
             const cleanToken = extractCleanNfcToken(fullData || ev.serialNumber);
             hint.textContent = "تمت القراءة بنجاح!";
             inspectTokenData(cleanToken);
@@ -936,7 +906,7 @@
             <div style="font-size:12.5px; font-weight:900; color:var(--brand-red);">⚠️ بطاقة غير مسجلة أو مجهولة!</div>
             <div style="font-size:10.5px; color:var(--text-muted); margin-top:3px;">
               الرمز المقروء: <code style="font-family:var(--font-en);">${token}</code><br>
-              يمكنك ربط وبرمجة هذه الشريحة الآن بأي موظف مسجل من خلال زر (+ ربط بطاقة NFC).
+              يمكنك ربط هذه الشريحة بموظف مسجل عبر فتح (استوديو برمجة الـ NFC).
             </div>
           </div>
         `;
