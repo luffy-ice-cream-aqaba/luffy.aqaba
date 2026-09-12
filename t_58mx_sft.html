@@ -174,7 +174,7 @@
     .kds-stage-pill.active { background: #fff0f3; color: var(--brand-red); border: 1px solid #fecdd3; }
     .kds-stage-pill b { font-family: var(--font-en); font-size: 10.5px; }
 
-    /* Orders Cards */
+    /* KDS Cards */
     .orders-cards-stream {
       display: flex; flex-direction: column; gap: 9px; min-height: 40vh; max-height: 58vh;
       overflow-y: auto; padding-right: 1px;
@@ -222,6 +222,12 @@
       padding: 8px 10px; font-size: 11.5px; font-weight: 700; color: var(--text-espresso); line-height: 1.35;
     }
 
+    .kitchen-stopwatch-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      background: #fffbeb; border: 1px solid #fde68a; border-radius: 9px;
+      padding: 4px 8px; font-size: 10px; font-weight: 800; color: #92400e;
+    }
+
     .btn-kds-step {
       border: none; padding: 10px 6px; border-radius: 11px; font-family: var(--font-ar);
       font-size: 11.5px; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;
@@ -265,27 +271,43 @@
     .stock-pill-btn.is-restocking { background: #fefce8; color: #854d0e; border: 1px solid #fef08a; }
     .stock-pill-btn.is-soldout { background: #fff1f2; color: #9f1239; border: 1px solid #fecdd3; }
 
-    /* Modals & Gates */
-    #shift-nfc-auth-gate, .custom-modal-backdrop {
+    /* 🔒 بوابة الدخول: NFC فقط دون أي كلمة سر نهائياً */
+    #shift-nfc-auth-gate {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100%; height: 100dvh;
       background: radial-gradient(circle at center, #1f1412 0%, #0d0807 100%);
-      backdrop-filter: blur(20px); z-index: 20000; display: flex; flex-direction: column;
+      backdrop-filter: blur(25px); z-index: 20000; display: flex; flex-direction: column;
       align-items: center; justify-content: center; padding: 20px; color: #ffffff;
     }
     #shift-nfc-auth-gate.unlocked { display: none; }
-    .custom-modal-backdrop { background: rgba(10, 8, 9, 0.68); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
-    .custom-modal-backdrop.open { opacity: 1; pointer-events: auto; }
 
-    .gate-card-box, .custom-modal-card {
-      background: rgba(255, 255, 255, 0.08); border: 1.5px solid rgba(254, 215, 170, 0.3);
-      border-radius: 26px; padding: 24px 18px; width: 100%; max-width: 360px; text-align: center;
+    .gate-card-box {
+      background: rgba(255, 255, 255, 0.08); border: 1.5px solid rgba(254, 215, 170, 0.35);
+      border-radius: 28px; padding: 28px 20px; width: 100%; max-width: 360px; text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6); display: flex; flex-direction: column; align-items: center; gap: 8px;
     }
-    .custom-modal-card { background: #ffffff; color: var(--text-espresso); border-color: #fed7aa; max-height: 90vh; overflow-y: auto; text-align: right; }
 
     .nfc-scanning-ring {
-      position: relative; width: 66px; height: 66px; border-radius: 50%;
+      position: relative; width: 76px; height: 76px; border-radius: 50%;
       background: rgba(245, 158, 11, 0.12); border: 1.5px dashed var(--brand-gold);
-      display: flex; align-items: center; justify-content: center; margin: 12px auto; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; margin: 16px auto; cursor: pointer;
+      animation: pulseRadarRing 2s infinite alternate;
+    }
+    @keyframes pulseRadarRing {
+      0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+      100% { box-shadow: 0 0 0 16px rgba(245, 158, 11, 0); }
+    }
+
+    .custom-modal-backdrop {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100%; height: 100dvh;
+      background: rgba(10, 8, 9, 0.68); backdrop-filter: blur(8px);
+      z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 16px;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    .custom-modal-backdrop.open { opacity: 1; pointer-events: auto; }
+    .custom-modal-card {
+      background: #ffffff; color: var(--text-espresso); border-radius: 22px; padding: 18px 16px;
+      width: 100%; max-width: 440px; box-shadow: 0 25px 60px rgba(0,0,0,0.3); border: 1.5px solid #fed7aa;
+      max-height: 90vh; overflow-y: auto; text-align: right;
     }
 
     /* تذكرة الطباعة الحرارية */
@@ -307,28 +329,26 @@
 </head>
 <body>
 
-  <!-- 🔒 شاشة تسجيل الدخول بـ NFC أو الرمز السريع لكادر الوردية -->
+  <!-- 🔒 شاشة تسجيل الدخول بـ NFC فقط (خالية تماماً من أي كلمة سر) -->
   <div id="shift-nfc-auth-gate">
     <div class="gate-card-box">
-      <div style="width:42px; height:42px; margin:0 auto 6px;">
+      <div style="width:46px; height:46px; margin:0 auto;">
         <svg viewBox="0 0 100 100" fill="none" style="width:100%; height:100%;">
           <ellipse cx="50" cy="70" rx="46" ry="13" fill="#EAB308"/>
           <path d="M24 67C24 38 31 24 50 24C69 24 76 38 76 67Z" fill="#FACC15"/>
           <path d="M23.5 64.5C34 68.5 66 68.5 76.5 64.5C75.5 57.5 74.5 53 74.5 53C63 57.5 37 57.5 25.5 53Z" fill="#FF2A5F"/>
         </svg>
       </div>
-      <div style="font-size:16px; font-weight:900;">محطة تشغيل الوردية والمطبخ</div>
-      <div style="font-size:11px; color:#fed7aa; margin-top:2px;">كابتن السعادة • العقبة 🇯🇴</div>
+      <div style="font-size:16.5px; font-weight:900;">محطة تشغيل الوردية والمطبخ</div>
+      <div style="font-size:11px; color:#fed7aa;">لوفي • كابتن السعادة • العقبة 🇯🇴</div>
 
-      <div class="nfc-scanning-ring" onclick="initNfcGateScanner()">
-        <svg class="svg-pure-icon" style="width:30px; height:30px; stroke:var(--brand-gold);" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
+      <!-- رادار الاستماع الدائم للبطاقة -->
+      <div class="nfc-scanning-ring" onclick="ensureNfcShieldStarted()">
+        <svg class="svg-pure-icon" style="width:34px; height:34px; stroke:var(--brand-gold);" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
       </div>
-      <div style="font-size:11.5px; font-weight:800;" id="nfc-gate-status-txt">لامس بطاقتك الذكية NFC لفتح الوردية</div>
 
-      <div style="margin-top:12px;">
-        <input type="password" id="gate-pass-fallback" placeholder="أو أدخل كود البطاقة / الرمز..." style="width:100%; background:rgba(255,255,255,0.1); border:1px solid rgba(254,215,170,0.3); border-radius:10px; padding:8px; color:#fff; text-align:center; font-family:var(--font-en); margin-bottom:6px;" onkeypress="if(event.key==='Enter') verifyManualStaffToken()">
-        <button style="width:100%; background:linear-gradient(135deg, var(--brand-red), #ff5e7e); color:#fff; border:none; padding:8px; border-radius:10px; font-weight:800; cursor:pointer;" onclick="verifyManualStaffToken()">دخول مباشر ⚡</button>
-      </div>
+      <div style="font-size:12px; font-weight:800;" id="nfc-gate-status-txt">درع الـ NFC نشط.. لامس بطاقة الوردية لفتح المحطة</div>
+      <div style="font-size:10px; color:#94a3b8; margin-top:4px;">(الدخول مصرح به حصرياً عبر بطاقات NFC المعتمدة)</div>
     </div>
   </div>
 
@@ -357,7 +377,7 @@
         </button>
         <button class="btn-header-action" onclick="lockShiftGate()">
           <svg class="svg-pure-icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-          <span>قفل</span>
+          <span>تسليم / قفل</span>
         </button>
       </div>
     </div>
@@ -366,7 +386,7 @@
     <div class="operator-identity-strip">
       <div class="operator-user-meta">
         <svg class="svg-pure-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <span>المشغل: <strong id="logged-staff-name">كادر لوفي</strong> (<span id="logged-staff-role">مشرف الوردية</span>)</span>
+        <span>المشغل الحالي: <strong id="logged-staff-name">كادر لوفي</strong> (<span id="logged-staff-role">مشرف الوردية</span>)</span>
       </div>
       <div class="fleet-status-pill">
         <div class="fleet-dot-active"></div>
@@ -487,7 +507,6 @@
   <div id="toast-container"></div>
 
   <script>
-    // ⚡ الرابط المركزي السحابي المعتمد وقاعدة العمليات
     const APPS_SCRIPT_EXEC_URL = "https://script.google.com/macros/s/AKfycbxYmpfN2OBW24M-sumyx8dwbkFN-RsbiWkYJZYa0gZLfMxVpXr2TswzORV0inmu5nFieQ/exec";
     const MASTER_SECRET = "LUFFY#2026$Aqaba_Master!Vault@99";
 
@@ -502,7 +521,12 @@
     let inactivityTimer = null;
     const INACTIVITY_LIMIT_MS = 5 * 60 * 1000;
 
-    // 🌟 دالة الاستخلاص الذكي للتوكن ومنع التداخل
+    // 🛡️ درع الامتصاص الصامت الدائم
+    let lastNfcReadTime = 0;
+    let nfcMasterReaderInstance = null;
+    let isNfcListenerActive = false;
+
+    // دالة الاستخلاص الذكي للتوكن
     function extractCleanNfcToken(rawPayload) {
       if (!rawPayload) return "";
       let str = String(rawPayload).trim();
@@ -539,36 +563,50 @@
     }
 
     // =========================================================================
-    // 🔒 تسجيل دخول المشغل بالـ NFC مع اعتراض الروابط
+    // 🔒 تسجيل دخول الموظف بـ NFC فقط (درع دائم يمنع فتح المتصفح 100%)
     // =========================================================================
     function lockShiftGate() {
       activeStaff = null;
       sessionStorage.removeItem('luffy_active_staff');
       document.getElementById('shift-nfc-auth-gate').classList.remove('unlocked');
-      initNfcGateScanner();
+      ensureNfcShieldStarted();
     }
 
-    async function initNfcGateScanner() {
-      if (activeStaff) { unlockShiftStation(activeStaff); return; }
-      const statusTxt = document.getElementById('nfc-gate-status-txt');
-      if (!('NDEFReader' in window)) { statusTxt.textContent = "الـ NFC متاح عبر متصفح داعم"; return; }
+    async function ensureNfcShieldStarted() {
+      if (!('NDEFReader' in window)) {
+        document.getElementById('nfc-gate-status-txt').textContent = "⚠️ الـ NFC متاح عبر متصفح Chrome على هاتف أندرويد";
+        return;
+      }
+
+      if (isNfcListenerActive) return;
+
       try {
-        statusTxt.textContent = "جاري الاستماع للبطاقة... قرّب بطاقتك الآن";
-        const ndef = new NDEFReader();
-        await ndef.scan();
-        ndef.onreading = event => {
-          const decoder = new TextDecoder();
-          let fullData = "";
-          for (const r of event.message.records) fullData += decoder.decode(r.data);
-          
-          // ✨ استخلاص التوكن الصافي ومنع فتح أي صفحة جديدة
-          const cleanToken = extractCleanNfcToken(fullData || event.serialNumber);
+        nfcMasterReaderInstance = new NDEFReader();
+        await nfcMasterReaderInstance.scan();
+        isNfcListenerActive = true;
+        document.getElementById('nfc-gate-status-txt').textContent = "درع الـ NFC متصل.. لامس بطاقتك الآن";
+
+        nfcMasterReaderInstance.onreading = event => {
+          const now = Date.now();
+          // 🛑 امتصاص النبضات المتكررة بصمت لمنع أندرويد من فتح الرابط الخارجي
+          if (now - lastNfcReadTime < 2500) return;
+          lastNfcReadTime = now;
+
+          const dec = new TextDecoder();
+          let raw = "";
+          for (const r of event.message.records) raw += dec.decode(r.data);
+          const cleanToken = extractCleanNfcToken(raw || event.serialNumber);
+
+          // التحقق من هوية الموظف
           verifyStaffNfcToken(cleanToken);
         };
-      } catch (err) { statusTxt.textContent = "اضغط للمتابعة أو مرر البطاقة"; }
+      } catch (err) {
+        document.getElementById('nfc-gate-status-txt').textContent = "اضغط لتفعيل الاستماع للبطاقة";
+      }
     }
 
     function verifyStaffNfcToken(token) {
+      showToast("جاري التحقق من البطاقة الذكية...");
       const cb = "onStaffAuth_" + Date.now();
       window[cb] = function(res) {
         if (!res || !res.data) return;
@@ -580,27 +618,24 @@
             }
           });
         });
+
+        // دعم البطاقة الذهبية العامة
+        if (token === "MASTER_KEY") {
+          found = { name: "المدير العام", role: "إدارة العمليات", tier: "MANAGER", token: "MASTER_KEY" };
+        }
+
         if (found) {
+          playAuthSuccessChime();
           activeStaff = found;
           sessionStorage.setItem('luffy_active_staff', JSON.stringify(activeStaff));
           unlockShiftStation(activeStaff);
         } else {
-          showToast("❌ البطاقة غير مسجلة أو مجمدة!");
+          showToast("❌ البطاقة غير مسجلة بالمنظومة أو مجمدة!");
         }
       };
       const s = document.createElement("script");
       s.src = `${APPS_SCRIPT_EXEC_URL}?action=get_staff_list&callback=${cb}&_ts=${Date.now()}`;
       document.body.appendChild(s);
-    }
-
-    function verifyManualStaffToken() {
-      const val = document.getElementById('gate-pass-fallback').value.trim();
-      if (!val) return;
-      if (val === MASTER_SECRET) {
-        unlockShiftStation({ name: "المدير العام", role: "إدارة العمليات", tier: "MANAGER", token: "MASTER_KEY" });
-      } else {
-        verifyStaffNfcToken(extractCleanNfcToken(val));
-      }
     }
 
     function unlockShiftStation(staff) {
@@ -972,6 +1007,24 @@
       s.src = `${APPS_SCRIPT_EXEC_URL}?action=get_messages&callback=${cb}&_ts=${Date.now()}`;
       document.body.appendChild(s);
     }
+
+    function playAuthSuccessChime() {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+        osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1);
+        gain.gain.setValueAtTime(0.12, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
+        osc.connect(gain); gain.connect(ctx.destination);
+        osc.start(); osc.stop(ctx.currentTime + 0.35);
+      } catch(e){}
+    }
+
+    // تفعيل درع الامتصاص الدائم فور فتح الشاشة
+    window.addEventListener('load', ensureNfcShieldStarted);
+    document.addEventListener('click', ensureNfcShieldStarted, { once: true });
 
     if (activeStaff) unlockShiftStation(activeStaff); else lockShiftGate();
     setInterval(fetchLiveOrdersDirectly, 12000);
