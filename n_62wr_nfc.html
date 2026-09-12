@@ -46,14 +46,12 @@
 
     .programmer-wrapper {
       width: 100%; max-width: 580px; background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
-      border: 1.5px solid var(--border-cyber); border-radius: 30px;
+      backdrop-filter: blur(30px); border: 1.5px solid var(--border-cyber); border-radius: 30px;
       padding: 18px 14px; box-shadow: var(--shadow-luxury);
       display: flex; flex-direction: column; gap: 14px; position: relative;
     }
     @media (min-width: 600px) { .programmer-wrapper { padding: 24px 20px; } }
 
-    /* Header */
     .studio-header {
       display: flex; justify-content: space-between; align-items: center;
       border-bottom: 1px solid var(--border-subtle); padding-bottom: 12px;
@@ -61,14 +59,12 @@
     .brand-cluster { display: flex; align-items: center; gap: 8px; }
     .straw-hat-svg { width: 36px; height: 36px; filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.5)); }
 
-    /* Manager Identity Badge */
     .manager-identity-strip {
       background: rgba(52, 211, 153, 0.1); border: 1px solid rgba(52, 211, 153, 0.3);
       border-radius: 12px; padding: 6px 12px; display: flex; justify-content: space-between;
       align-items: center; font-size: 11px;
     }
 
-    /* Card Preview Stage */
     .smart-card-stage {
       background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 50%, #1e293b 100%);
       border: 1.5px solid rgba(254, 215, 170, 0.4); border-radius: 22px;
@@ -82,15 +78,15 @@
       border: 1px solid #fef08a; display: flex; align-items: center; justify-content: center;
     }
 
-    /* Type Selector Grid */
-    .type-choice-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-    .btn-type-pill {
+    /* Mode Selector Grid */
+    .mode-choice-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+    .btn-mode-pill {
       background: rgba(255, 255, 255, 0.04); border: 1.5px solid var(--border-subtle);
-      border-radius: 12px; padding: 10px 4px; text-align: center; cursor: pointer;
-      font-family: var(--font-ar); font-size: 11px; font-weight: 800; color: #94a3b8;
+      border-radius: 11px; padding: 8px 3px; text-align: center; cursor: pointer;
+      font-family: var(--font-ar); font-size: 10px; font-weight: 800; color: #94a3b8;
       transition: all 0.2s ease;
     }
-    .btn-type-pill.active {
+    .btn-mode-pill.active {
       background: rgba(56, 189, 248, 0.15); border-color: var(--cyan-neon);
       color: var(--cyan-neon); box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
     }
@@ -105,7 +101,6 @@
     }
     input:focus, select:focus { border-color: var(--cyan-neon); background: #0c121e; }
 
-    /* Writing Status Box */
     .writer-radar-box {
       background: rgba(0, 0, 0, 0.35); border: 1.5px dashed var(--cyan-neon);
       border-radius: 20px; padding: 18px 14px; text-align: center;
@@ -129,7 +124,7 @@
       box-shadow: 0 4px 20px rgba(56, 189, 248, 0.35);
     }
 
-    /* 🔒 البوابة الأمنية المنفصلة */
+    /* 🔒 البوابة الأمنية */
     #auth-security-gate {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100%; height: 100dvh;
       background: radial-gradient(circle at center, #0e1524 0%, #06090e 100%);
@@ -147,7 +142,6 @@
     .manager-scan-area {
       background: rgba(245, 158, 11, 0.08); border: 1.5px dashed var(--brand-gold);
       border-radius: 16px; padding: 14px; cursor: pointer; margin: 6px 0;
-      transition: all 0.2s ease;
     }
 
     #toast-box { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 60000; pointer-events: none; }
@@ -176,7 +170,6 @@
       <div style="font-size:16px; font-weight:900;">اعتماد المدير العام للبرمجة</div>
       <div style="font-size:11px; color:#94a3b8;">لفتح صلاحية كتابة الشرائح، يرجى إثبات الهوية:</div>
 
-      <!-- خيار ملامسة بطاقة المدير العام -->
       <div class="manager-scan-area" onclick="startMasterNfcAuthListener()">
         <svg style="width:28px; height:28px; stroke:var(--brand-gold); margin:0 auto;" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
         <div style="font-size:11.5px; font-weight:800; color:#fed7aa; margin-top:4px;" id="auth-scan-status">لامس بطاقة المدير العام NFC بظهر الهاتف</div>
@@ -189,7 +182,7 @@
     </div>
   </div>
 
-  <!-- 📱 2. استوديو البرمجة (يفتح فقط بعد إبعاد بطاقة المدير) -->
+  <!-- 📱 2. استوديو البرمجة المطور -->
   <div class="programmer-wrapper">
     <div class="studio-header">
       <div class="brand-cluster">
@@ -200,7 +193,7 @@
         </svg>
         <div>
           <div style="font-size:15px; font-weight:900;">استوديو برمجة وكتابة بطاقات NFC</div>
-          <div style="font-size:10px; color:#94a3b8;">كتابة فيزيائية مشفرة وتسجيل سحابي ذري 🇯🇴</div>
+          <div style="font-size:10px; color:#94a3b8;">ربط الأشخاص المسجلين وبدل الفاقد والاحتياط 🇯🇴</div>
         </div>
       </div>
       <button onclick="lockStudioSession()" style="background:rgba(251,113,133,0.15); border:1px solid rgba(251,113,133,0.3); color:var(--brand-red); padding:4px 10px; border-radius:8px; font-size:10.5px; font-weight:800; cursor:pointer;">قفل الجلسة</button>
@@ -212,7 +205,7 @@
       <span style="color:#94a3b8; font-size:10px;">(مستشعر القراءة مغلق وجاهز للكتابة)</span>
     </div>
 
-    <!-- معاينة الشريحة الفيزيائية الجديدة -->
+    <!-- معاينة الشريحة الفيزيائية -->
     <div class="smart-card-stage">
       <div style="display:flex; justify-content:space-between; align-items:center; z-index:2;">
         <div style="display:flex; align-items:center; gap:6px;">
@@ -225,39 +218,39 @@
       </div>
 
       <div style="z-index:2; margin:6px 0;">
-        <div style="font-size:15px; font-weight:900; color:#fff;" id="preview-owner-name">اسم صاحب البطاقة</div>
-        <div style="font-family:var(--font-code); font-size:10px; color:#94a3b8; direction:ltr; text-align:right; margin-top:2px;" id="preview-token-code">TOKEN: LUFFY_STAFF_XXXX</div>
+        <div style="font-size:15px; font-weight:900; color:#fff;" id="preview-owner-name">اختر الشخص بالأسفل</div>
+        <div style="font-family:var(--font-code); font-size:10px; color:#94a3b8; direction:ltr; text-align:right; margin-top:2px;" id="preview-token-code">TOKEN: LUFFY_XXXX</div>
       </div>
 
       <div style="display:flex; justify-content:space-between; align-items:flex-end; z-index:2; border-top:1px solid var(--border-subtle); padding-top:6px;">
         <span style="font-size:9px; color:#cbd5e1;">الرابط: <code style="font-family:var(--font-code); color:var(--cyan-neon);">key.html?t=...</code></span>
-        <span style="font-size:9px; font-weight:800; color:#4ade80;">جاهز للكتابة على الشريحة الجديدة ✓</span>
+        <span style="font-size:9px; font-weight:800; color:#4ade80;">جاهز للكتابة ✓</span>
       </div>
     </div>
 
-    <!-- اختيار نوع واستخدام الشريحة -->
+    <!-- تبويبات نمط البرمجة -->
     <div class="field-group">
-      <label>1. اختر نوع واستخدام الشريحة الجديدة:</label>
-      <div class="type-choice-grid">
-        <button type="button" class="btn-type-pill active" onclick="selectCardType('STAFF', this)">💳 بطاقة كادر</button>
-        <button type="button" class="btn-type-pill" onclick="selectCardType('DRIVER', this)">🛵 ميدالية كابتن</button>
-        <button type="button" class="btn-type-pill" onclick="selectCardType('MARKETING', this)">🏷️ تاغ طاولة / تسويق</button>
+      <label>1. اختر نمط وإجراء البرمجة المطلوب:</label>
+      <div class="mode-choice-grid">
+        <button type="button" class="btn-mode-pill active" onclick="setProgrammerMode('STAFF', this)">💳 موظف مسجل</button>
+        <button type="button" class="btn-mode-pill" onclick="setProgrammerMode('DRIVER', this)">🛵 كابتن مسجل</button>
+        <button type="button" class="btn-mode-pill" onclick="setProgrammerMode('REPLACEMENT', this)">🔄 بدل فاقد</button>
+        <button type="button" class="btn-mode-pill" onclick="setProgrammerMode('SPARE', this)">📦 تاغ / احتياط</button>
       </div>
     </div>
 
-    <!-- الحقول وتوليد التوكن -->
-    <div class="field-group">
-      <label id="lbl-owner-name">اسم الموظف أو الكابتن:</label>
-      <input type="text" id="input_owner_name" placeholder="مثال: حمزة النجادات" oninput="regenerateToken()">
-    </div>
-
-    <div class="field-group" id="group-role-select">
-      <label>المسمى الوظيفي / الرتبة:</label>
-      <select id="input_role_tier" onchange="regenerateToken()">
-        <option value="MANAGER">مدير عام (صلاحيات كاملة واعتماد أمني)</option>
-        <option value="SUPERVISOR">مشرف وردية (تشغيل المطبخ واليومية)</option>
-        <option value="STAFF" selected>موظف تقديم وصالة (تسويق وخدمة زبائن)</option>
+    <!-- اختيار الشخص المسجل من قاعدة البيانات (يمنع التكرار) -->
+    <div class="field-group" id="group-person-select">
+      <label id="lbl-person-select">اختر الموظف المسجل في المنظومة:</label>
+      <select id="select_registered_person" onchange="onPersonSelected()">
+        <option value="">جاري جلب القائمة من السيرفر...</option>
       </select>
+    </div>
+
+    <!-- حقل مخصص لتاغات الاحتياط والطاولات -->
+    <div class="field-group" id="group-custom-tag-name" style="display:none;">
+      <label>اسم تاغ الطاولة أو كود الاحتياط (مثال: TABLE_04):</label>
+      <input type="text" id="input_tag_custom_name" placeholder="TABLE_01" oninput="regenerateToken()">
     </div>
 
     <div class="field-group">
@@ -265,7 +258,7 @@
       <input type="text" id="input_token_id" dir="ltr" style="font-family:var(--font-code); color:var(--cyan-neon); font-weight:800;" readonly>
     </div>
 
-    <!-- محطة كتابة الشريحة الجديدة (معزولة تماماً) -->
+    <!-- محطة كتابة الشريحة الجديدة -->
     <div class="writer-radar-box" id="writer-radar" onclick="triggerWritingTargetCard()">
       <div style="width:44px; height:44px; border-radius:50%; background:rgba(56,189,248,0.15); border:1.5px dashed var(--cyan-neon); display:flex; align-items:center; justify-content:center;">
         <svg style="width:22px; height:22px; stroke:var(--cyan-neon);" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
@@ -277,7 +270,7 @@
     </div>
 
     <button type="button" class="btn-start-write" onclick="triggerWritingTargetCard()">
-      <span>بدء كتابة وبرمجة الشريحة الجديدة الآن ⚡</span>
+      <span>بدء كتابة وبرمجة الشريحة وربطها بالسيرفر ⚡</span>
     </button>
   </div>
 
@@ -286,9 +279,12 @@
     const MASTER_SECRET = "LUFFY#2026$Aqaba_Master!Vault@99";
     const BASE_URL = "https://luffy-aqaba.pages.dev/key.html";
 
-    let currentCardType = 'STAFF';
+    let currentMode = 'STAFF';
     let authAbortController = null;
     let isSessionAuthenticated = false;
+
+    let registeredStaffList = [];
+    let registeredDriversList = [];
 
     function showToast(msg) {
       const box = document.getElementById('toast-box');
@@ -300,7 +296,7 @@
     }
 
     // =========================================================================
-    // 🔒 1. نظام التحقق الأمني وعزل مستشعر القراءة فور التعرف
+    // 🔒 1. نظام التحقق الأمني وعزل مستشعر القراءة
     // =========================================================================
     function startMasterNfcAuthListener() {
       if (!('NDEFReader' in window)) {
@@ -323,13 +319,12 @@
             for (const r of event.message.records) raw += dec.decode(r.data);
             const token = raw.match(/[?&]t=([^&]+)/) ? decodeURIComponent(raw.match(/[?&]t=([^&]+)/)[1]) : (raw || event.serialNumber);
 
-            // 🛑 الخطوة الجوهرية لمنع التداخل: إيقاف مستشعر القراءة فوراً!
             authAbortController.abort();
             authAbortController = null;
 
             verifyMasterTokenBackend(token);
           };
-        }).catch(err => {
+        }).catch(() => {
           statusEl.textContent = "اضغط للمحاولة مجدداً أو استخدم كلمة المرور";
         });
       } catch (err) {}
@@ -367,6 +362,7 @@
       document.getElementById('auth-operator-label').textContent = operatorLabel;
       document.getElementById('auth-security-gate').classList.add('unlocked');
       showToast("✓ تم التحقق بنجاح! أبعد بطاقة المدير وقرّب الشريحة المراد برمجتها.");
+      fetchPeopleData();
     }
 
     function lockStudioSession() {
@@ -378,69 +374,148 @@
     }
 
     // =========================================================================
-    // 🎨 2. توليد التوكن المخصص
+    // 👥 2. جلب قوائم الأشخاص المسجلين بالاختيار لمنع التكرار
     // =========================================================================
-    function selectCardType(type, btn) {
-      currentCardType = type;
-      document.querySelectorAll('.btn-type-pill').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+    function fetchPeopleData() {
+      // 1. جلب الموظفين
+      const cb1 = "onStaffList_" + Date.now();
+      window[cb1] = function(res) {
+        if (res && res.data) {
+          registeredStaffList = res.data;
+          populatePeopleDropdown();
+        }
+      };
+      const s1 = document.createElement("script");
+      s1.src = `${APPS_SCRIPT_EXEC_URL}?action=get_staff_list&callback=${cb1}&_ts=${Date.now()}`;
+      document.body.appendChild(s1);
 
-      const roleGroup = document.getElementById('group-role-select');
-      const lblName = document.getElementById('lbl-owner-name');
-
-      if (type === 'STAFF') {
-        roleGroup.style.display = 'flex';
-        lblName.textContent = "اسم الموظف الكامل:";
-        document.getElementById('preview-chip-role').textContent = "STAFF CARD";
-      } else if (type === 'DRIVER') {
-        roleGroup.style.display = 'none';
-        lblName.textContent = "اسم كابتن السعادة:";
-        document.getElementById('preview-chip-role').textContent = "CAPTAIN MEDALLION";
-      } else {
-        roleGroup.style.display = 'none';
-        lblName.textContent = "اسم الحملة أو رقم الطاولة (مثال: TABLE_05):";
-        document.getElementById('preview-chip-role').textContent = "MARKETING TAG";
-      }
-
-      regenerateToken();
+      // 2. جلب السائقين
+      const cb2 = "onDriversList_" + Date.now();
+      window[cb2] = function(res) {
+        if (res && res.data) {
+          registeredDriversList = res.data;
+          if (currentMode === 'DRIVER' || currentMode === 'REPLACEMENT') populatePeopleDropdown();
+        }
+      };
+      const s2 = document.createElement("script");
+      s2.src = `${APPS_SCRIPT_EXEC_URL}?action=get_drivers&callback=${cb2}&_ts=${Date.now()}`;
+      document.body.appendChild(s2);
     }
 
-    function regenerateToken() {
-      const nameVal = document.getElementById('input_owner_name').value.trim() || "NEW_USER";
-      const cleanName = nameVal.replace(/\s+/g, '_').toUpperCase();
+    function setProgrammerMode(mode, btn) {
+      currentMode = mode;
+      document.querySelectorAll('.btn-mode-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const groupPerson = document.getElementById('group-person-select');
+      const groupCustom = document.getElementById('group-custom-tag-name');
+      const lblPerson = document.getElementById('lbl-person-select');
+
+      if (mode === 'STAFF') {
+        groupPerson.style.display = 'flex';
+        groupCustom.style.display = 'none';
+        lblPerson.textContent = "اختر الموظف المسجل في المنظومة:";
+        document.getElementById('preview-chip-role').textContent = "STAFF CARD";
+      } else if (mode === 'DRIVER') {
+        groupPerson.style.display = 'flex';
+        groupCustom.style.display = 'none';
+        lblPerson.textContent = "اختر كابتن السعادة المسجل بالأسطول:";
+        document.getElementById('preview-chip-role').textContent = "CAPTAIN MEDALLION";
+      } else if (mode === 'REPLACEMENT') {
+        groupPerson.style.display = 'flex';
+        groupCustom.style.display = 'none';
+        lblPerson.textContent = "اختر الشخص (موظف/كابتن) لإصدار بدل فاقد له:";
+        document.getElementById('preview-chip-role').textContent = "REPLACEMENT CARD";
+      } else {
+        groupPerson.style.display = 'none';
+        groupCustom.style.display = 'flex';
+        document.getElementById('preview-chip-role').textContent = "SPARE / TAG";
+      }
+
+      populatePeopleDropdown();
+    }
+
+    function populatePeopleDropdown() {
+      const select = document.getElementById('select_registered_person');
+      select.innerHTML = "";
+
+      if (currentMode === 'STAFF') {
+        if (registeredStaffList.length === 0) {
+          select.innerHTML = `<option value="">لا يوجد موظفون مسجلون (سجلهم من شاشة HR أولاً)</option>`;
+          return;
+        }
+        registeredStaffList.forEach(emp => {
+          select.innerHTML += `<option value="STAFF|${emp.emp_id}|${emp.name}|${emp.tier}">${emp.name} (${emp.role} - ${emp.tier})</option>`;
+        });
+      } else if (currentMode === 'DRIVER') {
+        if (registeredDriversList.length === 0) {
+          select.innerHTML = `<option value="">لا يوجد كباتن مسجلون (سجلهم من شاشة الأسطول أولاً)</option>`;
+          return;
+        }
+        registeredDriversList.forEach(drv => {
+          select.innerHTML += `<option value="DRIVER|${drv.Driver_ID}|${drv.Driver_Name}|DRIVER">${drv.Driver_Name} (${drv.Vehicle_Type})</option>`;
+        });
+      } else if (currentMode === 'REPLACEMENT') {
+        select.innerHTML = `<optgroup label="الموظفين">`;
+        registeredStaffList.forEach(emp => {
+          select.innerHTML += `<option value="STAFF|${emp.emp_id}|${emp.name}|${emp.tier}">موظف: ${emp.name} (${emp.role})</option>`;
+        });
+        select.innerHTML += `</optgroup><optgroup label="الكباتن">`;
+        registeredDriversList.forEach(drv => {
+          select.innerHTML += `<option value="DRIVER|${drv.Driver_ID}|${drv.Driver_Name}|DRIVER">كابتن: ${drv.Driver_Name}</option>`;
+        });
+        select.innerHTML += `</optgroup>`;
+      }
+
+      onPersonSelected();
+    }
+
+    function onPersonSelected() {
+      if (currentMode === 'SPARE') {
+        regenerateToken();
+        return;
+      }
+      const select = document.getElementById('select_registered_person');
+      const val = select.value;
+      if (!val) return;
+
+      const [type, id, name, tier] = val.split('|');
+      const cleanName = name.replace(/\s+/g, '_').toUpperCase();
       const rand = Math.floor(1000 + Math.random() * 9000);
 
       let token = "";
-      if (currentCardType === 'STAFF') {
-        const tier = document.getElementById('input_role_tier').value;
+      if (type === 'STAFF') {
         const prefix = tier === 'MANAGER' ? 'MGR' : (tier === 'SUPERVISOR' ? 'SUP' : 'STF');
         token = `LUFFY_${prefix}_${cleanName}_${rand}`;
-      } else if (currentCardType === 'DRIVER') {
+      } else if (type === 'DRIVER') {
         token = `LUFFY_DRV_${cleanName}_${rand}`;
-      } else {
-        token = `LUFFY_TAG_${cleanName}_${rand}`;
       }
 
       document.getElementById('input_token_id').value = token;
-      document.getElementById('preview-owner-name').textContent = nameVal !== "NEW_USER" ? nameVal : "اسم صاحب البطاقة";
+      document.getElementById('preview-owner-name').textContent = name;
+      document.getElementById('preview-token-code').textContent = `TOKEN: ${token}`;
+    }
+
+    function regenerateToken() {
+      if (currentMode !== 'SPARE') return;
+      const customName = document.getElementById('input_tag_custom_name').value.trim() || "TABLE_01";
+      const clean = customName.replace(/\s+/g, '_').toUpperCase();
+      const rand = Math.floor(1000 + Math.random() * 9000);
+      const token = `LUFFY_TAG_${clean}_${rand}`;
+
+      document.getElementById('input_token_id').value = token;
+      document.getElementById('preview-owner-name').textContent = customName;
       document.getElementById('preview-token-code').textContent = `TOKEN: ${token}`;
     }
 
     // =========================================================================
-    // ✍️ 3. كتابة الشريحة الجديدة الفيزيائية والتسجيل السحابي
+    // ✍️ 3. كتابة الشريحة الجديدة وربطها سحابياً
     // =========================================================================
     async function triggerWritingTargetCard() {
-      if (!isSessionAuthenticated) {
-        lockStudioSession();
-        return;
-      }
+      if (!isSessionAuthenticated) { lockStudioSession(); return; }
 
       const token = document.getElementById('input_token_id').value.trim();
-      const ownerName = document.getElementById('input_owner_name').value.trim();
-      if (!ownerName) {
-        showToast("⚠️ يرجى إدخال اسم صاحب البطاقة أولاً");
-        return;
-      }
+      if (!token) { showToast("⚠️ يرجى اختيار الشخص أو إدخال كود التاغ"); return; }
 
       const targetWriteUrl = `${BASE_URL}?t=${encodeURIComponent(token)}`;
       const radar = document.getElementById('writer-radar');
@@ -448,65 +523,60 @@
       const desc = document.getElementById('radar-status-desc');
 
       radar.classList.add('is-writing');
-      title.textContent = "⏳ قرّب (الشريحة الجديدة فقط) من ظهر الهاتف الآن...";
+      title.textContent = "⏳ قرّب (الشريحة الجديدة المراد برمجتها فقط)...";
       desc.textContent = `جاري كتابة الرابط: ${targetWriteUrl}`;
 
       try {
         const ndef = new NDEFReader();
-        // كتابة الرابط المخصص على الشريحة الجديدة
-        await ndef.write({
-          records: [{ recordType: "url", data: targetWriteUrl }]
-        });
+        await ndef.write({ records: [{ recordType: "url", data: targetWriteUrl }] });
 
         playSuccessChime();
         radar.classList.remove('is-writing');
-        title.textContent = "🎉 تمت كتابة الشريحة الجديدة بنجاح تام!";
-        desc.textContent = "جاري التسجيل الفوري في قاعدة البيانات السحابية...";
+        title.textContent = "🎉 تمت كتابة الشريحة بنجاح!";
+        desc.textContent = "جاري الحفظ والربط في قاعدة البيانات السحابية...";
 
-        showToast("✓ تمت البرمجة الفيزيائية للشريحة بنجاح! جاري الحفظ السحابي...");
+        showToast("✓ تمت البرمجة الفيزيائية بنجاح! جاري الربط السحابي...");
 
-        // حفظ في الشيت السحابي
-        registerTokenToCloudDatabase(token, ownerName);
+        // تنفيذ الربط السحابي
+        commitCardBindingToBackend(token);
 
       } catch (error) {
         radar.classList.remove('is-writing');
         title.textContent = "❌ تعذر إتمام الكتابة";
-        desc.textContent = "تأكد من ملامسة الشريحة الجديدة لظهر الهاتف وأعد المحاولة.";
+        desc.textContent = "تأكد من ملامسة الشريحة لظهر الهاتف دون تحريكها وأعد المحاولة.";
         alert("خطأ أثناء الكتابة: " + error.message);
       }
     }
 
-    function registerTokenToCloudDatabase(token, ownerName) {
-      let actionName = "add_additional_card";
+    function commitCardBindingToBackend(token) {
+      let actionName = "";
       let payload = {};
 
-      if (currentCardType === 'STAFF') {
-        actionName = "register_new_employee";
-        payload = {
-          name: ownerName,
-          role: document.getElementById('input_role_tier').options[document.getElementById('input_role_tier').selectedIndex].text.split('(')[0].trim(),
-          tier: document.getElementById('input_role_tier').value,
-          token: token,
-          card_label: "بطاقة NFC ذكية",
-          phone_call: "",
-          phone_whatsapp: ""
-        };
-      } else if (currentCardType === 'DRIVER') {
-        actionName = "register_driver";
-        payload = {
-          name: ownerName,
-          phone: "9627XXXXXXXX",
-          vehicle: "دراجة نارية",
-          passcode: "1234",
-          nfc_token: token
-        };
+      if (currentMode === 'STAFF') {
+        const val = document.getElementById('select_registered_person').value;
+        const [type, empId, name, tier] = val.split('|');
+        actionName = "bind_card_to_existing_staff";
+        payload = { emp_id: empId, token: token, label: "بطاقة NFC ذكية" };
+      } else if (currentMode === 'DRIVER') {
+        const val = document.getElementById('select_registered_person').value;
+        const [type, drvId, name] = val.split('|');
+        actionName = "bind_medallion_to_existing_driver";
+        payload = { driver_id: drvId, token: token };
+      } else if (currentMode === 'REPLACEMENT') {
+        const val = document.getElementById('select_registered_person').value;
+        const [type, targetId, name] = val.split('|');
+        actionName = "issue_replacement_card";
+        payload = { target_type: type, target_id: targetId, target_name: name, new_token: token };
+      } else {
+        actionName = "add_additional_card";
+        payload = { emp_id: "MARKETING_TAG", label: document.getElementById('input_tag_custom_name').value.trim() || "تاغ تسويق", token: token };
       }
 
-      const cb = "onTokenRegistered_" + Date.now();
+      const cb = "onBindingDone_" + Date.now();
       window[cb] = function(res) {
-        showToast(`🎉 تم حفظ وتوثيق الشريحة في قاعدة البيانات السحابية بنجاح!`);
-        document.getElementById('radar-status-desc').textContent = `تمت البرمجة والتسجيل بنجاح! التوكن: ${token}`;
-        setTimeout(regenerateToken, 2000);
+        showToast("🎉 تم ربط الشريحة وتوثيقها سحابياً بنجاح تام!");
+        document.getElementById('radar-status-desc').textContent = `تمت البرمجة والربط بنجاح! التوكن: ${token}`;
+        fetchPeopleData();
       };
 
       const s = document.createElement("script");
@@ -514,7 +584,6 @@
       document.body.appendChild(s);
     }
 
-    // نغمات التوثيق الصوتية
     function playAuthSuccessChime() {
       try {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -543,9 +612,7 @@
       } catch(e){}
     }
 
-    // بدء الاستماع البدئي لبطاقة المدير
     startMasterNfcAuthListener();
-    regenerateToken();
   </script>
 </body>
 </html>
