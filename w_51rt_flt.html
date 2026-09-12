@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="referrer" content="no-referrer">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>LUFFY • لوفي | إدارة أسطول كباتن السعادة</title>
+  <title>LUFFY • لوفي | إدارة أسطول كباتن السعادة وإنهاء الخدمات</title>
   
   <!-- خطوط النخبة العالمية -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -223,9 +223,14 @@
     }
     .btn-driver-action:hover { background: #ffffff; border-color: #cbd5e1; }
     
-    .btn-bind-nfc { background: #fefce8; color: #854d0e; border-color: #fef08a; }
     .btn-stealth-pause { background: #fffbeb; color: #92400e; border-color: #fde68a; }
     .btn-perm-ban { background: #fff1f2; color: #9f1239; border-color: #fecdd3; }
+
+    .btn-danger-offboard {
+      border: 1px solid #fecdd3; background: #fff1f2; color: #be123c;
+      padding: 4px 8px; border-radius: 8px; font-size: 10px; font-weight: 800; cursor: pointer;
+    }
+    .btn-danger-offboard:hover { background: #fee2e2; }
 
     /* Smart Bundling */
     .smart-bundle-box {
@@ -253,7 +258,7 @@
     .form-group-unit { display: flex; flex-direction: column; gap: 3px; margin-bottom: 6px; width: 100%; }
     .form-group-unit.full-width { grid-column: 1 / -1; }
     label { font-size: 11px; font-weight: 800; color: var(--text-espresso); }
-    input, select {
+    input, select, textarea {
       width: 100%; background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 12px;
       padding: 9px 12px; font-family: var(--font-ar); font-size: 12px; outline: none;
     }
@@ -280,7 +285,7 @@
     
     .modal-dialog-panel {
       background: #ffffff; border-radius: 24px; padding: 20px 18px; width: 100%; max-width: 460px;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.3); border: 1.5px solid #fed7aa; max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.3); border: 1.5px solid #fed7aa; max-height: 90vh; overflow-y: auto; text-align: right;
     }
 
     .nfc-scan-touch-box {
@@ -311,12 +316,15 @@
         </div>
         <div class="brand-title-box">
           <div class="brand-name"><span class="name-en">LUFFY</span> • <span class="name-ar">أسطول كباتن السعادة</span></div>
-          <span class="brand-subtitle">مركز التحكم الميداني وتكافؤ فرص السائقين • العقبة 🇯🇴</span>
+          <span class="brand-subtitle">مركز التحكم الميداني وإنهاء خدمات الكباتن • العقبة 🇯🇴</span>
         </div>
       </div>
 
       <div class="header-tools-group">
         <div class="live-pulse-badge"><div class="live-dot-pulse"></div><span>رادار الأسطول متصل</span></div>
+        <a href="n_62wr_nfc.html" target="_blank" class="btn-tool-outline" style="border-color:#38bdf8; color:#0284c7;">
+          <span>استوديو كتابة الـ NFC ↗</span>
+        </a>
         <a href="z_84mq_vault.html" class="btn-tool-outline">
           <svg class="svg-pure-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
           <span>الإدارة</span>
@@ -327,10 +335,10 @@
     <!-- 📊 KPIs Fleet Dashboard -->
     <div class="kpi-command-grid">
       <div class="kpi-stat-unit">
-        <span class="kpi-label">إجمالي الأسطول</span>
+        <span class="kpi-label">إجمالي الأسطول النشط</span>
         <div class="kpi-val-row">
           <span class="kpi-digits" id="kpi-total-fleet">0</span>
-          <span style="font-size:9.5px; color:var(--text-muted);">كابتن مسجل</span>
+          <span style="font-size:9.5px; color:var(--text-muted);">كابتن بالخدمة</span>
         </div>
       </div>
 
@@ -363,12 +371,12 @@
     <div class="nav-track-bar">
       <button class="tab-item-btn active" onclick="switchFleetTab('directory', this)">
         <svg class="svg-pure-icon" viewBox="0 0 24 24"><circle cx="18.5" cy="17.5" r="3.5"></circle><circle cx="5.5" cy="17.5" r="3.5"></circle><circle cx="15" cy="5" r="1"></circle><path d="M12 17.5V14l-3-3 4-3 2 3h2"></path></svg>
-        <span>دليل السائقين والرقابة</span>
+        <span>دليل السائقين النشطين</span>
       </button>
 
       <button class="tab-item-btn" onclick="switchFleetTab('enroll', this)">
         <svg class="svg-pure-icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
-        <span>تسجيل كابتن جديد</span>
+        <span>تسجيل كابتن جديد (نقي)</span>
       </button>
 
       <button class="tab-item-btn" onclick="switchFleetTab('live_road', this)">
@@ -395,11 +403,11 @@
       <div class="drivers-list-flow" id="drivers-stream-container">جاري جلب أسطول السائقين وترتيبهم بحسب تكافؤ الفرص...</div>
     </div>
 
-    <!-- TAB 2: ENROLL NEW DRIVER -->
+    <!-- TAB 2: ENROLL NEW DRIVER (تسجيل نقي وفوري) -->
     <div class="admin-panel" id="pane-enroll">
       <div class="luxury-surface-card">
         <div class="card-title-main">تسجيل كابتن جديد في الأسطول</div>
-        <div class="card-desc-sub">أدخل بيانات السائق ومسح ميداليته الذكية بظهر الهاتف:</div>
+        <div class="card-desc-sub">تسجيل إداري نقي وفوري بدون الحاجة لمسح ميدالية NFC الآن (يمكنك برمجتها لاحقاً عبر الاستوديو):</div>
 
         <form id="enroll-driver-form" onsubmit="event.preventDefault(); commitNewDriverRegistration();">
           <div class="form-responsive-grid">
@@ -425,24 +433,14 @@
               </div>
             </div>
 
-            <div class="form-group-unit">
+            <div class="form-group-unit full-width">
               <label>رمز الطوارئ البدئي (محدد لمرتين فقط) *</label>
               <input type="password" id="new_driver_passcode" placeholder="••••••••" required>
             </div>
-
-            <div class="form-group-unit">
-              <label>ميدالية NFC الذكية المربوطة</label>
-              <input type="text" id="new_driver_nfc_token" placeholder="اضغط بالأسفل للمسح..." readonly style="cursor:pointer; background:#fffdfa;" onclick="scanNfcForNewDriver()">
-            </div>
-          </div>
-
-          <div class="nfc-scan-touch-box" onclick="scanNfcForNewDriver()">
-            <svg class="svg-pure-icon" style="width:28px; height:28px; stroke:var(--brand-gold); margin:0 auto;" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
-            <div style="font-size:11px; font-weight:800; margin-top:4px;" id="enroll-nfc-scan-hint">اضغط لملامسة ميدالية الكابتن الجديدة بظهر الهاتف</div>
           </div>
 
           <button type="submit" class="btn-primary-action" style="width:100%; margin-top:10px;">
-            <span>حفظ واعتماد الكابتن في الأسطول السحابي ⚡</span>
+            <span>حفظ واعتماد الكابتن في الأسطول السحابي فوراً ⚡</span>
           </button>
         </form>
       </div>
@@ -459,18 +457,36 @@
     </div>
   </div>
 
-  <!-- 💳 نافذة ربط ميدالية NFC لسائق مسجل -->
-  <div class="modal-backdrop-wrap" id="bind-nfc-modal" onclick="closeBindNfcModal()">
+  <!-- ⚠️ نافذة إنهاء خدمات الكابتن وأرشفته (استقالة / فصل) -->
+  <div class="modal-backdrop-wrap" id="offboard-driver-modal" onclick="closeOffboardDriverModal()">
     <div class="modal-dialog-panel" onclick="event.stopPropagation()">
-      <div style="font-size:14.5px; font-weight:900; color:var(--brand-gold);">💳 برمجة وربط ميدالية NFC للكابتن</div>
-      <p style="font-size:11.5px; color:var(--text-muted); margin:6px 0 12px;" id="bind-nfc-target-driver">الكابتن: ...</p>
-      
-      <div class="nfc-scan-touch-box" onclick="executeNfcBindingScan()">
-        <svg class="svg-pure-icon" style="width:34px; height:34px; stroke:var(--brand-gold); margin:0 auto;" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
-        <div style="font-size:11px; font-weight:800; margin-top:4px;" id="bind-nfc-hint">لامس ميدالية الكابتن بظهر الهاتف الآن</div>
+      <div style="font-size:14.5px; font-weight:900; color:var(--brand-red); margin-bottom:2px;">⚠️ إنهاء خدمات كابتن وأرشفة بياناته</div>
+      <p style="font-size:11px; color:var(--text-muted); margin-bottom:10px;" id="offboard-target-driver-name">الكابتن: ...</p>
+
+      <input type="hidden" id="offboard_driver_id">
+
+      <div class="form-group-unit">
+        <label>سبب إنهاء الخدمات / الخروج *</label>
+        <select id="offboard_driver_reason">
+          <option value="استقالة">استقالة برغبة الكابتن (Resignation)</option>
+          <option value="فصل">فصل / إنهاء خدمات إداري (Termination)</option>
+          <option value="انتهاء عقد">انتهاء العقد الرسمي (Contract Expiry)</option>
+        </select>
       </div>
 
-      <button style="border:none; background:#f1f5f9; padding:8px 16px; border-radius:10px; font-size:11px; font-weight:800; cursor:pointer;" onclick="closeBindNfcModal()">إلغاء</button>
+      <div class="form-group-unit">
+        <label>ملاحظات إدارية وبراءة ذمة المركبة والعهدة *</label>
+        <textarea id="offboard_driver_notes" rows="3" placeholder="اكتب أسباب الخروج وتفاصيل استلام الصندوق والعهدة..." required></textarea>
+      </div>
+
+      <div style="background:#fff1f2; border:1px solid #fecdd3; padding:8px 10px; border-radius:10px; font-size:10.5px; color:#9f1239; margin-bottom:10px; line-height:1.4;">
+        🛡️ <strong>الأمان السحابي:</strong> سيتم ترحيل سجل الكابتن كاملاً إلى شيت <code>Drivers_Archive</code>، وتعطيل ميداليته الذكية وقفل رمز الطوارئ، وإزالته من شاشات المطبخ والأسطول النشطة.
+      </div>
+
+      <div style="display:flex; gap:6px;">
+        <button style="flex:1; border:none; background:#f1f5f9; padding:9px; border-radius:10px; font-weight:800; cursor:pointer;" onclick="closeOffboardDriverModal()">تراجع</button>
+        <button style="flex:1.5; border:none; background:linear-gradient(135deg, var(--brand-red), #be123c); color:#fff; padding:9px; border-radius:10px; font-weight:900; cursor:pointer;" onclick="confirmExecuteOffboardDriver()">تأكيد الإنهاء والأرشفة ⚡</button>
+      </div>
     </div>
   </div>
 
@@ -501,11 +517,9 @@
     let driverSearchFilter = "";
     let fleetMapInstance = null;
     let fleetMarkersGroup = null;
-
     let pendingManagerAction = null;
-    let targetDriverForBinding = null;
 
-    // 🌟 دالة الاستخلاص الذكي للتوكن ومنع التداخل
+    // 🌟 دالة الاستخلاص الذكي للتوكن ومنع التداخل نهائياً
     function extractCleanNfcToken(rawPayload) {
       if (!rawPayload) return "";
       let str = String(rawPayload).trim();
@@ -559,7 +573,7 @@
             ndef.onreading = ev => {
               const decoder = new TextDecoder();
               let p = "";
-              for (const r of ev.message.records) p += decoder.decode(r.data);
+              for (const r of ev.message.records) p += dec.decode(r.data);
               const cleanToken = extractCleanNfcToken(p || ev.serialNumber);
 
               cancelManagerSig();
@@ -587,7 +601,7 @@
     }
 
     // =========================================================================
-    // 📡 سحب بيانات الأسطول والسائقين لحظياً
+    // 📡 سحب بيانات الأسطول والسائقين النشطين
     // =========================================================================
     function fetchFleetDataDirectly() {
       const cb1 = "onDriversFleetLoaded_" + Date.now();
@@ -688,7 +702,7 @@
       });
 
       if (filtered.length === 0) {
-        container.innerHTML = `<div style="text-align:center; padding:30px; color:var(--text-muted); font-weight:800;">لا يوجد كباتن مسجلين أو مطابقين للبحث.</div>`;
+        container.innerHTML = `<div style="text-align:center; padding:30px; color:var(--text-muted); font-weight:800;">لا يوجد كباتن مسجلين بالخدمة حالياً.</div>`;
         return;
       }
 
@@ -770,10 +784,10 @@
                 ${driver.Phone_Number || ''}
               </div>
 
-              <div style="display:flex; gap:4px; flex-wrap:wrap;">
-                <button class="btn-driver-action btn-bind-nfc" onclick="openBindNfcModalById('${driver.Driver_ID}')">
-                  <span>ربط ميدالية NFC</span>
-                </button>
+              <div style="display:flex; gap:4px; flex-wrap:wrap; align-items:center;">
+                <a href="n_62wr_nfc.html" target="_blank" class="btn-tool-outline" style="padding:4px 8px; font-size:10px; color:#0284c7; border-color:#38bdf8;">
+                  برمجة ميدالية في الاستوديو ↗
+                </a>
 
                 <button class="btn-driver-action btn-stealth-pause" onclick="setDriverStatusDirect('${driver.Driver_ID}', '${isPaused ? 'ACTIVE' : 'PAUSED'}')">
                   <span>${isPaused ? 'فك الإيقاف' : 'إيقاف مؤقت'}</span>
@@ -781,6 +795,10 @@
 
                 <button class="btn-driver-action btn-perm-ban" onclick="setDriverStatusDirect('${driver.Driver_ID}', '${isBanned ? 'ACTIVE' : 'BANNED'}')">
                   <span>${isBanned ? 'إلغاء الحظر' : 'حظر دائم'}</span>
+                </button>
+
+                <button class="btn-danger-offboard" onclick="openOffboardDriverModal('${driver.Driver_ID}', '${driver.Driver_Name}')">
+                  إنهاء خدمات ⚠️
                 </button>
 
                 ${cleanPhone ? `
@@ -821,50 +839,27 @@
     }
 
     // =========================================================================
-    // 💳 مسح وبرمجة ميدالية NFC لكابتن جديد مع اعتراض الروابط
+    // ✍️ تسجيل كابتن جديد (نقي وفوري)
     // =========================================================================
-    function scanNfcForNewDriver() {
-      if (!('NDEFReader' in window)) {
-        const mock = `LUFFY_DRV_MEDAL_${Date.now().toString().slice(-4)}`;
-        document.getElementById('new_driver_nfc_token').value = mock;
-        document.getElementById('enroll-nfc-scan-hint').textContent = `تم التقاط الرمز: ${mock} ✓`;
-        return;
-      }
-      try {
-        document.getElementById('enroll-nfc-scan-hint').textContent = "جاري قراءة الميدالية.. قرّبها من ظهر الهاتف الآن";
-        const ndef = new NDEFReader();
-        ndef.scan().then(() => {
-          ndef.onreading = ev => {
-            const dec = new TextDecoder();
-            let p = "";
-            for (const r of ev.message.records) p += dec.decode(r.data);
-            
-            // ✨ استخلاص التوكن النظيف واعتراض الرابط
-            const cleanToken = extractCleanNfcToken(p || ev.serialNumber);
-            document.getElementById('new_driver_nfc_token').value = cleanToken;
-            document.getElementById('enroll-nfc-scan-hint').textContent = `تم مسح الميدالية بنجاح: ${cleanToken} ✓`;
-            showToast("تم مسح ميدالية الكابتن بنجاح ✓");
-          };
-        });
-      } catch(e){}
-    }
-
     function commitNewDriverRegistration() {
       const name = document.getElementById('new_driver_name').value.trim();
       const phone = document.getElementById('new_driver_phone').value.trim().replace(/\D/g, '');
       const vehicle = document.getElementById('new_driver_vehicle').value;
       const passcode = document.getElementById('new_driver_passcode').value.trim();
-      const nfcToken = document.getElementById('new_driver_nfc_token').value.trim() || `LUFFY_DRV_${Date.now().toString().slice(-4)}`;
+
+      if (!name || !phone || !passcode) {
+        showToast("⚠️ يرجى إدخال كافة البيانات المطلوبة");
+        return;
+      }
 
       requestManagerNfcSignature((managerToken) => {
         showToast(`جاري تسجيل الكابتن [${name}]...`);
-        const payload = { name, phone: `+962${phone}`, vehicle, passcode, nfc_token: nfcToken };
+        const payload = { name, phone: `+962${phone}`, vehicle, passcode, nfc_token: "" };
 
         const cb = "onDrvReg_" + Date.now();
         window[cb] = function(res) {
           showToast(`🎉 تم تسجيل الكابتن [${name}] بنجاح ✓`);
           document.getElementById('enroll-driver-form').reset();
-          document.getElementById('enroll-nfc-scan-hint').textContent = "اضغط لملامسة ميدالية الكابتن الجديدة بظهر الهاتف";
           switchFleetTab('directory', document.querySelectorAll('.tab-item-btn')[0]);
         };
 
@@ -875,50 +870,41 @@
     }
 
     // =========================================================================
-    // 💳 ربط ميدالية NFC لسائق مسجل مسبقاً
+    // ⚠️ إنهاء خدمات الكابتن وأرشفته بالكامل (استقالة / فصل)
     // =========================================================================
-    function openBindNfcModalById(driverId) {
-      targetDriverForBinding = driversFleetList.find(d => d.Driver_ID === driverId);
-      if (!targetDriverForBinding) return;
-      document.getElementById('bind-nfc-target-driver').textContent = `الكابتن: ${targetDriverForBinding.Driver_Name} (${targetDriverForBinding.Driver_ID})`;
-      document.getElementById('bind-nfc-modal').classList.add('open');
+    function openOffboardDriverModal(driverId, driverName) {
+      document.getElementById('offboard_driver_id').value = driverId;
+      document.getElementById('offboard-target-driver-name').textContent = `الكابتن المستهدف: ${driverName} (${driverId})`;
+      document.getElementById('offboard_driver_notes').value = "";
+      document.getElementById('offboard-driver-modal').classList.add('open');
     }
-    function closeBindNfcModal() { document.getElementById('bind-nfc-modal').classList.remove('open'); }
+    function closeOffboardDriverModal() { document.getElementById('offboard-driver-modal').classList.remove('open'); }
 
-    function executeNfcBindingScan() {
-      if (!('NDEFReader' in window)) {
-        showToast("الـ NFC غير مدعوم بالمتصفح");
+    function confirmExecuteOffboardDriver() {
+      const driverId = document.getElementById('offboard_driver_id').value;
+      const reason = document.getElementById('offboard_driver_reason').value;
+      const notes = document.getElementById('offboard_driver_notes').value.trim();
+
+      if (!notes) {
+        showToast("⚠️ يرجى كتابة ملاحظات وتفاصيل إنهاء الخدمات واستلام العهدة");
         return;
       }
-      try {
-        const hint = document.getElementById('bind-nfc-hint');
-        hint.textContent = "جاري قراءة الميدالية... قرّبها الآن";
-        const ndef = new NDEFReader();
-        ndef.scan().then(() => {
-          ndef.onreading = ev => {
-            const dec = new TextDecoder();
-            let p = "";
-            for (const r of ev.message.records) p += dec.decode(r.data);
-            
-            const cleanToken = extractCleanNfcToken(p || ev.serialNumber);
-            commitNfcBindingToSheet(cleanToken);
-          };
-        });
-      } catch(e){}
-    }
 
-    function commitNfcBindingToSheet(nfcToken) {
-      showToast(`جاري ربط الميدالية بالكابتن...`);
-      const payload = { driver_id: targetDriverForBinding.Driver_ID, nfc_token: nfcToken };
-      const cb = "onNfcBound_" + Date.now();
-      window[cb] = function() {
-        showToast(`تم ربط الميدالية بالكابتن بنجاح ✓`);
-        closeBindNfcModal();
-        fetchFleetDataDirectly();
-      };
-      const s = document.createElement("script");
-      s.src = `${APPS_SCRIPT_EXEC_URL}?auth_pass=${encodeURIComponent(MASTER_SECRET)}&action=register_driver&data=${encodeURIComponent(JSON.stringify(payload))}&callback=${cb}`;
-      document.body.appendChild(s);
+      requestManagerNfcSignature((managerToken) => {
+        showToast("جاري أرشفة الكابتن وتعطيل ميداليته وإنهاء خدماته...");
+        const payload = { driver_id: driverId, reason: reason, notes: notes };
+
+        const cb = "onOffboardDrvDone_" + Date.now();
+        window[cb] = function(res) {
+          showToast("✓ تم إنهاء الخدمات وترحيل البيانات للأرشيف بنجاح");
+          closeOffboardDriverModal();
+          fetchFleetDataDirectly();
+        };
+
+        const s = document.createElement("script");
+        s.src = `${APPS_SCRIPT_EXEC_URL}?auth_pass=${encodeURIComponent(MASTER_SECRET)}&nfc_token=${encodeURIComponent(managerToken)}&action=offboard_driver&data=${encodeURIComponent(JSON.stringify(payload))}&callback=${cb}`;
+        document.body.appendChild(s);
+      });
     }
 
     // =========================================================================
