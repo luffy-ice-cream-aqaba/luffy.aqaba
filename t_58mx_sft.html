@@ -174,7 +174,7 @@
     .kds-stage-pill.active { background: #fff0f3; color: var(--brand-red); border: 1px solid #fecdd3; }
     .kds-stage-pill b { font-family: var(--font-en); font-size: 10.5px; }
 
-    /* KDS Cards */
+    /* Orders Cards */
     .orders-cards-stream {
       display: flex; flex-direction: column; gap: 9px; min-height: 40vh; max-height: 58vh;
       overflow-y: auto; padding-right: 1px;
@@ -220,12 +220,6 @@
     .order-items-textbox {
       background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 11px;
       padding: 8px 10px; font-size: 11.5px; font-weight: 700; color: var(--text-espresso); line-height: 1.35;
-    }
-
-    .kitchen-stopwatch-bar {
-      display: flex; align-items: center; justify-content: space-between;
-      background: #fffbeb; border: 1px solid #fde68a; border-radius: 9px;
-      padding: 4px 8px; font-size: 10px; font-weight: 800; color: #92400e;
     }
 
     .btn-kds-step {
@@ -508,6 +502,22 @@
     let inactivityTimer = null;
     const INACTIVITY_LIMIT_MS = 5 * 60 * 1000;
 
+    // 🌟 دالة الاستخلاص الذكي للتوكن ومنع التداخل
+    function extractCleanNfcToken(rawPayload) {
+      if (!rawPayload) return "";
+      let str = String(rawPayload).trim();
+      const match = str.match(/[?&](?:t|token)=([^&#\s]+)/i);
+      if (match) return decodeURIComponent(match[1]).trim();
+      if (str.startsWith("http://") || str.startsWith("https://")) {
+        try {
+          const url = new URL(str);
+          const tParam = url.searchParams.get("t") || url.searchParams.get("token");
+          if (tParam) return tParam.trim();
+        } catch(e){}
+      }
+      return str;
+    }
+
     function resetInactivityTimer() {
       clearTimeout(inactivityTimer);
       inactivityTimer = setTimeout(() => {
@@ -529,7 +539,7 @@
     }
 
     // =========================================================================
-    // 🔒 تسجيل دخول المشغل بالـ NFC أو الرمز السريع
+    // 🔒 تسجيل دخول المشغل بالـ NFC مع اعتراض الروابط
     // =========================================================================
     function lockShiftGate() {
       activeStaff = null;
@@ -548,10 +558,12 @@
         await ndef.scan();
         ndef.onreading = event => {
           const decoder = new TextDecoder();
-          let p = "";
-          for (const r of event.message.records) p += decoder.decode(r.data);
-          let token = p.match(/[?&]t=([^&]+)/) ? decodeURIComponent(p.match(/[?&]t=([^&]+)/)[1]) : (p || event.serialNumber);
-          verifyStaffNfcToken(token);
+          let fullData = "";
+          for (const r of event.message.records) fullData += decoder.decode(r.data);
+          
+          // ✨ استخلاص التوكن الصافي ومنع فتح أي صفحة جديدة
+          const cleanToken = extractCleanNfcToken(fullData || event.serialNumber);
+          verifyStaffNfcToken(cleanToken);
         };
       } catch (err) { statusTxt.textContent = "اضغط للمتابعة أو مرر البطاقة"; }
     }
@@ -587,7 +599,7 @@
       if (val === MASTER_SECRET) {
         unlockShiftStation({ name: "المدير العام", role: "إدارة العمليات", tier: "MANAGER", token: "MASTER_KEY" });
       } else {
-        verifyStaffNfcToken(val);
+        verifyStaffNfcToken(extractCleanNfcToken(val));
       }
     }
 
@@ -962,7 +974,7 @@
     }
 
     if (activeStaff) unlockShiftStation(activeStaff); else lockShiftGate();
-    setInterval(fetchLiveOrdersDirectly, 12000); // تحديث متزن كل 12 ثانية
+    setInterval(fetchLiveOrdersDirectly, 12000);
   </script>
 </body>
 </html>

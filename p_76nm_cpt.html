@@ -123,8 +123,7 @@
       box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
     }
     .btn-captain-readiness-toggle.is-break {
-      background: rgba(255, 255, 255, 0.1); color: #cbd5e1;
-      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1); color: #cbd5e1; border: 1.5px solid rgba(255, 255, 255, 0.2);
     }
 
     /* KPI Stats Bar */
@@ -201,21 +200,17 @@
 
     .qr-reader-container { width: 100%; border-radius: 16px; overflow: hidden; margin: 12px 0; border: 1.5px dashed var(--brand-red); }
 
-    /* Toast Stack */
-    .toast-stack-container {
-      position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 15000;
-      display: flex; flex-direction: column; gap: 8px; width: calc(100% - 28px); max-width: 420px; pointer-events: none;
-    }
-    .luxury-toast-pill {
-      pointer-events: auto; background: rgba(26, 17, 13, 0.96); color: #ffffff; backdrop-filter: blur(20px);
-      border: 1.5px solid var(--brand-gold); border-radius: 16px; padding: 11px 14px; font-size: 11.5px; font-weight: 800;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 6px;
+    /* Toast Container */
+    #toast-container { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 15000; pointer-events: none; }
+    .chakra-toast {
+      background: #1f1412; color: #ffffff; padding: 8px 16px; border-radius: 9999px; font-size: 11px; font-weight: 800;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25); border: 1.5px solid #fed7aa; display: flex; align-items: center; gap: 6px;
     }
   </style>
 </head>
 <body>
 
-  <div class="toast-stack-container" id="toast-stack-box"></div>
+  <div id="toast-container"></div>
 
   <!-- 🔒 1. بوابة تسجيل الدخول بميدالية NFC لكابتن السعادة -->
   <div class="app-modal-backdrop open" id="driver-nfc-standby-gate">
@@ -244,7 +239,7 @@
     </div>
   </div>
 
-  <!-- ⚠️ 2. الدخول الاحتياطي برمز الطوارئ -->
+  <!-- ⚠️ 2. الدخول برمز الطوارئ -->
   <div class="app-modal-backdrop" id="emergency-pass-modal">
     <div class="modal-card-surface">
       <div style="font-size:14.5px; font-weight:900; color:var(--brand-red);">الدخول برمز الطوارئ المشفر</div>
@@ -269,7 +264,7 @@
     </div>
   </div>
 
-  <!-- 📱 شاشة التطبيق الرئيسية لكابتن السعادة -->
+  <!-- 📱 تطبيق كابتن السعادة الرئيسي -->
   <div class="app-shell-wrapper">
     <div class="driver-top-bar">
       <div class="brand-cluster">
@@ -290,7 +285,7 @@
       </div>
     </div>
 
-    <!-- بطاقة الكابتن والجاهزية -->
+    <!-- بطاقة الهوية والتحكم بالجاهزية -->
     <div class="driver-badge-card">
       <div style="display:flex; justify-content:space-between; align-items:center;">
         <div>
@@ -309,7 +304,7 @@
     <!-- إحصائيات سريعة -->
     <div class="kpi-stats-grid">
       <div class="kpi-box">
-        <span class="kpi-title">الطلبات الجارية بعهدتي</span>
+        <span class="kpi-title">المهام الجارية بعهدتي</span>
         <span class="kpi-digits" style="color:var(--brand-gold);" id="kpi-assigned-count">0</span>
       </div>
       <div class="kpi-box">
@@ -331,14 +326,13 @@
       </button>
     </div>
 
-    <!-- تدفق الطلبات المسندة للكابتن -->
     <div style="font-size:12px; font-weight:900; color:#fed7aa; margin-bottom:6px;">المهام قيد التنفيذ الآن:</div>
     <div class="orders-stream-box" id="driver-orders-stream">
       <div style="text-align:center; padding:30px 10px; color:#94a3b8; font-size:11.5px;">جاري جلب المهام المسندة إليك...</div>
     </div>
   </div>
 
-  <!-- 📷 مسح QR Code عبر الكاميرا عند الاستلام من المطبخ -->
+  <!-- 📷 مسح QR الاستلام من المطبخ -->
   <div class="app-modal-backdrop" id="qr-modal">
     <div class="modal-card-surface">
       <div style="font-size:14px; font-weight:900;" id="qr-modal-title">مسح QR كود الطلب للاستلام</div>
@@ -372,7 +366,6 @@
   </div>
 
   <script>
-    // ⚡ الرابط المركزي السحابي المعتمد
     const APPS_SCRIPT_EXEC_URL = "https://script.google.com/macros/s/AKfycbxYmpfN2OBW24M-sumyx8dwbkFN-RsbiWkYJZYa0gZLfMxVpXr2TswzORV0inmu5nFieQ/exec";
 
     let currentDriver = JSON.parse(localStorage.getItem('luffy_driver_session') || "null");
@@ -381,19 +374,30 @@
     let targetOrderForProof = null;
     let liveGpsPosition = null;
 
-    function showToast(message) {
-      const stack = document.getElementById('toast-stack-box');
-      if (!stack) return;
-      while (stack.children.length >= 2) stack.removeChild(stack.firstChild);
+    // 🌟 دالة الاستخلاص الذكي للتوكن ومنع التداخل نهائياً
+    function extractCleanNfcToken(rawPayload) {
+      if (!rawPayload) return "";
+      let str = String(rawPayload).trim();
+      const match = str.match(/[?&](?:t|token)=([^&#\s]+)/i);
+      if (match) return decodeURIComponent(match[1]).trim();
+      if (str.startsWith("http://") || str.startsWith("https://")) {
+        try {
+          const url = new URL(str);
+          const tParam = url.searchParams.get("t") || url.searchParams.get("token");
+          if (tParam) return tParam.trim();
+        } catch(e){}
+      }
+      return str;
+    }
 
+    function showToast(message) {
+      const c = document.getElementById('toast-container');
+      if (!c) return;
       const pill = document.createElement('div');
-      pill.className = 'luxury-toast-pill';
-      pill.innerHTML = `
-        <svg class="svg-icon" style="stroke:#10b981;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-        <span>${message}</span>
-      `;
-      stack.appendChild(pill);
-      setTimeout(() => { if (pill.parentElement) pill.remove(); }, 3500);
+      pill.className = 'chakra-toast';
+      pill.innerHTML = `<span>${message}</span>`;
+      c.appendChild(pill);
+      setTimeout(() => pill.remove(), 3200);
     }
 
     // =========================================================================
@@ -440,7 +444,7 @@
     }
 
     // =========================================================================
-    // 🟢 التحكم الذاتي بجاهزية الكابتن (جاهز / استراحة)
+    // 🟢 التحكم الذاتي بجاهزية الكابتن
     // =========================================================================
     function toggleCaptainSelfReadiness() {
       if (!currentDriver) return;
@@ -481,7 +485,7 @@
     }
 
     // =========================================================================
-    // 🔒 تسجيل الدخول بميدالية NFC أو برمز الطوارئ
+    // 🔒 تسجيل الدخول بميدالية NFC مع اعتراض الروابط
     // =========================================================================
     async function triggerNfcAutoScan() {
       if (!('NDEFReader' in window)) return;
@@ -490,10 +494,12 @@
         await ndef.scan();
         ndef.onreading = ev => {
           const dec = new TextDecoder();
-          let p = "";
-          for (const r of ev.message.records) p += dec.decode(r.data);
-          const token = p.match(/[?&]t=([^&]+)/) ? decodeURIComponent(p.match(/[?&]t=([^&]+)/)[1]) : (p || ev.serialNumber);
-          verifyDriverNfcToken(token);
+          let fullData = "";
+          for (const r of ev.message.records) fullData += dec.decode(r.data);
+          
+          // ✨ استخلاص التوكن النظيف ومنع فتح أي صفحة جديدة
+          const cleanToken = extractCleanNfcToken(fullData || ev.serialNumber);
+          verifyDriverNfcToken(cleanToken);
         };
       } catch (err) {}
     }
@@ -569,7 +575,7 @@
     }
 
     // =========================================================================
-    // 📦 جلب وتحديث الطلبات المسندة للكابتن عبر السيرفر
+    // 📦 جلب وتحديث الطلبات المسندة للكابتن
     // =========================================================================
     function fetchCaptainOrdersDirectly() {
       if (!currentDriver) return;
@@ -581,7 +587,6 @@
         const driverName = currentDriver.name.trim();
         const driverId = currentDriver.id;
 
-        // تصفية الطلبات المسندة لهذا الكابتن
         driverOrdersList = allOrders.filter(o => {
           const assignedId = String(o.Assigned_Driver_ID || '');
           const assignedName = String(o.Assigned_Driver_Name || '');
@@ -626,7 +631,6 @@
         const isInTransit = order.Status === 'IN_TRANSIT';
         const cleanCustPhone = String(order.Customer_Phone || order.Phone_Number || '').replace(/[^\d+]/g, '');
 
-        // 📍 زر الملاحة الذكي: فتح مسار الملاحة المباشر عبر Google Maps
         let navLinkHtml = '';
         if (order.GPS_Map_URL && order.GPS_Map_URL.startsWith('http')) {
           navLinkHtml = `
@@ -693,7 +697,7 @@
     }
 
     // =========================================================================
-    // 📷 مسح QR الاستلام من المطبخ
+    // 📷 مسح QR الاستلام
     // =========================================================================
     async function openQrScannerForPickup(specificOrderId = "") {
       try { await verifyMandatoryLiveGps(); } catch(e) { return; }
@@ -747,7 +751,7 @@
     }
 
     // =========================================================================
-    // 🏁 إثبات التسليم النهائي لباب الزبون بـ GPS و NFC
+    // 🏁 إثبات التسليم لباب الزبون بـ NFC
     // =========================================================================
     async function startDeliveryCompletionProof(orderId) {
       try { await verifyMandatoryLiveGps(); } catch(e) { return; }
@@ -758,9 +762,14 @@
         try {
           const ndef = new NDEFReader();
           await ndef.scan();
-          ndef.onreading = () => {
+          ndef.onreading = (ev) => {
+            const dec = new TextDecoder();
+            let fullData = "";
+            for (const r of ev.message.records) fullData += dec.decode(r.data);
+            const cleanToken = extractCleanNfcToken(fullData || ev.serialNumber);
+
             closeNfcProofModal();
-            commitFinalDoorstepDelivery(targetOrderForProof, "NFC_MEDALLION_PROOF");
+            commitFinalDoorstepDelivery(targetOrderForProof, cleanToken || "NFC_MEDALLION_PROOF");
           };
         } catch(e){}
       }
@@ -786,10 +795,9 @@
       document.body.appendChild(s);
     }
 
-    // فحص الجلسة وبدء الاستماع
     checkDriverSession();
-    setInterval(fetchCaptainOrdersDirectly, 12000); // تحديث متزن كل 12 ثانية
-    setInterval(() => { if (currentDriver) verifyMandatoryLiveGps(); }, 60000); // إرسال نبض الـ GPS كل دقيقة
+    setInterval(fetchCaptainOrdersDirectly, 12000);
+    setInterval(() => { if (currentDriver) verifyMandatoryLiveGps(); }, 60000);
   </script>
 </body>
 </html>

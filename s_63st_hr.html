@@ -69,7 +69,6 @@
       display: flex; flex-direction: column; gap: 8px; padding-bottom: 10px;
       border-bottom: 1.5px solid #f1f0ee; margin-bottom: 10px;
     }
-
     @media (min-width: 600px) {
       .admin-top-bar { flex-direction: row; justify-content: space-between; align-items: center; }
     }
@@ -170,7 +169,7 @@
     .card-title-main { font-size: 14px; font-weight: 900; color: var(--text-espresso); margin-bottom: 3px; }
     .card-desc-sub { font-size: 11px; color: var(--text-muted); line-height: 1.4; margin-bottom: 12px; }
 
-    /* Employee & Card Cards */
+    /* Employee & Card Units */
     .staff-list-flow { display: flex; flex-direction: column; gap: 9px; max-height: 58vh; overflow-y: auto; padding-right: 1px; }
 
     .employee-card-unit {
@@ -477,7 +476,7 @@
     </div>
   </div>
 
-  <!-- 💳 نافذة ربط وبرمجة بطاقة NFC لموظف محدد -->
+  <!-- 💳 نافذة ربط وبرمجة بطاقة NFC لموظف -->
   <div class="modal-backdrop-wrap" id="bind-card-modal" onclick="closeBindCardModal()">
     <div class="modal-dialog-panel" onclick="event.stopPropagation()">
       <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px solid #f1f0ee; margin-bottom:12px;">
@@ -512,13 +511,28 @@
   <div id="toast-container"></div>
 
   <script>
-    // ⚡ الرابط المركزي السحابي المعتمد وقاعدة بيانات الأمان والكادر
     const APPS_SCRIPT_EXEC_URL = "https://script.google.com/macros/s/AKfycbxYmpfN2OBW24M-sumyx8dwbkFN-RsbiWkYJZYa0gZLfMxVpXr2TswzORV0inmu5nFieQ/exec";
     const MASTER_SECRET = "LUFFY#2026$Aqaba_Master!Vault@99";
 
     let staffDirectoryList = [];
     let staffSearchFilter = "";
     let currentEmployeeForCardBinding = null;
+
+    // 🌟 دالة الاستخلاص الذكي للتوكن ومنع التداخل نهائياً
+    function extractCleanNfcToken(rawPayload) {
+      if (!rawPayload) return "";
+      let str = String(rawPayload).trim();
+      const match = str.match(/[?&](?:t|token)=([^&#\s]+)/i);
+      if (match) return decodeURIComponent(match[1]).trim();
+      if (str.startsWith("http://") || str.startsWith("https://")) {
+        try {
+          const url = new URL(str);
+          const tParam = url.searchParams.get("t") || url.searchParams.get("token");
+          if (tParam) return tParam.trim();
+        } catch(e){}
+      }
+      return str;
+    }
 
     function showToast(msg) {
       const c = document.getElementById('toast-container');
@@ -748,7 +762,7 @@
     }
 
     // =========================================================================
-    // 💳 ربط وبرمجة بطاقة NFC لموظف
+    // 💳 ربط وبرمجة بطاقة NFC مع اعتراض الروابط
     // =========================================================================
     function openCardBindingModal(emp) {
       currentEmployeeForCardBinding = emp;
@@ -774,11 +788,14 @@
         ndef.scan().then(() => {
           ndef.onreading = ev => {
             const dec = new TextDecoder();
-            let p = "";
-            for (const r of ev.message.records) p += dec.decode(r.data);
-            const token = p.match(/[?&]t=([^&]+)/) ? decodeURIComponent(p.match(/[?&]t=([^&]+)/)[1]) : (p || ev.serialNumber);
-            document.getElementById('bind_card_token_input').value = token;
-            document.getElementById('bind-nfc-scan-hint').textContent = `تم مسح البطاقة: ${token} ✓`;
+            let fullData = "";
+            for (const r of ev.message.records) fullData += dec.decode(r.data);
+            
+            // ✨ استخلاص التوكن النظيف
+            const cleanToken = extractCleanNfcToken(fullData || ev.serialNumber);
+            
+            document.getElementById('bind_card_token_input').value = cleanToken;
+            document.getElementById('bind-nfc-scan-hint').textContent = `تم التقاط التوكن: ${cleanToken} ✓`;
             showToast("تم مسح بطاقة الموظف بنجاح ✓");
           };
         }).catch(() => {
@@ -840,14 +857,14 @@
     }
 
     // =========================================================================
-    // 🔍 رادار فحص البطاقات الذكية (NFC Inspector Radar)
+    // 🔍 رادار فحص البطاقات الذكية مع اعتراض الروابط
     // =========================================================================
     function triggerCardInspectorScan() {
       const hint = document.getElementById('inspector-status-hint');
 
       if (!('NDEFReader' in window)) {
         const testToken = prompt("أدخل كود البطاقة أو التوكن للفحص المباشر:");
-        if (testToken) inspectTokenData(testToken.trim());
+        if (testToken) inspectTokenData(extractCleanNfcToken(testToken.trim()));
         return;
       }
 
@@ -857,11 +874,13 @@
         ndef.scan().then(() => {
           ndef.onreading = ev => {
             const dec = new TextDecoder();
-            let p = "";
-            for (const r of ev.message.records) p += dec.decode(r.data);
-            const token = p.match(/[?&]t=([^&]+)/) ? decodeURIComponent(p.match(/[?&]t=([^&]+)/)[1]) : (p || ev.serialNumber);
+            let fullData = "";
+            for (const r of ev.message.records) fullData += dec.decode(r.data);
+            
+            // ✨ استخلاص التوكن النظيف وعرض الملف فوراً دون فتح المتصفح
+            const cleanToken = extractCleanNfcToken(fullData || ev.serialNumber);
             hint.textContent = "تمت القراءة بنجاح!";
-            inspectTokenData(token);
+            inspectTokenData(cleanToken);
           };
         }).catch(() => {
           hint.textContent = "اضغط لإعادة المحاولة";
@@ -879,7 +898,7 @@
 
       for (let emp of staffDirectoryList) {
         for (let c of (emp.cards || [])) {
-          if (c.token === token || (token && token.includes(c.token))) {
+          if (c.token === token || (token && token.includes(c.token)) || (c.token && c.token.includes(token))) {
             matchedEmp = emp;
             matchedCard = c;
             break;
@@ -925,7 +944,7 @@
     }
 
     fetchStaffDirectory();
-    setInterval(fetchStaffDirectory, 12000); // تحديث متزن كل 12 ثانية
+    setInterval(fetchStaffDirectory, 12000);
   </script>
 </body>
 </html>

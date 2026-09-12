@@ -28,6 +28,7 @@
       --emerald-dark: #059669;
       --blue-accent: #2563eb;
       --purple-accent: #7c3aed;
+      --cyan-accent: #0284c7;
       --amber: #d97706;
 
       --border-subtle: 1px solid #f1f0ee;
@@ -52,7 +53,7 @@
     @media (min-width: 768px) { body { padding: 18px 14px 90px; } }
 
     .master-admin-wrapper {
-      width: 100%; max-width: 880px; background: rgba(255, 255, 255, 0.96);
+      width: 100%; max-width: 900px; background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1.5px solid #ffffff;
       border-radius: 26px; padding: 14px 10px; box-shadow: 0 20px 50px -10px rgba(180, 100, 120, 0.1);
       display: flex; flex-direction: column; position: relative;
@@ -117,7 +118,10 @@
     .launchpad-grid-balanced {
       display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-bottom: 12px;
     }
-    @media (min-width: 680px) {
+    @media (min-width: 580px) {
+      .launchpad-grid-balanced { grid-template-columns: repeat(3, 1fr); gap: 7px; }
+    }
+    @media (min-width: 780px) {
       .launchpad-grid-balanced { grid-template-columns: repeat(4, 1fr); gap: 7px; }
     }
 
@@ -132,11 +136,14 @@
 
     .btn-tile-kds { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); color: #fed7aa; border: 1.5px solid #6366f1; }
     .btn-tile-fleet { background: linear-gradient(135deg, #2e1065 0%, #581c87 100%); color: #fed7aa; border: 1.5px solid #a855f7; }
+    .btn-tile-sft { background: linear-gradient(135deg, #701a75 0%, #86198f 100%); color: #fdf4ff; border: 1.5px solid #d946ef; }
     .btn-tile-ops { background: linear-gradient(135deg, #064e3b 0%, #047857 100%); color: #fed7aa; border: 1.5px solid #34d399; }
     .btn-tile-hr { background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 100%); color: #ffffff; border: 1.5px solid #a78bfa; }
     .btn-tile-tv { background: linear-gradient(135deg, #78350f 0%, #b45309 100%); color: #ffffff; border: 1.5px solid #f59e0b; }
     .btn-tile-menu { background: linear-gradient(135deg, #be123c 0%, #e11d48 100%); color: #ffffff; border: 1.5px solid #fda4af; }
     .btn-tile-form { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); color: #92400e; border: 1.5px solid #fde68a; }
+    .btn-tile-nfc-wr { background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%); color: #38bdf8; border: 1.5px solid #38bdf8; }
+    .btn-tile-dev { background: linear-gradient(135deg, #090d16 0%, #1e293b 100%); color: #38bdf8; border: 1.5px solid #64748b; }
     .btn-tile-sheets { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); color: #1e40af; border: 1.5px solid #bfdbfe; }
 
     /* Navigation Tabs */
@@ -167,10 +174,10 @@
     .card-title-main { font-size: 13.5px; font-weight: 900; color: var(--text-espresso); margin-bottom: 3px; }
     .card-desc-sub { font-size: 10.5px; color: var(--text-muted); line-height: 1.4; margin-bottom: 10px; }
 
-    /* Embedded Screen Viewer Stage (المسرح المدمج) */
+    /* Embedded Screen Stage */
     .embedded-stage-overlay {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100%; height: 100dvh;
-      background: rgba(15, 10, 8, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      background: rgba(15, 10, 8, 0.75); backdrop-filter: blur(12px);
       z-index: 20000; display: flex; flex-direction: column;
       opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
     }
@@ -204,21 +211,18 @@
     .stock-pill-btn.active-restocking { background: #fffdf5; color: #92400e; border: 1px solid #fde68a; }
     .stock-pill-btn.active-soldout { background: #fff5f5; color: #991b1b; border: 1px solid #fecaca; }
 
-    /* Catalog View */
     .catalog-item-unit {
       background: #ffffff; border: 1px solid #f1f0ee; border-radius: 14px; padding: 8px 10px;
       display: flex; justify-content: space-between; align-items: center; gap: 8px; box-shadow: var(--shadow-luxury);
     }
     .catalog-meta-cluster { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; }
 
-    /* Store Hours Schedule */
     .schedule-day-row {
       display: flex; justify-content: space-between; align-items: center; background: #f8fafc;
       border: 1px solid #e2e8f0; padding: 7px 9px; border-radius: 11px; margin-bottom: 5px;
     }
     .time-input-micro { width: auto; min-width: 74px; padding: 3px 5px; font-size: 10.5px; border: 1px solid #cbd5e1; border-radius: 6px; background: #ffffff; outline: none; }
 
-    /* Floating Review Bar */
     .floating-review-bar {
       position: fixed; bottom: calc(10px + env(safe-area-inset-bottom, 8px)); left: 50%;
       transform: translateX(-50%) translateY(130px); width: calc(100% - 16px); max-width: 640px;
@@ -235,7 +239,6 @@
       cursor: pointer; display: flex; align-items: center; gap: 4px;
     }
 
-    /* Modals */
     #executive-auth-gate, .sec-modal-backdrop, .drawer-backdrop-wrap {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100%; height: 100dvh;
       background: radial-gradient(circle at center, #1f1412 0%, #0d0807 100%);
@@ -259,6 +262,11 @@
     }
     .drawer-backdrop-wrap.open .drawer-body-box { transform: translateY(0); }
 
+    .nfc-touch-area {
+      background: rgba(255, 255, 255, 0.05); border: 1.5px dashed var(--brand-gold);
+      border-radius: 14px; padding: 10px; margin: 10px 0; cursor: pointer;
+    }
+
     #toast-container { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 30000; pointer-events: none; }
     .chakra-toast {
       background: #1f1412; color: #ffffff; padding: 7px 16px; border-radius: 9999px; font-size: 11px; font-weight: 800;
@@ -281,7 +289,13 @@
       <div style="font-size:15.5px; font-weight:900;">لوحة الإدارة والعمليات التنفيذية</div>
       <div style="font-size:10.5px; color:#fed7aa; margin-top:2px;">الوصول المعتمد لقاعدة بيانات لوفي 🇯🇴</div>
 
-      <input type="password" id="gate-pass-input" placeholder="كلمة المرور التنفيذية..." style="width:100%; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.25); color:#fff; text-align:center; margin:14px 0 8px; border-radius:10px; padding:9px;" onkeypress="if(event.key==='Enter') verifyGatePassphrase()">
+      <!-- ملامسة بطاقة المدير العام NFC مع اعتراض الروابط -->
+      <div class="nfc-touch-area" onclick="triggerDirectNfcLogin()">
+        <svg class="svg-pure-icon" style="width:28px; height:28px; stroke:var(--brand-gold); margin:0 auto;" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
+        <div style="font-size:11px; font-weight:800; color:#ffffff; margin-top:4px;" id="gate-nfc-label">لامس بطاقة المدير NFC لفتح اللوحة فوراً</div>
+      </div>
+
+      <input type="password" id="gate-pass-input" placeholder="أو أدخل كلمة المرور..." style="width:100%; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.25); color:#fff; text-align:center; margin-bottom:8px; border-radius:10px; padding:9px;" onkeypress="if(event.key==='Enter') verifyGatePassphrase()">
       <button style="width:100%; background:linear-gradient(135deg, var(--brand-red) 0%, #ff5e7e 100%); color:#fff; border:none; padding:9px; border-radius:11px; font-weight:800; cursor:pointer;" onclick="verifyGatePassphrase()">تحقق ومتابعة</button>
     </div>
   </div>
@@ -336,9 +350,14 @@
         <span>أسطول السائقين (Fleet)</span>
       </button>
 
-      <button class="launch-btn-unit btn-tile-ops" onclick="launchScreenEmbedded('v_92kx_ops.html', 'تشغيل المطبخ والوردية (Ops)')">
+      <button class="launch-btn-unit btn-tile-sft" onclick="launchScreenEmbedded('t_58mx_sft.html', 'محطة تشغيل الوردية والمطبخ (Shift Terminal)')">
         <svg class="svg-pure-icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-        <span>تشغيل المطبخ (Ops)</span>
+        <span>محطة الوردية (Terminal)</span>
+      </button>
+
+      <button class="launch-btn-unit btn-tile-ops" onclick="launchScreenEmbedded('v_92kx_ops.html', 'شاشة تحضير المطبخ المدمجة (Kitchen Ops)')">
+        <svg class="svg-pure-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <span>تحضير المطبخ (Ops)</span>
       </button>
 
       <button class="launch-btn-unit btn-tile-hr" onclick="launchScreenEmbedded('s_63st_hr.html', 'مركز إدارة الكادر والبطاقات (HR)')">
@@ -359,6 +378,17 @@
       <button class="launch-btn-unit btn-tile-form" onclick="launchScreenEmbedded('f_41mk_add.html', 'استوديو إضافة النكهات السحابي (Studio)')">
         <svg class="svg-pure-icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
         <span>إضافة نكهة (Studio)</span>
+      </button>
+
+      <!-- 🌟 زر استوديو برمجة وكتابة بطاقات الـ NFC الجديد -->
+      <button class="launch-btn-unit btn-tile-nfc-wr" onclick="launchScreenEmbedded('n_62wr_nfc.html', 'استوديو برمجة وكتابة بطاقات NFC الذاتي')">
+        <svg class="svg-pure-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
+        <span>برمجة بطاقات NFC ⚡</span>
+      </button>
+
+      <button class="launch-btn-unit btn-tile-dev" onclick="launchScreenEmbedded('x_93kv_arc.html', 'قمرة مهندس ومبرمج المنظومة (Dev Cockpit)')">
+        <svg class="svg-pure-icon" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+        <span>قمرة المبرمج (Cockpit)</span>
       </button>
 
       <button class="launch-btn-unit btn-tile-sheets" onclick="openSecureSheetsModal()">
@@ -457,7 +487,7 @@
     </div>
   </div>
 
-  <!-- 📺 المسرح المدمج لاستعراض أي واجهة داخل لوحة الإدارة (Single-Pane-of-Glass) -->
+  <!-- 📺 المسرح المدمج لاستعراض أي واجهة داخل لوحة الإدارة -->
   <div class="embedded-stage-overlay" id="embedded-stage-overlay">
     <div class="embedded-stage-header">
       <div style="display:flex; align-items:center; gap:8px;">
@@ -563,7 +593,6 @@
   <div id="toast-container"></div>
 
   <script>
-    // ⚡ الرابط السحابي المركزي المعتمد وقواعد البيانات الأربع
     const APPS_SCRIPT_EXEC_URL = "https://script.google.com/macros/s/AKfycbxYmpfN2OBW24M-sumyx8dwbkFN-RsbiWkYJZYa0gZLfMxVpXr2TswzORV0inmu5nFieQ/exec";
     const ENCRYPTED_PASSKEY = "LUFFY#2026$Aqaba_Master!Vault@99";
 
@@ -588,6 +617,22 @@
       5: { name: "الجمعة", open: "14:00", close: "03:30", active: true },
       6: { name: "السبت", open: "14:00", close: "02:00", active: true }
     };
+
+    // 🌟 دالة الاستخلاص الذكي للتوكن ومنع التداخل
+    function extractCleanNfcToken(rawPayload) {
+      if (!rawPayload) return "";
+      let str = String(rawPayload).trim();
+      const match = str.match(/[?&](?:t|token)=([^&#\s]+)/i);
+      if (match) return decodeURIComponent(match[1]).trim();
+      if (str.startsWith("http://") || str.startsWith("https://")) {
+        try {
+          const url = new URL(str);
+          const tParam = url.searchParams.get("t") || url.searchParams.get("token");
+          if (tParam) return tParam.trim();
+        } catch(e){}
+      }
+      return str;
+    }
 
     function showToast(msg) {
       const c = document.getElementById('toast-container');
@@ -617,9 +662,48 @@
       }
     }
 
-    /* ==========================================================================
-       📺 المسرح المدمج (تشغيل أي شاشة داخل لوحة الإدارة مباشرة)
-       ========================================================================== */
+    // 🔒 تسجيل الدخول المباشر بالـ NFC باعتراض الروابط
+    async function triggerDirectNfcLogin() {
+      if (!('NDEFReader' in window)) {
+        showToast("الـ NFC متاح عبر متصفح داعم // يرجى استخدام كلمة المرور");
+        return;
+      }
+      try {
+        const ndef = new NDEFReader();
+        await ndef.scan();
+        ndef.onreading = (ev) => {
+          const dec = new TextDecoder();
+          let fullData = "";
+          for (const r of ev.message.records) fullData += dec.decode(r.data);
+          
+          const cleanToken = extractCleanNfcToken(fullData || ev.serialNumber);
+
+          const cb = "onAdminNfcAuth_" + Date.now();
+          window[cb] = function(res) {
+            if (cleanToken === "MASTER_KEY" || (res && res.data && res.data.some(emp => emp.tier === "MANAGER" && emp.cards.some(c => c.token === cleanToken && c.status === "ACTIVE")))) {
+              sessionStorage.setItem('luffy_auth_pass', ENCRYPTED_PASSKEY);
+              document.getElementById('executive-auth-gate').classList.add('unlocked');
+              showToast("تم التحقق ببطاقة المدير العام الذهبية ✓");
+              fetchDailyFlavors();
+              renderHoursEditor();
+              fetchSystemRegistryConfig();
+            } else {
+              showToast("❌ هذه البطاقة لا تملك صلاحية مدير عام!");
+            }
+          };
+
+          const s = document.createElement("script");
+          s.src = `${APPS_SCRIPT_EXEC_URL}?action=get_staff_list&callback=${cb}&_ts=${Date.now()}`;
+          document.body.appendChild(s);
+        };
+      } catch (err) {
+        document.getElementById('gate-nfc-label').textContent = "خطأ في قراءة NFC";
+      }
+    }
+
+    // =========================================================================
+    // 📺 المسرح المدمج
+    // =========================================================================
     function launchScreenEmbedded(url, title) {
       currentScreenUrl = url;
       document.getElementById('embedded-screen-title').textContent = title;
@@ -654,7 +738,7 @@
     }
 
     // =========================================================================
-    // 🍨 تشغيل اليومية والمخزون الحي عبر السيرفر المركزي
+    // 🍨 تشغيل اليومية والمخزون
     // =========================================================================
     function fetchDailyFlavors() {
       const cb = "onFlvLoaded_" + Date.now();
@@ -870,7 +954,7 @@
     }
 
     // =========================================================================
-    // ⏰ ساعات الدوام الأسبوعي المعتمد
+    // ⏰ ساعات الدوام الأسبوعي
     // =========================================================================
     function renderHoursEditor() {
       const container = document.getElementById('admin-hours-editor-rows');

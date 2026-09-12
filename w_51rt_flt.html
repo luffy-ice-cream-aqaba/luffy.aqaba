@@ -69,14 +69,6 @@
       stroke-linecap: round; stroke-linejoin: round; display: inline-block; vertical-align: middle; flex-shrink: 0;
     }
 
-    .tabular-nums {
-      font-variant-numeric: tabular-nums;
-      font-feature-settings: "tnum";
-      font-family: var(--font-en);
-      letter-spacing: 0.5px;
-      display: inline-block;
-    }
-
     /* Header */
     .admin-top-bar {
       display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px;
@@ -194,12 +186,11 @@
     .driver-profile-card.is-banned-state { border-color: #fecdd3; background: #fff1f2; opacity: 0.75; }
 
     .driver-card-top-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-    
     .driver-avatar-badge {
       width: 40px; height: 40px; min-width: 40px; border-radius: 12px;
       background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
       border: 1px solid #bfdbfe; display: flex; align-items: center; justify-content: center;
-      color: var(--blue-accent);
+      color: var(--blue-accent); font-size: 18px;
     }
 
     .driver-meta-box { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
@@ -211,24 +202,14 @@
       padding: 2px 7px; border-radius: 5px; display: inline-flex; align-items: center; gap: 3px;
     }
 
-    .driver-ratings-ribbon {
-      display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 3px;
-    }
-    
+    .driver-ratings-ribbon { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 3px; }
     .rating-pill-star {
       background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
       color: #92400e; border: 1px solid #fcd34d; font-size: 10px; font-weight: 900;
-      padding: 2px 7px; border-radius: 6px; display: inline-flex; align-items: center; gap: 4px;
-      box-shadow: 0 2px 6px rgba(245, 158, 11, 0.15);
+      padding: 2px 7px; border-radius: 6px;
     }
-    .rating-pill-pos {
-      background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; font-size: 10px;
-      font-weight: 800; padding: 2px 6px; border-radius: 6px; display: inline-flex; align-items: center; gap: 3px;
-    }
-    .rating-pill-neg {
-      background: #fff1f2; color: #9f1239; border: 1px solid #fecdd3; font-size: 10px;
-      font-weight: 800; padding: 2px 6px; border-radius: 6px; display: inline-flex; align-items: center; gap: 3px;
-    }
+    .rating-pill-pos { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 6px; }
+    .rating-pill-neg { background: #fff1f2; color: #9f1239; border: 1px solid #fecdd3; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 6px; }
 
     .driver-card-tools {
       display: flex; justify-content: space-between; align-items: center;
@@ -242,24 +223,18 @@
     }
     .btn-driver-action:hover { background: #ffffff; border-color: #cbd5e1; }
     
-    .btn-action-eval {
-      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-      color: #92400e; border-color: #fde68a; font-weight: 900;
-    }
+    .btn-bind-nfc { background: #fefce8; color: #854d0e; border-color: #fef08a; }
     .btn-stealth-pause { background: #fffbeb; color: #92400e; border-color: #fde68a; }
     .btn-perm-ban { background: #fff1f2; color: #9f1239; border-color: #fecdd3; }
 
-    /* Smart Bundling Suggestion Card */
+    /* Smart Bundling */
     .smart-bundle-box {
       background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
       border: 1.5px solid #93c5fd; border-radius: 16px; padding: 12px 14px;
       margin-bottom: 12px; display: flex; flex-direction: column; gap: 6px;
     }
-    .bundle-header-title {
-      display: flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 900; color: #1e40af;
-    }
+    .bundle-header-title { display: flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 900; color: #1e40af; }
 
-    /* Forms */
     .jordan-phone-wrap {
       display: flex; align-items: center; direction: ltr; background: #f8fafc;
       border: 1.5px solid #e2e8f0; border-radius: 12px; overflow: hidden;
@@ -278,44 +253,39 @@
     .form-group-unit { display: flex; flex-direction: column; gap: 3px; margin-bottom: 6px; width: 100%; }
     .form-group-unit.full-width { grid-column: 1 / -1; }
     label { font-size: 11px; font-weight: 800; color: var(--text-espresso); }
-    input, select, textarea {
+    input, select {
       width: 100%; background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 12px;
       padding: 9px 12px; font-family: var(--font-ar); font-size: 12px; outline: none;
     }
-    input:focus, select:focus, textarea:focus { border-color: var(--brand-red); background: #ffffff; }
 
     .btn-primary-action {
       background: linear-gradient(135deg, var(--brand-red) 0%, #ff5e7e 100%); color: #ffffff; border: none;
       padding: 11px; border-radius: 12px; font-family: var(--font-ar); font-size: 12px; font-weight: 900;
-      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 14px rgba(255, 42, 95, 0.3);
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;
     }
 
-    /* Live Road Radar Map */
     .road-map-container {
       width: 100%; height: 260px; border-radius: 16px; border: 1.5px solid #bfdbfe;
       overflow: hidden; margin-bottom: 10px; position: relative; box-shadow: var(--shadow-card);
     }
     #fleet-leaflet-map { width: 100%; height: 100%; z-index: 10; }
 
-    .road-delivery-card {
-      background: #ffffff; border: 1.5px solid #bfdbfe; border-radius: 16px;
-      padding: 10px 12px; margin-bottom: 8px; display: flex; flex-direction: column; gap: 6px;
-      box-shadow: var(--shadow-card);
-    }
-
-    /* Modals */
-    .modal-backdrop-wrap {
+    .modal-backdrop-wrap, .manager-sig-backdrop {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100%; height: 100dvh;
-      background: rgba(10, 8, 9, 0.68); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      background: rgba(10, 8, 9, 0.68); backdrop-filter: blur(8px);
       z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 16px;
       opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
     }
-    .modal-backdrop-wrap.open { opacity: 1; pointer-events: auto; }
+    .modal-backdrop-wrap.open, .manager-sig-backdrop.open { opacity: 1; pointer-events: auto; }
     
     .modal-dialog-panel {
       background: #ffffff; border-radius: 24px; padding: 20px 18px; width: 100%; max-width: 460px;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.3); border: 1.5px solid #fed7aa;
-      margin: auto; max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.3); border: 1.5px solid #fed7aa; max-height: 90vh; overflow-y: auto;
+    }
+
+    .nfc-scan-touch-box {
+      background: #fdfaf7; border: 1.5px dashed var(--brand-gold); border-radius: 14px;
+      padding: 14px; text-align: center; margin: 10px 0; cursor: pointer;
     }
 
     #toast-container { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 15000; pointer-events: none; }
@@ -414,7 +384,6 @@
         <input type="text" class="search-driver-input" id="search-drivers-query" placeholder="ابحث باسم الكابتن، رقم الهاتف، نوع المركبة، أو الحالة..." oninput="handleDriverSearch(this.value)">
       </div>
 
-      <!-- مقترح الدمج الذكي للطلبات المتجاورة -->
       <div class="smart-bundle-box" id="smart-bundle-suggestion-card" style="display:none;">
         <div class="bundle-header-title">
           <svg class="svg-pure-icon" style="stroke:#1e40af;" viewBox="0 0 24 24"><path d="M16 16v1a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v1"></path><path d="M18 8h4a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-4"></path><circle cx="6" cy="19" r="2"></circle><circle cx="18" cy="19" r="2"></circle></svg>
@@ -430,7 +399,7 @@
     <div class="admin-panel" id="pane-enroll">
       <div class="luxury-surface-card">
         <div class="card-title-main">تسجيل كابتن جديد في الأسطول</div>
-        <div class="card-desc-sub">قم بإدخال بيانات السائق وتحديد نوع المركبة ورمز الطوارئ:</div>
+        <div class="card-desc-sub">أدخل بيانات السائق ومسح ميداليته الذكية بظهر الهاتف:</div>
 
         <form id="enroll-driver-form" onsubmit="event.preventDefault(); commitNewDriverRegistration();">
           <div class="form-responsive-grid">
@@ -462,9 +431,14 @@
             </div>
 
             <div class="form-group-unit">
-              <label>كود ميدالية NFC الذكية المربوطة</label>
-              <input type="text" id="new_driver_nfc_token" placeholder="DRV_NFC_XXXX (اختياري)">
+              <label>ميدالية NFC الذكية المربوطة</label>
+              <input type="text" id="new_driver_nfc_token" placeholder="اضغط بالأسفل للمسح..." readonly style="cursor:pointer; background:#fffdfa;" onclick="scanNfcForNewDriver()">
             </div>
+          </div>
+
+          <div class="nfc-scan-touch-box" onclick="scanNfcForNewDriver()">
+            <svg class="svg-pure-icon" style="width:28px; height:28px; stroke:var(--brand-gold); margin:0 auto;" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
+            <div style="font-size:11px; font-weight:800; margin-top:4px;" id="enroll-nfc-scan-hint">اضغط لملامسة ميدالية الكابتن الجديدة بظهر الهاتف</div>
           </div>
 
           <button type="submit" class="btn-primary-action" style="width:100%; margin-top:10px;">
@@ -485,10 +459,39 @@
     </div>
   </div>
 
+  <!-- 💳 نافذة ربط ميدالية NFC لسائق مسجل -->
+  <div class="modal-backdrop-wrap" id="bind-nfc-modal" onclick="closeBindNfcModal()">
+    <div class="modal-dialog-panel" onclick="event.stopPropagation()">
+      <div style="font-size:14.5px; font-weight:900; color:var(--brand-gold);">💳 برمجة وربط ميدالية NFC للكابتن</div>
+      <p style="font-size:11.5px; color:var(--text-muted); margin:6px 0 12px;" id="bind-nfc-target-driver">الكابتن: ...</p>
+      
+      <div class="nfc-scan-touch-box" onclick="executeNfcBindingScan()">
+        <svg class="svg-pure-icon" style="width:34px; height:34px; stroke:var(--brand-gold); margin:0 auto;" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
+        <div style="font-size:11px; font-weight:800; margin-top:4px;" id="bind-nfc-hint">لامس ميدالية الكابتن بظهر الهاتف الآن</div>
+      </div>
+
+      <button style="border:none; background:#f1f5f9; padding:8px 16px; border-radius:10px; font-size:11px; font-weight:800; cursor:pointer;" onclick="closeBindNfcModal()">إلغاء</button>
+    </div>
+  </div>
+
+  <!-- 👑 نافذة توقيع واعتماد المدير العام بالـ NFC -->
+  <div class="manager-sig-backdrop" id="manager-sig-modal">
+    <div class="modal-dialog-panel">
+      <div style="font-size:15px; font-weight:900; color:#1a110d;">توقيع واعتماد المدير العام</div>
+      <p style="font-size:11.5px; color:var(--text-muted); margin:5px 0 12px; line-height:1.4;">
+        لاعتماد هذا الإجراء الإداري الحساس، يرجى <strong>ملامسة بطاقة المدير العام</strong> بظهر الهاتف:
+      </p>
+      <div class="nfc-scan-touch-box">
+        <svg class="svg-pure-icon" style="width:32px; height:32px; stroke:var(--brand-gold); margin:0 auto;" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
+        <div style="font-size:11px; font-weight:800; color:var(--text-espresso);" id="sig-status-txt">جاري الاستماع لبطاقة المدير...</div>
+      </div>
+      <button style="border:none; background:#f1f5f9; padding:6px 16px; border-radius:8px; font-size:11px; font-weight:800; cursor:pointer;" onclick="cancelManagerSig()">إلغاء</button>
+    </div>
+  </div>
+
   <div id="toast-container"></div>
 
   <script>
-    // ⚡ الرابط المركزي السحابي المعتمد وقاعدة بيانات الأسطول
     const APPS_SCRIPT_EXEC_URL = "https://script.google.com/macros/s/AKfycbxYmpfN2OBW24M-sumyx8dwbkFN-RsbiWkYJZYa0gZLfMxVpXr2TswzORV0inmu5nFieQ/exec";
     const MASTER_SECRET = "LUFFY#2026$Aqaba_Master!Vault@99";
     const AQABA_STORE_COORDS = [29.5265, 35.0020];
@@ -498,6 +501,25 @@
     let driverSearchFilter = "";
     let fleetMapInstance = null;
     let fleetMarkersGroup = null;
+
+    let pendingManagerAction = null;
+    let targetDriverForBinding = null;
+
+    // 🌟 دالة الاستخلاص الذكي للتوكن ومنع التداخل
+    function extractCleanNfcToken(rawPayload) {
+      if (!rawPayload) return "";
+      let str = String(rawPayload).trim();
+      const match = str.match(/[?&](?:t|token)=([^&#\s]+)/i);
+      if (match) return decodeURIComponent(match[1]).trim();
+      if (str.startsWith("http://") || str.startsWith("https://")) {
+        try {
+          const url = new URL(str);
+          const tParam = url.searchParams.get("t") || url.searchParams.get("token");
+          if (tParam) return tParam.trim();
+        } catch(e){}
+      }
+      return str;
+    }
 
     function showToast(msg) {
       const c = document.getElementById('toast-container');
@@ -522,7 +544,50 @@
     }
 
     // =========================================================================
-    // 📡 سحب بيانات الأسطول والسائقين لحظياً عبر السيرفر المركزي
+    // 🔒 نظام توقيع واعتماد المدير بالـ NFC مع اعتراض الروابط
+    // =========================================================================
+    function requestManagerNfcSignature(callbackAction) {
+      pendingManagerAction = callbackAction;
+      document.getElementById('manager-sig-modal').classList.add('open');
+      const statusTxt = document.getElementById('sig-status-txt');
+      statusTxt.textContent = "جاري الاستماع لبطاقة المدير العام...";
+
+      if ('NDEFReader' in window) {
+        try {
+          const ndef = new NDEFReader();
+          ndef.scan().then(() => {
+            ndef.onreading = ev => {
+              const decoder = new TextDecoder();
+              let p = "";
+              for (const r of ev.message.records) p += decoder.decode(r.data);
+              const cleanToken = extractCleanNfcToken(p || ev.serialNumber);
+
+              cancelManagerSig();
+              if (pendingManagerAction) pendingManagerAction(cleanToken);
+            };
+          }).catch(() => {
+            statusTxt.textContent = "استخدم كلمة المرور للمتابعة";
+          });
+        } catch(e){}
+      } else {
+        const pass = prompt("أدخل كلمة المرور التنفيذية للاعتماد:");
+        if (pass === MASTER_SECRET) {
+          cancelManagerSig();
+          if (pendingManagerAction) pendingManagerAction("MASTER_KEY");
+        } else {
+          alert("كلمة المرور غير صحيحة!");
+          cancelManagerSig();
+        }
+      }
+    }
+
+    function cancelManagerSig() {
+      document.getElementById('manager-sig-modal').classList.remove('open');
+      pendingManagerAction = null;
+    }
+
+    // =========================================================================
+    // 📡 سحب بيانات الأسطول والسائقين لحظياً
     // =========================================================================
     function fetchFleetDataDirectly() {
       const cb1 = "onDriversFleetLoaded_" + Date.now();
@@ -530,7 +595,6 @@
         if (!res || !res.data) return;
         driversFleetList = res.data;
 
-        // ⚖️ خوارزمية تكافؤ الفرص في توزيع الرحلات
         driversFleetList.sort((a, b) => {
           if (a.Shift_Status === 'ACTIVE' && b.Shift_Status !== 'ACTIVE') return -1;
           if (a.Shift_Status !== 'ACTIVE' && b.Shift_Status === 'ACTIVE') return 1;
@@ -544,7 +608,6 @@
       s1.src = `${APPS_SCRIPT_EXEC_URL}?action=get_drivers&callback=${cb1}&_ts=${Date.now()}`;
       document.body.appendChild(s1);
 
-      // سحب الطلبات الجارية في الطريق
       const cb2 = "onRoadOrdersLoaded_" + Date.now();
       window[cb2] = function(res) {
         if (!res || !res.data) return;
@@ -576,9 +639,6 @@
       renderDriversDirectory();
     }
 
-    // =========================================================================
-    // 🧠 خوارزمية الدمج الذكي للطلبات المتجاورة
-    // =========================================================================
     function runSmartBundlingAlgorithm(orders) {
       const bundleCard = document.getElementById('smart-bundle-suggestion-card');
       const descEl = document.getElementById('bundle-description-text');
@@ -711,6 +771,10 @@
               </div>
 
               <div style="display:flex; gap:4px; flex-wrap:wrap;">
+                <button class="btn-driver-action btn-bind-nfc" onclick="openBindNfcModalById('${driver.Driver_ID}')">
+                  <span>ربط ميدالية NFC</span>
+                </button>
+
                 <button class="btn-driver-action btn-stealth-pause" onclick="setDriverStatusDirect('${driver.Driver_ID}', '${isPaused ? 'ACTIVE' : 'PAUSED'}')">
                   <span>${isPaused ? 'فك الإيقاف' : 'إيقاف مؤقت'}</span>
                 </button>
@@ -743,16 +807,46 @@
     }
 
     function setDriverStatusDirect(id, status) {
-      if (!confirm(`هل أنت متأكد من تغيير حالة الكابتن إلى [${status}]؟`)) return;
-      showToast("جاري تحديث الحالة الإدارية...");
-      const cb = "onAdmTgl_" + Date.now();
-      window[cb] = function() {
-        showToast("تم التحديث بنجاح ✓");
-        fetchFleetDataDirectly();
-      };
-      const s = document.createElement("script");
-      s.src = `${APPS_SCRIPT_EXEC_URL}?auth_pass=${encodeURIComponent(MASTER_SECRET)}&action=toggle_driver_status&driver_id=${encodeURIComponent(id)}&new_status=${status}&callback=${cb}`;
-      document.body.appendChild(s);
+      requestManagerNfcSignature((managerToken) => {
+        showToast("جاري تحديث الحالة الإدارية...");
+        const cb = "onAdmTgl_" + Date.now();
+        window[cb] = function() {
+          showToast("تم التحديث بتفويض المدير العام ✓");
+          fetchFleetDataDirectly();
+        };
+        const s = document.createElement("script");
+        s.src = `${APPS_SCRIPT_EXEC_URL}?auth_pass=${encodeURIComponent(MASTER_SECRET)}&nfc_token=${encodeURIComponent(managerToken)}&action=toggle_driver_status&driver_id=${encodeURIComponent(id)}&new_status=${status}&callback=${cb}`;
+        document.body.appendChild(s);
+      });
+    }
+
+    // =========================================================================
+    // 💳 مسح وبرمجة ميدالية NFC لكابتن جديد مع اعتراض الروابط
+    // =========================================================================
+    function scanNfcForNewDriver() {
+      if (!('NDEFReader' in window)) {
+        const mock = `LUFFY_DRV_MEDAL_${Date.now().toString().slice(-4)}`;
+        document.getElementById('new_driver_nfc_token').value = mock;
+        document.getElementById('enroll-nfc-scan-hint').textContent = `تم التقاط الرمز: ${mock} ✓`;
+        return;
+      }
+      try {
+        document.getElementById('enroll-nfc-scan-hint').textContent = "جاري قراءة الميدالية.. قرّبها من ظهر الهاتف الآن";
+        const ndef = new NDEFReader();
+        ndef.scan().then(() => {
+          ndef.onreading = ev => {
+            const dec = new TextDecoder();
+            let p = "";
+            for (const r of ev.message.records) p += dec.decode(r.data);
+            
+            // ✨ استخلاص التوكن النظيف واعتراض الرابط
+            const cleanToken = extractCleanNfcToken(p || ev.serialNumber);
+            document.getElementById('new_driver_nfc_token').value = cleanToken;
+            document.getElementById('enroll-nfc-scan-hint').textContent = `تم مسح الميدالية بنجاح: ${cleanToken} ✓`;
+            showToast("تم مسح ميدالية الكابتن بنجاح ✓");
+          };
+        });
+      } catch(e){}
     }
 
     function commitNewDriverRegistration() {
@@ -760,18 +854,68 @@
       const phone = document.getElementById('new_driver_phone').value.trim().replace(/\D/g, '');
       const vehicle = document.getElementById('new_driver_vehicle').value;
       const passcode = document.getElementById('new_driver_passcode').value.trim();
-      const nfcToken = document.getElementById('new_driver_nfc_token').value.trim() || `DRV_NFC_${Date.now().toString().slice(-4)}`;
+      const nfcToken = document.getElementById('new_driver_nfc_token').value.trim() || `LUFFY_DRV_${Date.now().toString().slice(-4)}`;
 
-      showToast(`جاري تسجيل الكابتن [${name}]...`);
-      const payload = { name, phone: `+962${phone}`, vehicle, passcode, nfc_token: nfcToken };
+      requestManagerNfcSignature((managerToken) => {
+        showToast(`جاري تسجيل الكابتن [${name}]...`);
+        const payload = { name, phone: `+962${phone}`, vehicle, passcode, nfc_token: nfcToken };
 
-      const cb = "onDrvReg_" + Date.now();
-      window[cb] = function(res) {
-        showToast(`🎉 تم تسجيل الكابتن [${name}] بنجاح ✓`);
-        document.getElementById('enroll-driver-form').reset();
-        switchFleetTab('directory', document.querySelectorAll('.tab-item-btn')[0]);
+        const cb = "onDrvReg_" + Date.now();
+        window[cb] = function(res) {
+          showToast(`🎉 تم تسجيل الكابتن [${name}] بنجاح ✓`);
+          document.getElementById('enroll-driver-form').reset();
+          document.getElementById('enroll-nfc-scan-hint').textContent = "اضغط لملامسة ميدالية الكابتن الجديدة بظهر الهاتف";
+          switchFleetTab('directory', document.querySelectorAll('.tab-item-btn')[0]);
+        };
+
+        const s = document.createElement("script");
+        s.src = `${APPS_SCRIPT_EXEC_URL}?auth_pass=${encodeURIComponent(MASTER_SECRET)}&nfc_token=${encodeURIComponent(managerToken)}&action=register_driver&data=${encodeURIComponent(JSON.stringify(payload))}&callback=${cb}`;
+        document.body.appendChild(s);
+      });
+    }
+
+    // =========================================================================
+    // 💳 ربط ميدالية NFC لسائق مسجل مسبقاً
+    // =========================================================================
+    function openBindNfcModalById(driverId) {
+      targetDriverForBinding = driversFleetList.find(d => d.Driver_ID === driverId);
+      if (!targetDriverForBinding) return;
+      document.getElementById('bind-nfc-target-driver').textContent = `الكابتن: ${targetDriverForBinding.Driver_Name} (${targetDriverForBinding.Driver_ID})`;
+      document.getElementById('bind-nfc-modal').classList.add('open');
+    }
+    function closeBindNfcModal() { document.getElementById('bind-nfc-modal').classList.remove('open'); }
+
+    function executeNfcBindingScan() {
+      if (!('NDEFReader' in window)) {
+        showToast("الـ NFC غير مدعوم بالمتصفح");
+        return;
+      }
+      try {
+        const hint = document.getElementById('bind-nfc-hint');
+        hint.textContent = "جاري قراءة الميدالية... قرّبها الآن";
+        const ndef = new NDEFReader();
+        ndef.scan().then(() => {
+          ndef.onreading = ev => {
+            const dec = new TextDecoder();
+            let p = "";
+            for (const r of ev.message.records) p += dec.decode(r.data);
+            
+            const cleanToken = extractCleanNfcToken(p || ev.serialNumber);
+            commitNfcBindingToSheet(cleanToken);
+          };
+        });
+      } catch(e){}
+    }
+
+    function commitNfcBindingToSheet(nfcToken) {
+      showToast(`جاري ربط الميدالية بالكابتن...`);
+      const payload = { driver_id: targetDriverForBinding.Driver_ID, nfc_token: nfcToken };
+      const cb = "onNfcBound_" + Date.now();
+      window[cb] = function() {
+        showToast(`تم ربط الميدالية بالكابتن بنجاح ✓`);
+        closeBindNfcModal();
+        fetchFleetDataDirectly();
       };
-
       const s = document.createElement("script");
       s.src = `${APPS_SCRIPT_EXEC_URL}?auth_pass=${encodeURIComponent(MASTER_SECRET)}&action=register_driver&data=${encodeURIComponent(JSON.stringify(payload))}&callback=${cb}`;
       document.body.appendChild(s);
