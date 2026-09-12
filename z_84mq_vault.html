@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="referrer" content="no-referrer">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>LUFFY • لوفي | مركز الإدارة والعمليات التنفيذي</title>
+  <title>LUFFY • لوفي | مركز القيادة والإدارة التنفيذي</title>
   
   <!-- خطوط النخبة العالمية -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,13 +28,12 @@
       --emerald-dark: #059669;
       --blue-accent: #2563eb;
       --purple-accent: #7c3aed;
-      --cyan-accent: #0284c7;
       --amber: #d97706;
 
       --border-subtle: 1px solid #f1f0ee;
       --border-soft: 1.5px solid rgba(254, 215, 170, 0.45);
       --shadow-luxury: 0 12px 32px -6px rgba(180, 100, 120, 0.08), 0 2px 8px rgba(0, 0, 0, 0.02);
-      --shadow-card: 0 10px 25px -5px rgba(0,0,0,0.05), 0 2px 6px rgba(0,0,0,0.02);
+      --shadow-card: 0 8px 24px -4px rgba(0,0,0,0.05), 0 2px 6px rgba(0,0,0,0.02);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
@@ -55,21 +54,21 @@
     .master-admin-wrapper {
       width: 100%; max-width: 900px; background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1.5px solid #ffffff;
-      border-radius: 26px; padding: 14px 10px; box-shadow: 0 20px 50px -10px rgba(180, 100, 120, 0.1);
-      display: flex; flex-direction: column; position: relative;
+      border-radius: 24px; padding: 12px 10px; box-shadow: 0 20px 50px -10px rgba(180, 100, 120, 0.1);
+      display: flex; flex-direction: column; position: relative; gap: 10px;
     }
 
-    @media (min-width: 768px) { .master-admin-wrapper { padding: 22px 18px; border-radius: 32px; } }
+    @media (min-width: 768px) { .master-admin-wrapper { padding: 22px 18px; border-radius: 32px; gap: 14px; } }
 
     .svg-pure-icon {
       width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2;
       stroke-linecap: round; stroke-linejoin: round; display: inline-block; vertical-align: middle; flex-shrink: 0;
     }
 
-    /* Top Bar Header */
+    /* Top Bar Header المتناسق 100% على شاشات الموبايل */
     .admin-top-bar {
       display: flex; flex-direction: column; gap: 8px; padding-bottom: 10px;
-      border-bottom: 1.5px solid #f1f0ee; margin-bottom: 10px;
+      border-bottom: 1.5px solid #f1f0ee;
     }
     @media (min-width: 600px) {
       .admin-top-bar { flex-direction: row; justify-content: space-between; align-items: center; }
@@ -77,58 +76,59 @@
 
     .header-brand-row { display: flex; justify-content: space-between; align-items: center; width: 100%; }
     .brand-cluster { display: flex; align-items: center; gap: 8px; min-width: 0; }
-    .straw-hat-badge { position: relative; width: 38px; height: 38px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+
+    .straw-hat-badge {
+      position: relative; width: 36px; height: 36px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
     .hat-glow {
       position: absolute; width: 140%; height: 140%; border-radius: 50%;
-      background: radial-gradient(circle, rgba(251, 191, 36, 0.6) 0%, transparent 70%); filter: blur(8px);
+      background: radial-gradient(circle, rgba(251, 191, 36, 0.6) 0%, transparent 70%); filter: blur(6px);
     }
-    .straw-hat-svg { width: 100%; height: 100%; position: relative; z-index: 2; filter: drop-shadow(0 4px 8px rgba(217, 119, 6, 0.35)); }
+    .straw-hat-svg { width: 100%; height: 100%; position: relative; z-index: 2; filter: drop-shadow(0 3px 6px rgba(217, 119, 6, 0.35)); }
 
     .brand-title-box { display: flex; flex-direction: column; min-width: 0; }
-    .brand-name { display: flex; align-items: center; gap: 4px; font-size: 15.5px; font-weight: 900; line-height: 1.2; white-space: nowrap; }
+    .brand-name {
+      display: flex; align-items: center; gap: 4px; font-size: 15px; font-weight: 900; line-height: 1.2; white-space: nowrap;
+    }
     .name-en {
-      font-family: var(--font-en); letter-spacing: 1px;
+      font-family: var(--font-en); letter-spacing: 0.5px;
       background: linear-gradient(135deg, var(--brand-red) 0%, var(--brand-gold) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
     .name-ar { color: var(--text-espresso); }
-    .brand-subtitle { font-size: 10px; color: var(--text-muted); font-weight: 800; margin-top: 1px; white-space: nowrap; }
+    .brand-subtitle { font-size: 10px; color: var(--text-muted); font-weight: 800; white-space: nowrap; }
 
-    .header-actions-row { display: flex; align-items: center; gap: 6px; width: 100%; }
+    .header-actions-row { display: flex; align-items: center; gap: 5px; width: 100%; flex-wrap: wrap; }
     @media (min-width: 600px) { .header-actions-row { width: auto; } }
 
     .live-pulse-badge {
-      display: flex; align-items: center; gap: 5px; background: #f0fdf4; border: 1px solid #bbf7d0;
-      padding: 5px 9px; border-radius: 9999px; font-size: 10.5px; font-weight: 800; color: var(--emerald-dark); flex-shrink: 0;
+      display: flex; align-items: center; gap: 4px; background: #f0fdf4; border: 1px solid #bbf7d0;
+      padding: 4px 8px; border-radius: 9999px; font-size: 10px; font-weight: 800; color: var(--emerald-dark); flex-shrink: 0;
     }
     .live-dot-pulse {
-      width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 8px var(--emerald); animation: pulseSyncDot 2s infinite;
+      width: 6px; height: 6px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 6px var(--emerald); animation: pulseDot 2s infinite;
     }
-    @keyframes pulseSyncDot { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.6; } }
+    @keyframes pulseDot { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.6; } }
 
     .btn-tool-outline {
-      flex: 1; background: #f8fafc; border: 1.5px solid #e2e8f0; color: var(--text-muted); font-family: var(--font-ar);
-      font-size: 11px; font-weight: 800; padding: 6px 10px; border-radius: 12px; cursor: pointer;
+      flex: 1 1 auto; background: #f8fafc; border: 1.5px solid #e2e8f0; color: var(--text-muted); font-family: var(--font-ar);
+      font-size: 10.5px; font-weight: 800; padding: 6px 10px; border-radius: 10px; cursor: pointer;
       display: flex; align-items: center; justify-content: center; gap: 4px; text-decoration: none; transition: all 0.2s ease; white-space: nowrap;
     }
     .btn-tool-outline:hover { background: #ffffff; border-color: #fed7aa; color: var(--brand-red); }
-    @media (min-width: 600px) { .btn-tool-outline { flex: initial; } }
 
-    /* Launchpad Grid */
+    /* Launchpad Grid المتناسق */
     .launchpad-grid-balanced {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-bottom: 12px;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px;
     }
-    @media (min-width: 580px) {
-      .launchpad-grid-balanced { grid-template-columns: repeat(3, 1fr); gap: 7px; }
-    }
-    @media (min-width: 780px) {
-      .launchpad-grid-balanced { grid-template-columns: repeat(4, 1fr); gap: 7px; }
-    }
+    @media (min-width: 580px) { .launchpad-grid-balanced { grid-template-columns: repeat(3, 1fr); gap: 7px; } }
+    @media (min-width: 780px) { .launchpad-grid-balanced { grid-template-columns: repeat(4, 1fr); gap: 8px; } }
 
     .launch-btn-unit {
-      display: flex; align-items: center; justify-content: center; gap: 5px;
-      padding: 10px 6px; border-radius: 12px; font-family: var(--font-ar);
-      font-size: clamp(10px, 2.7vw, 11.5px); font-weight: 800; text-decoration: none;
+      display: flex; align-items: center; justify-content: center; gap: 4px;
+      padding: 9px 5px; border-radius: 12px; font-family: var(--font-ar);
+      font-size: clamp(9.5px, 2.5vw, 11px); font-weight: 800; text-decoration: none;
       cursor: pointer; border: none; transition: transform 0.15s ease, box-shadow 0.15s ease;
       text-align: center; box-shadow: var(--shadow-card); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
@@ -146,65 +146,67 @@
     .btn-tile-dev { background: linear-gradient(135deg, #090d16 0%, #1e293b 100%); color: #38bdf8; border: 1.5px solid #64748b; }
     .btn-tile-sheets { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); color: #1e40af; border: 1.5px solid #bfdbfe; }
 
-    /* Navigation Tabs */
+    /* 🌟 شريط التبويبات الفاخر المطور للموبايل (Smooth Horizontal Capsule Track) */
     .nav-track-bar {
-      display: flex; background: #f1f5f9; padding: 3px; border-radius: 9999px; gap: 3px;
-      margin-bottom: 12px; overflow-x: auto; scrollbar-width: none;
+      display: flex; background: #f1f5f9; padding: 4px; border-radius: 9999px; gap: 4px;
+      overflow-x: auto; scrollbar-width: none; width: 100%; -webkit-overflow-scrolling: touch;
     }
     .nav-track-bar::-webkit-scrollbar { display: none; }
 
     .tab-item-btn {
-      flex: 1; min-width: max-content; border: none; background: transparent; padding: 7px 11px;
+      flex: 0 0 auto; border: none; background: transparent; padding: 7px 13px;
       border-radius: 9999px; font-family: var(--font-ar); font-size: 11px; font-weight: 800;
-      color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center;
-      gap: 4px; transition: all 0.2s ease; white-space: nowrap;
+      color: var(--text-muted); cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+      gap: 4px; transition: all 0.25s ease; white-space: nowrap; user-select: none;
     }
-    .tab-item-btn.active { background: #ffffff; color: var(--brand-red); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); }
+    .tab-item-btn.active {
+      background: #ffffff; color: var(--brand-red); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); font-weight: 900;
+    }
 
     .admin-panel { display: none; }
-    .admin-panel.active { display: block; animation: fadeIn 0.2s ease-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    .admin-panel.active { display: flex; flex-direction: column; gap: 8px; animation: fadeIn 0.2s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
 
     .luxury-surface-card {
       background: #ffffff; border: var(--border-soft); border-radius: 18px; padding: 12px 10px;
-      box-shadow: var(--shadow-luxury); margin-bottom: 12px;
+      box-shadow: var(--shadow-luxury);
     }
-    @media (min-width: 768px) { .luxury-surface-card { padding: 18px 16px; border-radius: 24px; } }
+    @media (min-width: 768px) { .luxury-surface-card { padding: 18px 16px; border-radius: 22px; } }
 
-    .card-title-main { font-size: 13.5px; font-weight: 900; color: var(--text-espresso); margin-bottom: 3px; }
-    .card-desc-sub { font-size: 10.5px; color: var(--text-muted); line-height: 1.4; margin-bottom: 10px; }
+    .card-title-main { font-size: 13px; font-weight: 900; color: var(--text-espresso); margin-bottom: 2px; }
+    .card-desc-sub { font-size: 10.5px; color: var(--text-muted); line-height: 1.35; margin-bottom: 8px; }
 
-    /* Embedded Screen Stage */
+    /* المسرح المدمج */
     .embedded-stage-overlay {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100%; height: 100dvh;
-      background: rgba(15, 10, 8, 0.75); backdrop-filter: blur(12px);
+      background: rgba(15, 10, 8, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       z-index: 20000; display: flex; flex-direction: column;
-      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+      opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
     }
     .embedded-stage-overlay.open { opacity: 1; pointer-events: auto; }
 
     .embedded-stage-header {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 10px 16px; background: #1a110d; color: #ffffff; border-bottom: 1.5px solid #fed7aa;
+      padding: 10px 14px; background: #1a110d; color: #ffffff; border-bottom: 1.5px solid #fed7aa; flex-shrink: 0;
     }
     .embedded-iframe-wrap { flex: 1; width: 100%; height: 100%; background: #ffffff; position: relative; }
     #embedded-screen-frame { width: 100%; height: 100%; border: none; }
 
-    /* Daily Control Items */
-    .flavor-control-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; max-height: 52vh; overflow-y: auto; }
+    /* عناصر المخزون اليومي */
+    .flavor-control-list { display: flex; flex-direction: column; gap: 7px; max-height: 54vh; overflow-y: auto; padding-right: 1px; }
     .flavor-control-card {
-      background: #ffffff; border: 1.5px solid #f1f0ee; border-radius: 16px; padding: 10px 12px;
-      display: flex; flex-direction: column; gap: 8px; box-shadow: var(--shadow-luxury);
+      background: #ffffff; border: 1.5px solid #f1f0ee; border-radius: 16px; padding: 9px 11px;
+      display: flex; flex-direction: column; gap: 7px; box-shadow: var(--shadow-card);
     }
-    .card-main-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-    .flavor-meta-box { display: flex; align-items: center; gap: 9px; min-width: 0; flex: 1; }
-    .flavor-thumb { width: 38px; height: 38px; min-width: 38px; object-fit: contain; border-radius: 11px; background: #fdfaf7; padding: 2px; border: 1px solid #f6ece5; }
-    .flavor-title-ar { font-size: 13.5px; font-weight: 900; color: var(--text-espresso); }
+    .card-main-row { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+    .flavor-meta-box { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; }
+    .flavor-thumb { width: 36px; height: 36px; min-width: 36px; object-fit: contain; border-radius: 10px; background: #fdfaf7; padding: 2px; border: 1px solid #f6ece5; }
+    .flavor-title-ar { font-size: 13px; font-weight: 900; color: var(--text-espresso); }
 
     .stock-segments-track { display: grid; grid-template-columns: repeat(4, 1fr); background: #f8fafc; padding: 2.5px; border-radius: 10px; border: 1px solid #eef2f6; gap: 2.5px; }
     .stock-pill-btn {
       border: none; background: transparent; padding: 5px 1px; border-radius: 7px; font-family: var(--font-ar);
-      font-size: clamp(9px, 2.6vw, 10.5px); font-weight: 800; color: var(--text-muted); cursor: pointer; text-align: center;
+      font-size: clamp(8.5px, 2.4vw, 10px); font-weight: 800; color: var(--text-muted); cursor: pointer; text-align: center;
     }
     .stock-pill-btn.active-available { background: #ffffff; color: #065f46; border: 1px solid #bbf7d0; }
     .stock-pill-btn.active-low { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
@@ -213,19 +215,18 @@
 
     .catalog-item-unit {
       background: #ffffff; border: 1px solid #f1f0ee; border-radius: 14px; padding: 8px 10px;
-      display: flex; justify-content: space-between; align-items: center; gap: 8px; box-shadow: var(--shadow-luxury);
+      display: flex; justify-content: space-between; align-items: center; gap: 6px; box-shadow: var(--shadow-card);
     }
-    .catalog-meta-cluster { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; }
 
     .schedule-day-row {
       display: flex; justify-content: space-between; align-items: center; background: #f8fafc;
-      border: 1px solid #e2e8f0; padding: 7px 9px; border-radius: 11px; margin-bottom: 5px;
+      border: 1px solid #e2e8f0; padding: 6px 9px; border-radius: 11px; margin-bottom: 5px;
     }
-    .time-input-micro { width: auto; min-width: 74px; padding: 3px 5px; font-size: 10.5px; border: 1px solid #cbd5e1; border-radius: 6px; background: #ffffff; outline: none; }
+    .time-input-micro { width: auto; min-width: 70px; padding: 3px 5px; font-size: 10px; border: 1px solid #cbd5e1; border-radius: 6px; background: #ffffff; outline: none; }
 
     .floating-review-bar {
       position: fixed; bottom: calc(10px + env(safe-area-inset-bottom, 8px)); left: 50%;
-      transform: translateX(-50%) translateY(130px); width: calc(100% - 16px); max-width: 640px;
+      transform: translateX(-50%) translateY(130px); width: calc(100% - 16px); max-width: 600px;
       background: rgba(26, 17, 13, 0.96); backdrop-filter: blur(20px); border: 1.5px solid #fed7aa;
       border-radius: 16px; padding: 8px 12px; display: flex; align-items: center;
       justify-content: space-between; color: #ffffff; z-index: 1000; box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
@@ -235,7 +236,7 @@
 
     .btn-review-modal-trigger {
       background: linear-gradient(135deg, var(--emerald) 0%, #059669 100%); color: #ffffff; border: none;
-      padding: 8px 14px; border-radius: 10px; font-family: var(--font-ar); font-size: 11.5px; font-weight: 900;
+      padding: 8px 12px; border-radius: 10px; font-family: var(--font-ar); font-size: 11px; font-weight: 900;
       cursor: pointer; display: flex; align-items: center; gap: 4px;
     }
 
@@ -246,12 +247,12 @@
       align-items: center; justify-content: center; padding: 16px; color: #ffffff;
     }
     #executive-auth-gate.unlocked { display: none; }
-    .sec-modal-backdrop, .drawer-backdrop-wrap { background: rgba(10, 8, 9, 0.65); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+    .sec-modal-backdrop, .drawer-backdrop-wrap { background: rgba(10, 8, 9, 0.65); opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
     .sec-modal-backdrop.open, .drawer-backdrop-wrap.open { opacity: 1; pointer-events: auto; }
 
     .auth-card-panel, .sec-modal-card {
       background: rgba(255, 255, 255, 0.08); border: 1.5px solid rgba(254, 215, 170, 0.3);
-      border-radius: 22px; padding: 20px 16px; width: 90%; max-width: 350px; text-align: center;
+      border-radius: 24px; padding: 22px 18px; width: 90%; max-width: 360px; text-align: center;
     }
     .sec-modal-card { background: #fff; color: var(--text-espresso); }
 
@@ -264,7 +265,7 @@
 
     .nfc-touch-area {
       background: rgba(255, 255, 255, 0.05); border: 1.5px dashed var(--brand-gold);
-      border-radius: 14px; padding: 10px; margin: 10px 0; cursor: pointer;
+      border-radius: 14px; padding: 12px; margin: 10px 0; cursor: pointer;
     }
 
     #toast-container { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 30000; pointer-events: none; }
@@ -276,10 +277,10 @@
 </head>
 <body>
 
-  <!-- 🔒 شاشة القفل الأمني التنفيذي -->
+  <!-- 🔒 شاشة القفل الأمني التنفيذي مع درع الامتصاص الصامت -->
   <div id="executive-auth-gate">
     <div class="auth-card-panel">
-      <div style="width:38px; height:38px; margin:0 auto 6px;">
+      <div style="width:42px; height:42px; margin:0 auto 6px;">
         <svg viewBox="0 0 100 100" fill="none" style="width:100%; height:100%;">
           <ellipse cx="50" cy="70" rx="46" ry="13" fill="#EAB308"/>
           <path d="M24 67C24 38 31 24 50 24C69 24 76 38 76 67Z" fill="#FACC15"/>
@@ -287,21 +288,21 @@
         </svg>
       </div>
       <div style="font-size:15.5px; font-weight:900;">لوحة الإدارة والعمليات التنفيذية</div>
-      <div style="font-size:10.5px; color:#fed7aa; margin-top:2px;">الوصول المعتمد لقاعدة بيانات لوفي 🇯🇴</div>
+      <div style="font-size:10px; color:#fed7aa; margin-top:2px;">الوصول المعتمد لمنظومة لوفي 🇯🇴</div>
 
-      <!-- ملامسة بطاقة المدير العام NFC مع اعتراض الروابط -->
-      <div class="nfc-touch-area" onclick="triggerDirectNfcLogin()">
+      <!-- ملامسة بطاقة المدير العام NFC المحمية من التداخل -->
+      <div class="nfc-touch-area" onclick="ensureAdminNfcShieldStarted()">
         <svg class="svg-pure-icon" style="width:28px; height:28px; stroke:var(--brand-gold); margin:0 auto;" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
-        <div style="font-size:11px; font-weight:800; color:#ffffff; margin-top:4px;" id="gate-nfc-label">لامس بطاقة المدير NFC لفتح اللوحة فوراً</div>
+        <div style="font-size:11px; font-weight:800; color:#ffffff; margin-top:4px;" id="gate-nfc-label">درع الـ NFC نشط.. لامس بطاقة المدير لفتح اللوحة</div>
       </div>
 
-      <input type="password" id="gate-pass-input" placeholder="أو أدخل كلمة المرور..." style="width:100%; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.25); color:#fff; text-align:center; margin-bottom:8px; border-radius:10px; padding:9px;" onkeypress="if(event.key==='Enter') verifyGatePassphrase()">
-      <button style="width:100%; background:linear-gradient(135deg, var(--brand-red) 0%, #ff5e7e 100%); color:#fff; border:none; padding:9px; border-radius:11px; font-weight:800; cursor:pointer;" onclick="verifyGatePassphrase()">تحقق ومتابعة</button>
+      <input type="password" id="gate-pass-input" placeholder="أو أدخل كلمة المرور التنفيذية..." style="width:100%; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.25); color:#fff; text-align:center; margin-bottom:8px; border-radius:10px; padding:9px;" onkeypress="if(event.key==='Enter') verifyGatePassphrase()">
+      <button style="width:100%; background:linear-gradient(135deg, var(--brand-red) 0%, #ff5e7e 100%); color:#fff; border:none; padding:9px; border-radius:11px; font-weight:800; cursor:pointer;" onclick="verifyGatePassphrase()">تحقق ومتابعة ⚡</button>
     </div>
   </div>
 
   <div class="master-admin-wrapper">
-    <!-- Header -->
+    <!-- Header المتناسق 100% في الموبايل والشاشات -->
     <div class="admin-top-bar">
       <div class="header-brand-row">
         <div class="brand-cluster">
@@ -338,66 +339,55 @@
       </div>
     </div>
 
-    <!-- 🚀 شبكة الإطلاق المباشرة (تشغيل الواجهات داخل المسرح المدمج) -->
+    <!-- 🚀 شبكة الإطلاق المباشرة -->
     <div class="launchpad-grid-balanced">
       <button class="launch-btn-unit btn-tile-kds" onclick="launchScreenEmbedded('q_37pb_kds.html', 'مركز إدارة وتتبع الطلبات (KDS)')">
-        <svg class="svg-pure-icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
         <span>مركز الطلبات (KDS)</span>
       </button>
 
       <button class="launch-btn-unit btn-tile-fleet" onclick="launchScreenEmbedded('w_51rt_flt.html', 'إدارة أسطول كباتن السعادة (Fleet)')">
-        <svg class="svg-pure-icon" viewBox="0 0 24 24"><circle cx="18.5" cy="17.5" r="3.5"></circle><circle cx="5.5" cy="17.5" r="3.5"></circle><circle cx="15" cy="5" r="1"></circle><path d="M12 17.5V14l-3-3 4-3 2 3h2"></path></svg>
         <span>أسطول السائقين (Fleet)</span>
       </button>
 
       <button class="launch-btn-unit btn-tile-sft" onclick="launchScreenEmbedded('t_58mx_sft.html', 'محطة تشغيل الوردية والمطبخ (Shift Terminal)')">
-        <svg class="svg-pure-icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
         <span>محطة الوردية (Terminal)</span>
       </button>
 
       <button class="launch-btn-unit btn-tile-ops" onclick="launchScreenEmbedded('v_92kx_ops.html', 'شاشة تحضير المطبخ المدمجة (Kitchen Ops)')">
-        <svg class="svg-pure-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
         <span>تحضير المطبخ (Ops)</span>
       </button>
 
       <button class="launch-btn-unit btn-tile-hr" onclick="launchScreenEmbedded('s_63st_hr.html', 'مركز إدارة الكادر والبطاقات (HR)')">
-        <svg class="svg-pure-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
         <span>إدارة الكادر (HR)</span>
       </button>
 
       <button class="launch-btn-unit btn-tile-tv" onclick="launchScreenEmbedded('for_t.v.html', 'شاشة عرض التلفاز بالصالة (TV)')">
-        <svg class="svg-pure-icon" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
         <span>شاشة التلفاز (TV)</span>
       </button>
 
       <button class="launch-btn-unit btn-tile-menu" onclick="launchScreenEmbedded('index.html', 'منيو الزبائن الرقمي (Menu)')">
-        <svg class="svg-pure-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5z"/></svg>
         <span>منيو الزبائن (Menu)</span>
       </button>
 
       <button class="launch-btn-unit btn-tile-form" onclick="launchScreenEmbedded('f_41mk_add.html', 'استوديو إضافة النكهات السحابي (Studio)')">
-        <svg class="svg-pure-icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
         <span>إضافة نكهة (Studio)</span>
       </button>
 
-      <!-- 🌟 زر استوديو برمجة وكتابة بطاقات الـ NFC (يفتح بنافذة مستقلة لدعم الهاردوير) -->
+      <!-- زر استوديو برمجة الـ NFC (يفتح بنافذة علوية مستقلة لدعم الهاردوير) -->
       <button class="launch-btn-unit btn-tile-nfc-wr" onclick="window.open('n_62wr_nfc.html', '_blank')">
-        <svg class="svg-pure-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
         <span>برمجة بطاقات NFC ↗</span>
       </button>
 
       <button class="launch-btn-unit btn-tile-dev" onclick="launchScreenEmbedded('x_93kv_arc.html', 'قمرة مهندس ومبرمج المنظومة (Dev Cockpit)')">
-        <svg class="svg-pure-icon" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
         <span>قمرة المبرمج (Cockpit)</span>
       </button>
 
       <button class="launch-btn-unit btn-tile-sheets" onclick="openSecureSheetsModal()">
-        <svg class="svg-pure-icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
         <span>قواعد البيانات (Sheets)</span>
       </button>
     </div>
 
-    <!-- 🎛️ شريط التبويبات الموحد -->
+    <!-- 🌟 شريط التبويبات الفاخر المطور للموبايل (Smooth Horizontal Capsule Track) -->
     <div class="nav-track-bar">
       <button class="tab-item-btn active" onclick="switchAdminTab('daily', this)"><span>تشغيل اليومية</span></button>
       <button class="tab-item-btn" onclick="switchAdminTab('flavors_catalog', this)"><span>كتالوج النكهات</span></button>
@@ -409,7 +399,7 @@
 
     <!-- TAB 1: DAILY CONTROL -->
     <div class="admin-panel active" id="pane-daily">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; padding:0 2px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; padding:0 2px;">
         <span style="font-size:11px; font-weight:800; color:var(--text-muted);" id="flavors-count-txt">جاري فحص النكهات...</span>
         <div style="display:flex; gap:6px;">
           <button style="border:none; background:none; color:var(--brand-red); font-size:10.5px; font-weight:800; cursor:pointer;" onclick="toggleAllActive(true)">تحديد الكل متوفر</button>
@@ -425,10 +415,10 @@
       <div class="luxury-surface-card">
         <div class="card-title-main">كتالوج النكهات وتعديل البيانات</div>
         <div class="card-desc-sub">اختر أي نكهة لتعديل صورها ووصفها وتصنيفها مباشرة:</div>
-        <div style="margin-bottom:10px;">
+        <div style="margin-bottom:8px;">
           <input type="text" id="flavor-search-input" placeholder="ابحث بالاسم أو التصنيف..." oninput="handleFlavorCatalogSearch(this.value)" style="width:100%; padding:8px 12px; border-radius:12px; border:1.5px solid #e2e8f0; font-family:var(--font-ar); font-size:11.5px;">
         </div>
-        <div id="flavor-catalog-container" style="display:flex; flex-direction:column; gap:7px; max-height:52vh; overflow-y:auto;">جاري التحميل...</div>
+        <div id="flavor-catalog-container" style="display:flex; flex-direction:column; gap:6px; max-height:52vh; overflow-y:auto;">جاري التحميل...</div>
       </div>
     </div>
 
@@ -446,7 +436,7 @@
 
     <!-- TAB 4: WHATSAPP & SYSTEM LINKS -->
     <div class="admin-panel" id="pane-links_config">
-      <div class="luxury-surface-card" style="border-color:#fed7aa;">
+      <div class="luxury-surface-card" style="border-color:#fed7aa; margin-bottom:8px;">
         <div class="card-title-main" style="color:var(--emerald-dark);">📱 رقم واتساب المحل الرسمي لاستقبال الطلبات</div>
         <div class="card-desc-sub">يتم تحديث هذا الرقم فوراً لجميع الزبائن في منيو الجوال:</div>
         <div style="display:flex; gap:6px; align-items:center;">
@@ -472,7 +462,7 @@
           <span>نشر التوجيه للوردية</span>
         </button>
       </div>
-      <div class="luxury-surface-card" id="broadcast-history-list">جاري تحميل الرسائل...</div>
+      <div class="luxury-surface-card" id="broadcast-history-list" style="margin-top:8px;">جاري تحميل الرسائل...</div>
     </div>
 
     <!-- TAB 6: AUDIT TRAIL -->
@@ -607,6 +597,12 @@
     let initialStates = {};
     let workingStates = {};
     let currentScreenUrl = "";
+    let activeTabName = "daily";
+
+    // 🛡️ درع الامتصاص الصامت الدائم المانع للخروج لـ key.html
+    let lastNfcReadTime = 0;
+    let nfcMasterReaderInstance = null;
+    let isNfcListenerActive = false;
 
     const WEEKLY_HOURS = {
       0: { name: "الأحد", open: "14:00", close: "02:00", active: true },
@@ -618,7 +614,6 @@
       6: { name: "السبت", open: "14:00", close: "02:00", active: true }
     };
 
-    // 🌟 دالة الاستخلاص الذكي للتوكن ومنع التداخل
     function extractCleanNfcToken(rawPayload) {
       if (!rawPayload) return "";
       let str = String(rawPayload).trim();
@@ -643,91 +638,153 @@
       setTimeout(() => t.remove(), 3000);
     }
 
+    // =========================================================================
+    // 🧭 محرك إدارة زر الرجوع بالهاتف (Hardware Back Button SPA Engine)
+    // =========================================================================
+    // تثبيت الحالة البدئية لمنع خروج المتصفح أو فقدان الجلسة
+    window.addEventListener('load', () => {
+      history.replaceState({ view: 'vault_root', tab: 'daily' }, '');
+    });
+
+    window.addEventListener('popstate', (event) => {
+      // 1. إذا كان المسرح المدمج مفتوحاً -> أغلقه وابقَ في لوحة الإدارة
+      const embeddedOverlay = document.getElementById('embedded-stage-overlay');
+      if (embeddedOverlay && embeddedOverlay.classList.contains('open')) {
+        closeEmbeddedScreen(false); // إغلاق بدون التلاعب بالتاريخ مجدداً
+        return;
+      }
+
+      // 2. إذا كانت نافذة تعديل النكهة أو الشيتات مفتوحة -> أغلقها
+      const editDrawer = document.getElementById('flavor-edit-drawer');
+      if (editDrawer && editDrawer.classList.contains('open')) {
+        closeFlavorEditDrawer(false);
+        return;
+      }
+
+      const secModal = document.getElementById('secure-modal');
+      if (secModal && secModal.classList.contains('open')) {
+        closeSecureSheetsModal(false);
+        return;
+      }
+
+      // 3. إذا كان المستخدم في أي تبويب فرعي -> ارجع لتبويب تشغيل اليومية
+      if (activeTabName !== 'daily') {
+        const homeTabBtn = document.querySelectorAll('.tab-item-btn')[0];
+        switchAdminTab('daily', homeTabBtn, false);
+        return;
+      }
+
+      // 4. إذا كان في الشاشة الرئيسية مسبقاً، احمِ الجلسة من الإغلاق العرضي
+      history.pushState({ view: 'vault_root', tab: 'daily' }, '');
+      showToast("أنت في الصفحة الرئيسية للوحة الإدارة ✓");
+    });
+
+    // =========================================================================
+    // 🔒 تسجيل الدخول التنفيذي بالـ NFC وكلمة المرور
+    // =========================================================================
     function lockAdminGate() {
       sessionStorage.removeItem('luffy_auth_pass');
       document.getElementById('executive-auth-gate').classList.remove('unlocked');
+      ensureAdminNfcShieldStarted();
     }
 
     function verifyGatePassphrase() {
       const input = document.getElementById('gate-pass-input').value.trim();
       if (input === ENCRYPTED_PASSKEY) {
-        sessionStorage.setItem('luffy_auth_pass', input);
-        document.getElementById('executive-auth-gate').classList.add('unlocked');
-        showToast("تم التحقق والدخول للوحة الإدارة ✓");
-        fetchDailyFlavors();
-        renderHoursEditor();
-        fetchSystemRegistryConfig();
+        grantAdminAccess();
       } else {
         alert("كلمة المرور غير صحيحة!");
       }
     }
 
-    // 🔒 تسجيل الدخول المباشر بالـ NFC باعتراض الروابط
-    async function triggerDirectNfcLogin() {
+    function grantAdminAccess() {
+      sessionStorage.setItem('luffy_auth_pass', ENCRYPTED_PASSKEY);
+      document.getElementById('executive-auth-gate').classList.add('unlocked');
+      showToast("تم التحقق والدخول للوحة الإدارة ✓");
+      fetchDailyFlavors();
+      renderHoursEditor();
+      fetchSystemRegistryConfig();
+    }
+
+    // درع الـ NFC الدائم للاستماع السري لبطاقة المدير العام
+    async function ensureAdminNfcShieldStarted() {
       if (!('NDEFReader' in window)) {
-        showToast("الـ NFC متاح عبر متصفح داعم // يرجى استخدام كلمة المرور");
+        document.getElementById('gate-nfc-label').textContent = "الـ NFC متاح عبر متصفح Chrome على هاتف أندرويد";
         return;
       }
+
+      if (isNfcListenerActive) return;
+
       try {
-        const ndef = new NDEFReader();
-        await ndef.scan();
-        ndef.onreading = (ev) => {
+        nfcMasterReaderInstance = new NDEFReader();
+        await nfcMasterReaderInstance.scan();
+        isNfcListenerActive = true;
+        document.getElementById('gate-nfc-label').textContent = "درع الـ NFC متصل.. لامس بطاقة المدير الآن";
+
+        nfcMasterReaderInstance.onreading = (ev) => {
+          const now = Date.now();
+          if (now - lastNfcReadTime < 2500) return; // امتصاص صامت للنغمات المتكررة لمنع أندرويد من فتح key.html
+          lastNfcReadTime = now;
+
           const dec = new TextDecoder();
           let fullData = "";
           for (const r of ev.message.records) fullData += dec.decode(r.data);
-          
           const cleanToken = extractCleanNfcToken(fullData || ev.serialNumber);
 
-          const cb = "onAdminNfcAuth_" + Date.now();
-          window[cb] = function(res) {
-            if (cleanToken === "MASTER_KEY" || (res && res.data && res.data.some(emp => emp.tier === "MANAGER" && emp.cards.some(c => c.token === cleanToken && c.status === "ACTIVE")))) {
-              sessionStorage.setItem('luffy_auth_pass', ENCRYPTED_PASSKEY);
-              document.getElementById('executive-auth-gate').classList.add('unlocked');
-              showToast("تم التحقق ببطاقة المدير العام الذهبية ✓");
-              fetchDailyFlavors();
-              renderHoursEditor();
-              fetchSystemRegistryConfig();
-            } else {
-              showToast("❌ هذه البطاقة لا تملك صلاحية مدير عام!");
-            }
-          };
-
-          const s = document.createElement("script");
-          s.src = `${APPS_SCRIPT_EXEC_URL}?action=get_staff_list&callback=${cb}&_ts=${Date.now()}`;
-          document.body.appendChild(s);
+          // التحقق من صلاحية المدير
+          if (cleanToken === "MASTER_KEY") {
+            grantAdminAccess();
+          } else {
+            const cb = "onAdminNfcAuth_" + Date.now();
+            window[cb] = function(res) {
+              if (res && res.data && res.data.some(emp => emp.tier === "MANAGER" && emp.cards.some(c => c.token === cleanToken && c.status === "ACTIVE"))) {
+                grantAdminAccess();
+              } else {
+                showToast("❌ هذه البطاقة لا تملك صلاحية مدير عام!");
+              }
+            };
+            const s = document.createElement("script");
+            s.src = `${APPS_SCRIPT_EXEC_URL}?action=get_staff_list&callback=${cb}&_ts=${Date.now()}`;
+            document.body.appendChild(s);
+          }
         };
       } catch (err) {
-        document.getElementById('gate-nfc-label').textContent = "خطأ في قراءة NFC";
+        document.getElementById('gate-nfc-label').textContent = "اضغط لتفعيل الاستماع للبطاقة";
       }
     }
 
     // =========================================================================
-    // 📺 المسرح المدمج
+    // 📺 المسرح المدمج وإدارة السجل الداخلي
     // =========================================================================
     function launchScreenEmbedded(url, title) {
       currentScreenUrl = url;
       document.getElementById('embedded-screen-title').textContent = title;
       document.getElementById('embedded-screen-frame').src = url;
       document.getElementById('embedded-stage-overlay').classList.add('open');
+      history.pushState({ view: 'embedded_screen', url: url }, '');
     }
 
-    function closeEmbeddedScreen() {
+    function closeEmbeddedScreen(modifyHistory = true) {
       document.getElementById('embedded-stage-overlay').classList.remove('open');
       document.getElementById('embedded-screen-frame').src = "";
       currentScreenUrl = "";
+      if (modifyHistory) history.back();
     }
 
     function popOutCurrentEmbeddedScreen() {
-      if (currentScreenUrl) {
-        window.open(currentScreenUrl, '_blank', 'noopener,noreferrer');
-      }
+      if (currentScreenUrl) window.open(currentScreenUrl, '_blank', 'noopener,noreferrer');
     }
 
-    function switchAdminTab(tabId, btn) {
+    function switchAdminTab(tabId, btn, pushState = true) {
+      activeTabName = tabId;
       document.querySelectorAll('.tab-item-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById(`pane-${tabId}`).classList.add('active');
+
+      if (pushState && tabId !== 'daily') {
+        history.pushState({ view: 'vault_tab', tab: tabId }, '');
+      }
 
       if (tabId === 'daily') fetchDailyFlavors();
       if (tabId === 'flavors_catalog') renderCatalogList(allCatalogFlavors);
@@ -875,7 +932,7 @@
     }
 
     // =========================================================================
-    // 📖 كتالوج النكهات والتعديل المباشر
+    // 📖 كتالوج النكهات والتعديل
     // =========================================================================
     function renderCatalogList(list) {
       const container = document.getElementById('flavor-catalog-container');
@@ -891,13 +948,13 @@
         card.className = 'catalog-item-unit';
         card.innerHTML = `
           <div class="catalog-meta-cluster">
-            <img src="${item.Image_URL_Show || 'https://images.unsplash.com/photo-1560008511-11c63416e52d?w=100'}" style="width:38px; height:38px; object-fit:contain; border-radius:8px; background:#fdfaf7;">
+            <img src="${item.Image_URL_Show || 'https://images.unsplash.com/photo-1560008511-11c63416e52d?w=100'}" style="width:36px; height:36px; object-fit:contain; border-radius:8px; background:#fdfaf7;">
             <div style="min-width:0;">
-              <strong style="font-size:12.5px;">${item.Flavor_Name_AR}</strong>
-              <div style="font-size:10px; color:var(--text-muted);">${item.Category || 'عام'} • <span style="color:${item.Primary_Color}; font-weight:800;">${item.Flavor_Name_EN || ''}</span></div>
+              <strong style="font-size:12px;">${item.Flavor_Name_AR}</strong>
+              <div style="font-size:9.5px; color:var(--text-muted);">${item.Category || 'عام'} • <span style="color:${item.Primary_Color}; font-weight:800;">${item.Flavor_Name_EN || ''}</span></div>
             </div>
           </div>
-          <button style="border:1px solid #e2e8f0; background:#f8fafc; padding:4px 9px; border-radius:8px; font-size:10.5px; font-weight:800; cursor:pointer;" onclick="openFlavorEditDrawer('${id}')">تعديل</button>
+          <button style="border:1px solid #e2e8f0; background:#f8fafc; padding:4px 9px; border-radius:8px; font-size:10px; font-weight:800; cursor:pointer;" onclick="openFlavorEditDrawer('${id}')">تعديل</button>
         `;
         container.appendChild(card);
       });
@@ -924,8 +981,13 @@
       document.getElementById('edit_desc_ar').value = flv.Description_AR || '';
 
       document.getElementById('flavor-edit-drawer').classList.add('open');
+      history.pushState({ view: 'flavor_edit_drawer' }, '');
     }
-    function closeFlavorEditDrawer() { document.getElementById('flavor-edit-drawer').classList.remove('open'); }
+
+    function closeFlavorEditDrawer(modifyHistory = true) {
+      document.getElementById('flavor-edit-drawer').classList.remove('open');
+      if (modifyHistory) history.back();
+    }
 
     function submitFlavorEdit() {
       const payload = {
@@ -944,7 +1006,7 @@
       const cb = "onFlvEdited_" + Date.now();
       window[cb] = function() {
         showToast(`تم تحديث [${payload.name_ar}] بنجاح ✓`);
-        closeFlavorEditDrawer();
+        closeFlavorEditDrawer(false);
         fetchDailyFlavors();
       };
 
@@ -963,11 +1025,11 @@
         const d = WEEKLY_HOURS[i];
         container.innerHTML += `
           <div class="schedule-day-row">
-            <span style="font-weight:800; font-size:11.5px;">${d.name}</span>
+            <span style="font-weight:800; font-size:11px;">${d.name}</span>
             <div style="display:flex; align-items:center; gap:4px;">
-              <span style="font-size:10px; color:var(--text-muted);">من</span>
+              <span style="font-size:9.5px; color:var(--text-muted);">من</span>
               <input type="time" class="time-input-micro" id="open_day_${i}" value="${d.open}">
-              <span style="font-size:10px; color:var(--text-muted);">إلى</span>
+              <span style="font-size:9.5px; color:var(--text-muted);">إلى</span>
               <input type="time" class="time-input-micro" id="close_day_${i}" value="${d.close}">
             </div>
           </div>
@@ -1006,8 +1068,8 @@
         const linksBox = document.getElementById('system-links-display-list');
         if (reg.links) {
           linksBox.innerHTML = Object.keys(reg.links).map(k => `
-            <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:6px 10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
-              <div><strong>${k}</strong>: <span style="font-family:var(--font-en); font-size:10px; color:var(--text-muted);">${reg.links[k]}</span></div>
+            <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:5px 8px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
+              <div><strong>${k}</strong>: <span style="font-family:var(--font-en); font-size:9.5px; color:var(--text-muted);">${reg.links[k]}</span></div>
               <a href="${reg.links[k]}" target="_blank" style="color:var(--blue-accent); font-weight:800; text-decoration:none;">فتح ↗</a>
             </div>
           `).join('');
@@ -1056,10 +1118,10 @@
           return;
         }
         container.innerHTML = res.data.map(m => `
-          <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:7px 9px; margin-bottom:5px; font-size:11px;">
+          <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:6px 8px; margin-bottom:4px; font-size:10.5px;">
             <div style="display:flex; justify-content:space-between;">
               <strong style="color:var(--brand-red);">${m.sender}</strong>
-              <span style="font-size:9.5px; color:var(--text-muted);">${m.timestamp}</span>
+              <span style="font-size:9px; color:var(--text-muted);">${m.timestamp}</span>
             </div>
             <div style="margin-top:2px;">${m.text}</div>
           </div>
@@ -1084,13 +1146,13 @@
           return;
         }
         container.innerHTML = res.data.map(log => `
-          <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:8px 10px; font-size:11px;">
+          <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:7px 9px; font-size:10.5px;">
             <div style="display:flex; justify-content:space-between; align-items:center;">
               <strong>👤 ${log.name} (${log.role})</strong>
-              <span style="font-family:var(--font-en); font-size:9.5px; color:var(--text-muted);">${log.timestamp}</span>
+              <span style="font-family:var(--font-en); font-size:9px; color:var(--text-muted);">${log.timestamp}</span>
             </div>
-            <div style="color:var(--brand-red); font-weight:800; margin-top:2px;">[${log.action}]</div>
-            <div style="color:var(--text-espresso); margin-top:2px;">${log.details}</div>
+            <div style="color:var(--brand-red); font-weight:800; margin-top:1px;">[${log.action}]</div>
+            <div style="color:var(--text-espresso); margin-top:1px;">${log.details}</div>
           </div>
         `).join('');
       };
@@ -1101,26 +1163,42 @@
     }
 
     // =========================================================================
-    // 🔒 بوابة الوصول الآمن لقواعد البيانات الأربع
+    // 🔒 فتح قواعد البيانات في Google Sheets
     // =========================================================================
     function openSecureSheetsModal() {
       document.getElementById('secure-modal').classList.add('open');
       document.getElementById('sec-password-input').value = "";
+      history.pushState({ view: 'secure_modal' }, '');
     }
-    function closeSecureSheetsModal() { document.getElementById('secure-modal').classList.remove('open'); }
+
+    function closeSecureSheetsModal(modifyHistory = true) {
+      document.getElementById('secure-modal').classList.remove('open');
+      if (modifyHistory) history.back();
+    }
 
     function verifyPasskeyAndOpenTargetSheet() {
       const pass = document.getElementById('sec-password-input').value.trim();
       const sheetId = document.getElementById('sheet-target-select').value;
       if (pass === ENCRYPTED_PASSKEY) {
-        closeSecureSheetsModal();
+        closeSecureSheetsModal(false);
         window.open(`https://docs.google.com/spreadsheets/d/${sheetId}/edit`, '_blank', 'noopener,noreferrer');
       } else {
         alert("كلمة المرور غير صحيحة!");
       }
     }
 
-    lockAdminGate();
+    // تفعيل درع الـ NFC والتحقق التلقائي
+    window.addEventListener('load', ensureAdminNfcShieldStarted);
+    document.addEventListener('click', ensureAdminNfcShieldStarted, { once: true });
+
+    if (sessionStorage.getItem('luffy_auth_pass') === ENCRYPTED_PASSKEY) {
+      document.getElementById('executive-auth-gate').classList.add('unlocked');
+      fetchDailyFlavors();
+      renderHoursEditor();
+      fetchSystemRegistryConfig();
+    } else {
+      lockAdminGate();
+    }
   </script>
 </body>
 </html>
