@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="referrer" content="no-referrer">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>LUFFY • لوفي | مركز إدارة الكادر وإنهاء الخدمات</title>
+  <title>LUFFY • لوفي | مركز إدارة الكادر والخدمات</title>
   
   <!-- خطوط النخبة العالمية -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +32,7 @@
       --border-subtle: 1px solid #f1f0ee;
       --border-soft: 1.5px solid rgba(254, 215, 170, 0.45);
       --shadow-luxury: 0 12px 32px -6px rgba(180, 100, 120, 0.08), 0 2px 8px rgba(0, 0, 0, 0.02);
-      --shadow-card: 0 10px 25px -5px rgba(0,0,0,0.05), 0 2px 6px rgba(0,0,0,0.02);
+      --shadow-card: 0 8px 24px -4px rgba(0,0,0,0.05), 0 2px 6px rgba(0,0,0,0.02);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
@@ -53,21 +53,21 @@
     .team-master-wrapper {
       width: 100%; max-width: 860px; background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1.5px solid #ffffff;
-      border-radius: 26px; padding: 14px 10px; box-shadow: 0 20px 50px -10px rgba(180, 100, 120, 0.1);
-      display: flex; flex-direction: column; position: relative;
+      border-radius: 24px; padding: 12px 10px; box-shadow: 0 20px 50px -10px rgba(180, 100, 120, 0.1);
+      display: flex; flex-direction: column; position: relative; gap: 10px;
     }
 
-    @media (min-width: 768px) { .team-master-wrapper { padding: 22px 18px; border-radius: 32px; } }
+    @media (min-width: 768px) { .team-master-wrapper { padding: 20px 16px; border-radius: 32px; gap: 12px; } }
 
     .svg-pure-icon {
       width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2;
       stroke-linecap: round; stroke-linejoin: round; display: inline-block; vertical-align: middle; flex-shrink: 0;
     }
 
-    /* Header */
+    /* Top Bar Header المتناسق على الموبايل */
     .admin-top-bar {
       display: flex; flex-direction: column; gap: 8px; padding-bottom: 10px;
-      border-bottom: 1.5px solid #f1f0ee; margin-bottom: 10px;
+      border-bottom: 1.5px solid #f1f0ee;
     }
     @media (min-width: 600px) {
       .admin-top-bar { flex-direction: row; justify-content: space-between; align-items: center; }
@@ -77,74 +77,70 @@
     .brand-cluster { display: flex; align-items: center; gap: 8px; min-width: 0; }
 
     .straw-hat-badge {
-      position: relative; width: 38px; height: 38px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      position: relative; width: 36px; height: 36px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
     }
     .hat-glow {
       position: absolute; width: 140%; height: 140%; border-radius: 50%;
-      background: radial-gradient(circle, rgba(251, 191, 36, 0.6) 0%, transparent 70%); filter: blur(8px);
+      background: radial-gradient(circle, rgba(251, 191, 36, 0.6) 0%, transparent 70%); filter: blur(6px);
     }
-    .straw-hat-svg {
-      width: 100%; height: 100%; position: relative; z-index: 2; filter: drop-shadow(0 4px 8px rgba(217, 119, 6, 0.35));
-    }
+    .straw-hat-svg { width: 100%; height: 100%; position: relative; z-index: 2; filter: drop-shadow(0 3px 6px rgba(217, 119, 6, 0.35)); }
 
     .brand-title-box { display: flex; flex-direction: column; min-width: 0; }
     .brand-name {
-      display: flex; align-items: center; gap: 4px; font-size: 15.5px; font-weight: 900; line-height: 1.2; white-space: nowrap;
+      display: flex; align-items: center; gap: 4px; font-size: 15px; font-weight: 900; line-height: 1.2; white-space: nowrap;
     }
     .name-en {
-      font-family: var(--font-en); letter-spacing: 1px;
+      font-family: var(--font-en); letter-spacing: 0.5px;
       background: linear-gradient(135deg, var(--brand-red) 0%, var(--brand-gold) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
     .name-ar { color: var(--text-espresso); }
-    .brand-subtitle { font-size: 10px; color: var(--text-muted); font-weight: 800; margin-top: 1px; white-space: nowrap; }
+    .brand-subtitle { font-size: 10px; color: var(--text-muted); font-weight: 800; white-space: nowrap; }
 
-    .header-actions-row { display: flex; align-items: center; gap: 6px; width: 100%; }
+    .header-actions-row { display: flex; align-items: center; gap: 5px; width: 100%; flex-wrap: wrap; }
     @media (min-width: 600px) { .header-actions-row { width: auto; } }
 
     .live-pulse-badge {
-      display: flex; align-items: center; gap: 5px; background: #f0fdf4; border: 1px solid #bbf7d0;
-      padding: 5px 9px; border-radius: 9999px; font-size: 10.5px; font-weight: 800; color: var(--emerald-dark); flex-shrink: 0;
+      display: flex; align-items: center; gap: 4px; background: #f0fdf4; border: 1px solid #bbf7d0;
+      padding: 4px 8px; border-radius: 9999px; font-size: 10px; font-weight: 800; color: var(--emerald-dark); flex-shrink: 0;
     }
     .live-dot-pulse {
-      width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 8px var(--emerald); animation: pulseSyncDot 2s infinite;
+      width: 6px; height: 6px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 6px var(--emerald); animation: pulseDot 2s infinite;
     }
-    @keyframes pulseSyncDot { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.6; } }
 
     .btn-tool-outline {
-      flex: 1; background: #f8fafc; border: 1.5px solid #e2e8f0; color: var(--text-muted); font-family: var(--font-ar);
-      font-size: 11px; font-weight: 800; padding: 6px 12px; border-radius: 12px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: 5px; text-decoration: none; transition: all 0.2s ease; white-space: nowrap;
+      flex: 1 1 auto; background: #f8fafc; border: 1.5px solid #e2e8f0; color: var(--text-muted); font-family: var(--font-ar);
+      font-size: 10.5px; font-weight: 800; padding: 6px 10px; border-radius: 10px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 4px; text-decoration: none; transition: all 0.2s ease; white-space: nowrap;
     }
     .btn-tool-outline:hover { background: #ffffff; border-color: #fed7aa; color: var(--brand-red); }
-    @media (min-width: 600px) { .btn-tool-outline { flex: initial; } }
 
     /* KPIs Grid */
     .kpi-command-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-bottom: 10px;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px;
     }
-    @media (min-width: 600px) { .kpi-command-grid { grid-template-columns: repeat(4, 1fr); } }
+    @media (min-width: 600px) { .kpi-command-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; } }
 
     .kpi-stat-unit {
-      background: #ffffff; border: 1.5px solid #f1f0ee; border-radius: 14px; padding: 8px 10px;
-      display: flex; flex-direction: column; gap: 2px; box-shadow: var(--shadow-card);
+      background: #ffffff; border: 1.5px solid #f1f0ee; border-radius: 14px;
+      padding: 8px 10px; display: flex; flex-direction: column; gap: 2px; box-shadow: var(--shadow-card);
     }
     .kpi-label { font-size: 9.5px; font-weight: 800; color: var(--text-muted); }
     .kpi-val-row { display: flex; justify-content: space-between; align-items: baseline; }
     .kpi-digits { font-family: var(--font-en); font-size: 18px; font-weight: 900; color: var(--text-espresso); }
 
     /* Search Toolbar */
-    .search-staff-wrapper { position: relative; margin-bottom: 10px; display: flex; align-items: center; }
+    .search-staff-wrapper { position: relative; width: 100%; display: flex; align-items: center; }
     .search-staff-input {
-      width: 100%; background: #ffffff; border: 1.5px solid #fed7aa; border-radius: 14px;
-      padding: 8px 36px 8px 12px; font-family: var(--font-ar); font-size: 11.5px; outline: none; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      width: 100%; background: #ffffff; border: 1.5px solid #fed7aa; border-radius: 12px;
+      padding: 8px 34px 8px 10px; font-family: var(--font-ar); font-size: 11.5px; outline: none;
     }
-    .search-svg-icon { position: absolute; right: 12px; width: 16px; height: 16px; stroke: #a89a92; pointer-events: none; }
+    .search-svg-icon { position: absolute; right: 10px; width: 15px; height: 15px; stroke: #a89a92; pointer-events: none; }
 
     /* Navigation Tabs */
     .nav-track-bar {
       display: flex; background: #f1f5f9; padding: 3px; border-radius: 9999px; gap: 3px;
-      margin-bottom: 12px; overflow-x: auto; scrollbar-width: none;
+      overflow-x: auto; scrollbar-width: none; width: 100%;
     }
     .nav-track-bar::-webkit-scrollbar { display: none; }
 
@@ -157,24 +153,14 @@
     .tab-item-btn.active { background: #ffffff; color: var(--brand-red); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); }
 
     .admin-panel { display: none; }
-    .admin-panel.active { display: block; animation: fadeIn 0.2s ease-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    .admin-panel.active { display: flex; flex-direction: column; gap: 10px; animation: fadeIn 0.2s ease-out; }
 
-    .luxury-surface-card {
-      background: #ffffff; border: var(--border-soft); border-radius: 18px; padding: 14px 12px;
-      box-shadow: var(--shadow-luxury); margin-bottom: 12px;
-    }
-    @media (min-width: 768px) { .luxury-surface-card { padding: 18px 16px; border-radius: 24px; } }
-
-    .card-title-main { font-size: 14px; font-weight: 900; color: var(--text-espresso); margin-bottom: 3px; }
-    .card-desc-sub { font-size: 11px; color: var(--text-muted); line-height: 1.4; margin-bottom: 12px; }
-
-    /* Employee & Card Units */
-    .staff-list-flow { display: flex; flex-direction: column; gap: 9px; max-height: 58vh; overflow-y: auto; padding-right: 1px; }
+    /* Employee Card المحسنة للموبايل بالكامل */
+    .staff-list-flow { display: flex; flex-direction: column; gap: 8px; max-height: 58vh; overflow-y: auto; padding-right: 1px; }
 
     .employee-card-unit {
       background: #ffffff; border: 1.5px solid #f1f0ee; border-radius: 16px;
-      padding: 11px 12px; display: flex; flex-direction: column; gap: 8px;
+      padding: 10px 12px; display: flex; flex-direction: column; gap: 7px;
       box-shadow: var(--shadow-card); transition: all 0.2s ease;
     }
     .employee-card-unit.is-manager-tier { border-color: #fde68a; background: #fffdf8; }
@@ -183,8 +169,9 @@
     .emp-card-header-row { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
     
     .emp-avatar-stage {
-      width: 38px; height: 38px; min-width: 38px; border-radius: 11px;
-      display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 900;
+      width: 36px; height: 36px; min-width: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 900;
+      flex-shrink: 0;
     }
     .avatar-manager { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
     .avatar-supervisor { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
@@ -193,109 +180,69 @@
     .emp-info-meta { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; }
     .emp-name-title { font-size: 13.5px; font-weight: 900; color: var(--text-espresso); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     
-    .tier-badge { font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 5px; }
+    .tier-badge { font-size: 9px; font-weight: 800; padding: 1px 6px; border-radius: 4px; }
     .tier-manager { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
     .tier-supervisor { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
     .tier-staff { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
 
-    /* Contact Strip per Employee */
-    .emp-contact-actions-strip {
-      display: flex; align-items: center; gap: 5px; background: #f8fafc; padding: 5px 8px;
-      border-radius: 10px; border: 1px solid #eef2f6; flex-wrap: wrap;
+    /* شبكة أزرار العمليات المرنة التي لا تنكسر في الموبايل */
+    .emp-tools-row {
+      display: flex; align-items: center; gap: 5px; flex-wrap: wrap; margin-top: 2px;
     }
-    .btn-contact-action {
-      border: 1px solid #e2e8f0; background: #ffffff; padding: 4px 8px; border-radius: 8px;
-      font-size: 10px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center;
-      gap: 4px; color: var(--text-espresso); cursor: pointer; transition: all 0.2s ease;
+
+    .btn-emp-action {
+      flex: 1 1 auto; border: 1px solid #e2e8f0; background: #f8fafc; padding: 5px 8px; border-radius: 8px;
+      font-size: 10px; font-weight: 800; color: var(--text-espresso); cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; justify-content: center; gap: 4px; transition: all 0.2s ease;
+      white-space: nowrap;
     }
-    .btn-contact-action:hover { border-color: var(--brand-red); color: var(--brand-red); }
-    .btn-contact-call { color: var(--blue-accent); border-color: #bfdbfe; background: #eff6ff; }
-    .btn-contact-wa { color: #047857; border-color: #a7f3d0; background: #ecfdf5; }
+    .btn-emp-action:hover { background: #ffffff; border-color: #cbd5e1; }
+    .btn-emp-studio { color: #0284c7; border-color: #38bdf8; background: #f0f9ff; }
+    .btn-emp-call { color: var(--blue-accent); border-color: #bfdbfe; background: #eff6ff; }
+    .btn-emp-wa { color: #047857; border-color: #a7f3d0; background: #ecfdf5; }
+    .btn-danger-offboard { border-color: #fecdd3; background: #fff1f2; color: #be123c; }
 
     .smart-card-chip {
       display: flex; justify-content: space-between; align-items: center; background: #ffffff;
-      border: 1px solid #e2e8f0; border-radius: 10px; padding: 6px 8px; margin-top: 4px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      border: 1px solid #e2e8f0; border-radius: 9px; padding: 5px 8px; margin-top: 4px;
     }
-    .card-label-txt { font-size: 11px; font-weight: 800; color: var(--text-espresso); }
+    .card-label-txt { font-size: 10.5px; font-weight: 800; color: var(--text-espresso); }
     .card-token-sub { font-family: var(--font-en); font-size: 9px; color: var(--text-muted); direction: ltr; text-align: right; }
-    
-    .scan-counter-pill {
-      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-      color: #92400e; border: 1px solid #fde68a; font-family: var(--font-en);
-      font-size: 9.5px; font-weight: 900; padding: 2px 6px; border-radius: 9999px; display: flex; align-items: center; gap: 3px;
-    }
 
     .card-actions-cluster { display: flex; align-items: center; gap: 3px; }
-    .btn-card-micro { border: none; padding: 3px 6px; border-radius: 5px; font-size: 9.5px; font-weight: 800; cursor: pointer; }
+    .btn-card-micro { border: none; padding: 3px 6px; border-radius: 5px; font-size: 9px; font-weight: 800; cursor: pointer; }
     .btn-card-toggle-freeze { background: #f1f5f9; color: #475569; }
     .btn-card-toggle-active { background: #ecfdf5; color: #065f46; }
     .btn-card-delete { background: #fff1f2; color: #9f1239; }
 
-    .btn-danger-offboard {
-      border: 1px solid #fecdd3; background: #fff1f2; color: #be123c;
-      padding: 4px 8px; border-radius: 8px; font-size: 10px; font-weight: 800; cursor: pointer;
-    }
-    .btn-danger-offboard:hover { background: #fee2e2; }
-
-    /* Forms */
     .form-responsive-grid { display: grid; grid-template-columns: 1fr; gap: 8px; width: 100%; }
     @media (min-width: 600px) { .form-responsive-grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
-    .form-group-unit { display: flex; flex-direction: column; gap: 3px; margin-bottom: 6px; width: 100%; }
+    .form-group-unit { display: flex; flex-direction: column; gap: 3px; width: 100%; }
     .form-group-unit.full-width { grid-column: 1 / -1; }
     label { font-size: 10.5px; font-weight: 800; color: var(--text-espresso); }
     input, select, textarea {
       width: 100%; background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 11px;
       padding: 8.5px 10px; font-family: var(--font-ar); font-size: 11.5px; outline: none;
     }
-    input:focus, select:focus, textarea:focus { border-color: var(--brand-red); background: #ffffff; }
-
-    .jordan-phone-wrap {
-      display: flex; align-items: center; direction: ltr; background: #f8fafc;
-      border: 1.5px solid #e2e8f0; border-radius: 11px; overflow: hidden;
-    }
-    .jordan-prefix-pill {
-      background: #f1f5f9; padding: 8.5px 10px; font-family: var(--font-en); font-weight: 900;
-      font-size: 11.5px; color: var(--text-espresso); border-right: 1px solid #e2e8f0;
-    }
-    .jordan-phone-input {
-      flex: 1; border: none; background: transparent; padding: 8.5px 10px; font-family: var(--font-en);
-      font-weight: 800; font-size: 12.5px; color: var(--text-espresso); outline: none;
-    }
 
     .btn-primary-action {
       background: linear-gradient(135deg, var(--brand-red) 0%, #ff5e7e 100%); color: #ffffff; border: none;
       padding: 11px; border-radius: 12px; font-family: var(--font-ar); font-size: 12px; font-weight: 900;
-      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 14px rgba(255, 42, 95, 0.3);
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;
     }
 
-    /* Modals */
     .modal-backdrop-wrap {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100%; height: 100dvh;
-      background: rgba(10, 8, 9, 0.68); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-      z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 16px;
+      background: rgba(10, 8, 9, 0.68); backdrop-filter: blur(8px);
+      z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 14px;
       opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
     }
     .modal-backdrop-wrap.open { opacity: 1; pointer-events: auto; }
     
     .modal-dialog-panel {
       background: #ffffff; border-radius: 22px; padding: 18px 16px; width: 100%; max-width: 440px;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.3); border: 1.5px solid #fed7aa;
-      margin: auto; max-height: 90vh; overflow-y: auto; transform: scale(0.96); transition: transform 0.25s ease; text-align: right;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.3); border: 1.5px solid #fed7aa; max-height: 90vh; overflow-y: auto; text-align: right;
     }
-    .modal-backdrop-wrap.open .modal-dialog-panel { transform: scale(1); }
-
-    /* Inspector Radar Screen */
-    .inspector-radar-stage {
-      background: #fdfaf7; border: 2px dashed var(--brand-gold); border-radius: 18px;
-      padding: 20px 12px; text-align: center; margin-bottom: 12px; cursor: pointer;
-    }
-    .inspector-result-card {
-      background: #ffffff; border: 1.5px solid #fed7aa; border-radius: 16px;
-      padding: 14px; display: flex; flex-direction: column; gap: 6px; text-align: right;
-      box-shadow: var(--shadow-luxury); animation: popIn 0.3s ease-out;
-    }
-    @keyframes popIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
     #toast-container { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 15000; pointer-events: none; }
     .chakra-toast {
@@ -307,7 +254,7 @@
 <body>
 
   <div class="team-master-wrapper">
-    <!-- Header -->
+    <!-- Header المتناسق في الموبايل -->
     <div class="admin-top-bar">
       <div class="header-brand-row">
         <div class="brand-cluster">
@@ -321,7 +268,7 @@
           </div>
           <div class="brand-title-box">
             <div class="brand-name"><span class="name-en">LUFFY</span> • <span class="name-ar">إدارة الكادر والخدمات</span></div>
-            <span class="brand-subtitle">سجل الموظفين النشطين وإنهاء الخدمات • العقبة 🇯🇴</span>
+            <span class="brand-subtitle">سجل الموظفين والبطاقات • العقبة 🇯🇴</span>
           </div>
         </div>
 
@@ -354,7 +301,7 @@
         <span class="kpi-label">إجمالي الكادر النشط</span>
         <div class="kpi-val-row">
           <span class="kpi-digits" id="kpi-total-staff">0</span>
-          <span style="font-size:9px; color:var(--text-muted);">عضو على رأس عمله</span>
+          <span style="font-size:9px; color:var(--text-muted);">عضو بالخدمة</span>
         </div>
       </div>
 
@@ -401,21 +348,21 @@
       </button>
     </div>
 
-    <!-- TAB 1: STAFF DIRECTORY & CARDS -->
+    <!-- TAB 1: STAFF DIRECTORY -->
     <div class="admin-panel active" id="pane-directory">
       <div class="search-staff-wrapper">
         <svg class="svg-pure-icon search-svg-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         <input type="text" class="search-staff-input" id="search-staff-input" placeholder="ابحث بالاسم، المسمى، الهاتف، أو رمز البطاقة..." oninput="handleStaffSearch(this.value)">
       </div>
 
-      <div class="staff-list-flow" id="staff-directory-stream">جاري جلب بيانات الكادر والبطاقات...</div>
+      <div class="staff-list-flow" id="staff-directory-stream">جاري جلب بيانات الكادر...</div>
     </div>
 
-    <!-- TAB 2: ENROLL NEW EMPLOYEE (تسجيل نقي وفوري) -->
+    <!-- TAB 2: ENROLL NEW EMPLOYEE -->
     <div class="admin-panel" id="pane-enroll">
-      <div class="luxury-surface-card">
-        <div class="card-title-main">تسجيل موظف جديد في الكادر</div>
-        <div class="card-desc-sub">تسجيل إداري نقي وفوري بدون الحاجة لمسح الـ NFC الآن (يمكنك برمجة بطاقته لاحقاً عبر الاستوديو):</div>
+      <div class="luxury-surface-card" style="background:#fff; border-radius:18px; padding:14px; border:1px solid #fed7aa;">
+        <div style="font-size:13.5px; font-weight:900; margin-bottom:2px;">تسجيل موظف جديد في الكادر</div>
+        <div style="font-size:10.5px; color:var(--text-muted); margin-bottom:10px;">تسجيل إداري نقي وفوري (يمكنك برمجة بطاقته لاحقاً عبر الاستوديو):</div>
 
         <form id="enroll-staff-form" onsubmit="event.preventDefault(); triggerEnrollNewStaff();">
           <div class="form-responsive-grid">
@@ -448,7 +395,7 @@
 
             <div class="form-group-unit">
               <div style="display:flex; justify-content:space-between; align-items:center;">
-                <label>رقم هاتف محادثات الواتساب 💬</label>
+                <label>رقم هاتف الواتساب 💬</label>
                 <button type="button" style="border:none; background:transparent; color:var(--emerald-dark); font-size:10px; font-weight:800; cursor:pointer;" onclick="syncWhatsAppPhoneWithCall()">= نفس الرقم</button>
               </div>
               <div class="jordan-phone-wrap">
@@ -467,13 +414,13 @@
 
     <!-- TAB 3: NFC SMART CARD INSPECTOR -->
     <div class="admin-panel" id="pane-inspector">
-      <div class="luxury-surface-card">
-        <div class="card-title-main">رادار فحص وقراءة البطاقات الذكية المباشر</div>
-        <div class="card-desc-sub">لامس أي بطاقة بظهر هاتفك لكشف هويتها، صاحبها، رتبتها، وعدد مسحاتها التسويقية:</div>
+      <div class="luxury-surface-card" style="background:#fff; border-radius:18px; padding:14px; border:1px solid #fed7aa;">
+        <div style="font-size:13.5px; font-weight:900; margin-bottom:2px;">رادار فحص وقراءة البطاقات الذكية المباشر</div>
+        <div style="font-size:10.5px; color:var(--text-muted); margin-bottom:10px;">درع الـ NFC الدائم نشط؛ لامس أي بطاقة بظهر هاتفك لكشف هويتها فوراً:</div>
 
         <div class="inspector-radar-stage" onclick="triggerCardInspectorScan()">
-          <svg class="svg-pure-icon" style="width:36px; height:36px; stroke:var(--brand-gold); margin:0 auto;" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
-          <div style="font-size:12px; font-weight:900; color:var(--text-espresso); margin-top:5px;" id="inspector-status-hint">انقر هنا ثم قرّب أي بطاقة لفحصها فوراً دون فتح المتصفح</div>
+          <svg class="svg-pure-icon" style="width:34px; height:34px; stroke:var(--brand-gold); margin:0 auto;" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
+          <div style="font-size:11.5px; font-weight:900; color:var(--text-espresso); margin-top:5px;" id="inspector-status-hint">انقر هنا ثم قرّب أي بطاقة لفحصها فوراً</div>
         </div>
 
         <div id="inspector-result-box" style="display:none;"></div>
@@ -498,12 +445,12 @@
         </select>
       </div>
 
-      <div class="form-group-unit">
+      <div class="form-group-unit" style="margin-top:6px;">
         <label>ملاحظات إدارية وتفاصيل تسليم العهد والمفاتيح *</label>
         <textarea id="offboard_notes_input" rows="3" placeholder="اكتب أسباب الخروج وتفاصيل براءة الذمة..." required></textarea>
       </div>
 
-      <div style="background:#fff1f2; border:1px solid #fecdd3; padding:8px 10px; border-radius:10px; font-size:10.5px; color:#9f1239; margin-bottom:10px; line-height:1.4;">
+      <div style="background:#fff1f2; border:1px solid #fecdd3; padding:8px 10px; border-radius:10px; font-size:10.5px; color:#9f1239; margin:10px 0; line-height:1.4;">
         🛡️ <strong>الأمان السحابي:</strong> سيتم ترحيل سجل الموظف كاملاً إلى شيت <code>Staff_Archive</code>، وتعطيل وسحب جميع بطاقات الـ NFC التابعة له فوراً، وإزالته من شاشات الوردية النشطة.
       </div>
 
@@ -523,7 +470,10 @@
     let staffDirectoryList = [];
     let staffSearchFilter = "";
 
-    // 🌟 دالة الاستخلاص الذكي للتوكن ومنع التداخل نهائياً
+    // 🛡️ درع الـ NFC الدائم المانع للخروج إلى المتصفح نهائياً
+    let lastNfcReadTime = 0;
+    let nfcShieldReader = null;
+
     function extractCleanNfcToken(rawPayload) {
       if (!rawPayload) return "";
       let str = String(rawPayload).trim();
@@ -537,6 +487,29 @@
         } catch(e){}
       }
       return str;
+    }
+
+    async function startPermanentNfcShield() {
+      if (!('NDEFReader' in window)) return;
+      try {
+        if (!nfcShieldReader) {
+          nfcShieldReader = new NDEFReader();
+          await nfcShieldReader.scan();
+          nfcShieldReader.onreading = event => {
+            const now = Date.now();
+            if (now - lastNfcReadTime < 1500) return;
+            lastNfcReadTime = now;
+
+            const dec = new TextDecoder();
+            let fullData = "";
+            for (const r of event.message.records) fullData += dec.decode(r.data);
+            const token = extractCleanNfcToken(fullData || event.serialNumber);
+
+            // فحص البطاقة في الرادار مباشرة دون فتح المتصفح
+            inspectTokenData(token);
+          };
+        }
+      } catch(e) {}
     }
 
     function showToast(msg) {
@@ -619,9 +592,9 @@
 
       if (!staffDirectoryList || staffDirectoryList.length === 0) {
         container.innerHTML = `
-          <div style="text-align:center; padding:30px; background:#fffdfa; border:1.5px dashed #fed7aa; border-radius:18px;">
-            <div style="font-size:14px; font-weight:900; color:var(--brand-red);">لا يوجد موظفون على رأس عملهم حالياً</div>
-            <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">سجل موظفاً جديداً بنقرة زر واحدة من تبويب (تسجيل موظف جديد) ✓</div>
+          <div style="text-align:center; padding:25px; background:#fffdfa; border:1.5px dashed #fed7aa; border-radius:18px;">
+            <div style="font-size:13.5px; font-weight:900; color:var(--brand-red);">لا يوجد موظفون على رأس عملهم حالياً</div>
+            <div style="font-size:10.5px; color:var(--text-muted); margin-top:4px;">سجل موظفاً جديداً بنقرة زر واحدة من تبويب (تسجيل موظف جديد) ✓</div>
           </div>
         `;
         return;
@@ -637,7 +610,7 @@
       });
 
       if (filtered.length === 0) {
-        container.innerHTML = `<div style="text-align:center; padding:30px; color:var(--text-muted); font-weight:800;">لا يوجد موظفون مطابقون للبحث.</div>`;
+        container.innerHTML = `<div style="text-align:center; padding:25px; color:var(--text-muted); font-weight:800;">لا يوجد موظفون مطابقون للبحث.</div>`;
         return;
       }
 
@@ -659,42 +632,42 @@
                 <div class="emp-avatar-stage ${avatarClass}">${emp.name.charAt(0)}</div>
                 <div style="min-width:0;">
                   <div class="emp-name-title">${emp.name}</div>
-                  <div style="display:flex; align-items:center; gap:5px; margin-top:2px;">
+                  <div style="display:flex; align-items:center; gap:4px; margin-top:1px;">
                     <span class="tier-badge ${tierClass}">${tierLabel}</span>
-                    <span style="font-size:10px; color:var(--text-muted);">${emp.role}</span>
+                    <span style="font-size:9.5px; color:var(--text-muted);">${emp.role}</span>
                   </div>
                 </div>
               </div>
 
-              <div style="display:flex; gap:4px; align-items:center;">
-                <a href="n_62wr_nfc.html" target="_blank" class="btn-tool-outline" style="padding:4px 8px; font-size:10px; color:#0284c7; border-color:#38bdf8;">
-                  برمجة بطاقة في الاستوديو ↗
-                </a>
-                <button class="btn-danger-offboard" onclick="openOffboardModal('${emp.emp_id}', '${emp.name}')">
+              <div style="display:flex; align-items:center; gap:4px; flex-shrink:0;">
+                <button class="btn-emp-action btn-danger-offboard" onclick="openOffboardModal('${emp.emp_id}', '${emp.name}')">
                   إنهاء خدمات ⚠️
                 </button>
               </div>
             </div>
 
-            <!-- أزرار الاتصال والواتساب -->
-            <div class="emp-contact-actions-strip">
+            <!-- شبكة الأزرار المتناسقة على الموبايل والشاشات -->
+            <div class="emp-tools-row">
+              <a href="n_62wr_nfc.html" target="_blank" class="btn-emp-action btn-emp-studio">
+                برمجة بطاقة في الاستوديو ↗
+              </a>
+
               ${cleanCallPhone ? `
-                <a href="tel:${cleanCallPhone}" class="btn-contact-action btn-contact-call">
-                  <svg class="svg-pure-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                  <span>اتصال: ${emp.phone_call}</span>
+                <a href="tel:${cleanCallPhone}" class="btn-emp-action btn-emp-call">
+                  اتصال: ${emp.phone_call}
                 </a>
-              ` : '<span style="font-size:10px; color:var(--text-muted);">لم يتم تحديد هاتف</span>'}
+              ` : ''}
 
               ${cleanWaPhone ? `
-                <a href="https://wa.me/${cleanWaPhone}?text=${encodeURIComponent('أهلاً بك يا ' + emp.name + ' في كادر لوفي - كابتن السعادة 🍨✨')}" target="_blank" class="btn-contact-action btn-contact-wa">
-                  <span>💬 واتساب: ${emp.phone_whatsapp || emp.phone_call}</span>
+                <a href="https://wa.me/${cleanWaPhone}?text=${encodeURIComponent('أهلاً بك يا ' + emp.name + ' في كادر لوفي - كابتن السعادة 🍨✨')}" target="_blank" class="btn-emp-action btn-emp-wa">
+                  واتساب
                 </a>
               ` : ''}
             </div>
 
             <!-- البطاقات الذكية المربوطة -->
-            <div style="border-top:1px solid #f1f0ee; padding-top:6px; margin-top:2px;">
-              <div style="display:flex; justify-content:space-between; align-items:center; font-size:10px; font-weight:800; color:var(--text-muted); margin-bottom:4px;">
+            <div style="border-top:1px solid #f1f0ee; padding-top:5px; margin-top:1px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; font-size:9.5px; font-weight:800; color:var(--text-muted); margin-bottom:3px;">
                 <span>البطاقات الذكية المربوطة (${emp.cards ? emp.cards.length : 0}):</span>
                 <span>إجمالي المسحات: <strong style="color:var(--brand-red); font-family:var(--font-en);">${emp.total_scans || 0}</strong></span>
               </div>
@@ -704,7 +677,7 @@
                   <div>
                     <div class="card-label-txt">
                       💳 ${card.label}
-                      <span style="font-size:9px; font-weight:800; color:${card.status === 'ACTIVE' ? 'var(--emerald-dark)' : 'var(--brand-red)'}; margin-right:3px;">
+                      <span style="font-size:8.5px; font-weight:800; color:${card.status === 'ACTIVE' ? 'var(--emerald-dark)' : 'var(--brand-red)'}; margin-right:2px;">
                         [${card.status === 'ACTIVE' ? 'نشطة' : 'معطلة'}]
                       </span>
                     </div>
@@ -712,7 +685,6 @@
                   </div>
 
                   <div class="card-actions-cluster">
-                    <div class="scan-counter-pill">👁️ ${card.scan_count || 0}</div>
                     <button class="btn-card-micro ${card.status === 'ACTIVE' ? 'btn-card-toggle-freeze' : 'btn-card-toggle-active'}" onclick="toggleCardStatusDirect('${card.token}', '${card.status === 'ACTIVE' ? 'DISABLED' : 'ACTIVE'}')">
                       ${card.status === 'ACTIVE' ? 'تجميد' : 'تفعيل'}
                     </button>
@@ -720,8 +692,8 @@
                   </div>
                 </div>
               `).join('')) : `
-                <div style="font-size:10.5px; color:var(--text-muted); background:#fdfaf7; border:1px dashed #fed7aa; padding:6px; border-radius:8px; text-align:center;">
-                  لا توجد بطاقة مربوطة • افتح <strong>(استوديو الـ NFC)</strong> لبرمجة بطاقة له فوراً
+                <div style="font-size:10px; color:var(--text-muted); background:#fdfaf7; border:1px dashed #fed7aa; padding:5px; border-radius:7px; text-align:center;">
+                  لا توجد بطاقة مربوطة • افتح (استوديو كتابة الـ NFC) بالأعلى لبرمجة بطاقة له
                 </div>
               `}
             </div>
@@ -730,9 +702,6 @@
       }).join('');
     }
 
-    // =========================================================================
-    // ✍️ تسجيل موظف جديد (نقي وفوري بدون بطاقة)
-    // =========================================================================
     function triggerEnrollNewStaff() {
       const name = document.getElementById('new_staff_name').value.trim();
       const role = document.getElementById('new_staff_role').value.trim();
@@ -749,11 +718,7 @@
       }
 
       showToast(`جاري تسجيل [${name}] في شيت الأمان...`);
-      const payload = {
-        name, role, tier,
-        phone_call: phoneCall,
-        phone_whatsapp: phoneWa
-      };
+      const payload = { name, role, tier, phone_call: phoneCall, phone_whatsapp: phoneWa };
 
       const cb = "onStaffRegDone_" + Date.now();
       window[cb] = function(res) {
@@ -767,9 +732,6 @@
       document.body.appendChild(s);
     }
 
-    // =========================================================================
-    // ⚠️ إنهاء خدمات الموظف وأرشفته بالكامل (استقالة / فصل)
-    // =========================================================================
     function openOffboardModal(empId, empName) {
       document.getElementById('offboard_emp_id').value = empId;
       document.getElementById('offboard-target-emp-name').textContent = `الموظف المستهدف: ${empName} (${empId})`;
@@ -784,11 +746,11 @@
       const notes = document.getElementById('offboard_notes_input').value.trim();
 
       if (!notes) {
-        showToast("⚠️ يرجى كتابة ملاحظات وتفاصيل إنهاء الخدمات لتسجيلها بالأرشيف");
+        showToast("⚠️ يرجى كتابة ملاحظات وتفاصيل إنهاء الخدمات");
         return;
       }
 
-      showToast("جاري أرشفة الموظف وتعطيل بطاقاته وإنهاء خدماته...");
+      showToast("جاري أرشفة الموظف وإنهاء خدماته...");
       const payload = { emp_id: empId, reason: reason, notes: notes };
 
       const cb = "onOffboardStaffDone_" + Date.now();
@@ -828,40 +790,21 @@
       document.body.appendChild(s);
     }
 
-    // =========================================================================
-    // 🔍 رادار فحص البطاقات الذكية مع اعتراض الروابط
-    // =========================================================================
     function triggerCardInspectorScan() {
       const hint = document.getElementById('inspector-status-hint');
-
       if (!('NDEFReader' in window)) {
         const testToken = prompt("أدخل كود البطاقة أو التوكن للفحص المباشر:");
         if (testToken) inspectTokenData(extractCleanNfcToken(testToken.trim()));
         return;
       }
-
-      try {
-        hint.textContent = "جاري قراءة البطاقة... قرّبها من ظهر الهاتف الآن";
-        const ndef = new NDEFReader();
-        ndef.scan().then(() => {
-          ndef.onreading = ev => {
-            const dec = new TextDecoder();
-            let fullData = "";
-            for (const r of ev.message.records) fullData += dec.decode(r.data);
-            const cleanToken = extractCleanNfcToken(fullData || ev.serialNumber);
-            hint.textContent = "تمت القراءة بنجاح!";
-            inspectTokenData(cleanToken);
-          };
-        }).catch(() => {
-          hint.textContent = "اضغط لإعادة المحاولة";
-        });
-      } catch(e){}
+      hint.textContent = "درع الـ NFC نشط.. قرّب أي بطاقة من ظهر الهاتف الآن";
+      startPermanentNfcShield();
     }
 
     function inspectTokenData(token) {
       const resultBox = document.getElementById('inspector-result-box');
       resultBox.style.display = "block";
-      resultBox.innerHTML = `<div style="text-align:center; padding:15px; color:var(--text-muted);">جاري مطابقة البطاقة مع قاعدة البيانات...</div>`;
+      resultBox.innerHTML = `<div style="text-align:center; padding:15px; color:var(--text-muted);">جاري فحص البطاقة في السيرفر...</div>`;
 
       let matchedEmp = null;
       let matchedCard = null;
@@ -881,39 +824,43 @@
         resultBox.innerHTML = `
           <div class="inspector-result-card">
             <div style="display:flex; justify-content:space-between; align-items:center;">
-              <span style="font-size:11.5px; font-weight:900; color:var(--emerald-dark);">✓ بطاقة معتمدة ومسجلة في النظام</span>
+              <span style="font-size:11px; font-weight:900; color:var(--emerald-dark);">✓ بطاقة معتمدة ومسجلة في النظام</span>
               <span class="tier-badge ${matchedEmp.tier === 'MANAGER' ? 'tier-manager' : (matchedEmp.tier === 'SUPERVISOR' ? 'tier-supervisor' : 'tier-staff')}">
                 ${matchedEmp.tier}
               </span>
             </div>
-
-            <div style="font-size:14px; font-weight:900; color:var(--text-espresso); margin-top:2px;">
+            <div style="font-size:13.5px; font-weight:900; color:var(--text-espresso); margin-top:2px;">
               👤 الموظف: ${matchedEmp.name} (${matchedEmp.role})
             </div>
-
-            <div style="font-size:11px; color:var(--text-muted); line-height:1.5;">
-              🏷️ تسمية البطاقة: <strong>${matchedCard.label}</strong><br>
-              📞 هاتف الاتصال: <strong>${matchedEmp.phone_call || 'غير محدد'}</strong> | 💬 واتساب: <strong>${matchedEmp.phone_whatsapp || 'غير محدد'}</strong><br>
-              🔑 التوكن المشفر: <code style="font-family:var(--font-en);">${matchedCard.token}</code><br>
-              📊 المسحات التسويقية: <strong style="color:var(--brand-red); font-family:var(--font-en);">${matchedCard.scan_count || 0} مسحة</strong><br>
-              ⚡ الحالة: <strong style="color:${matchedCard.status === 'ACTIVE' ? 'var(--emerald-dark)' : 'var(--brand-red)'};">${matchedCard.status === 'ACTIVE' ? 'نشطة ومفعلة' : 'مجمدة وموقوفة'}</strong>
+            <div style="font-size:10.5px; color:var(--text-muted); line-height:1.4;">
+              🏷️ التسمية: <strong>${matchedCard.label}</strong> | 🔑 التوكن: <code style="font-family:var(--font-en);">${matchedCard.token}</code><br>
+              📊 المسحات: <strong style="color:var(--brand-red); font-family:var(--font-en);">${matchedCard.scan_count || 0}</strong> | ⚡ الحالة: <strong style="color:${matchedCard.status === 'ACTIVE' ? 'var(--emerald-dark)' : 'var(--brand-red)'};">${matchedCard.status === 'ACTIVE' ? 'نشطة ومفعلة' : 'مجمدة'}</strong>
             </div>
           </div>
         `;
       } else {
         resultBox.innerHTML = `
           <div class="inspector-result-card" style="border-color:#fecdd3; background:#fff5f8;">
-            <div style="font-size:12.5px; font-weight:900; color:var(--brand-red);">⚠️ بطاقة غير مسجلة أو مجهولة!</div>
-            <div style="font-size:10.5px; color:var(--text-muted); margin-top:3px;">
+            <div style="font-size:12px; font-weight:900; color:var(--brand-red);">⚠️ بطاقة غير مسجلة أو مجهولة!</div>
+            <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">
               الرمز المقروء: <code style="font-family:var(--font-en);">${token}</code><br>
-              يمكنك ربط هذه الشريحة بموظف مسجل عبر فتح (استوديو برمجة الـ NFC).
+              يمكنك ربط هذه الشريحة بموظف مسجل عبر فتح (استوديو كتابة الـ NFC).
             </div>
           </div>
         `;
       }
     }
 
-    fetchStaffDirectory();
+    // تفعيل درع الـ NFC وجلب البيانات
+    window.addEventListener('load', () => {
+      startPermanentNfcShield();
+      fetchStaffDirectory();
+    });
+
+    document.addEventListener('click', () => {
+      startPermanentNfcShield();
+    }, { once: true });
+
     setInterval(fetchStaffDirectory, 12000);
   </script>
 </body>
