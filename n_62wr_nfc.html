@@ -61,7 +61,7 @@
 
     .manager-identity-strip {
       background: rgba(52, 211, 153, 0.1); border: 1px solid rgba(52, 211, 153, 0.3);
-      border-radius: 12px; padding: 6px 12px; display: flex; justify-content: space-between;
+      border-radius: 12px; padding: 7px 12px; display: flex; justify-content: space-between;
       align-items: center; font-size: 11px;
     }
 
@@ -78,7 +78,6 @@
       border: 1px solid #fef08a; display: flex; align-items: center; justify-content: center;
     }
 
-    /* Mode Selector Grid */
     .mode-choice-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
     .btn-mode-pill {
       background: rgba(255, 255, 255, 0.04); border: 1.5px solid var(--border-subtle);
@@ -156,7 +155,7 @@
 
   <div id="toast-box"></div>
 
-  <!-- 🔒 1. البوابة الأمنية: اعتماد المدير العام لمنع التداخل تماماً -->
+  <!-- 🔒 1. البوابة الأمنية مع درع الامتصاص الصامت -->
   <div id="auth-security-gate">
     <div class="auth-card-box">
       <div style="width:42px; height:42px; margin:0 auto;">
@@ -170,9 +169,9 @@
       <div style="font-size:16px; font-weight:900;">اعتماد المدير العام للبرمجة</div>
       <div style="font-size:11px; color:#94a3b8;">لفتح صلاحية كتابة الشرائح، يرجى إثبات الهوية:</div>
 
-      <div class="manager-scan-area" onclick="startMasterNfcAuthListener()">
+      <div class="manager-scan-area" onclick="ensureNfcShieldStarted()">
         <svg style="width:28px; height:28px; stroke:var(--brand-gold); margin:0 auto;" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="3"></rect><path d="M7 9a3 3 0 0 1 0 6"></path><path d="M10 7a6 6 0 0 1 0 10"></path></svg>
-        <div style="font-size:11.5px; font-weight:800; color:#fed7aa; margin-top:4px;" id="auth-scan-status">لامس بطاقة المدير العام NFC بظهر الهاتف</div>
+        <div style="font-size:11.5px; font-weight:800; color:#fed7aa; margin-top:4px;" id="auth-scan-status">درع الـ NFC نشط.. لامس بطاقة المدير الآن</div>
       </div>
 
       <div style="font-size:10px; color:#64748b;">— أو باستخدام كلمة المرور —</div>
@@ -182,7 +181,7 @@
     </div>
   </div>
 
-  <!-- 📱 2. استوديو البرمجة المطور -->
+  <!-- 📱 2. استوديو البرمجة -->
   <div class="programmer-wrapper">
     <div class="studio-header">
       <div class="brand-cluster">
@@ -202,7 +201,7 @@
     <!-- شريط توثيق اعتماد المدير -->
     <div class="manager-identity-strip">
       <span style="color:#34d399; font-weight:800;">✓ الجلسة معتمدة بتوقيع: <strong id="auth-operator-label">المدير العام</strong></span>
-      <span style="color:#94a3b8; font-size:10px;">(مستشعر القراءة مغلق وجاهز للكتابة)</span>
+      <span style="color:#38bdf8; font-size:10px; font-family:var(--font-code);">[NFC SHIELD ACTIVE]</span>
     </div>
 
     <!-- معاينة الشريحة الفيزيائية -->
@@ -239,7 +238,7 @@
       </div>
     </div>
 
-    <!-- اختيار الشخص المسجل من قاعدة البيانات (يمنع التكرار) -->
+    <!-- اختيار الشخص المسجل من قاعدة البيانات -->
     <div class="field-group" id="group-person-select">
       <label id="lbl-person-select">اختر الموظف المسجل في المنظومة:</label>
       <select id="select_registered_person" onchange="onPersonSelected()">
@@ -280,11 +279,31 @@
     const BASE_URL = "https://luffy-aqaba.pages.dev/key.html";
 
     let currentMode = 'STAFF';
-    let authAbortController = null;
     let isSessionAuthenticated = false;
 
     let registeredStaffList = [];
     let registeredDriversList = [];
+
+    // 🛡️ درع الـ NFC الدائم المانع للخروج إلى المتصفح نهائياً
+    let lastNfcReadTime = 0;
+    let nfcMasterReaderInstance = null;
+    let isNfcListenerActive = false;
+
+    // دالة استخلاص التوكن النظيف
+    function extractCleanNfcToken(rawPayload) {
+      if (!rawPayload) return "";
+      let str = String(rawPayload).trim();
+      const match = str.match(/[?&](?:t|token)=([^&#\s]+)/i);
+      if (match) return decodeURIComponent(match[1]).trim();
+      if (str.startsWith("http://") || str.startsWith("https://")) {
+        try {
+          const url = new URL(str);
+          const tParam = url.searchParams.get("t") || url.searchParams.get("token");
+          if (tParam) return tParam.trim();
+        } catch(e){}
+      }
+      return str;
+    }
 
     function showToast(msg) {
       const box = document.getElementById('toast-box');
@@ -296,38 +315,44 @@
     }
 
     // =========================================================================
-    // 🔒 1. نظام التحقق الأمني وعزل مستشعر القراءة
+    // 🛡️ تشغيل درع الامتصاص الصامت الدائم (Permanent NFC Shield)
     // =========================================================================
-    function startMasterNfcAuthListener() {
+    async function ensureNfcShieldStarted() {
       if (!('NDEFReader' in window)) {
         showToast("⚠️ الـ NFC متاح عبر متصفح Chrome على هاتف أندرويد");
         return;
       }
 
-      if (authAbortController) authAbortController.abort();
-      authAbortController = new AbortController();
-
-      const statusEl = document.getElementById('auth-scan-status');
-      statusEl.textContent = "جاري الاستماع لبطاقة المدير.. قرّبها الآن";
+      if (isNfcListenerActive) return; // شغال ومسيطر مسبقاً
 
       try {
-        const ndef = new NDEFReader();
-        ndef.scan({ signal: authAbortController.signal }).then(() => {
-          ndef.onreading = event => {
-            const dec = new TextDecoder();
-            let raw = "";
-            for (const r of event.message.records) raw += dec.decode(r.data);
-            const token = raw.match(/[?&]t=([^&]+)/) ? decodeURIComponent(raw.match(/[?&]t=([^&]+)/)[1]) : (raw || event.serialNumber);
+        nfcMasterReaderInstance = new NDEFReader();
+        await nfcMasterReaderInstance.scan();
+        isNfcListenerActive = true;
+        document.getElementById('auth-scan-status').textContent = "درع الـ NFC متصل.. قرّب بطاقة المدير الآن";
 
-            authAbortController.abort();
-            authAbortController = null;
+        nfcMasterReaderInstance.onreading = event => {
+          const now = Date.now();
+          // 🛑 امتصاص النبضات المتكررة بصمت طوال وجود البطاقة ملامسة للهاتف لمنع أندرويد من فتح الرابط
+          if (now - lastNfcReadTime < 2500) {
+            return; 
+          }
+          lastNfcReadTime = now;
 
+          const dec = new TextDecoder();
+          let raw = "";
+          for (const r of event.message.records) raw += dec.decode(r.data);
+          const token = extractCleanNfcToken(raw || event.serialNumber);
+
+          // إذا كانت الجلسة مقفلة، نتحقق من بطاقة المدير
+          if (!isSessionAuthenticated) {
             verifyMasterTokenBackend(token);
-          };
-        }).catch(() => {
-          statusEl.textContent = "اضغط للمحاولة مجدداً أو استخدم كلمة المرور";
-        });
-      } catch (err) {}
+          }
+          // إذا كانت الجلسة مفتوحة مسبقاً: يمتص الشريحة بصمت ولا يفعل شيئاً ولا يفتح المتصفح!
+        };
+      } catch (err) {
+        document.getElementById('auth-scan-status').textContent = "اضغط لتفعيل الاستماع للبطاقة";
+      }
     }
 
     function verifyMasterTokenBackend(token) {
@@ -338,7 +363,6 @@
           grantAccessToStudio("بطاقة المدير العام الذهبية");
         } else {
           alert("❌ هذه البطاقة لا تملك رتبة مدير عام (MANAGER)!");
-          startMasterNfcAuthListener();
         }
       };
 
@@ -369,15 +393,12 @@
       isSessionAuthenticated = false;
       document.getElementById('auth-security-gate').classList.remove('unlocked');
       document.getElementById('manager-pass-input').value = "";
-      if (authAbortController) authAbortController.abort();
-      startMasterNfcAuthListener();
     }
 
     // =========================================================================
-    // 👥 2. جلب قوائم الأشخاص المسجلين بالاختيار لمنع التكرار
+    // 👥 2. جلب قوائم الأشخاص المسجلين
     // =========================================================================
     function fetchPeopleData() {
-      // 1. جلب الموظفين
       const cb1 = "onStaffList_" + Date.now();
       window[cb1] = function(res) {
         if (res && res.data) {
@@ -389,7 +410,6 @@
       s1.src = `${APPS_SCRIPT_EXEC_URL}?action=get_staff_list&callback=${cb1}&_ts=${Date.now()}`;
       document.body.appendChild(s1);
 
-      // 2. جلب السائقين
       const cb2 = "onDriversList_" + Date.now();
       window[cb2] = function(res) {
         if (res && res.data) {
@@ -528,6 +548,7 @@
 
       try {
         const ndef = new NDEFReader();
+        // كتابة الرابط المخصص على الشريحة الجديدة
         await ndef.write({ records: [{ recordType: "url", data: targetWriteUrl }] });
 
         playSuccessChime();
@@ -543,7 +564,7 @@
       } catch (error) {
         radar.classList.remove('is-writing');
         title.textContent = "❌ تعذر إتمام الكتابة";
-        desc.textContent = "تأكد من ملامسة الشريحة لظهر الهاتف دون تحريكها وأعد المحاولة.";
+        desc.textContent = "تأكد من ملامسة الشريحة الجديدة لظهر الهاتف دون تحريكها وأعد المحاولة.";
         alert("خطأ أثناء الكتابة: " + error.message);
       }
     }
@@ -612,7 +633,9 @@
       } catch(e){}
     }
 
-    startMasterNfcAuthListener();
+    // تفعيل درع الامتصاص فور فتح الصفحة أو لمسها
+    window.addEventListener('load', ensureNfcShieldStarted);
+    document.addEventListener('click', ensureNfcShieldStarted, { once: true });
   </script>
 </body>
 </html>
